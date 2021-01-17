@@ -1,5 +1,9 @@
+$ vim .github/workflows/generate-docs.yml
 name: generate-docs
-on: [ push ]
+on:
+  push:
+    branches:
+      - master
 jobs:
   generate-docs:
     name: generate-docs
