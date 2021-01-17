@@ -1,4 +1,3 @@
-$ vim .github/workflows/generate-docs.yml
 name: generate-docs
 on:
   push:
