@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>打印接收到的数据 · 个人笔记</title>
+        <title>响应数据 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -62,10 +62,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="03响应数据.html" />
+    <link rel="next" href="04时间服务器.html" />
     
     
-    <link rel="prev" href="01HelloWorld.html" />
+    <link rel="prev" href="02打印接收到的数据.html" />
     
 
     <style>
@@ -216,7 +216,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.2" data-path="02打印接收到的数据.html">
+        <li class="chapter " data-level="1.3.2" data-path="02打印接收到的数据.html">
             
                 <a href="02打印接收到的数据.html">
             
@@ -229,7 +229,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="03响应数据.html">
+        <li class="chapter active" data-level="1.3.3" data-path="03响应数据.html">
             
                 <a href="03响应数据.html">
             
@@ -290,7 +290,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >打印接收到的数据</a>
+        <a href=".." >响应数据</a>
     </h1>
 </div>
 
@@ -305,14 +305,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x6253;&#x5370;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6570;&#x636E;">&#x6253;&#x5370;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6570;&#x636E;</h2>
+                                <h2 id="&#x54CD;&#x5E94;&#x6570;&#x636E;">&#x54CD;&#x5E94;&#x6570;&#x636E;</h2>
+<p>&#x539F;&#x6587;&#x53EB;<code>Echo Server</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x54CD;&#x5E94;&#x670D;&#x52A1;&#x5668;</p>
 <h3 id="&#x6E90;&#x7801;">&#x6E90;&#x7801;</h3>
 <pre><code class="lang-java"><span class="hljs-keyword">package</span> org.aidan;
 
-<span class="hljs-keyword">import</span> io.netty.buffer.ByteBuf;
 <span class="hljs-keyword">import</span> io.netty.channel.ChannelHandlerContext;
 <span class="hljs-keyword">import</span> io.netty.channel.ChannelInboundHandlerAdapter;
-<span class="hljs-keyword">import</span> io.netty.util.ReferenceCountUtil;
 
 <span class="hljs-comment">/**
  * <span class="hljs-doctag">@author</span> aidan
@@ -320,20 +319,12 @@
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DiscardServerHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ChannelInboundHandlerAdapter</span> </span>{
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>{
-        ByteBuf in = (ByteBuf) msg;
-        <span class="hljs-keyword">try</span> {
-            <span class="hljs-keyword">while</span> (in.isReadable()) {
-                System.out.print((<span class="hljs-keyword">char</span>) in.readByte());
-                System.out.flush();
-            }
-        } <span class="hljs-keyword">finally</span> {
-            ReferenceCountUtil.release(msg);
-        }
+        ctx.write(msg);
+        ctx.flush();
     }
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exceptionCaught</span><span class="hljs-params">(ChannelHandlerContext ctx, Throwable cause)</span> </span>{
-        <span class="hljs-comment">// Close the connection when an exception is raised.</span>
         cause.printStackTrace();
         ctx.close();
     }
@@ -400,38 +391,38 @@
 }
 </code></pre>
 <h3 id="&#x8BF4;&#x660E;">&#x8BF4;&#x660E;</h3>
-<p>&#x4E0E;&#x4E0A;&#x4E00;&#x8282;&#x76F8;&#x6BD4;&#xFF0C;&#x53EA;&#x662F;&#x4FEE;&#x6539;&#x4E86;<code>channelRead()</code>&#x65B9;&#x6CD5;&#xFF1A;</p>
+<p>&#x4E0E;&#x4E0A;&#x4E00;&#x8282;&#x76F8;&#x6BD4;&#xFF0C;&#x4FEE;&#x6539;&#x7684;&#x5185;&#x5BB9;&#x8FD8;&#x662F;<code>channelRead()</code>&#x65B9;&#x6CD5;&#xFF1A;</p>
 <pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>{
-        ByteBuf in = (ByteBuf) msg;
-        <span class="hljs-keyword">try</span> {
-            <span class="hljs-keyword">while</span> (in.isReadable()) {
-                System.out.print((<span class="hljs-keyword">char</span>) in.readByte());
-                System.out.flush();
-            }
-        } <span class="hljs-keyword">finally</span> {
-            ReferenceCountUtil.release(msg);
-        }
+        ctx.write(msg);
+        ctx.flush();
     }
 </code></pre>
-<p>&#x518D;&#x7528;<code>telnet</code>&#x547D;&#x4EE4;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;</p>
+<p><code>ChannelHandlerContext</code>&#x5BF9;&#x8C61;&#x63D0;&#x4F9B;&#x5404;&#x79CD;&#x89E6;&#x53D1;<code>I/O</code>&#x4E8B;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x4F7F;&#x7528;<code>write(Object)</code>&#x65B9;&#x6CD5;&#x6765;&#x9010;&#x4E2A;&#x5199;&#x5165;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x50CF;&#x4E22;&#x5F03;&#x793A;&#x4F8B;&#x90A3;&#x6837;&#x91CA;&#x653E;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x56E0;&#x4E3A;<code>Netty</code>&#x4F1A;&#x4E3A;&#x6211;&#x4EEC;&#x5728;&#x6D88;&#x606F;&#x5199;&#x56DE;&#x7F51;&#x7EDC;&#x7EBF;&#x8DEF;&#x65F6;&#x91CA;&#x653E;&#x6D88;&#x606F;&#x3002;</p>
+<p><code>write(Object)</code>&#x65B9;&#x6CD5;&#x5E76;&#x4E0D;&#x4F1A;&#x5C06;&#x6D88;&#x606F;&#x5199;&#x5165;&#x7F51;&#x7EDC;&#x7EBF;&#x8DEF;&#xFF0C;&#x5B83;&#x53EA;&#x662F;&#x628A;&#x6D88;&#x606F;&#x7F13;&#x51B2;&#x5728;&#x672C;&#x5730;&#xFF0C;&#x76F4;&#x5230;<code>flush()</code>&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x65F6;&#x624D;&#x4F1A;&#x5199;&#x5165;&#x7F51;&#x7EDC;&#x7EBF;&#x8DEF;&#x3002;</p>
+<p>&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;<code>writeAndFlush(msg)</code>&#x6765;&#x66FF;&#x6362;<code>write(msg)</code>&#x548C;<code>flush()</code></p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>{
+        ctx.writeAndFlush(msg);
+    }
+</code></pre>
+<h3 id="&#x6D4B;&#x8BD5;">&#x6D4B;&#x8BD5;</h3>
 <pre><code class="lang-bash">$ telnet localhost 8080
+Trying ::1...
+Connected to localhost.
+Escape character is <span class="hljs-string">&apos;^]&apos;</span>.
 a
-b
-c
+a
+ab
+ab
+abc
+abc
+www
+www
 </code></pre>
-<p>&#x53D1;&#x73B0;<code>DiscardServer</code>&#x7684;&#x63A7;&#x5236;&#x53F0;&#x6709;&#x5BF9;&#x5E94;&#x7684;&#x5B57;&#x7B26;&#x8F93;&#x51FA;&#x4E86;&#x3002;</p>
-<p><code>`channelRead()</code>&#x65B9;&#x6CD5;&#x4E2D;&#x7684;&#x5FAA;&#x73AF;&#x53EF;&#x4EE5;&#x66FF;&#x6362;&#x4E3A;<code>System.out.println(in.toString(io.netty.util.CharsetUtil.US_ASCII));</code></p>
-<pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>{
-        ByteBuf in = (ByteBuf) msg;
-        <span class="hljs-keyword">try</span> {
-            System.out.println(in.toString(io.netty.util.CharsetUtil.US_ASCII));
-        } <span class="hljs-keyword">finally</span> {
-            ReferenceCountUtil.release(msg);
-        }
-    }
-</code></pre>
+<p>&#x53D1;&#x73B0;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x4E86;&#x6570;&#x636E;&#x3002;</p>
 
                                 
                                 </section>
@@ -459,12 +450,12 @@ c
 
             
                 
-                <a href="01HelloWorld.html" class="navigation navigation-prev " aria-label="Previous page: HelloWorld">
+                <a href="02打印接收到的数据.html" class="navigation navigation-prev " aria-label="Previous page: 打印接收到的数据">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="03响应数据.html" class="navigation navigation-next " aria-label="Next page: 响应数据">
+                <a href="04时间服务器.html" class="navigation navigation-next " aria-label="Next page: 时间服务器">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -475,7 +466,7 @@ c
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"打印接收到的数据","level":"1.3.2","depth":2,"next":{"title":"响应数据","level":"1.3.3","depth":2,"path":"02Netty/03响应数据.md","ref":"02Netty/03响应数据.md","articles":[]},"previous":{"title":"HelloWorld","level":"1.3.1","depth":2,"path":"02Netty/01HelloWorld.md","ref":"02Netty/01HelloWorld.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"02Netty/02打印接收到的数据.md","mtime":"2021-01-22T16:04:10.605Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-22T16:04:54.938Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"响应数据","level":"1.3.3","depth":2,"next":{"title":"时间服务器","level":"1.3.4","depth":2,"path":"02Netty/04时间服务器.md","ref":"02Netty/04时间服务器.md","articles":[]},"previous":{"title":"打印接收到的数据","level":"1.3.2","depth":2,"path":"02Netty/02打印接收到的数据.md","ref":"02Netty/02打印接收到的数据.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"02Netty/03响应数据.md","mtime":"2021-01-22T16:04:10.605Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-22T16:04:54.938Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
