@@ -407,6 +407,78 @@
                                 <section class="normal markdown-section">
                                 
                                 <h2 id="&#x65F6;&#x95F4;&#x5BA2;&#x6237;&#x7AEF;">&#x65F6;&#x95F4;&#x5BA2;&#x6237;&#x7AEF;</h2>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> io.netty.example.time;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimeClient</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        String host = args[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">int</span> port = Integer.parseInt(args[<span class="hljs-number">1</span>]);
+        EventLoopGroup workerGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();
+
+        <span class="hljs-keyword">try</span> {
+            Bootstrap b = <span class="hljs-keyword">new</span> Bootstrap(); <span class="hljs-comment">// (1)</span>
+            b.group(workerGroup); <span class="hljs-comment">// (2)</span>
+            b.channel(NioSocketChannel.class); <span class="hljs-comment">// (3)</span>
+            b.option(ChannelOption.SO_KEEPALIVE, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// (4)</span>
+            b.handler(<span class="hljs-keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(SocketChannel ch)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+                    ch.pipeline().addLast(<span class="hljs-keyword">new</span> TimeClientHandler());
+                }
+            });
+
+            <span class="hljs-comment">// Start the client.</span>
+            ChannelFuture f = b.connect(host, port).sync(); <span class="hljs-comment">// (5)</span>
+
+            <span class="hljs-comment">// Wait until the connection is closed.</span>
+            f.channel().closeFuture().sync();
+        } <span class="hljs-keyword">finally</span> {
+            workerGroup.shutdownGracefully();
+        }
+    }
+}
+</code></pre>
+<ol>
+<li><p><code>Bootstrap</code>&#x4E0E;<code>ServerBootstrap</code>&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x662F;&#x5B83;&#x9002;&#x7528;&#x4E8E;&#x975E;&#x670D;&#x52A1;&#x5668;&#x901A;&#x9053;&#xFF0C;&#x5982;&#x5BA2;&#x6237;&#x7AEF;&#x6216;&#x65E0;&#x8FDE;&#x63A5;&#x901A;&#x9053;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x53EA;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;<code>EventLoopGroup</code>&#xFF0C;&#x5219;&#x5B83;&#x5C06;&#x540C;&#x65F6;&#x7528;&#x4F5C;<code>boss</code>&#x7EC4;&#x548C;<code>worker</code>&#x7EC4;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;<code>boss-worker</code>&#x5E76;&#x4E0D;&#x7528;&#x4E8E;&#x5BA2;&#x6237;&#x7AEF;&#x3002;</p>
+</li>
+<li><p><code>NioSocketChannel</code>&#x88AB;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x5BA2;&#x6237;&#x7AEF;&#x901A;&#x9053;&#xFF0C;&#x800C;&#x4E0D;&#x662F;<code>NioServerSocketChannel</code>&#x3002;</p>
+</li>
+<li><p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x4F7F;&#x7528;<code>childOption()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E0E;&#x4F7F;&#x7528;<code>ServerBootstrap</code>&#x4E0D;&#x540C;&#xFF0C;&#x56E0;&#x4E3A;&#x5BA2;&#x6237;&#x7AEF;<code>SocketChannel</code>&#x6CA1;&#x6709;&#x7236;&#x7EA7;&#x3002;</p>
+</li>
+<li><p>&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x8C03;&#x7528;<code>connect()</code>&#x65B9;&#x6CD5;&#x800C;&#x4E0D;&#x662F;<code>bind()</code>&#x65B9;&#x6CD5;&#x3002;</p>
+</li>
+</ol>
+<p>&#x5982;&#x60A8;&#x6240;&#x89C1;&#xFF0C;&#x5B83;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4EE3;&#x7801;&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x4E0D;&#x540C;&#x3002;&#x90A3;&#x4E48;<code>ChannelHandler</code>&#x5B9E;&#x73B0;&#x5462;&#xFF1F;&#x5B83;&#x5E94;&#x8BE5;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x4E00;&#x4E2A;32&#x4F4D;&#x7684;&#x6574;&#x6570;&#xFF0C;&#x5E76;&#x8F6C;&#x6362;&#x6210;&#x4E00;&#x4E2A;&#x4EBA;&#x7C7B;&#x53EF;&#x8BFB;&#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x6253;&#x5370;&#x8FD9;&#x4E2A;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5E76;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> io.netty.example.time;
+
+<span class="hljs-keyword">import</span> java.util.Date;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimeClientHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ChannelInboundHandlerAdapter</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>{
+        ByteBuf m = (ByteBuf) msg; <span class="hljs-comment">// (1)</span>
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">long</span> currentTimeMillis = (m.readUnsignedInt() - <span class="hljs-number">2208988800L</span>) * <span class="hljs-number">1000L</span>;
+            System.out.println(<span class="hljs-keyword">new</span> Date(currentTimeMillis));
+            ctx.close();
+        } <span class="hljs-keyword">finally</span> {
+            m.release();
+        }
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exceptionCaught</span><span class="hljs-params">(ChannelHandlerContext ctx, Throwable cause)</span> </span>{
+        cause.printStackTrace();
+        ctx.close();
+    }
+}
+</code></pre>
+<ol>
+<li>&#x5728;<code>TCP/IP</code>&#x4E2D;&#xFF0C;<code>Netty</code>&#x5C06;&#x4ECE;&#x5BF9;&#x7B49;&#x65B9;&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;&#x8BFB;&#x5165;<code>ByteBuf</code>&#x3002;</li>
+</ol>
+<p>&#x5B83;&#x770B;&#x8D77;&#x6765;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x793A;&#x4F8B;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x533A;&#x522B;&#x3002;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;<code>handler</code>&#x6709;&#x65F6;&#x5019;&#x4F1A;&#x56E0;&#x4E3A;&#x4E00;&#x4E2A;<code>IndexOutOfBoundsException</code>&#x5F02;&#x5E38;&#x800C;&#x62D2;&#x7EDD;&#x5DE5;&#x4F5C;&#x3002;&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x4E0B;&#x4E00;&#x8282;&#x89E3;&#x91CA;&#x8FD9;&#x4E2A;&#x4E8B;&#x60C5;&#x3002;</p>
 
                                 
                                 </section>
@@ -446,7 +518,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"时间客户端","level":"1.3.4.3","depth":3,"previous":{"title":"时间服务器","level":"1.3.4.2","depth":3,"path":"02Netty/04时间服务器与客户端/02时间服务器.md","ref":"02Netty/04时间服务器与客户端/02时间服务器.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"02Netty/04时间服务器与客户端/03时间客户端.md","mtime":"2021-01-23T05:14:32.399Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-23T05:15:22.591Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"时间客户端","level":"1.3.4.3","depth":3,"previous":{"title":"时间服务器","level":"1.3.4.2","depth":3,"path":"02Netty/04时间服务器与客户端/02时间服务器.md","ref":"02Netty/04时间服务器与客户端/02时间服务器.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"02Netty/04时间服务器与客户端/03时间客户端.md","mtime":"2021-01-23T14:00:15.804Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-23T14:01:03.627Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
