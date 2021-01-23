@@ -62,6 +62,8 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="02解决方案二客户端源码.html" />
+    
     
     <link rel="prev" href="./" />
     
@@ -436,6 +438,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.5.4.2" data-path="02解决方案二客户端源码.html">
+            
+                <a href="02解决方案二客户端源码.html">
+            
+                    
+                    解决方案二客户端源码
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -588,6 +603,48 @@
     }
 }
 </code></pre>
+<p>&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x7C7B;&#x76F8;&#x8F83;&#x4E8E;&#x65F6;&#x95F4;&#x5BA2;&#x6237;&#x7AEF;&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x7684;&#x53D8;&#x5316;&#x3002;</p>
+<h3 id="timedecoder"><code>TimeDecoder</code></h3>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> org.aidan.client;
+
+<span class="hljs-keyword">import</span> io.netty.buffer.ByteBuf;
+<span class="hljs-keyword">import</span> io.netty.channel.ChannelHandlerContext;
+<span class="hljs-keyword">import</span> io.netty.handler.codec.ByteToMessageDecoder;
+
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> aidan
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimeDecoder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ByteToMessageDecoder</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">decode</span><span class="hljs-params">(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        <span class="hljs-keyword">if</span> (in.readableBytes() &lt; <span class="hljs-number">4</span>) {
+            <span class="hljs-keyword">return</span>;
+        }
+        out.add(in.readBytes(<span class="hljs-number">4</span>));
+    }
+}
+</code></pre>
+<h3 id="timedecoder&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;"><code>TimeDecoder</code>&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> org.aidan.client;
+
+<span class="hljs-keyword">import</span> io.netty.buffer.ByteBuf;
+<span class="hljs-keyword">import</span> io.netty.channel.ChannelHandlerContext;
+<span class="hljs-keyword">import</span> io.netty.handler.codec.ReplayingDecoder;
+
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> aidan
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimeDecoder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ReplayingDecoder</span>&lt;<span class="hljs-title">Void</span>&gt; </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">decode</span><span class="hljs-params">(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out)</span> </span>{
+        out.add(in.readBytes(<span class="hljs-number">4</span>));
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -615,10 +672,14 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 源码">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 源码">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="02解决方案二客户端源码.html" class="navigation navigation-next " aria-label="Next page: 解决方案二客户端源码">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -627,7 +688,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"解决方案一客户端源码","level":"1.3.5.4.1","depth":4,"previous":{"title":"源码","level":"1.3.5.4","depth":3,"path":"02Netty/05处理基于流的传输/04源码/README.md","ref":"02Netty/05处理基于流的传输/04源码/README.md","articles":[{"title":"解决方案一客户端源码","level":"1.3.5.4.1","depth":4,"path":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","ref":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","mtime":"2021-01-23T15:08:42.741Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-23T15:09:33.726Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"解决方案一客户端源码","level":"1.3.5.4.1","depth":4,"next":{"title":"解决方案二客户端源码","level":"1.3.5.4.2","depth":4,"path":"02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.md","ref":"02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.md","articles":[]},"previous":{"title":"源码","level":"1.3.5.4","depth":3,"path":"02Netty/05处理基于流的传输/04源码/README.md","ref":"02Netty/05处理基于流的传输/04源码/README.md","articles":[{"title":"解决方案一客户端源码","level":"1.3.5.4.1","depth":4,"path":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","ref":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","articles":[]},{"title":"解决方案二客户端源码","level":"1.3.5.4.2","depth":4,"path":"02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.md","ref":"02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","mtime":"2021-01-23T15:34:51.279Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-23T15:35:40.394Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
