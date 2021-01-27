@@ -109,3 +109,18 @@ public class TimeEncoder extends MessageToByteEncoder<UnixTime> {
 }
 ```
 
+剩下的最后一个任务是在`TimeServerHandler`之前将`TimeEncoder`插入到服务器端的`ChannelPipeline`中，这只是一个简单的练习。
+
+```java
+ch.pipeline().addLast(new TimeEncoder(), new TimeServerHandler());
+```
+
+
+
+小结：
+
+服务器给客户端发消息的过程：
+
+1. 服务器将消息`UnixTime`编码成`ByteBuf`。
+2. 客户端收到消息后将`ByteBuf`解码成`UnixTime`。
+
