@@ -16,12 +16,11 @@
 示例代码：
 
 ```java
-      	EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             // ......
         } finally {
-            // 关闭服务器
             Future<?> workFuture = workerGroup.shutdownGracefully();
             Future<?> bossFuture = bossGroup.shutdownGracefully();
             workFuture.get();
@@ -30,11 +29,10 @@
 ```
 
 ```java
-				EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             // ......
         } finally {
-          	// 关闭客户端
             Future<?> future = workerGroup.shutdownGracefully();
             future.get();
         }
