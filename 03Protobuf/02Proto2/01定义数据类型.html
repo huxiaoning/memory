@@ -1,0 +1,863 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>定义数据类型 · 个人笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Jett">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"huxiaoning/memory","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    个人笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../01笔记系统/">
+            
+                <a href="../../01笔记系统/">
+            
+                    
+                    笔记系统
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../01笔记系统/01Git.html">
+            
+                <a href="../../01笔记系统/01Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../01笔记系统/02Typora.html">
+            
+                <a href="../../01笔记系统/02Typora.html">
+            
+                    
+                    Typora
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../01笔记系统/03Snipaste.html">
+            
+                <a href="../../01笔记系统/03Snipaste.html">
+            
+                    
+                    Snipaste
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../../01笔记系统/04PicGo.html">
+            
+                <a href="../../01笔记系统/04PicGo.html">
+            
+                    
+                    PicGo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../02Netty/">
+            
+                <a href="../../02Netty/">
+            
+                    
+                    Netty
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../02Netty/01HelloWorld.html">
+            
+                <a href="../../02Netty/01HelloWorld.html">
+            
+                    
+                    HelloWorld
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../02Netty/02打印接收到的数据.html">
+            
+                <a href="../../02Netty/02打印接收到的数据.html">
+            
+                    
+                    打印接收到的数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../02Netty/03响应数据.html">
+            
+                <a href="../../02Netty/03响应数据.html">
+            
+                    
+                    响应数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../02Netty/04时间服务器与客户端/">
+            
+                <a href="../../02Netty/04时间服务器与客户端/">
+            
+                    
+                    时间服务器与客户端
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../../02Netty/04时间服务器与客户端/01源码/">
+            
+                <a href="../../02Netty/04时间服务器与客户端/01源码/">
+            
+                    
+                    源码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1.1" data-path="../../02Netty/04时间服务器与客户端/01源码/01TimeServer类.html">
+            
+                <a href="../../02Netty/04时间服务器与客户端/01源码/01TimeServer类.html">
+            
+                    
+                    TimeServer类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.1.2" data-path="../../02Netty/04时间服务器与客户端/01源码/02TimeServerHandler类.html">
+            
+                <a href="../../02Netty/04时间服务器与客户端/01源码/02TimeServerHandler类.html">
+            
+                    
+                    TimeServerHandler类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.1.3" data-path="../../02Netty/04时间服务器与客户端/01源码/03TimeClient类.html">
+            
+                <a href="../../02Netty/04时间服务器与客户端/01源码/03TimeClient类.html">
+            
+                    
+                    TimeClient类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.1.4" data-path="../../02Netty/04时间服务器与客户端/01源码/04TimeClientHandler类.html">
+            
+                <a href="../../02Netty/04时间服务器与客户端/01源码/04TimeClientHandler类.html">
+            
+                    
+                    TimeClientHandler类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2" data-path="../../02Netty/04时间服务器与客户端/02时间服务器.html">
+            
+                <a href="../../02Netty/04时间服务器与客户端/02时间服务器.html">
+            
+                    
+                    时间服务器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.3" data-path="../../02Netty/04时间服务器与客户端/03时间客户端.html">
+            
+                <a href="../../02Netty/04时间服务器与客户端/03时间客户端.html">
+            
+                    
+                    时间客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../02Netty/05处理基于流的传输/">
+            
+                <a href="../../02Netty/05处理基于流的传输/">
+            
+                    
+                    处理基于流的传输
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1" data-path="../../02Netty/05处理基于流的传输/01套接字缓冲区的一个小警告.html">
+            
+                <a href="../../02Netty/05处理基于流的传输/01套接字缓冲区的一个小警告.html">
+            
+                    
+                    套接字缓冲区的一个小警告
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.2" data-path="../../02Netty/05处理基于流的传输/02解决方案一.html">
+            
+                <a href="../../02Netty/05处理基于流的传输/02解决方案一.html">
+            
+                    
+                    解决方案一
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.3" data-path="../../02Netty/05处理基于流的传输/03解决方案二.html">
+            
+                <a href="../../02Netty/05处理基于流的传输/03解决方案二.html">
+            
+                    
+                    解决方案二
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.4" data-path="../../02Netty/05处理基于流的传输/04源码/">
+            
+                <a href="../../02Netty/05处理基于流的传输/04源码/">
+            
+                    
+                    源码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.4.1" data-path="../../02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.html">
+            
+                <a href="../../02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.html">
+            
+                    
+                    解决方案一客户端源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.4.2" data-path="../../02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.html">
+            
+                <a href="../../02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.html">
+            
+                    
+                    解决方案二客户端源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../02Netty/06使用POJO替代ByteBuf/">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/">
+            
+                    
+                    使用POJO替代ByteBuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.6.1" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/">
+            
+                    
+                    源码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.6.1.1" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/01UnixTime类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/01UnixTime类.html">
+            
+                    
+                    UnixTime类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.1.2" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/02TimeServer类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/02TimeServer类.html">
+            
+                    
+                    TimeServer类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.1.3" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/03TimeEncoder类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/03TimeEncoder类.html">
+            
+                    
+                    TimeEncoder类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.1.4" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/04TimeServerHandler类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/04TimeServerHandler类.html">
+            
+                    
+                    TimeServerHandler类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.1.5" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/05TimeClient类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/05TimeClient类.html">
+            
+                    
+                    TimeClient类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.1.6" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/06TimeDecoder类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/06TimeDecoder类.html">
+            
+                    
+                    TimeDecoder类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.1.7" data-path="../../02Netty/06使用POJO替代ByteBuf/01源码/07TimeClientHandler类.html">
+            
+                <a href="../../02Netty/06使用POJO替代ByteBuf/01源码/07TimeClientHandler类.html">
+            
+                    
+                    TimeClientHandler类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../../02Netty/07关闭Netty应用程序.html">
+            
+                <a href="../../02Netty/07关闭Netty应用程序.html">
+            
+                    
+                    关闭Netty应用程序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../../02Netty/08总结/">
+            
+                <a href="../../02Netty/08总结/">
+            
+                    
+                    总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../01Protobuf编译器.html">
+            
+                <a href="../01Protobuf编译器.html">
+            
+                    
+                    Protobuf编译器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Proto2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.2.1" data-path="01定义数据类型.html">
+            
+                <a href="01定义数据类型.html">
+            
+                    
+                    定义数据类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >定义数据类型</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x7C7B;&#x578B;">&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x7C7B;&#x578B;</h2>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;</p>
+<p>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x6D88;&#x606F;&#x683C;&#x5F0F;&#xFF0C;</p>
+<p>&#x8BF7;&#x6C42;&#x6709;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>&#x9875;&#x7801;</li>
+<li>&#x6BCF;&#x9762;&#x7ED3;&#x679C;&#x6570;&#x91CF;</li>
+</ul>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">SearchRequest</span> </span>{
+  <span class="hljs-keyword">required</span> <span class="hljs-built_in">string</span> query = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">optional</span> <span class="hljs-built_in">int32</span> page_number = <span class="hljs-number">2</span>;
+  <span class="hljs-keyword">optional</span> <span class="hljs-built_in">int32</span> result_per_page = <span class="hljs-number">3</span>;
+}
+</code></pre>
+<p><code>SearchRequest</code>&#x6D88;&#x606F;&#x4F53;&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x4E2A;&#x5B57;&#x6BB5;(&#x952E;&#x503C;&#x5BF9;)&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x8981;&#x5305;&#x542B;&#x5728;&#x6B64;&#x7C7B;&#x578B;&#x7684;&#x6D88;&#x606F;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x6761;&#x6570;&#x636E;&#xFF0C;&#x90FD;&#x6709;&#x4E00;&#x6761;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x540D;&#x79F0;&#x548C;&#x7C7B;&#x578B;&#x3002;</p>
+<h3 id="&#x6307;&#x5B9A;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;">&#x6307;&#x5B9A;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;</h3>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5B57;&#x6BB5;&#x90FD;&#x662F;&#x6807;&#x91CF;&#xFF0C;&#x4E24;&#x4E2A;&#x6574;&#x6570;&#x7C7B;&#x578B;(<code>page_number</code>&#x548C;<code>result_per_page</code>)&#x548C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;(<code>query</code>)&#x3002;</p>
+<p>&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x7EC4;&#x5408;&#x7C7B;&#x578B;&#x5B57;&#x6BB5;&#xFF0C;&#x5305;&#x62EC;&#x679A;&#x4E3E;&#x548C;&#x5176;&#x4ED6;&#x6D88;&#x606F;&#x7C7B;&#x578B;&#x3002;</p>
+<h3 id="&#x5206;&#x914D;&#x5B57;&#x6BB5;&#x7F16;&#x53F7;">&#x5206;&#x914D;&#x5B57;&#x6BB5;&#x7F16;&#x53F7;</h3>
+<p>&#x6D88;&#x606F;&#x5B9A;&#x4E49;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;&#x7F16;&#x53F7;&#x3002;</p>
+<p>&#x8FD9;&#x4E9B;&#x6570;&#x5B57;&#x7528;&#x4E8E;&#x6807;&#x8BC6;&#x6D88;&#x606F;&#x4E8C;&#x8FDB;&#x5236;&#x683C;&#x5F0F;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x5B9A;&#x4E49;&#x7684;&#x6D88;&#x606F;&#x7C7B;&#x578B;&#x5DF2;&#x7ECF;&#x5728;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;&#x5C31;&#x4E0D;&#x5E94;&#x8BE5;&#x6539;&#x53D8;&#x4ED6;&#x4EEC;&#x4E86;&#x3002;&#xFF08;&#x4F20;&#x8F93;&#x7684;&#x53CC;&#x65B9;&#x5E94;&#x8BE5;&#x4E00;&#x8D77;&#x6539;&#x53D8;&#x3002;&#xFF09;</p>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;1&#x5230;15&#x8303;&#x56F4;&#x5185;&#x7684;&#x5B57;&#x6BB5;&#x53F7;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x6765;&#x7F16;&#x7801;&#xFF0C;&#x5305;&#x62EC;&#x5B57;&#x6BB5;&#x7F16;&#x53F7;&#x548C;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x3002;(&#x5728;&#x540E;&#x9762;&#x7684;&#x7F16;&#x7801;&#x7AE0;&#x8282;&#x4E2D;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x66F4;&#x591A;&#x7A7A;&#x95F4;&#x5360;&#x7528;&#x7684;&#x5185;&#x5BB9;)&#x3002;</p>
+<p>16&#x5230;2047&#x8303;&#x56F4;&#x5185;&#x7684;&#x5B57;&#x6BB5;&#x53F7;&#x9700;&#x8981;&#x4E24;&#x4E2A;&#x5B57;&#x8282;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x5E94;&#x8BE5;&#x4E3A;&#x975E;&#x5E38;&#x9891;&#x7E41;&#x51FA;&#x73B0;&#x7684;&#x6D88;&#x606F;&#x5143;&#x7D20;&#x4FDD;&#x7559;&#x5B57;&#x6BB5;&#x7F16;&#x53F7;1&#x5230;15&#x3002;</p>
+<p>&#x8BF7;&#x8BB0;&#x4F4F;&#x4E3A;&#x5C06;&#x6765;&#x53EF;&#x80FD;&#x6DFB;&#x52A0;&#x7684;&#x9891;&#x7E41;&#x51FA;&#x73B0;&#x7684;&#x5143;&#x7D20;&#x7559;&#x51FA;&#x4E00;&#x4E9B;&#x7A7A;&#x95F4;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x7684;&#x6700;&#x5C0F;&#x5B57;&#x6BB5;&#x53F7;&#x662F;1&#xFF0C;&#x6700;&#x5927;&#x7684;&#x662F;229<sup>-1</sup>&#xFF0C;&#x5373;536870911&#x3002;</p>
+<p>&#x4E0D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;19000(<code>FieldDescriptor::kFirstReservedNumber</code>)&#x5230;19999(<code>FieldDescriptor::kLastReservedNumber</code>)&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x5B57;&#x4F5C;&#x4E3A;&#x5B57;&#x6BB5;&#x53F7;&#x3002;&#x5B83;&#x4EEC;&#x662F;<code>ProtoBuf</code>&#x5B9E;&#x73B0;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x4FDD;&#x7559;&#x5B57;&#x6BB5;&#x53F7;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;<code>.proto</code>&#x6587;&#x4EF6;&#x4E2D;&#x4F7F;&#x7528;<code>ProtoBuf</code>&#x4FDD;&#x7559;&#x5B57;&#x6BB5;&#x53F7;&#xFF0C;<code>Protoc</code>&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x62B1;&#x6028;&#x3002;</p>
+<p>&#x540C;&#x6837;&#xFF0C;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x4EE5;&#x524D;&#x4FDD;&#x7559;&#x7684;&#x5B57;&#x6BB5;&#x53F7;&#x3002;</p>
+<h3 id="&#x6307;&#x5B9A;&#x5B57;&#x6BB5;&#x89C4;&#x5219;">&#x6307;&#x5B9A;&#x5B57;&#x6BB5;&#x89C4;&#x5219;</h3>
+<p>&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x6D88;&#x606F;&#x5B57;&#x6BB5;&#x4E3A;&#x4EE5;&#x4E0B;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<p><code>required</code> - &#x5FC5;&#x987B;&#x8D4B;&#x4E00;&#x4E2A;&#x503C;</p>
+<p><code>optional</code> - 0~1&#x4E2A;&#x503C;&#xFF08;&#x53EF;&#x4F20;&#x53EF;&#x4E0D;&#x4F20;&#xFF09;</p>
+<p><code>repeated</code> - 0~&#x591A;&#x4E2A;&#x503C;(&#x6570;&#x7EC4;&#x3001;&#x96C6;&#x5408;)</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Proto2">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"定义数据类型","level":"1.4.2.1","depth":3,"previous":{"title":"Proto2","level":"1.4.2","depth":2,"path":"03Protobuf/02Proto2/README.md","ref":"03Protobuf/02Proto2/README.md","articles":[{"title":"定义数据类型","level":"1.4.2.1","depth":3,"path":"03Protobuf/02Proto2/01定义数据类型.md","ref":"03Protobuf/02Proto2/01定义数据类型.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/02Proto2/01定义数据类型.md","mtime":"2021-01-29T15:58:42.899Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-29T15:59:33.249Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
