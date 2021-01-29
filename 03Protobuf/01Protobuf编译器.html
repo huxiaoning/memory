@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>下载Protobuf编译器 · 个人笔记</title>
+        <title>Protobuf编译器 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -637,12 +637,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.1" data-path="01下载Protobuf编译器.html">
+        <li class="chapter active" data-level="1.4.1" data-path="01Protobuf编译器.html">
             
-                <a href="01下载Protobuf编译器.html">
+                <a href="01Protobuf编译器.html">
             
                     
-                    下载Protobuf编译器
+                    Protobuf编译器
             
                 </a>
             
@@ -685,7 +685,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >下载Protobuf编译器</a>
+        <a href=".." >Protobuf编译器</a>
     </h1>
 </div>
 
@@ -700,9 +700,115 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x4E0B;&#x8F7D;protobuf&#x7F16;&#x8BD1;&#x5668;">&#x4E0B;&#x8F7D;<code>Protobuf</code>&#x7F16;&#x8BD1;&#x5668;</h2>
-<p><a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank">&#x4E0B;&#x8F7D;&#x5730;&#x5740;</a></p>
+                                <h2 id="protobuf&#x7F16;&#x8BD1;&#x5668;"><code>Protobuf</code>&#x7F16;&#x8BD1;&#x5668;</h2>
+<h3 id="&#x4E0B;&#x8F7D;&#x5730;&#x5740;"><a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank">&#x4E0B;&#x8F7D;&#x5730;&#x5740;</a></h3>
 <p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/20210129221448.png" alt="image-20210129221446792"></p>
+<h3 id="&#x5B89;&#x88C5;&#x914D;&#x7F6E;">&#x5B89;&#x88C5;&#x914D;&#x7F6E;</h3>
+<pre><code class="lang-bash">$ sudo chown -R aidan:staff /opt/dev
+$ <span class="hljs-built_in">cd</span> /opt/dev
+$ mkdir -p /opt/dev/Proto
+$ <span class="hljs-built_in">cd</span> /opt/dev/Proto
+$ wget https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/protoc-3.14.0-osx-x86_64.zip
+$ unzip protoc-3.14.0-osx-x86_64.zip
+$ rm -rf protoc-3.14.0-osx-x86_64.zip
+$ vim ~/.profile
+<span class="hljs-built_in">export</span> PROTO_HOME=/opt/dev/Proto
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PROTO_HOME</span>/bin:<span class="hljs-variable">$PATH</span>
+$ . ~/.profile
+
+$ protoc --version
+libprotoc 3.14.0
+</code></pre>
+<h3 id="&#x67E5;&#x770B;&#x5E2E;&#x52A9;">&#x67E5;&#x770B;&#x5E2E;&#x52A9;</h3>
+<pre><code class="lang-bash">$ protoc -h
+Usage: protoc [OPTION] PROTO_FILES
+Parse PROTO_FILES and generate output based on the options given:
+  -IPATH, --proto_path=PATH   Specify the directory <span class="hljs-keyword">in</span> <span class="hljs-built_in">which</span> to search <span class="hljs-keyword">for</span>
+                              imports.  May be specified multiple <span class="hljs-built_in">times</span>;
+                              directories will be searched <span class="hljs-keyword">in</span> order.  If not
+                              given, the current working directory is used.
+                              If not found <span class="hljs-keyword">in</span> any of the these directories,
+                              the --descriptor_<span class="hljs-built_in">set</span>_<span class="hljs-keyword">in</span> descriptors will be
+                              checked <span class="hljs-keyword">for</span> required proto file.
+  --version                   Show version info and exit.
+  -h, --help                  Show this text and exit.
+  --encode=MESSAGE_TYPE       Read a text-format message of the given <span class="hljs-built_in">type</span>
+                              from standard input and write it <span class="hljs-keyword">in</span> binary
+                              to standard output.  The message <span class="hljs-built_in">type</span> must
+                              be defined <span class="hljs-keyword">in</span> PROTO_FILES or their imports.
+  --deterministic_output      When using --encode, ensure map fields are
+                              deterministically ordered. Note thatthis order is not
+                              canonical, and changes across buildsor releases of protoc.
+  --decode=MESSAGE_TYPE       Read a binary message of the given <span class="hljs-built_in">type</span> from
+                              standard input and write it <span class="hljs-keyword">in</span> text format
+                              to standard output.  The message <span class="hljs-built_in">type</span> must
+                              be defined <span class="hljs-keyword">in</span> PROTO_FILES or their imports.
+  --decode_raw                Read an arbitrary protocol message from
+                              standard input and write the raw tag/value
+                              pairs <span class="hljs-keyword">in</span> text format to standard output.  No
+                              PROTO_FILES should be given when using this
+                              flag.
+  --descriptor_<span class="hljs-built_in">set</span>_<span class="hljs-keyword">in</span>=FILES   Specifies a delimited list of FILES
+                              each containing a FileDescriptorSet (a
+                              protocol buffer defined <span class="hljs-keyword">in</span> descriptor.proto).
+                              The FileDescriptor <span class="hljs-keyword">for</span> each of the PROTO_FILES
+                              provided will be loaded from these
+                              FileDescriptorSets. If a FileDescriptor
+                              appears multiple <span class="hljs-built_in">times</span>, the first occurrence
+                              will be used.
+  -oFILE,                     Writes a FileDescriptorSet (a protocol buffer,
+    --descriptor_<span class="hljs-built_in">set</span>_out=FILE defined <span class="hljs-keyword">in</span> descriptor.proto) containing all of
+                              the input files to FILE.
+  --include_imports           When using --descriptor_<span class="hljs-built_in">set</span>_out, also include
+                              all dependencies of the input files <span class="hljs-keyword">in</span> the
+                              <span class="hljs-built_in">set</span>, so that the <span class="hljs-built_in">set</span> is self-contained.
+  --include_<span class="hljs-built_in">source</span>_info       When using --descriptor_<span class="hljs-built_in">set</span>_out, <span class="hljs-keyword">do</span> not strip
+                              SourceCodeInfo from the FileDescriptorProto.
+                              This results <span class="hljs-keyword">in</span> vastly larger descriptors that
+                              include information about the original
+                              location of each decl <span class="hljs-keyword">in</span> the <span class="hljs-built_in">source</span> file as
+                              well as surrounding comments.
+  --dependency_out=FILE       Write a dependency output file <span class="hljs-keyword">in</span> the format
+                              expected by make. This writes the transitive
+                              <span class="hljs-built_in">set</span> of input file paths to FILE
+  --error_format=FORMAT       Set the format <span class="hljs-keyword">in</span> <span class="hljs-built_in">which</span> to <span class="hljs-built_in">print</span> errors.
+                              FORMAT may be <span class="hljs-string">&apos;gcc&apos;</span> (the default) or <span class="hljs-string">&apos;msvs&apos;</span>
+                              (Microsoft Visual Studio format).
+  --print_free_field_numbers  Print the free field numbers of the messages
+                              defined <span class="hljs-keyword">in</span> the given proto files. Groups share
+                              the same field number space with the parent
+                              message. Extension ranges are counted as
+                              occupied fields numbers.
+
+  --plugin=EXECUTABLE         Specifies a plugin executable to use.
+                              Normally, protoc searches the PATH <span class="hljs-keyword">for</span>
+                              plugins, but you may specify additional
+                              executables not <span class="hljs-keyword">in</span> the path using this flag.
+                              Additionally, EXECUTABLE may be of the form
+                              NAME=PATH, <span class="hljs-keyword">in</span> <span class="hljs-built_in">which</span> <span class="hljs-keyword">case</span> the given plugin name
+                              is mapped to the given executable even <span class="hljs-keyword">if</span>
+                              the executable<span class="hljs-string">&apos;s own name differs.
+  --cpp_out=OUT_DIR           Generate C++ header and source.
+  --csharp_out=OUT_DIR        Generate C# source file.
+  --java_out=OUT_DIR          Generate Java source file.
+  --js_out=OUT_DIR            Generate JavaScript source.
+  --objc_out=OUT_DIR          Generate Objective-C header and source.
+  --php_out=OUT_DIR           Generate PHP source file.
+  --python_out=OUT_DIR        Generate Python source file.
+  --ruby_out=OUT_DIR          Generate Ruby source file.
+  @&lt;filename&gt;                 Read options and filenames from file. If a
+                              relative file path is specified, the file
+                              will be searched in the working directory.
+                              The --proto_path option will not affect how
+                              this argument file is searched. Content of
+                              the file will be expanded in the position of
+                              @&lt;filename&gt; as in the argument list. Note
+                              that shell expansion is not applied to the
+                              content of the file (i.e., you cannot use
+                              quotes, wildcards, escapes, commands, etc.).
+                              Each line corresponds to a single argument,
+                              even if it contains spaces.
+</span></code></pre>
 
                                 
                                 </section>
@@ -742,7 +848,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"下载Protobuf编译器","level":"1.4.1","depth":2,"previous":{"title":"Protobuf","level":"1.4","depth":1,"path":"03Protobuf/README.md","ref":"03Protobuf/README.md","articles":[{"title":"下载Protobuf编译器","level":"1.4.1","depth":2,"path":"03Protobuf/01下载Protobuf编译器.md","ref":"03Protobuf/01下载Protobuf编译器.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/01下载Protobuf编译器.md","mtime":"2021-01-29T14:15:25.679Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-29T14:16:16.670Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Protobuf编译器","level":"1.4.1","depth":2,"previous":{"title":"Protobuf","level":"1.4","depth":1,"path":"03Protobuf/README.md","ref":"03Protobuf/README.md","articles":[{"title":"Protobuf编译器","level":"1.4.1","depth":2,"path":"03Protobuf/01Protobuf编译器.md","ref":"03Protobuf/01Protobuf编译器.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/01Protobuf编译器.md","mtime":"2021-01-29T14:40:07.746Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-29T14:40:53.662Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
