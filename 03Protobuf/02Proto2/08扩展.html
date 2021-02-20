@@ -827,12 +827,21 @@
 <p>&#x6269;&#x5C55;&#x5141;&#x8BB8;&#x60A8;&#x58F0;&#x660E;&#x6D88;&#x606F;&#x4E2D;&#x7684;&#x4E00;&#x7CFB;&#x5217;&#x5B57;&#x6BB5;&#x53F7;&#x53EF;&#x7528;&#x4E8E;&#x7B2C;&#x4E09;&#x65B9;&#x6269;&#x5C55;&#x3002;</p>
 <p>&#x6269;&#x5C55;&#x662F;&#x539F;<code>.proto</code>&#x6587;&#x4EF6;&#x4E2D;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x5B57;&#x6BB5;&#x7684;&#x5360;&#x4F4D;&#x7B26;&#x3002;</p>
 <p>&#x8FD9;&#x5141;&#x8BB8;&#x5176;&#x4ED6;<code>.proto</code>&#x6587;&#x4EF6;&#x901A;&#x8FC7;&#x5B9A;&#x4E49;&#x5177;&#x6709;&#x8FD9;&#x4E9B;&#x5B57;&#x6BB5;&#x7F16;&#x53F7;&#x7684;&#x90E8;&#x5206;&#x6216;&#x6240;&#x6709;&#x5B57;&#x6BB5;&#x7684;&#x7C7B;&#x578B;&#x6765;&#x6DFB;&#x52A0;&#x5230;&#x6D88;&#x606F;&#x5B9A;&#x4E49;&#x4E2D;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;<code>a.proto</code></p>
 <pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">Foo</span> </span>{
   <span class="hljs-comment">// ...</span>
   extensions <span class="hljs-number">100</span> to <span class="hljs-number">199</span>;
 }
 </code></pre>
+<p>&#x610F;&#x601D;&#x662F;&#xFF0C;<code>Foo</code>&#x4E2D;&#x7684;100&#x5230;199&#x7684;&#x5B57;&#x7B26;&#x53F7;&#x662F;&#x4E3A;&#x6269;&#x5C55;&#x9884;&#x7559;&#x7684;&#x3002;</p>
+<p>&#x5176;&#x4ED6;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5728;&#x4ED6;&#x81EA;&#x5DF2;&#x7684;<code>.proto</code>&#x6587;&#x4EF6;&#x4E2D;&#x5411;<code>Foo</code>&#x4E2D;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x8FD9;&#x8981;&#x6C42;&#x4ED6;&#x7684;<code>.proto</code>&#x6587;&#x4EF6;&#x8981;&#x5F15;&#x5165;&#x4F60;&#x7684;<code>.proto</code>&#x6587;&#x4EF6;(&#x5305;&#x542B;<code>Foo</code>)&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x4F60;&#x9884;&#x7559;&#x7684;&#x5B57;&#x6BB5;&#x53F7;&#x3002;&#x4F8B;&#x5982;&#xFF1A;<code>b.proto</code></p>
+<pre><code class="lang-protobuf"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;a.proto&quot;</span>
+
+extend Foo {
+  <span class="hljs-keyword">optional</span> <span class="hljs-built_in">int32</span> bar = <span class="hljs-number">126</span>;
+}
+</code></pre>
+<p>&#x8FD9;&#x6837;&#x5C31;&#x5728;<code>b.proto</code>&#x4E2D;&#x901A;&#x8FC7;&#x5B57;&#x6BB5;&#x53F7;126&#x5411;<code>a.proto</code>&#x4E2D;&#x6DFB;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;<code>bar</code>&#x5B57;&#x6BB5;&#x3002;</p>
 
                                 
                                 </section>
@@ -872,7 +881,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"扩展","level":"1.4.2.8","depth":3,"previous":{"title":"更新消息类型","level":"1.4.2.7","depth":3,"path":"03Protobuf/02Proto2/07更新消息类型.md","ref":"03Protobuf/02Proto2/07更新消息类型.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/02Proto2/08扩展.md","mtime":"2021-02-20T14:07:05.246Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-20T14:08:05.563Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"扩展","level":"1.4.2.8","depth":3,"previous":{"title":"更新消息类型","level":"1.4.2.7","depth":3,"path":"03Protobuf/02Proto2/07更新消息类型.md","ref":"03Protobuf/02Proto2/07更新消息类型.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/02Proto2/08扩展.md","mtime":"2021-02-20T14:14:36.397Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-20T14:15:23.054Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
