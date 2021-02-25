@@ -852,6 +852,64 @@
                                 <section class="normal markdown-section">
                                 
                                 <h2 id="oneof"><code>Oneof</code></h2>
+<p>&#x5982;&#x679C;&#x60A8;&#x6709;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x8BB8;&#x591A;&#x53EF;&#x9009;<code>optional</code>&#x5B57;&#x6BB5;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x6700;&#x591A;&#x53EA;&#x80FD;&#x540C;&#x65F6;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>oneof</code>&#x529F;&#x80FD;&#x5F3A;&#x5236;&#x6267;&#x884C;&#x6B64;&#x884C;&#x4E3A;&#x5E76;&#x8282;&#x7701;&#x5185;&#x5B58;&#x3002;</p>
+<p><code>oneof</code>&#x5B57;&#x6BB5;&#x4E0E;<code>optional</code>&#x5B57;&#x6BB5;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x662F;<code>oneof</code>&#x5B57;&#x6BB5;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5B57;&#x6BB5;&#x5171;&#x4EAB;&#x5185;&#x5B58;&#xFF0C;&#x5E76;&#x4E14;&#x540C;&#x65F6;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x503C;&#x3002;</p>
+<p>&#x8BBE;&#x7F6E;<code>oneof</code>&#x7684;&#x4EFB;&#x4F55;&#x6210;&#x5458;&#x5C06;&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x6210;&#x5458;&#x3002;</p>
+<p>&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7279;&#x6B8A;&#x7684;<code>case&#xFF08;&#xFF09;</code>&#x6216;<code>WhichOneof&#xFF08;&#xFF09;</code>&#x65B9;&#x6CD5;&#x68C0;&#x67E5;<code>oneof</code>&#x4E2D;&#x8BBE;&#x7F6E;&#x4E86;&#x54EA;&#x4E2A;&#x503C;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#xFF0C;&#x5177;&#x4F53;&#x53D6;&#x51B3;&#x4E8E;&#x60A8;&#x9009;&#x62E9;&#x7684;&#x8BED;&#x8A00;&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;oneof">&#x4F7F;&#x7528;<code>oneof</code></h3>
+<p>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;<code>oneof</code>&#x5B57;&#x6BB5;:</p>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">SampleMessage</span> </span>{
+  oneof test_oneof {
+     <span class="hljs-built_in">string</span> name = <span class="hljs-number">4</span>;
+     SubMessage sub_message = <span class="hljs-number">9</span>;
+  }
+}
+</code></pre>
+<p>&#x7136;&#x540E;&#x5C06;<code>oneof</code>&#x5B57;&#x6BB5;&#x6DFB;&#x52A0;&#x5230;<code>oneof</code> &#x5B9A;&#x4E49;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;<code>required</code>&#x3001;<code>optional</code>&#x6216;<code>repeated</code>&#x5173;&#x952E;&#x5B57;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x5411;<code>oneof</code>&#x6DFB;&#x52A0;<code>repeated</code>&#x5B57;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5305;&#x542B;<code>repeated</code>&#x5B57;&#x6BB5;&#x7684;&#x6D88;&#x606F;&#x3002;</p>
+<p>&#x5728;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;<code>oneof</code>&#x5B57;&#x6BB5;&#x5177;&#x6709;&#x4E0E;&#x5E38;&#x89C4;<code>optional</code>&#x76F8;&#x540C;&#x7684;<code>getter</code>&#x548C;<code>setter</code>&#x65B9;&#x6CD5;&#x3002;&#x60A8;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x68C0;&#x67E5;<code>oneof</code>&#x4E2D;&#x8BBE;&#x7F6E;&#x4E86;&#x54EA;&#x4E2A;&#x503C;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x5728;&#x76F8;&#x5173;&#x7684;API&#x53C2;&#x8003;&#x4E2D;&#x627E;&#x5230;&#x6709;&#x5173;&#x6240;&#x9009;&#x8BED;&#x8A00;&#x7684;<code>oneof</code>API&#x7684;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x3002;</p>
+<h3 id="oneof&#x7279;&#x5F81;"><code>oneof</code>&#x7279;&#x5F81;</h3>
+<ul>
+<li><p>&#x8BBE;&#x7F6E;<code>oneof</code>&#x5B57;&#x6BB5;&#x5C06;&#x81EA;&#x52A8;&#x6E05;&#x9664;<code>oneof</code>&#x7684;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x6210;&#x5458;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x60A8;&#x8BBE;&#x7F6E;&#x4E86;<code>oneof</code>&#x4E2D;&#x591A;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x53EA;&#x6709;&#x6700;&#x540E;&#x8BBE;&#x7F6E;&#x7684;&#x5B57;&#x6BB5;&#x4ECD;&#x7136;&#x6709;&#x503C;&#x3002;</p>
+<pre><code class="lang-c++">SampleMessage message;
+message.set_name(<span class="hljs-string">&quot;name&quot;</span>);
+CHECK(message.has_name());
+message.mutable_sub_message();   <span class="hljs-comment">// Will clear name field.</span>
+CHECK(!message.has_name());
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>&#x5982;&#x679C;&#x89E3;&#x6790;&#x5668;&#x5728;<code>wire</code>&#x4E0A;&#x9047;&#x5230;&#x540C;&#x4E00;&#x4E2A;<code>oneof</code>&#x7684;&#x591A;&#x4E2A;&#x6210;&#x5458;&#xFF0C;&#x5219;&#x5728;&#x89E3;&#x6790;&#x7684;&#x6D88;&#x606F;&#x4E2D;&#x53EA;&#x4F7F;&#x7528;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x770B;&#x5230;&#x7684;&#x6210;&#x5458;&#x3002;</p>
+</li>
+<li><p>&#x6269;&#x5C55;&#x4E0D;&#x652F;&#x6301;<code>oneof</code>&#x3002;</p>
+</li>
+<li><p><code>oneof</code>&#x4E0D;&#x80FD;&#x662F;<code>repeated</code>&#x7684;&#x3002;</p>
+</li>
+<li><p>&#x53CD;&#x5C04;<code>API</code>&#x9002;&#x7528;&#x4E8E;<code>oneof</code>&#x5B57;&#x6BB5;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x5C06;<code>oneof</code>&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x4E3A;&#x9ED8;&#x8BA4;&#x503C;&#xFF08;&#x4F8B;&#x5982;&#x5C06;<code>int32</code>&#x7684;<code>oneof</code>&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x4E3A;0&#xFF09;&#xFF0C;&#x5219;&#x5C06;&#x8BBE;&#x7F6E;&#x8BE5;<code>oneof</code>&#x5B57;&#x6BB5;&#x7684;&#x201C;case&#x201D;&#xFF0C;&#x5E76;&#x4E14;&#x8BE5;&#x503C;&#x5C06;&#x5728;&#x8FDE;&#x7EBF;&#x4E0A;&#x5E8F;&#x5217;&#x5316;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x4F7F;&#x7528;C++&#xFF0C;&#x8BF7;&#x786E;&#x4FDD;&#x4EE3;&#x7801;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x5D29;&#x6E83;&#x3002;&#x4E0B;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x5C06;&#x5D29;&#x6E83;&#xFF0C;&#x56E0;&#x4E3A;&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>set_name&#xFF08;&#xFF09;</code>&#x65B9;&#x6CD5;&#x5DF2;&#x7ECF;&#x5220;&#x9664;&#x4E86;<code>sub_message</code>&#x3002;</p>
+<pre><code class="lang-c++">SampleMessage message;
+SubMessage* sub_message = message.mutable_sub_message();
+message.set_name(<span class="hljs-string">&quot;name&quot;</span>);      <span class="hljs-comment">// Will delete sub_message</span>
+sub_message-&gt;set_...            <span class="hljs-comment">// Crashes here</span>
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>&#x8FD8;&#x662F;&#x5728;<code>C++</code>&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4EA4;&#x6362;&#x4E24;&#x4E2A;<code>oneof</code>&#x6D88;&#x606F;&#xFF0C;&#x6BCF;&#x6761;&#x6D88;&#x606F;&#x7684;&#x7ED3;&#x5C3E;&#x90FD;&#x662F;&#x53E6;&#x4E00;&#x6761;&#x7684;<code>one of</code>,&#x5728;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;<code>msg1</code>&#x4F1A;&#x62E5;&#x6709;<code>sub_message</code>,&#x800C;<code>msg2</code>&#x4F1A;&#x62E5;&#x6709;<code>name</code>&#x3002;</p>
+<pre><code class="lang-c++">SampleMessage msg1;
+msg1.set_name(<span class="hljs-string">&quot;name&quot;</span>);
+SampleMessage msg2;
+msg2.mutable_sub_message();
+msg1.swap(&amp;msg2);
+CHECK(msg1.has_sub_message());
+CHECK(msg2.has_name());
+</code></pre>
+</li>
+</ul>
+<h3 id="&#x5411;&#x540E;&#x517C;&#x5BB9;&#x6027;&#x95EE;&#x9898;">&#x5411;&#x540E;&#x517C;&#x5BB9;&#x6027;&#x95EE;&#x9898;</h3>
 
                                 
                                 </section>
@@ -895,7 +953,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Oneof","level":"1.4.2.9","depth":3,"next":{"title":"玩","level":"1.5","depth":1,"path":"300玩/README.md","ref":"300玩/README.md","articles":[]},"previous":{"title":"扩展","level":"1.4.2.8","depth":3,"path":"03Protobuf/02Proto2/08扩展.md","ref":"03Protobuf/02Proto2/08扩展.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/02Proto2/09Oneof.md","mtime":"2021-02-25T14:55:32.780Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-25T14:56:31.531Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Oneof","level":"1.4.2.9","depth":3,"next":{"title":"玩","level":"1.5","depth":1,"path":"300玩/README.md","ref":"300玩/README.md","articles":[]},"previous":{"title":"扩展","level":"1.4.2.8","depth":3,"path":"03Protobuf/02Proto2/08扩展.md","ref":"03Protobuf/02Proto2/08扩展.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"03Protobuf/02Proto2/09Oneof.md","mtime":"2021-02-25T15:26:49.461Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-25T15:27:50.130Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
