@@ -39,6 +39,7 @@ jobs:
           name: docs
       - run: git config --global user.email "secrets.EMAIL"
       - run: git config --global user.name "secrets.NAME"
+      - run: wget https://onegetcdn.azureedge.net/providers/Microsoft.PackageManagement.NuGetProvider-2.8.5.208.dll
       - run: git add .
       - run: git commit -m 'UP'
       - run: git push
