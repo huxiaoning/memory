@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Snipaste · 个人笔记</title>
+        <title>CentOS 7 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="04PicGo.html" />
+    <link rel="next" href="../300玩/" />
     
     
-    <link rel="prev" href="02Typora.html" />
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -122,9 +122,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
             
-                <a href="./">
+                <a href="../01笔记系统/">
             
                     
                     笔记系统
@@ -136,9 +136,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
             
-                <a href="01Git.html">
+                <a href="../01笔记系统/01Git.html">
             
                     
                     Git
@@ -149,9 +149,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
             
-                <a href="02Typora.html">
+                <a href="../01笔记系统/02Typora.html">
             
                     
                     Typora
@@ -162,9 +162,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.3" data-path="03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
             
-                <a href="03Snipaste.html">
+                <a href="../01笔记系统/03Snipaste.html">
             
                     
                     Snipaste
@@ -175,9 +175,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
             
-                <a href="04PicGo.html">
+                <a href="../01笔记系统/04PicGo.html">
             
                     
                     PicGo
@@ -819,9 +819,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../100 Docker/">
+        <li class="chapter " data-level="1.5" data-path="./">
             
-                <a href="../100 Docker/">
+                <a href="./">
             
                     
                     Docker
@@ -833,9 +833,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../100 Docker/01 CentOS 7.html">
+        <li class="chapter active" data-level="1.5.1" data-path="01 CentOS 7.html">
             
-                <a href="../100 Docker/01 CentOS 7.html">
+                <a href="01 CentOS 7.html">
             
                     
                     CentOS 7
@@ -932,7 +932,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Snipaste</a>
+        <a href=".." >CentOS 7</a>
     </h1>
 </div>
 
@@ -947,8 +947,29 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="snipaste"><code>Snipaste</code></h2>
-<p>&#x622A;&#x56FE;&#x5DE5;&#x5177;</p>
+                                <h4 id="centos-7"><code>CentOS 7</code></h4>
+<h5 id="&#x57FA;&#x7840;&#x955C;&#x50CF;">&#x57FA;&#x7840;&#x955C;&#x50CF;</h5>
+<pre><code class="lang-powershell">$ docker pull centos:<span class="hljs-number">7</span>
+</code></pre>
+<h5 id="dockerfile"><code>Dockerfile</code></h5>
+<pre><code class="lang-dockerfile"><span class="hljs-keyword">FROM</span> centos:<span class="hljs-number">7</span>
+COPY id_rsa_2048.pub /root/.ssh/authorized_keys 
+<span class="hljs-keyword">RUN</span> <span class="bash">yum install -y passwd openssl openssh-server \
+    &amp;&amp; ssh-keygen -q -t rsa -b 2048 <span class="hljs-_">-f</span> /etc/ssh/ssh_host_rsa_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; ssh-keygen -q -t ecdsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ecdsa_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; ssh-keygen -t dsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ed25519_key -N <span class="hljs-string">&apos;&apos;</span> 
+</span><span class="hljs-keyword">CMD</span> <span class="bash">[<span class="hljs-string">&quot;/usr/sbin/sshd&quot;</span>,<span class="hljs-string">&quot;-D&quot;</span>]
+</span></code></pre>
+<h5 id="&#x6784;&#x5EFA;&#x8FD0;&#x884C;">&#x6784;&#x5EFA;&#x8FD0;&#x884C;</h5>
+<pre><code class="lang-powershell">$ docker build -t mycentos7:<span class="hljs-number">1.0</span> .
+</code></pre>
+<h5 id="&#x8C03;&#x8BD5;&#x547D;&#x4EE4;">&#x8C03;&#x8BD5;&#x547D;&#x4EE4;</h5>
+<pre><code class="lang-powershell">$ docker run -it --rm centos:<span class="hljs-number">7</span> bash
+$ docker exec -it mycentos bash
+</code></pre>
+<h5 id="&#x6B63;&#x5F0F;&#x547D;&#x4EE4;">&#x6B63;&#x5F0F;&#x547D;&#x4EE4;</h5>
+<pre><code class="lang-powershell">$ docker run --rm -it -p <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2222</span>:<span class="hljs-number">22</span> --name mycentos -d mycentos7:<span class="hljs-number">1.0</span>
+</code></pre>
 
                                 
                                 </section>
@@ -976,12 +997,12 @@
 
             
                 
-                <a href="02Typora.html" class="navigation navigation-prev " aria-label="Previous page: Typora">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Docker">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="04PicGo.html" class="navigation navigation-next " aria-label="Next page: PicGo">
+                <a href="../300玩/" class="navigation navigation-next " aria-label="Next page: 玩">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -992,7 +1013,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Snipaste","level":"1.2.3","depth":2,"next":{"title":"PicGo","level":"1.2.4","depth":2,"path":"01笔记系统/04PicGo.md","ref":"01笔记系统/04PicGo.md","articles":[]},"previous":{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/03Snipaste.md","mtime":"2021-05-28T02:31:24.440Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-28T02:32:15.644Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CentOS 7","level":"1.5.1","depth":2,"next":{"title":"玩","level":"1.6","depth":1,"path":"300玩/README.md","ref":"300玩/README.md","articles":[{"title":"ESXI","level":"1.6.1","depth":2,"path":"300玩/01ESXI/README.md","ref":"300玩/01ESXI/README.md","articles":[{"title":"下载","level":"1.6.1.1","depth":3,"path":"300玩/01ESXI/01下载.md","ref":"300玩/01ESXI/01下载.md","articles":[]}]}]},"previous":{"title":"Docker","level":"1.5","depth":1,"path":"100 Docker/README.md","ref":"100 Docker/README.md","articles":[{"title":"CentOS 7","level":"1.5.1","depth":2,"path":"100 Docker/01 CentOS 7.md","ref":"100 Docker/01 CentOS 7.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"100 Docker/01 CentOS 7.md","mtime":"2021-05-28T02:31:24.440Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-28T02:32:15.644Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
