@@ -929,7 +929,49 @@
                                 <section class="normal markdown-section">
                                 
                                 <h2 id="git"><code>Git</code></h2>
-<p><code>Git</code>&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;</p>
+<h5 id="&#x751F;&#x6210;&#x5BC6;&#x94A5;&#x5BF9;">&#x751F;&#x6210;&#x5BC6;&#x94A5;&#x5BF9;</h5>
+<pre><code class="lang-bash">$ sudo apt update
+$ sudo apt install -y git
+$ git --version
+$ git config --global user.name <span class="hljs-string">&quot;huxiaoningsworld&quot;</span>
+$ git config --global user.email <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span>
+$ ssh-keygen -t rsa -C <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span>
+$ cat ~/.ssh/id_rsa.pub
+</code></pre>
+<h5 id="github&#x7AEF;&#x53E3;&#x914D;&#x7F6E;&#x548C;&#x4EE3;&#x7406;&#x914D;&#x7F6E;">GitHub&#x7AEF;&#x53E3;&#x914D;&#x7F6E;&#x548C;&#x4EE3;&#x7406;&#x914D;&#x7F6E;</h5>
+<pre><code class="lang-bash">$ cat ~/.ssh/config
+Host xxxx.com
+        port xxx
+        IdentityFile C:\Users\aidan\.ssh\id_rsa
+Host ssh.github.com
+        User    git
+        Hostname        ssh.github.com
+        Port    443
+        ProxyCommand    connect -S 127.0.0.1:60002 <span class="hljs-_">-a</span> none %h %p
+        IdentityFile C:\Users\aidan\.ssh\id_rsa
+ Host github.com
+        User    git
+        Hostname        github.com
+        Port    22
+        ProxyCommand    connect -S 127.0.0.1:60002 <span class="hljs-_">-a</span> none %h %p
+        IdentityFile C:\Users\aidan\.ssh\id_rsa
+</code></pre>
+<h5 id="&#x5E38;&#x7528;&#x522B;&#x540D;">&#x5E38;&#x7528;&#x522B;&#x540D;</h5>
+<pre><code class="lang-bash">$ <span class="hljs-built_in">alias</span> add=<span class="hljs-string">&apos;git add .&apos;</span>
+<span class="hljs-comment"># alias commit=&apos;vim ~/info.txt &amp;&amp; git commit -m &quot;$(cat ~/info.txt)&quot;&apos;</span>
+$ <span class="hljs-built_in">alias</span> commit=<span class="hljs-string">&apos;git commit -m &quot;UP&quot;&apos;</span>
+$ <span class="hljs-built_in">alias</span> pull=<span class="hljs-string">&apos;git pull&apos;</span>
+$ <span class="hljs-built_in">alias</span> push=<span class="hljs-string">&apos;git push&apos;</span>
+$ <span class="hljs-built_in">alias</span> status=<span class="hljs-string">&apos;git status&apos;</span>
+
+$ vim /etc/bash.bashrc
+<span class="hljs-built_in">alias</span> add=<span class="hljs-string">&apos;git add .&apos;</span>
+<span class="hljs-built_in">alias</span> commit=<span class="hljs-string">&apos;git commit -m &quot;UP&quot;&apos;</span>
+<span class="hljs-built_in">alias</span> pull=<span class="hljs-string">&apos;git pull&apos;</span>
+<span class="hljs-built_in">alias</span> push=<span class="hljs-string">&apos;git push&apos;</span>
+<span class="hljs-built_in">alias</span> status=<span class="hljs-string">&apos;git status&apos;</span>
+</code></pre>
+<h5 id="git&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;"><code>Git</code>&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;</h5>
 <pre><code class="lang-shell">echo &quot;# memory&quot; &gt;&gt; README.md
 git init
 git add README.md
@@ -980,7 +1022,7 @@ git push -u origin master
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Git","level":"1.2.1","depth":2,"next":{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},"previous":{"title":"笔记系统","level":"1.2","depth":1,"path":"01笔记系统/README.md","ref":"01笔记系统/README.md","articles":[{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},{"title":"Snipaste","level":"1.2.3","depth":2,"path":"01笔记系统/03Snipaste.md","ref":"01笔记系统/03Snipaste.md","articles":[]},{"title":"PicGo","level":"1.2.4","depth":2,"path":"01笔记系统/04PicGo.md","ref":"01笔记系统/04PicGo.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/01Git.md","mtime":"2021-05-28T01:39:45.925Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-28T01:40:30.561Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Git","level":"1.2.1","depth":2,"next":{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},"previous":{"title":"笔记系统","level":"1.2","depth":1,"path":"01笔记系统/README.md","ref":"01笔记系统/README.md","articles":[{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},{"title":"Snipaste","level":"1.2.3","depth":2,"path":"01笔记系统/03Snipaste.md","ref":"01笔记系统/03Snipaste.md","articles":[]},{"title":"PicGo","level":"1.2.4","depth":2,"path":"01笔记系统/04PicGo.md","ref":"01笔记系统/04PicGo.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/01Git.md","mtime":"2021-05-28T01:51:34.608Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-28T01:52:25.068Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
