@@ -1,6 +1,7 @@
 ### 打印一个`int`值
 
-```c
+```shell
+$ vim main.c
 #include <stdio.h>
 int main()
 {
@@ -8,5 +9,8 @@ int main()
 	printf("a = %d\n",a);
 	return 0;
 }
+$ gcc main.c
+$ ./a.out
+a = 5
 ```
 
