@@ -1011,6 +1011,40 @@ $ docker exec -it mycentos bash
 </ol>
 <p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/image-20210528104325084.png" alt="image-20210528104325084"></p>
 <p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/image-20210528104349463.png" alt="image-20210528104349463"></p>
+<h5 id="&#x5B8C;&#x6574;">&#x5B8C;&#x6574;</h5>
+<pre><code class="lang-dockerfile"><span class="hljs-keyword">FROM</span> centos:<span class="hljs-number">7</span>
+COPY study.pub /root/.ssh/authorized_keys
+<span class="hljs-keyword">COPY</span> <span class="bash">id_rsa /root/.ssh/id_rsa
+</span><span class="hljs-keyword">COPY</span> <span class="bash">id_rsa.pub /root/.ssh/id_rsa.pub
+</span><span class="hljs-keyword">COPY</span> <span class="bash">known_hosts /root/.ssh/known_hosts
+</span><span class="hljs-keyword">ADD</span> <span class="bash">jdk-8u251-linux-x64.tar.gz /opt/Java/
+</span><span class="hljs-keyword">ADD</span> <span class="bash">apache-maven-3.6.3-bin.tar.gz /opt/Maven/
+</span><span class="hljs-comment"># ARG JAVA_HOME=/opt/Java/jdk1.8.0_251</span>
+<span class="hljs-comment"># ARG M2_HOME=/opt/Maven/apache-maven-3.6.3</span>
+<span class="hljs-comment"># ENV JAVA_HOME=$JAVA_HOME PATH=$PATH:$JAVA_HOME/bin</span>
+<span class="hljs-comment"># ENV CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span>
+<span class="hljs-comment"># ENV M2_HOME=$M2_HOME PATH=$PATH:$M2_HOME/bin</span>
+<span class="hljs-keyword">RUN</span> <span class="bash">yum install -y vim wget curl gcc gcc-c++ openssl openssh-server net-tools git \
+    &amp;&amp; mkdir -p /var/run/sshd \
+    &amp;&amp; ssh-keygen -q -t rsa -b 2048 <span class="hljs-_">-f</span> /etc/ssh/ssh_host_rsa_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; ssh-keygen -q -t ecdsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ecdsa_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; ssh-keygen -t dsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ed25519_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; git config --global user.name <span class="hljs-string">&quot;huxiaoningsworld&quot;</span> \
+    &amp;&amp; git config --global user.email <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span> \
+    &amp;&amp; chmod 0600 ~/.ssh/id_rsa \
+    &amp;&amp; yum install -y kde<span class="hljs-_">-l</span>10n-Chinese glibc-common \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export LC_ALL=&quot;zh_CN.UTF-8&quot;&apos;</span> &amp;&gt;&gt; /etc/profile \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;LANG=&quot;zh_CN.UTF-8&quot;&apos;</span> &amp;&gt; /etc/locale.conf \
+    &amp;&amp; localedef -c <span class="hljs-_">-f</span> UTF-8 -i zh_CN zh_CN.utf8 \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;:set encoding=UTF-8&quot;</span> &amp;&gt;&gt; /root/.vimrc \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export JAVA_HOME=/opt/Java/jdk1.8.0_251&apos;</span> &amp;&gt;&gt; /etc/profile.d/java.sh \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export PATH=$JAVA_HOME/bin:$PATH&apos;</span> &amp;&gt;&gt; /etc/profile.d/java.sh \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar&apos;</span> &amp;&gt;&gt; /etc/profile.d/java.sh \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export M2_HOME=/opt/Maven/apache-maven-3.6.3&apos;</span> &amp;&gt;&gt; /etc/profile.d/maven.sh \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export PATH=$M2_HOME/bin:$PATH&apos;</span> &amp;&gt;&gt; /etc/profile.d/maven.sh \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export MAVEN_OPTS=&quot;-Xms128m -Xmx1024m&quot;&apos;</span> &amp;&gt;&gt; /etc/profile.d/maven.sh
+</span><span class="hljs-keyword">CMD</span> <span class="bash">[<span class="hljs-string">&quot;/usr/sbin/sshd&quot;</span>,<span class="hljs-string">&quot;-D&quot;</span>]
+</span></code></pre>
 
                                 
                                 </section>
@@ -1054,7 +1088,7 @@ $ docker exec -it mycentos bash
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CentOS 7","level":"1.5.1","depth":2,"next":{"title":"C语言","level":"1.6","depth":1,"path":"101 C语言/README.md","ref":"101 C语言/README.md","articles":[{"title":"HelloWorld","level":"1.6.1","depth":2,"path":"101 C语言/01 HelloWorld.md","ref":"101 C语言/01 HelloWorld.md","articles":[]}]},"previous":{"title":"Docker","level":"1.5","depth":1,"path":"100 Docker/README.md","ref":"100 Docker/README.md","articles":[{"title":"CentOS 7","level":"1.5.1","depth":2,"path":"100 Docker/01 CentOS 7.md","ref":"100 Docker/01 CentOS 7.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"100 Docker/01 CentOS 7.md","mtime":"2021-05-28T05:38:42.523Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-28T05:39:26.891Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CentOS 7","level":"1.5.1","depth":2,"next":{"title":"C语言","level":"1.6","depth":1,"path":"101 C语言/README.md","ref":"101 C语言/README.md","articles":[{"title":"HelloWorld","level":"1.6.1","depth":2,"path":"101 C语言/01 HelloWorld.md","ref":"101 C语言/01 HelloWorld.md","articles":[]}]},"previous":{"title":"Docker","level":"1.5","depth":1,"path":"100 Docker/README.md","ref":"100 Docker/README.md","articles":[{"title":"CentOS 7","level":"1.5.1","depth":2,"path":"100 Docker/01 CentOS 7.md","ref":"100 Docker/01 CentOS 7.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"100 Docker/01 CentOS 7.md","mtime":"2021-05-31T01:40:52.551Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T01:41:41.701Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
