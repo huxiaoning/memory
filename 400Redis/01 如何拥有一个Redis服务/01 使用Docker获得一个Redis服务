@@ -13,3 +13,13 @@ $ docker run --rm -it -d --name myredis -p 6379:6379 redis:6
 https://github.com/caoxinyu/RedisClient/tree/windows/release
 ```
 
+`Java`客户端
+
+```xml
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+```
+
