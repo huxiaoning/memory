@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>MySQL数据类型之符点型 · 个人笔记</title>
+        <title>MySQL数据类型之字符型 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="05MySQL数据类型之日期时间型.html" />
     
-    
-    <link rel="prev" href="03MySQL数据类型之整形.html" />
+    <link rel="prev" href="05MySQL数据类型之日期时间型.html" />
     
 
     <style>
@@ -1096,7 +1094,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.11.3" data-path="04MySQL数据类型之符点型.html">
+        <li class="chapter " data-level="1.11.3" data-path="04MySQL数据类型之符点型.html">
             
                 <a href="04MySQL数据类型之符点型.html">
             
@@ -1122,7 +1120,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11.5" data-path="06MySQL数据类型之字符型.html">
+        <li class="chapter active" data-level="1.11.5" data-path="06MySQL数据类型之字符型.html">
             
                 <a href="06MySQL数据类型之字符型.html">
             
@@ -1170,7 +1168,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >MySQL数据类型之符点型</a>
+        <a href=".." >MySQL数据类型之字符型</a>
     </h1>
 </div>
 
@@ -1185,22 +1183,46 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="mysql&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E4B;&#x7B26;&#x70B9;&#x578B;"><code>MySQL</code>&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E4B;&#x7B26;&#x70B9;&#x578B;</h1>
+                                <h1 id="mysql&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E4B;&#x5B57;&#x7B26;&#x578B;">MySQL&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E4B;&#x5B57;&#x7B26;&#x578B;</h1>
 <table>
 <thead>
 <tr>
 <th>&#x6570;&#x636E;&#x7C7B;&#x578B;</th>
-<th>&#x5B58;&#x50A8;&#x8303;&#x56F4;</th>
+<th>&#x5B58;&#x50A8;&#x9700;&#x6C42;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>FLOAT[(M,D)]</td>
-<td>-3.402823466E+38&#x5230;-1.175494351E-38&#x3001;0&#x548C;1.175494351E-38&#x5230;3.402823466E+38&#x3002;<br>M&#x662F;&#x6570;&#x636E;&#x603B;&#x4F4D;&#x6570;&#xFF0C;D&#x662F;&#x5C0F;&#x6570;&#x70B9;&#x540E;&#x9762;&#x4F4D;&#x6570;&#x3002;&#x5982;&#x679C;M&#x548C;D&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x6839;&#x636E;&#x786C;&#x4EF6;&#x5141;&#x8BB8;&#x7684;&#x9650;&#x5236;&#x6765;&#x4FDD;&#x5B58;&#x503C;&#x3002;<br>&#x5355;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x6570;&#x7CBE;&#x786E;&#x5230;&#x5927;&#x7EA6;7&#x4F4D;&#x5C0F;&#x6570;&#x4F4D;&#x3002;</td>
+<td>CHAR(M)</td>
+<td>M&#x4E2A;&#x5B57;&#x8282;&#xFF0C;0 &lt;= M &lt;= 255</td>
 </tr>
 <tr>
-<td>DOUBLE[(M,D)]</td>
-<td>-1.7976931348623157E+308&#x5230;-2.2250738585072014E-308&#x3001;0&#x548C;2.2250738585072014E-308&#x5230;1.7976931348623157E+308&#x3002;</td>
+<td>VARCHAR(M)</td>
+<td>L+1&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5176;&#x4E2D;L &lt;= M &#x4E14; 0 &lt;= M &lt;= 65535</td>
+</tr>
+<tr>
+<td>TINYTEXT</td>
+<td>L+1&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5176;&#x4E2D;L &lt; 2<sup>8</sup></td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>L+2&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5176;&#x4E2D;L &lt; 2<sup>16</sup></td>
+</tr>
+<tr>
+<td>MEDIUMTEXT</td>
+<td>L+3&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5176;&#x4E2D;L &lt; 2<sup>24</sup></td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>L+4&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5176;&#x4E2D;L &lt; 2<sup>32</sup></td>
+</tr>
+<tr>
+<td>ENUM(&apos;value1&apos;,&apos;value2&apos;,...)</td>
+<td>1&#x6216;2&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x53D6;&#x51B3;&#x4E8E;&#x679A;&#x4E3E;&#x503C;&#x7684;&#x4E2A;&#x6570;(&#x6700;&#x591A;65535&#x4E2A;&#x503C;)</td>
+</tr>
+<tr>
+<td>SET(&apos;value1&apos;,&apos;value2&apos;,...)</td>
+<td>1&#x3001;2&#x3001;3&#x3001;4&#x6216;&#x8005;8&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x53D6;&#x51B3;&#x4E8E;set&#x6210;&#x5458;&#x7684;&#x6570;&#x76EE;(&#x6700;&#x591A;64&#x4E2A;&#x6210;&#x5458;)</td>
 </tr>
 </tbody>
 </table>
@@ -1231,14 +1253,10 @@
 
             
                 
-                <a href="03MySQL数据类型之整形.html" class="navigation navigation-prev " aria-label="Previous page: MySQL数据类型之整形">
+                <a href="05MySQL数据类型之日期时间型.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: MySQL数据类型之日期时间型">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="05MySQL数据类型之日期时间型.html" class="navigation navigation-next " aria-label="Next page: MySQL数据类型之日期时间型">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -1247,7 +1265,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"MySQL数据类型之符点型","level":"1.11.3","depth":2,"next":{"title":"MySQL数据类型之日期时间型","level":"1.11.4","depth":2,"path":"700MySQL/05MySQL数据类型之日期时间型.md","ref":"700MySQL/05MySQL数据类型之日期时间型.md","articles":[]},"previous":{"title":"MySQL数据类型之整形","level":"1.11.2","depth":2,"path":"700MySQL/03MySQL数据类型之整形.md","ref":"700MySQL/03MySQL数据类型之整形.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"700MySQL/04MySQL数据类型之符点型.md","mtime":"2021-07-03T14:19:57.931Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-03T14:20:39.055Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"MySQL数据类型之字符型","level":"1.11.5","depth":2,"previous":{"title":"MySQL数据类型之日期时间型","level":"1.11.4","depth":2,"path":"700MySQL/05MySQL数据类型之日期时间型.md","ref":"700MySQL/05MySQL数据类型之日期时间型.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"700MySQL/06MySQL数据类型之字符型.md","mtime":"2021-07-03T14:19:57.931Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-03T14:20:39.055Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
