@@ -25,6 +25,6 @@ CREATE TABLE tb1(
     username VARCHAR(20),
     age TINYINT UNSIGNED,
     salary FLOAT(8,2) UNSIGNED
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='tb1表';
 ```
 
