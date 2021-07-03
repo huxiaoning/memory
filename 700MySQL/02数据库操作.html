@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Git · 个人笔记</title>
+        <title>数据库操作 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,8 +66,6 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="02Typora.html" />
-    
     
     <link rel="prev" href="./" />
     
@@ -122,9 +120,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
             
-                <a href="./">
+                <a href="../01笔记系统/">
             
                     
                     笔记系统
@@ -136,9 +134,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
             
-                <a href="01Git.html">
+                <a href="../01笔记系统/01Git.html">
             
                     
                     Git
@@ -149,9 +147,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
             
-                <a href="02Typora.html">
+                <a href="../01笔记系统/02Typora.html">
             
                     
                     Typora
@@ -162,9 +160,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
             
-                <a href="03Snipaste.html">
+                <a href="../01笔记系统/03Snipaste.html">
             
                     
                     Snipaste
@@ -175,9 +173,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
             
-                <a href="04PicGo.html">
+                <a href="../01笔记系统/04PicGo.html">
             
                     
                     PicGo
@@ -1056,9 +1054,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../700MySQL/">
+        <li class="chapter " data-level="1.11" data-path="./">
             
-                <a href="../700MySQL/">
+                <a href="./">
             
                     
                     MySQL
@@ -1070,9 +1068,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.11.1" data-path="../700MySQL/02数据库操作.html">
+        <li class="chapter active" data-level="1.11.1" data-path="02数据库操作.html">
             
-                <a href="../700MySQL/02数据库操作.html">
+                <a href="02数据库操作.html">
             
                     
                     数据库操作
@@ -1118,7 +1116,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Git</a>
+        <a href=".." >数据库操作</a>
     </h1>
 </div>
 
@@ -1133,56 +1131,35 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="git"><code>Git</code></h2>
-<h5 id="&#x751F;&#x6210;&#x5BC6;&#x94A5;&#x5BF9;">&#x751F;&#x6210;&#x5BC6;&#x94A5;&#x5BF9;</h5>
-<pre><code class="lang-bash">$ sudo apt update
-$ sudo apt install -y git
-$ git --version
-$ git config --global user.name <span class="hljs-string">&quot;huxiaoningsworld&quot;</span>
-$ git config --global user.email <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span>
-$ ssh-keygen -t rsa -C <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span>
-$ cat ~/.ssh/id_rsa.pub
+                                <h1 id="&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;">&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;</h1>
+<h2 id="mysql&#x8BED;&#x53E5;&#x89C4;&#x8303;"><code>MySql</code>&#x8BED;&#x53E5;&#x89C4;&#x8303;</h2>
+<pre><code>&#x5173;&#x952E;&#x5B57;&#x4E0E;&#x51FD;&#x6570;&#x540D;&#x79F0;&#x5168;&#x90E8;&#x5927;&#x5199;
+&#x6570;&#x636E;&#x5E93;&#x540D;&#x79F0;&#x3001;&#x8868;&#x540D;&#x79F0;&#x3001;&#x5B57;&#x6BB5;&#x540D;&#x79F0;&#x5168;&#x90E8;&#x5C0F;&#x5199;
+SQL&#x8BED;&#x53E5;&#x5FC5;&#x987B;&#x4EE5;&#x5206;&#x53F7;&#x7ED3;&#x5C3E;
+</code></pre><h2 id="&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;">&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;</h2>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> {<span class="hljs-keyword">DATABASE</span> | <span class="hljs-keyword">SCHEMA</span>} [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] db_name
+[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> [=] charset_name;
 </code></pre>
-<h5 id="github&#x7AEF;&#x53E3;&#x914D;&#x7F6E;&#x548C;&#x4EE3;&#x7406;&#x914D;&#x7F6E;">GitHub&#x7AEF;&#x53E3;&#x914D;&#x7F6E;&#x548C;&#x4EE3;&#x7406;&#x914D;&#x7F6E;</h5>
-<pre><code class="lang-bash">$ cat ~/.ssh/config
-Host xxxx.com
-        port xxx
-        IdentityFile C:\Users\aidan\.ssh\id_rsa
-Host ssh.github.com
-        User    git
-        Hostname        ssh.github.com
-        Port    443
-        ProxyCommand    connect -S 127.0.0.1:60002 <span class="hljs-_">-a</span> none %h %p
-        IdentityFile C:\Users\aidan\.ssh\id_rsa
- Host github.com
-        User    git
-        Hostname        github.com
-        Port    22
-        ProxyCommand    connect -S 127.0.0.1:60002 <span class="hljs-_">-a</span> none %h %p
-        IdentityFile C:\Users\aidan\.ssh\id_rsa
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> db1;
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">DATABASES</span>;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> db1;
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">WARNINGS</span>;
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> db1; <span class="hljs-comment">-- &#x67E5;&#x770B;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;db1&#x7684;sql,&#x5305;&#x62EC;&#x6570;&#x636E;&#x5E93;&#x7F16;&#x7801;&#x4FE1;&#x606F;</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> db2 <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> gbk;
 </code></pre>
-<h5 id="&#x5E38;&#x7528;&#x522B;&#x540D;">&#x5E38;&#x7528;&#x522B;&#x540D;</h5>
-<pre><code class="lang-bash">$ <span class="hljs-built_in">alias</span> add=<span class="hljs-string">&apos;git add .&apos;</span>
-<span class="hljs-comment"># alias commit=&apos;vim ~/info.txt &amp;&amp; git commit -m &quot;$(cat ~/info.txt)&quot;&apos;</span>
-$ <span class="hljs-built_in">alias</span> commit=<span class="hljs-string">&apos;git commit -m &quot;UP&quot;&apos;</span>
-$ <span class="hljs-built_in">alias</span> pull=<span class="hljs-string">&apos;git pull&apos;</span>
-$ <span class="hljs-built_in">alias</span> push=<span class="hljs-string">&apos;git push&apos;</span>
-$ <span class="hljs-built_in">alias</span> status=<span class="hljs-string">&apos;git status&apos;</span>
-
-$ vim /etc/bash.bashrc
-<span class="hljs-built_in">alias</span> add=<span class="hljs-string">&apos;git add .&apos;</span>
-<span class="hljs-built_in">alias</span> commit=<span class="hljs-string">&apos;git commit -m &quot;UP&quot;&apos;</span>
-<span class="hljs-built_in">alias</span> pull=<span class="hljs-string">&apos;git pull&apos;</span>
-<span class="hljs-built_in">alias</span> push=<span class="hljs-string">&apos;git push&apos;</span>
-<span class="hljs-built_in">alias</span> status=<span class="hljs-string">&apos;git status&apos;</span>
+<h2 id="&#x4FEE;&#x6539;&#x6570;&#x636E;&#x5E93;&#x5E93;">&#x4FEE;&#x6539;&#x6570;&#x636E;&#x5E93;&#x5E93;</h2>
+<pre><code class="lang-sql"><span class="hljs-keyword">ALTER</span> {<span class="hljs-keyword">DATABASE</span> | <span class="hljs-keyword">SCHEMA</span>} db_name
+[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> [=] charset_name;
 </code></pre>
-<h5 id="git&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;"><code>Git</code>&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;</h5>
-<pre><code class="lang-shell">echo &quot;# memory&quot; &gt;&gt; README.md
-git init
-git add README.md
-git commit -m &quot;first commit&quot;
-git remote add origin git@github.com:huxiaoning/memory.git
-git push -u origin master
+<pre><code class="lang-sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">DATABASE</span> db2 <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> = utf8;
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> db2; <span class="hljs-comment">-- &#x53D1;&#x73B0;&#x53D8;&#x6210;utf8&#x7F16;&#x7801;&#x4E86;</span>
+</code></pre>
+<h2 id="&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;">&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;</h2>
+<pre><code class="lang-sql"><span class="hljs-keyword">DROP</span> {<span class="hljs-keyword">DATABASE</span> | <span class="hljs-keyword">SCHEMA</span>} [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span>] db_name;
+</code></pre>
+<pre><code class="lang-sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> db1;
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">DATABASES</span>; <span class="hljs-comment">-- &#x53D1;&#x73B0;&#x6570;&#x636E;&#x5E93;db1&#x5DF2;&#x7ECF;&#x88AB;&#x5220;&#x9664;&#x4E86;&#x3002;</span>
+<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> db2;
 </code></pre>
 
                                 
@@ -1211,14 +1188,10 @@ git push -u origin master
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 笔记系统">
+                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: MySQL">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="02Typora.html" class="navigation navigation-next " aria-label="Next page: Typora">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -1227,7 +1200,7 @@ git push -u origin master
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Git","level":"1.2.1","depth":2,"next":{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},"previous":{"title":"笔记系统","level":"1.2","depth":1,"path":"01笔记系统/README.md","ref":"01笔记系统/README.md","articles":[{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},{"title":"Snipaste","level":"1.2.3","depth":2,"path":"01笔记系统/03Snipaste.md","ref":"01笔记系统/03Snipaste.md","articles":[]},{"title":"PicGo","level":"1.2.4","depth":2,"path":"01笔记系统/04PicGo.md","ref":"01笔记系统/04PicGo.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/01Git.md","mtime":"2021-07-03T08:43:11.855Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-03T08:43:59.718Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"数据库操作","level":"1.11.1","depth":2,"previous":{"title":"MySQL","level":"1.11","depth":1,"path":"700MySQL/README.md","ref":"700MySQL/README.md","articles":[{"title":"数据库操作","level":"1.11.1","depth":2,"path":"700MySQL/02数据库操作.md","ref":"700MySQL/02数据库操作.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"700MySQL/02数据库操作.md","mtime":"2021-07-03T08:43:11.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-03T08:43:59.718Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
