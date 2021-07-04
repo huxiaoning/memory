@@ -17,5 +17,7 @@
 
 ## 内连接
 
+显示左表及右表符合连接条件的记录
+
 ![内连接1](https://raw.githubusercontent.com/huxiaoning/img/master/%E5%86%85%E8%BF%9E%E6%8E%A51.png)
 
