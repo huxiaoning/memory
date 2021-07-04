@@ -17,5 +17,5 @@
 
 ## 内连接
 
-![内连接](C:\Users\Jett\Pictures\内连接.png)
+![内连接1](https://raw.githubusercontent.com/huxiaoning/img/master/%E5%86%85%E8%BF%9E%E6%8E%A51.png)
 
