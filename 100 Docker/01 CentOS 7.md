@@ -65,6 +65,7 @@ COPY study.pub /root/.ssh/authorized_keys
 COPY id_rsa /root/.ssh/id_rsa
 COPY id_rsa.pub /root/.ssh/id_rsa.pub
 COPY known_hosts /root/.ssh/known_hosts
+COPY libfaketime-master.zip /root/libfaketime-master.zip
 ADD jdk-8u251-linux-x64.tar.gz /opt/Java/
 ADD apache-maven-3.6.3-bin.tar.gz /opt/Maven/
 # ARG JAVA_HOME=/opt/Java/jdk1.8.0_251
@@ -72,7 +73,8 @@ ADD apache-maven-3.6.3-bin.tar.gz /opt/Maven/
 # ENV JAVA_HOME=$JAVA_HOME PATH=$PATH:$JAVA_HOME/bin
 # ENV CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 # ENV M2_HOME=$M2_HOME PATH=$PATH:$M2_HOME/bin
-RUN yum install -y vim wget curl gcc gcc-c++ openssl openssh-server net-tools git \
+ARG TZ=Asia/Shanghai
+RUN yum install -y vim wget curl gcc gcc-c++ openssl openssh-server net-tools telnet-server telnet git unzip make \
 	&& mkdir -p /var/run/sshd \
 	&& ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' \
 	&& ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
@@ -85,6 +87,11 @@ RUN yum install -y vim wget curl gcc gcc-c++ openssl openssh-server net-tools gi
 	&& echo 'LANG="zh_CN.UTF-8"' &> /etc/locale.conf \
 	&& localedef -c -f UTF-8 -i zh_CN zh_CN.utf8 \
 	&& echo ":set encoding=UTF-8" &>> /root/.vimrc \
+	&& ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+	# && cd /root && unzip libfaketime-master.zip \
+	# && cd libfaketime-master \
+	# && make && make install \
+	# && echo 'export LD_PRELOAD=/usr/local/lib/faketime/libfaketime.so.1' &>> /etc/profile.d/faketime.sh \
 	&& echo 'export JAVA_HOME=/opt/Java/jdk1.8.0_251' &>> /etc/profile.d/java.sh \
 	&& echo 'export PATH=$JAVA_HOME/bin:$PATH' &>> /etc/profile.d/java.sh \
 	&& echo 'export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar' &>> /etc/profile.d/java.sh \
