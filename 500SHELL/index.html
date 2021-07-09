@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>BASH · 个人笔记</title>
+        <title>SHELL · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -1003,7 +1003,7 @@
                 <a href="./">
             
                     
-                    BASH
+                    SHELL
             
                 </a>
             
@@ -2057,7 +2057,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >BASH</a>
+        <a href=".." >SHELL</a>
     </h1>
 </div>
 
@@ -2072,7 +2072,28 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="bash"><code>BASH</code></h1>
+                                <h1 id="shell"><code>SHELL</code></h1>
+<h2 id="&#x6784;&#x5EFA;&#x57FA;&#x4E8E;docker&#x7684;&#x81EA;&#x5B9A;&#x4E49;centos&#x73AF;&#x5883;">&#x6784;&#x5EFA;&#x57FA;&#x4E8E;<code>Docker</code>&#x7684;&#x81EA;&#x5B9A;&#x4E49;<code>CentOS</code>&#x73AF;&#x5883;</h2>
+<pre><code class="lang-bash">$ vim Dockfile
+FROM centos:7
+COPY id_rsa_2048.pub /root/.ssh/authorized_keys 
+ARG TZ=Asia/Shanghai
+RUN yum install -y vim wget curl gcc gcc-c++ openssl openssh-server net-tools telnet-server telnet git unzip make kde<span class="hljs-_">-l</span>10n-Chinese glibc-common \
+    &amp;&amp; mkdir -p /var/run/sshd \
+    &amp;&amp; ssh-keygen -q -t rsa -b 2048 <span class="hljs-_">-f</span> /etc/ssh/ssh_host_rsa_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; ssh-keygen -q -t ecdsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ecdsa_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; ssh-keygen -t dsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ed25519_key -N <span class="hljs-string">&apos;&apos;</span> \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export LC_ALL=&quot;zh_CN.UTF-8&quot;&apos;</span> &amp;&gt;&gt; /etc/profile \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;LANG=&quot;zh_CN.UTF-8&quot;&apos;</span> &amp;&gt; /etc/locale.conf \
+    &amp;&amp; localedef -c <span class="hljs-_">-f</span> UTF-8 -i zh_CN zh_CN.utf8 \
+    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;:set encoding=UTF-8&quot;</span> &amp;&gt;&gt; /root/.vimrc \
+    &amp;&amp; ln -snf /usr/share/zoneinfo/<span class="hljs-variable">$TZ</span> /etc/localtime &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-variable">$TZ</span> &gt; /etc/timezone
+CMD [<span class="hljs-string">&quot;/usr/sbin/sshd&quot;</span>,<span class="hljs-string">&quot;-D&quot;</span>]
+
+$ docker build -t mycentos7:1.0 .
+$ docker run --rm -it -p 127.0.0.1:2222:22 --name mycentos <span class="hljs-_">-d</span> mycentos7:1.0
+</code></pre>
+<p>&#x4F7F;&#x7528;<code>XShell</code>&#x8FDE;&#x63A5;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
 
                                 
                                 </section>
@@ -2116,7 +2137,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"BASH","level":"1.9","depth":1,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"使用Docker获得一个Redis服务","level":"1.8.1.1","depth":3,"path":"400Redis/01 如何拥有一个Redis服务/01 使用Docker获得一个Redis服务.md","ref":"400Redis/01 如何拥有一个Redis服务/01 使用Docker获得一个Redis服务.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/README.md","mtime":"2021-07-08T11:47:25.479Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-08T11:48:10.936Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SHELL","level":"1.9","depth":1,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"使用Docker获得一个Redis服务","level":"1.8.1.1","depth":3,"path":"400Redis/01 如何拥有一个Redis服务/01 使用Docker获得一个Redis服务.md","ref":"400Redis/01 如何拥有一个Redis服务/01 使用Docker获得一个Redis服务.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500SHELL/README.md","mtime":"2021-07-09T15:39:53.003Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-09T15:40:39.238Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
