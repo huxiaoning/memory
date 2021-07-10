@@ -8,12 +8,6 @@
 
 `Shell`是解释执行的脚本语言，在`Shell`中可以直接调用Linux系统命令。
 
-echo $SHELL
-
-bash   	-- 进入子Shell<父Shell子Shell的概念:个人猜测，登录mysql后的提示符界面也是一个子Shell>
-
-cat /etc/shells
-
 ```bash
 # 输出当前的默认SHELL(是Bash)
 $ echo $SHELL
