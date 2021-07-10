@@ -2418,6 +2418,61 @@ $ <span class="hljs-built_in">echo</span> hello \
 &gt; Tome
 hello Jack, Tome
 </code></pre>
+<h2 id="&#x5F53;&#x524D;&#x8BED;&#x7CFB;&#x67E5;&#x8BE2;">&#x5F53;&#x524D;&#x8BED;&#x7CFB;&#x67E5;&#x8BE2;</h2>
+<ul>
+<li><code>locale</code>&#x67E5;&#x8BE2;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x8BED;&#x7CFB;</li>
+</ul>
+<pre><code class="lang-bash">$ locale
+LANG=
+LC_CTYPE=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_NUMERIC=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_TIME=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_COLLATE=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_MONETARY=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_MESSAGES=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_PAPER=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_NAME=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_ADDRESS=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_TELEPHONE=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_MEASUREMENT=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_IDENTIFICATION=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span>
+LC_ALL=zh_CN.UTF-8
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$LANG</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$LC_ALL</span>
+LC_ALL=zh_CN.UTF-8
+</code></pre>
+<ul>
+<li>&#x67E5;&#x770B;Linux&#x652F;&#x6301;&#x7684;&#x6240;&#x6709;&#x8BED;&#x7CFB;</li>
+</ul>
+<pre><code class="lang-bash">$ locale <span class="hljs-_">-a</span> | more
+C
+en_US.utf8
+POSIX
+zh_CN.utf8
+</code></pre>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7CFB;&#x7EDF;&#x9ED8;&#x8BA4;&#x8BED;&#x7CFB;</li>
+</ul>
+<pre><code class="lang-bash">$ cat /etc/sysconfig/i18n
+</code></pre>
+<ul>
+<li><p>Linux&#x4E2D;&#x6587;&#x652F;&#x6301;</p>
+<ul>
+<li>&#x524D;&#x63D0;&#x6761;&#x4EF6;&#xFF0C;&#x6B63;&#x786E;&#x5B89;&#x88C5;&#x7684;&#x4E2D;&#x6587;&#x5B57;&#x4F53;&#x548C;&#x4E2D;&#x6587;&#x8BED;&#x7CFB;<ul>
+<li>&#x5982;&#x679C;&#x6709;&#x56FE;&#x5F62;&#x754C;&#x9762;&#xFF0C;&#x53EF;&#x4EE5;&#x6B63;&#x786E;&#x652F;&#x6301;&#x4E2D;&#x6587;&#x663E;&#x793A;</li>
+<li>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x8FDC;&#x7A0B;&#x5DE5;&#x5177;&#xFF0C;&#x53EA;&#x8981;&#x8BED;&#x7CFB;&#x8BBE;&#x5B9A;&#x6B63;&#x786E;&#xFF0C;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x4E2D;&#x6587;&#x663E;&#x793A;</li>
+<li>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7EAF;&#x5B57;&#x7B26;&#x754C;&#x9762;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;(&#x5982;<code>zhcon</code>&#x7B49;)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>&#x76F8;&#x5173;&#x73AF;&#x5883;&#x53D8;&#x91CF;</p>
+<ul>
+<li><code>LANG</code> : &#x5B9A;&#x4E49;&#x7CFB;&#x7EDF;&#x4E3B;&#x8BED;&#x7CFB;&#x7684;&#x53D8;&#x91CF;</li>
+<li><code>LC_ALl</code> : &#x5B9A;&#x4E49;&#x6574;&#x4F53;&#x8BED;&#x7CFB;&#x7684;&#x53D8;&#x91CF;</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -2461,7 +2516,7 @@ hello Jack, Tome
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"环境变量","level":"1.9.2.2","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"用户自定义变量","level":"1.9.2.1","depth":3,"path":"500BASH/02SHELL变量/01用户自定义变量.md","ref":"500BASH/02SHELL变量/01用户自定义变量.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/02SHELL变量/02环境变量.md","mtime":"2021-07-10T08:06:34.498Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-10T08:07:30.211Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"环境变量","level":"1.9.2.2","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"用户自定义变量","level":"1.9.2.1","depth":3,"path":"500BASH/02SHELL变量/01用户自定义变量.md","ref":"500BASH/02SHELL变量/01用户自定义变量.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/02SHELL变量/02环境变量.md","mtime":"2021-07-10T11:57:02.381Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-10T11:57:44.708Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
