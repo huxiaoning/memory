@@ -2317,6 +2317,107 @@ $ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$z</span>
 <li><code>unset</code> &#x53D8;&#x91CF;&#x540D;</li>
 </ul>
 <h2 id="&#x5E38;&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;">&#x5E38;&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x540D;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>HOSTNAME</code></td>
+<td>&#x4E3B;&#x673A;&#x540D;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SHELL</code></td>
+<td>&#x5F53;&#x524D;&#x7684;<code>shell</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TERM</code></td>
+<td>&#x7EC8;&#x7AEF;&#x73AF;&#x5883;<code>xterm</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HISTSIZE</code></td>
+<td>&#x5386;&#x53F2;&#x547D;&#x4EE4;&#x4E0A;&#x9650;&#x6761;&#x6570;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SSH_CLIENT</code></td>
+<td>&#x5F53;&#x524D;&#x64CD;&#x4F5C;&#x73AF;&#x5883;&#x662F;&#x7528;<code>ssh</code>&#x8FDE;&#x63A5;&#x7684;&#xFF0C;&#x8FD9;&#x91CC;&#x8BB0;&#x5F55;&#x5BA2;&#x6237;&#x7AEF;<code>ip</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SSH_TTY</code></td>
+<td>ssh&#x8FDE;&#x63A5;&#x7684;&#x7EC8;&#x7AEF;&#x65F6;<code>pts/1</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>USER</code></td>
+<td>&#x5F53;&#x524D;&#x767B;&#x5F55;&#x7684;&#x7528;&#x6237;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="path&#x73AF;&#x5883;&#x53D8;&#x91CF;"><code>PATH</code>&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2>
+<p>&#x7CFB;&#x7EDF;&#x67E5;&#x627E;&#x547D;&#x4EE4;&#x7684;&#x8DEF;&#x5F84;</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># &#x67E5;&#x770B;PATH&#x73AF;&#x5883;&#x53D8;&#x91CF;</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>
+<span class="hljs-comment"># &#x589E;&#x52A0;PATH&#x53D8;&#x91CF;&#x7684;&#x503C;</span>
+$ PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>&quot;</span>:/path/to/java_home/bin
+</code></pre>
+<h2 id="ps1&#x73AF;&#x5883;&#x53D8;&#x91CF;"><code>PS1</code>&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2>
+<p>&#x547D;&#x4EE4;&#x884C;&#x63D0;&#x793A;&#x7B26;&#x663E;&#x793A;&#x7684;&#x683C;&#x5F0F;</p>
+<pre><code class="lang-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PS1</span>
+[\u@\h \W]\$
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>&#x683C;&#x5F0F;&#x7B26;&#x53F7;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\d</code></td>
+<td>&#x663E;&#x793A;&#x65E5;&#x671F;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&quot;&#x661F;&#x671F; &#x6708; &#x65E5;&quot;</td>
+</tr>
+<tr>
+<td><code>\H</code></td>
+<td>&#x663E;&#x793A;&#x5B8C;&#x6574;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x3002;&#x5982;&#x9ED8;&#x8BA4;&#x4E3B;&#x673A;&#x540D;&quot;<code>localhost.localdomain</code>&quot;</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>&#x663E;&#x793A;24&#x5C0F;&#x65F6;&#x5236;&#x65F6;&#x95F4;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&quot;<code>HH:MM:SS</code>&quot;</td>
+</tr>
+<tr>
+<td><code>\A</code></td>
+<td>&#x663E;&#x793A;24&#x5C0F;&#x65F6;&#x5236;&#x65F6;&#x95F4;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&quot;<code>HH:MM</code>&quot;</td>
+</tr>
+<tr>
+<td><code>\u</code></td>
+<td>&#x663E;&#x793A;&#x5F53;&#x524D;&#x7528;&#x6237;&#x540D;</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>&#x663E;&#x793A;&#x5F53;&#x524D;&#x6240;&#x5728;&#x76EE;&#x5F55;&#x7684;&#x5B8C;&#x6574;&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>&#x663E;&#x793A;&#x5F53;&#x524D;&#x6240;&#x5728;&#x76EE;&#x5F55;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;</td>
+</tr>
+<tr>
+<td><code>\$</code></td>
+<td>&#x63D0;&#x793A;&#x7B26;&#x3002;&#x5982;&#x679C;&#x662F;<code>root</code>&#x7528;&#x6237;&#x4F1A;&#x663E;&#x793A;&#x63D0;&#x793A;&#x7B26;&#x4E3A;&quot;<code>#</code>&quot;,&#x5982;&#x679C;&#x662F;&#x666E;&#x901A;&#x7528;&#x6237;&#x4F1A;&#x663E;&#x793A;&#x63D0;&#x793A;&#x7B26;&#x4E3A;&quot;<code>$</code>&quot;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ps2&#x73AF;&#x5883;&#x53D8;&#x91CF;"><code>PS2</code>&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2>
+<pre><code class="lang-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PS2</span>
+&gt;
+<span class="hljs-comment"># &#x6362;&#x884C;&#x6267;&#x884C;&#x547D;&#x4EE4;</span>
+$ <span class="hljs-built_in">echo</span> hello \
+&gt; Jack, \
+&gt; Tome
+hello Jack, Tome
+</code></pre>
 
                                 
                                 </section>
@@ -2360,7 +2461,7 @@ $ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$z</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"环境变量","level":"1.9.2.2","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"用户自定义变量","level":"1.9.2.1","depth":3,"path":"500BASH/02SHELL变量/01用户自定义变量.md","ref":"500BASH/02SHELL变量/01用户自定义变量.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/02SHELL变量/02环境变量.md","mtime":"2021-07-10T07:48:01.468Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-10T07:49:01.062Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"环境变量","level":"1.9.2.2","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"用户自定义变量","level":"1.9.2.1","depth":3,"path":"500BASH/02SHELL变量/01用户自定义变量.md","ref":"500BASH/02SHELL变量/01用户自定义变量.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/02SHELL变量/02环境变量.md","mtime":"2021-07-10T08:06:34.498Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-10T08:07:30.211Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
