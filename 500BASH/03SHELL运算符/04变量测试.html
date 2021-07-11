@@ -2383,6 +2383,66 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x53D8;&#x91CF;&#x6D4B;&#x8BD5;">&#x53D8;&#x91CF;&#x6D4B;&#x8BD5;</h1>
+<table>
+<thead>
+<tr>
+<th>&#x53D8;&#x91CF;&#x7F6E;&#x6362;&#x65B9;&#x5F0F;</th>
+<th>&#x53D8;&#x91CF;y&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;</th>
+<th>&#x53D8;&#x91CF;y&#x4E3A;&#x7A7A;&#x503C;</th>
+<th>&#x53D8;&#x91CF;y&#x8BBE;&#x7F6E;&#x503C;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x=$(y-&#x65B0;&#x503C;)</td>
+<td>x=&#x65B0;&#x503C;</td>
+<td>x&#x4E3A;&#x7A7A;</td>
+<td>x=$y</td>
+</tr>
+<tr>
+<td>x=$(y:-&#x65B0;&#x503C;)</td>
+<td>x=&#x65B0;&#x503C;</td>
+<td>x=&#x65B0;&#x503C;</td>
+<td>x=$y</td>
+</tr>
+<tr>
+<td>x=$(y+&#x65B0;&#x503C;)</td>
+<td>x&#x4E3A;&#x7A7A;</td>
+<td>x=&#x65B0;&#x503C;</td>
+<td>x=&#x65B0;&#x503C;</td>
+</tr>
+<tr>
+<td>x=$(y:+&#x65B0;&#x503C;)</td>
+<td>x&#x4E3A;&#x7A7A;</td>
+<td>x&#x4E3A;&#x7A7A;</td>
+<td>x=&#x65B0;&#x503C;</td>
+</tr>
+<tr>
+<td>x=$(y=&#x65B0;&#x503C;)</td>
+<td>x=&#x65B0;&#x503C; y=&#x65B0;&#x503C;</td>
+<td>x&#x4E3A;&#x7A7A; y&#x503C;&#x4E0D;&#x53D8;</td>
+<td>x=$y y&#x503C;&#x4E0D;&#x53D8;</td>
+</tr>
+<tr>
+<td>x=$(y:=&#x65B0;&#x503C;)</td>
+<td>x=&#x65B0;&#x503C; y=&#x65B0;&#x503C;</td>
+<td>x=&#x65B0;&#x503C; y=&#x65B0;&#x503C;</td>
+<td>x=$y y&#x503C;&#x4E0D;&#x53D8;</td>
+</tr>
+<tr>
+<td>x=$(y?&#x65B0;&#x503C;)</td>
+<td>&#x65B0;&#x503C;&#x8F93;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;(&#x5C31;&#x662F;&#x5C4F;&#x5E55;)</td>
+<td>x&#x4E3A;&#x7A7A;</td>
+<td>x=$y</td>
+</tr>
+<tr>
+<td>x=$(y:?&#x65B0;&#x503C;)</td>
+<td>&#x65B0;&#x503C;&#x8F93;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;(&#x5C31;&#x662F;&#x5C4F;&#x5E55;)</td>
+<td>&#x65B0;&#x503C;&#x8F93;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;(&#x5C31;&#x662F;&#x5C4F;&#x5E55;)</td>
+<td>x=$y</td>
+</tr>
+</tbody>
+</table>
 
                                 
                                 </section>
@@ -2426,7 +2486,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"变量测试","level":"1.9.3.4","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"数值运算的方法","level":"1.9.3.3","depth":3,"path":"500BASH/03SHELL运算符/03数值运算的方法.md","ref":"500BASH/03SHELL运算符/03数值运算的方法.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/03SHELL运算符/04变量测试.md","mtime":"2021-07-10T15:15:41.140Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-10T15:16:29.020Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"变量测试","level":"1.9.3.4","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"数值运算的方法","level":"1.9.3.3","depth":3,"path":"500BASH/03SHELL运算符/03数值运算的方法.md","ref":"500BASH/03SHELL运算符/03数值运算的方法.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/03SHELL运算符/04变量测试.md","mtime":"2021-07-11T12:22:34.418Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-11T12:23:22.730Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
