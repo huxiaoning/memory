@@ -2578,6 +2578,78 @@ $ df -h | grep -v Use% | awk <span class="hljs-string">&apos;{print $5}&apos;</s
 3
 0
 0
+<span class="hljs-comment"># &#x53D6;ssh&#x8FDB;&#x7A0B;&#x53F7;</span>
+$ ps -ef | grep -v grep | grep <span class="hljs-string">&apos;sshd -D&apos;</span> | awk <span class="hljs-string">&apos;{print $2}&apos;</span>
+1
+
+<span class="hljs-comment"># &#x6740;&#x8FDB;&#x7A0B;&#x811A;&#x672C;</span>
+$ vim kill.sh
+<span class="hljs-meta">#!/bin/bash</span>
+pids=$(ps -ef | grep -v grep | grep -v <span class="hljs-variable">$0</span> | grep <span class="hljs-string">&quot;$*&quot;</span> | awk <span class="hljs-string">&apos;{print $2}&apos;</span>)
+<span class="hljs-keyword">for</span> pid <span class="hljs-keyword">in</span> <span class="hljs-variable">$pids</span>
+    <span class="hljs-keyword">do</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-variable">$pid</span>
+        <span class="hljs-comment"># kill -9 $pid</span>
+    <span class="hljs-keyword">done</span>
+$ chmod 755 kill.sh
+$ ./kill.sh /usr/sbin/sshd
+1
+$ ./kill.sh <span class="hljs-string">&quot;sshd -D&quot;</span>
+1
+</code></pre>
+<h2 id="begin">BEGIN</h2>
+<pre><code class="lang-bash">$ awk <span class="hljs-string">&apos;BEGIN{print &quot;This is a transcript&quot;}{print $2 &quot;\t&quot; $4}&apos;</span> student.txt
+This is a transcript
+Name    Mark
+furong    85
+fengj    60
+cang    70
+</code></pre>
+<h2 id="end">END</h2>
+<pre><code class="lang-bash">$ awk <span class="hljs-string">&apos;END{print &quot;The End&quot;}{print $2 &quot;\t&quot; $4}&apos;</span> student.txt
+Name    Mark
+furong    85
+fengj    60
+cang    70
+The End
+</code></pre>
+<h2 id="fs&#x5185;&#x7F6E;&#x53D8;&#x91CF;"><code>FS</code>&#x5185;&#x7F6E;&#x53D8;&#x91CF;</h2>
+<p><code>FS</code>&#x5185;&#x7F6E;&#x53D8;&#x91CF;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x6307;&#x5B9A;&#x5206;&#x9694;&#x7B26;&#x3002;</p>
+<pre><code class="lang-bash">$ useradd user1
+$ useradd user2
+$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+user1:x:1000:1000::/home/user1:/bin/bash
+user2:x:1001:1001::/home/user2:/bin/bash
+$ cat /etc/passwd | grep -v <span class="hljs-string">&quot;root&quot;</span> | grep <span class="hljs-string">&quot;/bin/bash&quot;</span> | awk <span class="hljs-string">&apos;BEGIN{FS=&quot;:&quot;}{print $1 &quot;\t&quot; $3}&apos;</span>
+user1    1000
+user2    1001
+</code></pre>
+<h2 id="awk&#x5173;&#x7CFB;&#x8FD0;&#x7B97;&#x7B26;"><code>awk</code>&#x5173;&#x7CFB;&#x8FD0;&#x7B97;&#x7B26;</h2>
+<pre><code class="lang-bash">$ cat student.txt
+ID    Name    gender    Mark
+1    furong    F    85
+2    fengj    F    60
+3    cang    F    70
+
+$ cat student.txt | grep -v Name | awk <span class="hljs-string">&apos;$4&gt;=70{print $2}&apos;</span>
+furong
+cang
 </code></pre>
 
                                 
@@ -2622,7 +2694,7 @@ $ df -h | grep -v Use% | awk <span class="hljs-string">&apos;{print $5}&apos;</s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"字符截取命令awk","level":"1.9.5.4","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"格式化输出命令printf","level":"1.9.5.3","depth":3,"path":"500BASH/05SHELL编程/03格式化输出命令printf.md","ref":"500BASH/05SHELL编程/03格式化输出命令printf.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/05SHELL编程/04字符截取命令awk.md","mtime":"2021-07-16T13:24:44.666Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-16T13:25:36.040Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"字符截取命令awk","level":"1.9.5.4","depth":3,"next":{"title":"CMD","level":"1.10","depth":1,"path":"600CMD/README.md","ref":"600CMD/README.md","articles":[{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},{"title":"打印IP地址","level":"1.10.2","depth":2,"path":"600CMD/02打印IP地址.md","ref":"600CMD/02打印IP地址.md","articles":[]}]},"previous":{"title":"格式化输出命令printf","level":"1.9.5.3","depth":3,"path":"500BASH/05SHELL编程/03格式化输出命令printf.md","ref":"500BASH/05SHELL编程/03格式化输出命令printf.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"500BASH/05SHELL编程/04字符截取命令awk.md","mtime":"2021-07-16T15:39:57.201Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-16T15:40:52.537Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
