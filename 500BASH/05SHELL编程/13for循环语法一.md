@@ -9,7 +9,7 @@ for 变量 in 值1 值2 值3...
 	done
 ```
 
-- 例子1
+## 例子1
 ```bash
 $ vim for1.sh
 #!/bin/bash
@@ -25,7 +25,7 @@ $ ./for1.sh
 4
 5
 ```
-- 例子2：遍历当前目录下的所有文件
+## 例子2 - 遍历当前目录下的所有文件
 ```bash
 $ vim for2.sh
 #!/bin/bash
