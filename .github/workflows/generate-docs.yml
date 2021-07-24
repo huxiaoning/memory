@@ -19,6 +19,7 @@ jobs:
       - run: gitbook install
       - run: wget https://github.com/huxiaoning/gitbook-helper/releases/download/1.0/gitbook-helper-1.0-SNAPSHOT.jar
       - run: java -jar -Dwork.dir=$(pwd) gitbook-helper-1.0-SNAPSHOT.jar
+      - run: rm -rf gitbook-helper-1.0-SNAPSHOT.jar
       - run: gitbook build
       - uses: actions/upload-artifact@v1
         with:
