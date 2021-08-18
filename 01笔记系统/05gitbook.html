@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>打印IP地址 · 个人笔记</title>
+        <title>gitbook · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../700MySQL/" />
+    <link rel="next" href="../02Netty/" />
     
     
-    <link rel="prev" href="01打印登录用户名.html" />
+    <link rel="prev" href="04PicGo.html" />
     
 
     <style>
@@ -122,9 +122,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
+        <li class="chapter " data-level="1.2" data-path="./">
             
-                <a href="../01笔记系统/">
+                <a href="./">
             
                     
                     笔记系统
@@ -136,9 +136,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="01Git.html">
             
-                <a href="../01笔记系统/01Git.html">
+                <a href="01Git.html">
             
                     
                     Git
@@ -149,9 +149,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
             
-                <a href="../01笔记系统/02Typora.html">
+                <a href="02Typora.html">
             
                     
                     Typora
@@ -162,9 +162,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="03Snipaste.html">
             
-                <a href="../01笔记系统/03Snipaste.html">
+                <a href="03Snipaste.html">
             
                     
                     Snipaste
@@ -175,9 +175,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
             
-                <a href="../01笔记系统/04PicGo.html">
+                <a href="04PicGo.html">
             
                     
                     PicGo
@@ -188,9 +188,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="../01笔记系统/05gitbook.html">
+        <li class="chapter active" data-level="1.2.5" data-path="05gitbook.html">
             
-                <a href="../01笔记系统/05gitbook.html">
+                <a href="05gitbook.html">
             
                     
                     gitbook
@@ -1619,9 +1619,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="./">
+        <li class="chapter " data-level="1.10" data-path="../600CMD/">
             
-                <a href="./">
+                <a href="../600CMD/">
             
                     
                     CMD
@@ -1633,9 +1633,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="01打印登录用户名.html">
+        <li class="chapter " data-level="1.10.1" data-path="../600CMD/01打印登录用户名.html">
             
-                <a href="01打印登录用户名.html">
+                <a href="../600CMD/01打印登录用户名.html">
             
                     
                     打印登录用户名
@@ -1646,9 +1646,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.10.2" data-path="02打印IP地址.html">
+        <li class="chapter " data-level="1.10.2" data-path="../600CMD/02打印IP地址.html">
             
-                <a href="02打印IP地址.html">
+                <a href="../600CMD/02打印IP地址.html">
             
                     
                     打印IP地址
@@ -2729,7 +2729,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >打印IP地址</a>
+        <a href=".." >gitbook</a>
     </h1>
 </div>
 
@@ -2744,18 +2744,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x6253;&#x5370;&#x672C;&#x673A;ip&#x5730;&#x5740;">&#x6253;&#x5370;&#x672C;&#x673A;<code>IP</code>&#x5730;&#x5740;</h1>
-<pre><code class="lang-cmd"><span class="hljs-built_in">ipconfig</span> | <span class="hljs-built_in">findstr</span> IPv4 | <span class="hljs-built_in">findstr</span> <span class="hljs-number">192</span>.<span class="hljs-number">168</span>
-# &#x672A;&#x5B8C;
-</code></pre>
-<pre><code class="lang-bat">@<span class="hljs-built_in">echo</span> off
-<span class="hljs-keyword">for</span> /f &quot;tokens=<span class="hljs-number">4</span>&quot; <span class="hljs-variable">%%a</span> <span class="hljs-keyword">in</span> (&apos;route <span class="hljs-built_in">print</span>^|<span class="hljs-built_in">findstr</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.*<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>&apos;) <span class="hljs-keyword">do</span> (
- <span class="hljs-built_in">set</span> IP=<span class="hljs-variable">%%a</span>
-)
-<span class="hljs-built_in">echo</span> <span class="hljs-variable">%IP%</span>
-java -jar redisclient-win32.x86_64.<span class="hljs-number">2</span>.<span class="hljs-number">0</span>.jar - &#x5FEB;&#x6377;&#x65B9;&#x5F0F;
-</code></pre>
-
+                                
                                 
                                 </section>
                             
@@ -2782,12 +2771,12 @@ java -jar redisclient-win32.x86_64.<span class="hljs-number">2</span>.<span clas
 
             
                 
-                <a href="01打印登录用户名.html" class="navigation navigation-prev " aria-label="Previous page: 打印登录用户名">
+                <a href="04PicGo.html" class="navigation navigation-prev " aria-label="Previous page: PicGo">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../700MySQL/" class="navigation navigation-next " aria-label="Next page: MySQL">
+                <a href="../02Netty/" class="navigation navigation-next " aria-label="Next page: Netty">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -2798,7 +2787,7 @@ java -jar redisclient-win32.x86_64.<span class="hljs-number">2</span>.<span clas
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"打印IP地址","level":"1.10.2","depth":2,"next":{"title":"MySQL","level":"1.11","depth":1,"path":"700MySQL/README.md","ref":"700MySQL/README.md","articles":[{"title":"数据库管理","level":"1.11.1","depth":2,"path":"700MySQL/01数据库管理/README.md","ref":"700MySQL/01数据库管理/README.md","articles":[]},{"title":"数据类型","level":"1.11.2","depth":2,"path":"700MySQL/02数据类型/README.md","ref":"700MySQL/02数据类型/README.md","articles":[{"title":"MySQL数据类型之整形","level":"1.11.2.1","depth":3,"path":"700MySQL/02数据类型/03MySQL数据类型之整形.md","ref":"700MySQL/02数据类型/03MySQL数据类型之整形.md","articles":[]},{"title":"MySQL数据类型之符点型","level":"1.11.2.2","depth":3,"path":"700MySQL/02数据类型/04MySQL数据类型之符点型.md","ref":"700MySQL/02数据类型/04MySQL数据类型之符点型.md","articles":[]},{"title":"MySQL数据类型之日期时间型","level":"1.11.2.3","depth":3,"path":"700MySQL/02数据类型/05MySQL数据类型之日期时间型.md","ref":"700MySQL/02数据类型/05MySQL数据类型之日期时间型.md","articles":[]},{"title":"MySQL数据类型之字符型","level":"1.11.2.4","depth":3,"path":"700MySQL/02数据类型/06MySQL数据类型之字符型.md","ref":"700MySQL/02数据类型/06MySQL数据类型之字符型.md","articles":[]}]},{"title":"数据表管理","level":"1.11.3","depth":2,"path":"700MySQL/03数据表管理/README.md","ref":"700MySQL/03数据表管理/README.md","articles":[{"title":"MySQL创建数据表","level":"1.11.3.1","depth":3,"path":"700MySQL/03数据表管理/07MySQL创建数据表.md","ref":"700MySQL/03数据表管理/07MySQL创建数据表.md","articles":[]},{"title":"查看数据表","level":"1.11.3.2","depth":3,"path":"700MySQL/03数据表管理/08查看数据表.md","ref":"700MySQL/03数据表管理/08查看数据表.md","articles":[]},{"title":"查看数据表结构","level":"1.11.3.3","depth":3,"path":"700MySQL/03数据表管理/09查看数据表结构.md","ref":"700MySQL/03数据表管理/09查看数据表结构.md","articles":[]},{"title":"修改数据表-添加、删除列","level":"1.11.3.4","depth":3,"path":"700MySQL/03数据表管理/19修改数据表-添加、删除列.md","ref":"700MySQL/03数据表管理/19修改数据表-添加、删除列.md","articles":[]},{"title":"修改数据表--添加约束","level":"1.11.3.5","depth":3,"path":"700MySQL/03数据表管理/20修改数据表--添加约束.md","ref":"700MySQL/03数据表管理/20修改数据表--添加约束.md","articles":[]},{"title":"修改数据表--删除约束","level":"1.11.3.6","depth":3,"path":"700MySQL/03数据表管理/21修改数据表--删除约束.md","ref":"700MySQL/03数据表管理/21修改数据表--删除约束.md","articles":[]},{"title":"修改数据表--修改列定义和更名数据表","level":"1.11.3.7","depth":3,"path":"700MySQL/03数据表管理/22修改数据表--修改列定义和更名数据表.md","ref":"700MySQL/03数据表管理/22修改数据表--修改列定义和更名数据表.md","articles":[]}]},{"title":"五大约束","level":"1.11.4","depth":2,"path":"700MySQL/04五大约束/README.md","ref":"700MySQL/04五大约束/README.md","articles":[{"title":"空值与非空","level":"1.11.4.1","depth":3,"path":"700MySQL/04五大约束/11空值与非空.md","ref":"700MySQL/04五大约束/11空值与非空.md","articles":[]},{"title":"自动编号","level":"1.11.4.2","depth":3,"path":"700MySQL/04五大约束/12自动编号.md","ref":"700MySQL/04五大约束/12自动编号.md","articles":[]},{"title":"初涉主键约束","level":"1.11.4.3","depth":3,"path":"700MySQL/04五大约束/13初涉主键约束.md","ref":"700MySQL/04五大约束/13初涉主键约束.md","articles":[]},{"title":"初涉唯一约束","level":"1.11.4.4","depth":3,"path":"700MySQL/04五大约束/14初涉唯一约束.md","ref":"700MySQL/04五大约束/14初涉唯一约束.md","articles":[]},{"title":"初涉默认约束","level":"1.11.4.5","depth":3,"path":"700MySQL/04五大约束/15初涉默认约束.md","ref":"700MySQL/04五大约束/15初涉默认约束.md","articles":[]},{"title":"外键约束","level":"1.11.4.6","depth":3,"path":"700MySQL/04五大约束/16外键约束.md","ref":"700MySQL/04五大约束/16外键约束.md","articles":[]},{"title":"外键约束的参照操作","level":"1.11.4.7","depth":3,"path":"700MySQL/04五大约束/17外键约束的参照操作.md","ref":"700MySQL/04五大约束/17外键约束的参照操作.md","articles":[]},{"title":"表级约束与列级约束","level":"1.11.4.8","depth":3,"path":"700MySQL/04五大约束/18表级约束与列级约束.md","ref":"700MySQL/04五大约束/18表级约束与列级约束.md","articles":[]}]},{"title":"数据管理","level":"1.11.5","depth":2,"path":"700MySQL/05数据管理/README.md","ref":"700MySQL/05数据管理/README.md","articles":[{"title":"表记录的插入与查找","level":"1.11.5.1","depth":3,"path":"700MySQL/05数据管理/10表记录的插入与查找.md","ref":"700MySQL/05数据管理/10表记录的插入与查找.md","articles":[]},{"title":"插入记录INSERT","level":"1.11.5.2","depth":3,"path":"700MySQL/05数据管理/23插入记录INSERT.md","ref":"700MySQL/05数据管理/23插入记录INSERT.md","articles":[]},{"title":"插入记录INSERT SET-SELECT","level":"1.11.5.3","depth":3,"path":"700MySQL/05数据管理/24插入记录INSERT SET-SELECT.md","ref":"700MySQL/05数据管理/24插入记录INSERT SET-SELECT.md","articles":[]},{"title":"单表更新记录UPDATE","level":"1.11.5.4","depth":3,"path":"700MySQL/05数据管理/25单表更新记录UPDATE.md","ref":"700MySQL/05数据管理/25单表更新记录UPDATE.md","articles":[]},{"title":"单表删除记录DELETE","level":"1.11.5.5","depth":3,"path":"700MySQL/05数据管理/26单表删除记录DELETE.md","ref":"700MySQL/05数据管理/26单表删除记录DELETE.md","articles":[]},{"title":"查询表达式解析","level":"1.11.5.6","depth":3,"path":"700MySQL/05数据管理/27查询表达式解析.md","ref":"700MySQL/05数据管理/27查询表达式解析.md","articles":[]},{"title":"WHERE语句进行条件查询","level":"1.11.5.7","depth":3,"path":"700MySQL/05数据管理/28WHERE语句进行条件查询.md","ref":"700MySQL/05数据管理/28WHERE语句进行条件查询.md","articles":[]},{"title":"GROUP BY语句对查询结果分组","level":"1.11.5.8","depth":3,"path":"700MySQL/05数据管理/29GROUP BY语句对查询结果分组.md","ref":"700MySQL/05数据管理/29GROUP BY语句对查询结果分组.md","articles":[]},{"title":"HAVING子句设置分组条件","level":"1.11.5.9","depth":3,"path":"700MySQL/05数据管理/30HAVING子句设置分组条件.md","ref":"700MySQL/05数据管理/30HAVING子句设置分组条件.md","articles":[]},{"title":"ORDER BY语句对查询结果排序","level":"1.11.5.10","depth":3,"path":"700MySQL/05数据管理/31ORDER BY语句对查询结果排序.md","ref":"700MySQL/05数据管理/31ORDER BY语句对查询结果排序.md","articles":[]},{"title":"LIMIT语句限制查询数量","level":"1.11.5.11","depth":3,"path":"700MySQL/05数据管理/32LIMIT语句限制查询数量.md","ref":"700MySQL/05数据管理/32LIMIT语句限制查询数量.md","articles":[]},{"title":"数据准备","level":"1.11.5.12","depth":3,"path":"700MySQL/05数据管理/33数据准备.md","ref":"700MySQL/05数据管理/33数据准备.md","articles":[]},{"title":"子查询","level":"1.11.5.13","depth":3,"path":"700MySQL/05数据管理/34子查询.md","ref":"700MySQL/05数据管理/34子查询.md","articles":[]},{"title":"由比较运算符引发的子查询","level":"1.11.5.14","depth":3,"path":"700MySQL/05数据管理/35由比较运算符引发的子查询.md","ref":"700MySQL/05数据管理/35由比较运算符引发的子查询.md","articles":[]},{"title":"由 NOT IN EXISTS 引发的子查询","level":"1.11.5.15","depth":3,"path":"700MySQL/05数据管理/36由 NOT IN EXISTS 引发的子查询.md","ref":"700MySQL/05数据管理/36由 NOT IN EXISTS 引发的子查询.md","articles":[]},{"title":"使用INSERT … SELECT 插入记录","level":"1.11.5.16","depth":3,"path":"700MySQL/05数据管理/37使用INSERT … SELECT 插入记录.md","ref":"700MySQL/05数据管理/37使用INSERT … SELECT 插入记录.md","articles":[]},{"title":"多表更新","level":"1.11.5.17","depth":3,"path":"700MySQL/05数据管理/38多表更新.md","ref":"700MySQL/05数据管理/38多表更新.md","articles":[]},{"title":"多表更新之一步到位","level":"1.11.5.18","depth":3,"path":"700MySQL/05数据管理/39多表更新之一步到位.md","ref":"700MySQL/05数据管理/39多表更新之一步到位.md","articles":[]},{"title":"连接的语法结构","level":"1.11.5.19","depth":3,"path":"700MySQL/05数据管理/40连接的语法结构.md","ref":"700MySQL/05数据管理/40连接的语法结构.md","articles":[]},{"title":"内连接INNER JOIN","level":"1.11.5.20","depth":3,"path":"700MySQL/05数据管理/41内连接INNER JOIN.md","ref":"700MySQL/05数据管理/41内连接INNER JOIN.md","articles":[]},{"title":"外连接OUTER JOIN","level":"1.11.5.21","depth":3,"path":"700MySQL/05数据管理/42外连接OUTER JOIN.md","ref":"700MySQL/05数据管理/42外连接OUTER JOIN.md","articles":[]},{"title":"多表连接","level":"1.11.5.22","depth":3,"path":"700MySQL/05数据管理/43多表连接.md","ref":"700MySQL/05数据管理/43多表连接.md","articles":[]},{"title":"关于连接的几点说明","level":"1.11.5.23","depth":3,"path":"700MySQL/05数据管理/44关于连接的几点说明.md","ref":"700MySQL/05数据管理/44关于连接的几点说明.md","articles":[]},{"title":"无限级分类表设计","level":"1.11.5.24","depth":3,"path":"700MySQL/05数据管理/45无限级分类表设计.md","ref":"700MySQL/05数据管理/45无限级分类表设计.md","articles":[]},{"title":"多表删除","level":"1.11.5.25","depth":3,"path":"700MySQL/05数据管理/46多表删除.md","ref":"700MySQL/05数据管理/46多表删除.md","articles":[]}]},{"title":"函数","level":"1.11.6","depth":2,"path":"700MySQL/06函数/README.md","ref":"700MySQL/06函数/README.md","articles":[{"title":"字符函数","level":"1.11.6.1","depth":3,"path":"700MySQL/06函数/48字符函数.md","ref":"700MySQL/06函数/48字符函数.md","articles":[]},{"title":"数值运算符与函数","level":"1.11.6.2","depth":3,"path":"700MySQL/06函数/49数值运算符与函数.md","ref":"700MySQL/06函数/49数值运算符与函数.md","articles":[]},{"title":"比较运算符和函数","level":"1.11.6.3","depth":3,"path":"700MySQL/06函数/50比较运算符和函数.md","ref":"700MySQL/06函数/50比较运算符和函数.md","articles":[]},{"title":"日期时间函数","level":"1.11.6.4","depth":3,"path":"700MySQL/06函数/51日期时间函数.md","ref":"700MySQL/06函数/51日期时间函数.md","articles":[]},{"title":"信息函数","level":"1.11.6.5","depth":3,"path":"700MySQL/06函数/52信息函数.md","ref":"700MySQL/06函数/52信息函数.md","articles":[]},{"title":"聚合函数","level":"1.11.6.6","depth":3,"path":"700MySQL/06函数/53聚合函数.md","ref":"700MySQL/06函数/53聚合函数.md","articles":[]},{"title":"加密函数","level":"1.11.6.7","depth":3,"path":"700MySQL/06函数/54加密函数.md","ref":"700MySQL/06函数/54加密函数.md","articles":[]},{"title":"自定义函数简介","level":"1.11.6.8","depth":3,"path":"700MySQL/06函数/55自定义函数简介.md","ref":"700MySQL/06函数/55自定义函数简介.md","articles":[]},{"title":"创建不带参数的自定义函数","level":"1.11.6.9","depth":3,"path":"700MySQL/06函数/56创建不带参数的自定义函数.md","ref":"700MySQL/06函数/56创建不带参数的自定义函数.md","articles":[]},{"title":"创建带有参数的自定义函数","level":"1.11.6.10","depth":3,"path":"700MySQL/06函数/57创建带有参数的自定义函数.md","ref":"700MySQL/06函数/57创建带有参数的自定义函数.md","articles":[]},{"title":"创建具有复合结构函数体的自定义函数","level":"1.11.6.11","depth":3,"path":"700MySQL/06函数/58创建具有复合结构函数体的自定义函数.md","ref":"700MySQL/06函数/58创建具有复合结构函数体的自定义函数.md","articles":[]}]},{"title":"存储过程","level":"1.11.7","depth":2,"path":"700MySQL/07存储过程/README.md","ref":"700MySQL/07存储过程/README.md","articles":[{"title":"存储过程语法结构解","level":"1.11.7.1","depth":3,"path":"700MySQL/07存储过程/60存储过程语法结构解.md","ref":"700MySQL/07存储过程/60存储过程语法结构解.md","articles":[]},{"title":"创建不带参数的存储过程","level":"1.11.7.2","depth":3,"path":"700MySQL/07存储过程/61创建不带参数的存储过程.md","ref":"700MySQL/07存储过程/61创建不带参数的存储过程.md","articles":[]},{"title":"创建带有IN类型参数的存储过程","level":"1.11.7.3","depth":3,"path":"700MySQL/07存储过程/62创建带有IN类型参数的存储过程.md","ref":"700MySQL/07存储过程/62创建带有IN类型参数的存储过程.md","articles":[]},{"title":"创建带有IN和OUT类型参数的存储过程","level":"1.11.7.4","depth":3,"path":"700MySQL/07存储过程/63创建带有IN和OUT类型参数的存储过程.md","ref":"700MySQL/07存储过程/63创建带有IN和OUT类型参数的存储过程.md","articles":[]},{"title":"创建带有多个OUT类型参数的存储过程","level":"1.11.7.5","depth":3,"path":"700MySQL/07存储过程/64创建带有多个OUT类型参数的存储过程.md","ref":"700MySQL/07存储过程/64创建带有多个OUT类型参数的存储过程.md","articles":[]},{"title":"存储过程与自定义函数的区别","level":"1.11.7.6","depth":3,"path":"700MySQL/07存储过程/65存储过程与自定义函数的区别.md","ref":"700MySQL/07存储过程/65存储过程与自定义函数的区别.md","articles":[]}]},{"title":"MySQL话题","level":"1.11.8","depth":2,"path":"700MySQL/08MySQL话题/README.md","ref":"700MySQL/08MySQL话题/README.md","articles":[{"title":"相关知识点","level":"1.11.8.1","depth":3,"path":"700MySQL/08MySQL话题/01相关知识点.md","ref":"700MySQL/08MySQL话题/01相关知识点.md","articles":[]}]},{"title":"高性能MySQL","level":"1.11.9","depth":2,"path":"700MySQL/09高性能MySQL/README.md","ref":"700MySQL/09高性能MySQL/README.md","articles":[{"title":"第1章 MySQL架构与历史","level":"1.11.9.1","depth":3,"path":"700MySQL/09高性能MySQL/01第1章 MySQL架构与历史/README.md","ref":"700MySQL/09高性能MySQL/01第1章 MySQL架构与历史/README.md","articles":[]}]}]},"previous":{"title":"打印登录用户名","level":"1.10.1","depth":2,"path":"600CMD/01打印登录用户名.md","ref":"600CMD/01打印登录用户名.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"600CMD/02打印IP地址.md","mtime":"2021-08-18T00:58:59.186Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-18T00:59:46.963Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"gitbook","level":"1.2.5","depth":2,"next":{"title":"Netty","level":"1.3","depth":1,"path":"02Netty/README.md","ref":"02Netty/README.md","articles":[{"title":"HelloWorld","level":"1.3.1","depth":2,"path":"02Netty/01HelloWorld.md","ref":"02Netty/01HelloWorld.md","articles":[]},{"title":"打印接收到的数据","level":"1.3.2","depth":2,"path":"02Netty/02打印接收到的数据.md","ref":"02Netty/02打印接收到的数据.md","articles":[]},{"title":"响应数据","level":"1.3.3","depth":2,"path":"02Netty/03响应数据.md","ref":"02Netty/03响应数据.md","articles":[]},{"title":"时间服务器与客户端","level":"1.3.4","depth":2,"path":"02Netty/04时间服务器与客户端/README.md","ref":"02Netty/04时间服务器与客户端/README.md","articles":[{"title":"源码","level":"1.3.4.1","depth":3,"path":"02Netty/04时间服务器与客户端/01源码/README.md","ref":"02Netty/04时间服务器与客户端/01源码/README.md","articles":[{"title":"TimeServer类","level":"1.3.4.1.1","depth":4,"path":"02Netty/04时间服务器与客户端/01源码/01TimeServer类.md","ref":"02Netty/04时间服务器与客户端/01源码/01TimeServer类.md","articles":[]},{"title":"TimeServerHandler类","level":"1.3.4.1.2","depth":4,"path":"02Netty/04时间服务器与客户端/01源码/02TimeServerHandler类.md","ref":"02Netty/04时间服务器与客户端/01源码/02TimeServerHandler类.md","articles":[]},{"title":"TimeClient类","level":"1.3.4.1.3","depth":4,"path":"02Netty/04时间服务器与客户端/01源码/03TimeClient类.md","ref":"02Netty/04时间服务器与客户端/01源码/03TimeClient类.md","articles":[]},{"title":"TimeClientHandler类","level":"1.3.4.1.4","depth":4,"path":"02Netty/04时间服务器与客户端/01源码/04TimeClientHandler类.md","ref":"02Netty/04时间服务器与客户端/01源码/04TimeClientHandler类.md","articles":[]}]},{"title":"时间服务器","level":"1.3.4.2","depth":3,"path":"02Netty/04时间服务器与客户端/02时间服务器.md","ref":"02Netty/04时间服务器与客户端/02时间服务器.md","articles":[]},{"title":"时间客户端","level":"1.3.4.3","depth":3,"path":"02Netty/04时间服务器与客户端/03时间客户端.md","ref":"02Netty/04时间服务器与客户端/03时间客户端.md","articles":[]}]},{"title":"处理基于流的传输","level":"1.3.5","depth":2,"path":"02Netty/05处理基于流的传输/README.md","ref":"02Netty/05处理基于流的传输/README.md","articles":[{"title":"套接字缓冲区的一个小警告","level":"1.3.5.1","depth":3,"path":"02Netty/05处理基于流的传输/01套接字缓冲区的一个小警告.md","ref":"02Netty/05处理基于流的传输/01套接字缓冲区的一个小警告.md","articles":[]},{"title":"解决方案一","level":"1.3.5.2","depth":3,"path":"02Netty/05处理基于流的传输/02解决方案一.md","ref":"02Netty/05处理基于流的传输/02解决方案一.md","articles":[]},{"title":"解决方案二","level":"1.3.5.3","depth":3,"path":"02Netty/05处理基于流的传输/03解决方案二.md","ref":"02Netty/05处理基于流的传输/03解决方案二.md","articles":[]},{"title":"源码","level":"1.3.5.4","depth":3,"path":"02Netty/05处理基于流的传输/04源码/README.md","ref":"02Netty/05处理基于流的传输/04源码/README.md","articles":[{"title":"解决方案一客户端源码","level":"1.3.5.4.1","depth":4,"path":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","ref":"02Netty/05处理基于流的传输/04源码/01解决方案一客户端源码.md","articles":[]},{"title":"解决方案二客户端源码","level":"1.3.5.4.2","depth":4,"path":"02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.md","ref":"02Netty/05处理基于流的传输/04源码/02解决方案二客户端源码.md","articles":[]}]}]},{"title":"使用POJO替代ByteBuf","level":"1.3.6","depth":2,"path":"02Netty/06使用POJO替代ByteBuf/README.md","ref":"02Netty/06使用POJO替代ByteBuf/README.md","articles":[{"title":"源码","level":"1.3.6.1","depth":3,"path":"02Netty/06使用POJO替代ByteBuf/01源码/README.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/README.md","articles":[{"title":"UnixTime类","level":"1.3.6.1.1","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/01UnixTime类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/01UnixTime类.md","articles":[]},{"title":"TimeServer类","level":"1.3.6.1.2","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/02TimeServer类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/02TimeServer类.md","articles":[]},{"title":"TimeEncoder类","level":"1.3.6.1.3","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/03TimeEncoder类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/03TimeEncoder类.md","articles":[]},{"title":"TimeServerHandler类","level":"1.3.6.1.4","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/04TimeServerHandler类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/04TimeServerHandler类.md","articles":[]},{"title":"TimeClient类","level":"1.3.6.1.5","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/05TimeClient类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/05TimeClient类.md","articles":[]},{"title":"TimeDecoder类","level":"1.3.6.1.6","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/06TimeDecoder类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/06TimeDecoder类.md","articles":[]},{"title":"TimeClientHandler类","level":"1.3.6.1.7","depth":4,"path":"02Netty/06使用POJO替代ByteBuf/01源码/07TimeClientHandler类.md","ref":"02Netty/06使用POJO替代ByteBuf/01源码/07TimeClientHandler类.md","articles":[]}]}]},{"title":"关闭Netty应用程序","level":"1.3.7","depth":2,"path":"02Netty/07关闭Netty应用程序.md","ref":"02Netty/07关闭Netty应用程序.md","articles":[]},{"title":"总结","level":"1.3.8","depth":2,"path":"02Netty/08总结/README.md","ref":"02Netty/08总结/README.md","articles":[]}]},"previous":{"title":"PicGo","level":"1.2.4","depth":2,"path":"01笔记系统/04PicGo.md","ref":"01笔记系统/04PicGo.md","articles":[]},"dir":"neutral"},"config":{"plugins":["github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/05gitbook.md","mtime":"2021-08-18T00:58:59.182Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-18T00:59:46.963Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
