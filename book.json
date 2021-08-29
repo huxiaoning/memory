@@ -6,13 +6,22 @@
     "root": ".",
 
     "plugins": [
+        "donate",
         "github-buttons@2.1.0",
         "edit-link",
-	"toggle-chapters",
-	"code"
+        "toggle-chapters",
+        "code"
     ],
 
     "pluginsConfig": {
+        "donate": {
+            "wechat": "https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg",
+            "alipay": "https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg",
+            "title": "",
+            "button": "打赏",
+            "alipayText": "支付宝打赏",
+            "wechatText": "微信打赏"
+        },
         "github-buttons": {
             "repo": "huxiaoning/memory",
             "types": [
@@ -22,8 +31,7 @@
         },
         "edit-link": {
             "base": "https://github.com/huxiaoning/memory/edit/master",
-            "label": "Edit This Page"
+            "label": "编辑此页面"
         }
     }
 }
-
