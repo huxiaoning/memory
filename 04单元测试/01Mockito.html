@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>玩 · 个人笔记</title>
+        <title>Mockito · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01ESXI/" />
+    <link rel="next" href="../100 Docker/" />
     
     
-    <link rel="prev" href="../101 C语言/02 打印一个int值.html" />
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -836,9 +836,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../04单元测试/">
+        <li class="chapter " data-level="1.5" data-path="./">
             
-                <a href="../04单元测试/">
+                <a href="./">
             
                     
                     单元测试
@@ -850,9 +850,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../04单元测试/01Mockito.html">
+        <li class="chapter active" data-level="1.5.1" data-path="01Mockito.html">
             
-                <a href="../04单元测试/01Mockito.html">
+                <a href="01Mockito.html">
             
                     
                     Mockito
@@ -945,9 +945,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="./">
+        <li class="chapter " data-level="1.8" data-path="../300玩/">
             
-                <a href="./">
+                <a href="../300玩/">
             
                     
                     玩
@@ -959,9 +959,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="01ESXI/">
+        <li class="chapter " data-level="1.8.1" data-path="../300玩/01ESXI/">
             
-                <a href="01ESXI/">
+                <a href="../300玩/01ESXI/">
             
                     
                     ESXI
@@ -973,9 +973,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1.1" data-path="01ESXI/01下载.html">
+        <li class="chapter " data-level="1.8.1.1" data-path="../300玩/01ESXI/01下载.html">
             
-                <a href="01ESXI/01下载.html">
+                <a href="../300玩/01ESXI/01下载.html">
             
                     
                     下载
@@ -2765,7 +2765,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >玩</a>
+        <a href=".." >Mockito</a>
     </h1>
 </div>
 
@@ -2780,8 +2780,98 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x73A9;">&#x73A9;</h2>
-<p><a href="https://www.youtube.com/watch?v=6bLS9kwGamc&amp;t=229s" target="_blank"><code>OpenWRT</code>&#x5171;&#x4EAB;<code>USB</code>&#x6253;&#x5370;&#x673A;</a></p>
+                                <h1 id="mockito">Mockito</h1>
+<p><br></p>
+<pre><code class="lang-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.12<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.powermock<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>powermock-api-mockito2<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.0.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.powermock<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>powermock-module-junit4<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.0.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p><br></p>
+<p><code>MockitoTest</code></p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockitoTest</span> </span>{
+
+    <span class="hljs-comment">/**
+     * &#x9A8C;&#x8BC1;&#x4EA4;&#x4E92;
+     */</span>
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">// &#x6A21;&#x62DF;&#x521B;&#x5EFA;</span>
+        List&lt;String&gt; mockedList = Mockito.mock(List.class);
+
+        <span class="hljs-comment">// &#x4F7F;&#x7528;&#x6A21;&#x62DF;&#x5BF9;&#x8C61; - &#x5B83;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x4EFB;&#x4F55;&quot;&#x610F;&#x5916;&#x4E92;&#x52A8;&quot;&#x7684;&#x5F02;&#x5E38;&#x3002;</span>
+        mockedList.add(<span class="hljs-string">&quot;one&quot;</span>);
+        mockedList.clear();
+
+        <span class="hljs-comment">// &#x9009;&#x62E9;&#x6027;&#x7684;&#x3001;&#x660E;&#x786E;&#x7684;&#x3002;&#x9AD8;&#x5EA6;&#x53EF;&#x8BFB;&#x7684;&#x9A8C;&#x8BC1;</span>
+        verify(mockedList).add(<span class="hljs-string">&quot;one&quot;</span>);
+        verify(mockedList).clear();
+    }
+
+    <span class="hljs-comment">/**
+     * &#x5B58;&#x6839;&#x65B9;&#x6CD5;&#x8C03;&#x7528;
+     */</span>
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test2</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">// &#x53EF;&#x4EE5;&#x6A21;&#x62DF;&#x5177;&#x4F53;&#x7684;&#x7C7B;(LinkedList),&#x800C;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x63A5;&#x53E3;</span>
+        LinkedList&lt;String&gt; mockedList = Mockito.mock(LinkedList.class);
+
+        <span class="hljs-comment">// &#x6253;&#x5370;null</span>
+        System.out.println(mockedList.get(<span class="hljs-number">0</span>));
+
+        <span class="hljs-comment">// &#x5B58;&#x6839;&#x51FA;&#x73B0;&#x5728;&#x5B9E;&#x9645;&#x6267;&#x884C;&#x4E4B;&#x524D; (&#x540E;&#x9762;&#x51FA;&#x73B0; mockedList.get(0) &#x5176;&#x8FD4;&#x56DE;&#x503C;&#x4E3A; &quot;first&quot;)</span>
+        when(mockedList.get(<span class="hljs-number">0</span>)).thenReturn(<span class="hljs-string">&quot;first&quot;</span>);
+
+        <span class="hljs-comment">// &#x6253;&#x5370; first</span>
+        System.out.println(mockedList.get(<span class="hljs-number">0</span>));
+        System.out.println(mockedList.get(<span class="hljs-number">1</span>));
+
+        <span class="hljs-comment">// &#x6253;&#x5370;null</span>
+        System.out.println(mockedList.get(<span class="hljs-number">999</span>));
+
+    }
+
+}
+</code></pre>
+<p><br></p>
+<p><code>PowerMockitoTest</code></p>
+<pre><code class="lang-java"><span class="hljs-meta">@RunWith</span>(PowerMockRunner.class)
+<span class="hljs-meta">@PrepareForTest</span>({App.class})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PowerMockitoTest</span> </span>{
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test3</span><span class="hljs-params">()</span> </span>{
+        PowerMockito.mockStatic(App.class);
+
+        PowerMockito.when(App.get(<span class="hljs-number">1</span>)).thenReturn(<span class="hljs-number">50</span>);
+        <span class="hljs-keyword">int</span> i = App.get(<span class="hljs-number">1</span>);
+        System.out.println(i);
+
+        App app = PowerMockito.mock(App.class);
+        PowerMockito.when(app.a()).thenReturn(<span class="hljs-number">10</span>);
+        <span class="hljs-keyword">int</span> ret = app.a();
+        Assert.assertEquals(<span class="hljs-number">10</span>, ret);
+
+    }
+}
+</code></pre>
+<p><br></p>
 
                                 
                                 </section>
@@ -2809,12 +2899,12 @@
 
             
                 
-                <a href="../101 C语言/02 打印一个int值.html" class="navigation navigation-prev " aria-label="Previous page: 打印一个int值">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 单元测试">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="01ESXI/" class="navigation navigation-next " aria-label="Next page: ESXI">
+                <a href="../100 Docker/" class="navigation navigation-next " aria-label="Next page: Docker">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -2825,7 +2915,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"玩","level":"1.8","depth":1,"next":{"title":"ESXI","level":"1.8.1","depth":2,"path":"300玩/01ESXI/README.md","ref":"300玩/01ESXI/README.md","articles":[{"title":"下载","level":"1.8.1.1","depth":3,"path":"300玩/01ESXI/01下载.md","ref":"300玩/01ESXI/01下载.md","articles":[]}]},"previous":{"title":"打印一个int值","level":"1.7.2","depth":2,"path":"101 C语言/02 打印一个int值.md","ref":"101 C语言/02 打印一个int值.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"300玩/README.md","mtime":"2021-09-07T01:17:01.512Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T01:17:51.675Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Mockito","level":"1.5.1","depth":2,"next":{"title":"Docker","level":"1.6","depth":1,"path":"100 Docker/README.md","ref":"100 Docker/README.md","articles":[{"title":"CentOS 7","level":"1.6.1","depth":2,"path":"100 Docker/01 CentOS 7.md","ref":"100 Docker/01 CentOS 7.md","articles":[]}]},"previous":{"title":"单元测试","level":"1.5","depth":1,"path":"04单元测试/README.md","ref":"04单元测试/README.md","articles":[{"title":"Mockito","level":"1.5.1","depth":2,"path":"04单元测试/01Mockito.md","ref":"04单元测试/01Mockito.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"04单元测试/01Mockito.md","mtime":"2021-09-07T01:17:01.508Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T01:17:51.675Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
