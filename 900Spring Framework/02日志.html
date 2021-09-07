@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>笔记系统 · 个人笔记</title>
+        <title>日志 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01Git.html" />
     
-    
-    <link rel="prev" href="../" />
+    <link rel="prev" href="01依赖关系管理和命名约定.html" />
     
 
     <style>
@@ -126,9 +124,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
             
-                <a href="./">
+                <a href="../01笔记系统/">
             
                     
                     笔记系统
@@ -140,9 +138,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
             
-                <a href="01Git.html">
+                <a href="../01笔记系统/01Git.html">
             
                     
                     Git
@@ -153,9 +151,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
             
-                <a href="02Typora.html">
+                <a href="../01笔记系统/02Typora.html">
             
                     
                     Typora
@@ -166,9 +164,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
             
-                <a href="03Snipaste.html">
+                <a href="../01笔记系统/03Snipaste.html">
             
                     
                     Snipaste
@@ -179,9 +177,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
             
-                <a href="04PicGo.html">
+                <a href="../01笔记系统/04PicGo.html">
             
                     
                     PicGo
@@ -192,9 +190,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="05gitbook.html">
+        <li class="chapter " data-level="1.2.5" data-path="../01笔记系统/05gitbook.html">
             
-                <a href="05gitbook.html">
+                <a href="../01笔记系统/05gitbook.html">
             
                     
                     gitbook
@@ -2735,9 +2733,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../900Spring Framework/">
+        <li class="chapter " data-level="1.14" data-path="./">
             
-                <a href="../900Spring Framework/">
+                <a href="./">
             
                     
                     Spring Framework
@@ -2749,9 +2747,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.14.1" data-path="../900Spring Framework/01依赖关系管理和命名约定.html">
+        <li class="chapter " data-level="1.14.1" data-path="01依赖关系管理和命名约定.html">
             
-                <a href="../900Spring Framework/01依赖关系管理和命名约定.html">
+                <a href="01依赖关系管理和命名约定.html">
             
                     
                     依赖关系管理和命名约定
@@ -2762,9 +2760,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.2" data-path="../900Spring Framework/02日志.html">
+        <li class="chapter active" data-level="1.14.2" data-path="02日志.html">
             
-                <a href="../900Spring Framework/02日志.html">
+                <a href="02日志.html">
             
                     
                     日志
@@ -2810,7 +2808,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >笔记系统</a>
+        <a href=".." >日志</a>
     </h1>
 </div>
 
@@ -2825,82 +2823,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x7B14;&#x8BB0;&#x7CFB;&#x7EDF;">&#x7B14;&#x8BB0;&#x7CFB;&#x7EDF;</h2>
-<pre><code class="lang-yaml">$ vim .github/workflows/generate-docs.yml
-<span class="hljs-attr">name:</span> generate-docs
-<span class="hljs-attr">on:</span>
-<span class="hljs-attr">  push:</span>
-<span class="hljs-attr">    branches:</span>
-<span class="hljs-bullet">      -</span> master
-<span class="hljs-attr">jobs:</span>
-<span class="hljs-attr">  generate-docs:</span>
-<span class="hljs-attr">    name:</span> generate-docs
-<span class="hljs-attr">    runs-on:</span> ubuntu-latest
-<span class="hljs-attr">    steps:</span>
-<span class="hljs-attr">      - uses:</span> actions/checkout@v2
-<span class="hljs-attr">      - uses:</span> actions/setup-java@v1
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          java-version:</span> <span class="hljs-string">&apos;9.0.4&apos;</span> <span class="hljs-comment"># The JDK version to make available on the path.</span>
-<span class="hljs-attr">          java-package:</span> jdk <span class="hljs-comment"># (jre, jdk, or jdk+fx) - defaults to jdk</span>
-<span class="hljs-attr">          architecture:</span> x64 <span class="hljs-comment"># (x64 or x86) - defaults to x64</span>
-<span class="hljs-attr">      - uses:</span> actions/setup-node@v1
-<span class="hljs-attr">      - run:</span> npm install -g gitbook-cli
-<span class="hljs-attr">      - run:</span> gitbook install
-<span class="hljs-attr">      - run:</span> wget https://github.com/huxiaoning/gitbook-helper/releases/download/<span class="hljs-number">1.0</span>/gitbook-helper<span class="hljs-bullet">-1.0</span>-SNAPSHOT.jar
-<span class="hljs-attr">      - run:</span> java -jar -Dwork.dir=$(pwd) gitbook-helper<span class="hljs-bullet">-1.0</span>-SNAPSHOT.jar
-<span class="hljs-attr">      - run:</span> gitbook build
-<span class="hljs-attr">      - uses:</span> actions/upload-artifact@v1
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          name:</span> docs
-<span class="hljs-attr">          path:</span> _book
-<span class="hljs-attr">  upload-docs:</span>
-<span class="hljs-attr">    name:</span> upload-docs
-<span class="hljs-attr">    needs:</span> generate-docs
-<span class="hljs-attr">    runs-on:</span> ubuntu-latest
-<span class="hljs-attr">    steps:</span>
-<span class="hljs-attr">      - uses:</span> actions/checkout@v2
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          ref:</span> <span class="hljs-string">&apos;docs&apos;</span>
-<span class="hljs-attr">      - name:</span> &#x5220;&#x9664;&#x9664;.git&#x76EE;&#x5F55;&#x5916;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;(&#x5939;)
-<span class="hljs-attr">        run:</span> ls -a | grep -v <span class="hljs-string">&apos;^.git$&apos;</span> | grep -v <span class="hljs-string">&apos;^.$&apos;</span> | grep -v <span class="hljs-string">&apos;^..$&apos;</span> | xargs -t -I % rm -rf %
-<span class="hljs-attr">      - uses:</span> actions/download-artifact@v2
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          name:</span> docs
-<span class="hljs-attr">      - run:</span> git config --global user.email <span class="hljs-string">&quot;secrets.EMAIL&quot;</span>
-<span class="hljs-attr">      - run:</span> git config --global user.name <span class="hljs-string">&quot;secrets.NAME&quot;</span>
-<span class="hljs-attr">      - run:</span> git add .
-<span class="hljs-attr">      - run:</span> git commit -m <span class="hljs-string">&apos;UP&apos;</span>
-<span class="hljs-attr">      - run:</span> git push
-</code></pre>
-<pre><code>$ vim book.json
-{
-    &quot;title&quot;: &quot;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&quot;,
-    &quot;description&quot;: &quot;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&quot;,
-    &quot;author&quot;: &quot;Jett&quot;,
-    &quot;language&quot;: &quot;zh-hans&quot;,
-    &quot;root&quot;: &quot;.&quot;,
-
-    &quot;plugins&quot;: [
-        &quot;github-buttons@2.1.0&quot;,
-        &quot;edit-link&quot;,
-    &quot;toggle-chapters&quot;
-    ],
-
-    &quot;pluginsConfig&quot;: {
-        &quot;github-buttons&quot;: {
-            &quot;repo&quot;: &quot;huxiaoning/memory&quot;,
-            &quot;types&quot;: [
-                &quot;star&quot;
-            ],
-            &quot;size&quot;: &quot;small&quot;
-        },
-        &quot;edit-link&quot;: {
-            &quot;base&quot;: &quot;https://github.com/huxiaoning/memory/edit/master&quot;,
-            &quot;label&quot;: &quot;Edit This Page&quot;
-        }
-    }
-}
-</code></pre><p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/20210117233749.png" alt="image-20210117233747803"></p>
+                                <h1 id="&#x65E5;&#x5FD7;">&#x65E5;&#x5FD7;</h1>
+<p>&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x662F;Spring&#x7684;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x4F9D;&#x8D56;&#x9879;:</p>
+<ul>
+<li>&#x65E5;&#x5FD7;&#x662F;&#x552F;&#x4E00;&#x5FC5;&#x987B;&#x7684;&#x5916;&#x90E8;&#x4F9D;&#x8D56;&#x9879;&#x4F9D;&#x8D56;&#x6027;</li>
+<li>&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x559C;&#x6B22;&#x770B;&#x5230;&#x4ED6;&#x4EEC;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x5DE5;&#x5177;&#x7684;&#x4E00;&#x4E9B;&#x8F93;&#x51FA;</li>
+<li>Spring&#x4E0E;&#x8BB8;&#x591A;&#x5176;&#x4ED6;&#x5DE5;&#x5177;&#x96C6;&#x6210;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x5DE5;&#x5177;&#x90FD;&#x9009;&#x62E9;&#x4E86;&#x65E5;&#x5FD7;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x3002;</li>
+</ul>
+<p>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x7684;&#x76EE;&#x6807;&#x4E4B;&#x4E00;&#x901A;&#x5E38;&#x662F;&#x5728;&#x6574;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF08;&#x5305;&#x62EC;&#x6240;&#x6709;&#x5916;&#x90E8;&#x7EC4;&#x4EF6;&#xFF09;&#x7684;&#x4E2D;&#x5FC3;&#x4F4D;&#x7F6E;&#x914D;&#x7F6E;&#x7EDF;&#x4E00;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x3002;&#x8FD9;&#x6BD4;&#x53EF;&#x80FD;&#x8981;&#x56F0;&#x96BE;&#x5F97;&#x591A;&#xFF0C;&#x56E0;&#x4E3A;&#x65E5;&#x5FD7;&#x6846;&#x67B6;&#x7684;&#x9009;&#x62E9;&#x592A;&#x591A;&#x4E86;&#x3002;</p>
+<p>Spring&#x4E2D;&#x7684;&#x5F3A;&#x5236;&#x65E5;&#x5FD7;&#x4F9D;&#x8D56;&#x662F;<code>Jakarta Commons Logging API (JCL).</code></p>
+<p>Spring&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x4E86;<code>JCL</code>&#x5E76;&#x4F7F;<code>JCL</code>&#x65E5;&#x5FD7;&#x5BF9;&#x8C61;&#x5BF9;Spring&#x6846;&#x67B6;&#x7684;&#x6269;&#x5C55;&#x7C7B;&#x53EF;&#x89C1;&#x3002;</p>
+<p>&#x8BA9;Spring&#x7684;&#x6240;&#x6709;&#x7248;&#x672C;&#x4F7F;&#x7528;&#x540C;&#x6837;&#x7684;&#x65E5;&#x5FD7;&#x5E93;&#x53EF;&#x4EE5;&#x8BA9;&#x8FC1;&#x79FB;&#x53D8;&#x5F97;&#x7B80;&#x5355;&#x3002;</p>
+<p>&#x8FD9;&#x6837;&#x5373;&#x4F7F;&#x662F;&#x4F7F;&#x7528;Spring&#x6269;&#x5C55;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x5176;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x6027;&#x4E5F;&#x5F97;&#x4EE5;&#x4FDD;&#x8BC1;&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x4F7F;Spring&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6A21;&#x5757;(<code>spring-core</code>)&#x53EF;&#x4EE5;&#x663E;&#x5F0F;&#x5730;&#x4F9D;&#x8D56;&#x5B9E;&#x73B0;<code>JCL</code>&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x6A21;&#x5757;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x90FD;&#x4F9D;&#x8D56;&#x5B83;&#x3002;</p>
+<blockquote>
+<p>&#x5728;IDEA&#x4E2D;&#x6253;&#x5F00;<code>pom.xml</code>&#xFF0C;&#x6309;<code>Ctrl + Alt + U</code>&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x770B;&#x5230;&#x4F60;&#x7684;&#x9879;&#x76EE;&#x4E5F;&#x5F15;&#x5165;&#x4E86;<code>commons-logging</code>&#x3002;</p>
+</blockquote>
+<p><code>commons-logging</code>&#x7684;&#x597D;&#x5904;&#x5728;&#x4E8E;&#x4E0D;&#x9700;&#x8981;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x4E1C;&#x897F;&#x6765;&#x8BA9;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p><code>commons-logging</code>&#x6709;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x65F6;&#x53D1;&#x73B0;&#x7B97;&#x6CD5;&#xFF0C;&#x8BE5;&#x7B97;&#x6CD5;&#x5728;&#x7C7B;&#x8DEF;&#x5F84;&#x4E0A;&#x7684;&#x5DF2;&#x77E5;&#x4F4D;&#x7F6E;&#x67E5;&#x627E;&#x5176;&#x4ED6;&#x65E5;&#x5FD7;&#x6846;&#x67B6;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x5B83;&#x8BA4;&#x4E3A;&#x5408;&#x9002;&#x7684;&#x65E5;&#x5FD7;&#x6846;&#x67B6;&#xFF08;&#x6216;&#x8005;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x544A;&#x8BC9;&#x5B83;&#x7528;&#x54EA;&#x4E2A;&#x65E5;&#x5FD7;&#x6846;&#x67B6;&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x53EF;&#x7528;&#x7684;&#x65E5;&#x5FD7;&#xFF0C;&#x5C06;&#x4F7F;&#x7528;&#x6765;&#x81EA;<code>JDK</code>&#x7684;&#x65E5;&#x5FD7;<code>(java.util.logging or JUL)</code>&#x3002;</p>
+<p>&#x4F60;&#x5E94;&#x8BE5;&#x5DF2;&#x7ECF;&#x53D1;&#x73B0;&#x4E86;&#xFF0C;&#x4F60;&#x7684;Spring&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x4EE5;&#x5F00;&#x7BB1;&#x5373;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#xFF0C;&#x5E76;&#x5F00;&#x5FC3;&#x5730;&#x8BB0;&#x5F55;&#x7740;&#x63A7;&#x5236;&#x53F0;&#x65E5;&#x5FD7;&#x3002;</p>
 
                                 
                                 </section>
@@ -2928,14 +2870,10 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 个人笔记">
+                <a href="01依赖关系管理和命名约定.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 依赖关系管理和命名约定">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="01Git.html" class="navigation navigation-next " aria-label="Next page: Git">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -2944,7 +2882,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"笔记系统","level":"1.2","depth":1,"next":{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},"previous":{"title":"个人笔记","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/README.md","mtime":"2021-09-07T07:39:39.510Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T07:40:32.931Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"日志","level":"1.14.2","depth":2,"previous":{"title":"依赖关系管理和命名约定","level":"1.14.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"900Spring Framework/02日志.md","mtime":"2021-09-07T07:39:39.518Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T07:40:32.931Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
