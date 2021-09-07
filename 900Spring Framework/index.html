@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>笔记系统 · 个人笔记</title>
+        <title>Spring Framework · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01Git.html" />
+    <link rel="next" href="01依赖关系管理和命名约定.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="../800Java/01Java新手/" />
     
 
     <style>
@@ -126,9 +126,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
             
-                <a href="./">
+                <a href="../01笔记系统/">
             
                     
                     笔记系统
@@ -140,9 +140,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
             
-                <a href="01Git.html">
+                <a href="../01笔记系统/01Git.html">
             
                     
                     Git
@@ -153,9 +153,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
             
-                <a href="02Typora.html">
+                <a href="../01笔记系统/02Typora.html">
             
                     
                     Typora
@@ -166,9 +166,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
             
-                <a href="03Snipaste.html">
+                <a href="../01笔记系统/03Snipaste.html">
             
                     
                     Snipaste
@@ -179,9 +179,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
             
-                <a href="04PicGo.html">
+                <a href="../01笔记系统/04PicGo.html">
             
                     
                     PicGo
@@ -192,9 +192,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="05gitbook.html">
+        <li class="chapter " data-level="1.2.5" data-path="../01笔记系统/05gitbook.html">
             
-                <a href="05gitbook.html">
+                <a href="../01笔记系统/05gitbook.html">
             
                     
                     gitbook
@@ -2735,9 +2735,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../900Spring Framework/">
+        <li class="chapter active" data-level="1.14" data-path="./">
             
-                <a href="../900Spring Framework/">
+                <a href="./">
             
                     
                     Spring Framework
@@ -2749,9 +2749,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.14.1" data-path="../900Spring Framework/01依赖关系管理和命名约定.html">
+        <li class="chapter " data-level="1.14.1" data-path="01依赖关系管理和命名约定.html">
             
-                <a href="../900Spring Framework/01依赖关系管理和命名约定.html">
+                <a href="01依赖关系管理和命名约定.html">
             
                     
                     依赖关系管理和命名约定
@@ -2797,7 +2797,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >笔记系统</a>
+        <a href=".." >Spring Framework</a>
     </h1>
 </div>
 
@@ -2812,82 +2812,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x7B14;&#x8BB0;&#x7CFB;&#x7EDF;">&#x7B14;&#x8BB0;&#x7CFB;&#x7EDF;</h2>
-<pre><code class="lang-yaml">$ vim .github/workflows/generate-docs.yml
-<span class="hljs-attr">name:</span> generate-docs
-<span class="hljs-attr">on:</span>
-<span class="hljs-attr">  push:</span>
-<span class="hljs-attr">    branches:</span>
-<span class="hljs-bullet">      -</span> master
-<span class="hljs-attr">jobs:</span>
-<span class="hljs-attr">  generate-docs:</span>
-<span class="hljs-attr">    name:</span> generate-docs
-<span class="hljs-attr">    runs-on:</span> ubuntu-latest
-<span class="hljs-attr">    steps:</span>
-<span class="hljs-attr">      - uses:</span> actions/checkout@v2
-<span class="hljs-attr">      - uses:</span> actions/setup-java@v1
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          java-version:</span> <span class="hljs-string">&apos;9.0.4&apos;</span> <span class="hljs-comment"># The JDK version to make available on the path.</span>
-<span class="hljs-attr">          java-package:</span> jdk <span class="hljs-comment"># (jre, jdk, or jdk+fx) - defaults to jdk</span>
-<span class="hljs-attr">          architecture:</span> x64 <span class="hljs-comment"># (x64 or x86) - defaults to x64</span>
-<span class="hljs-attr">      - uses:</span> actions/setup-node@v1
-<span class="hljs-attr">      - run:</span> npm install -g gitbook-cli
-<span class="hljs-attr">      - run:</span> gitbook install
-<span class="hljs-attr">      - run:</span> wget https://github.com/huxiaoning/gitbook-helper/releases/download/<span class="hljs-number">1.0</span>/gitbook-helper<span class="hljs-bullet">-1.0</span>-SNAPSHOT.jar
-<span class="hljs-attr">      - run:</span> java -jar -Dwork.dir=$(pwd) gitbook-helper<span class="hljs-bullet">-1.0</span>-SNAPSHOT.jar
-<span class="hljs-attr">      - run:</span> gitbook build
-<span class="hljs-attr">      - uses:</span> actions/upload-artifact@v1
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          name:</span> docs
-<span class="hljs-attr">          path:</span> _book
-<span class="hljs-attr">  upload-docs:</span>
-<span class="hljs-attr">    name:</span> upload-docs
-<span class="hljs-attr">    needs:</span> generate-docs
-<span class="hljs-attr">    runs-on:</span> ubuntu-latest
-<span class="hljs-attr">    steps:</span>
-<span class="hljs-attr">      - uses:</span> actions/checkout@v2
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          ref:</span> <span class="hljs-string">&apos;docs&apos;</span>
-<span class="hljs-attr">      - name:</span> &#x5220;&#x9664;&#x9664;.git&#x76EE;&#x5F55;&#x5916;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;(&#x5939;)
-<span class="hljs-attr">        run:</span> ls -a | grep -v <span class="hljs-string">&apos;^.git$&apos;</span> | grep -v <span class="hljs-string">&apos;^.$&apos;</span> | grep -v <span class="hljs-string">&apos;^..$&apos;</span> | xargs -t -I % rm -rf %
-<span class="hljs-attr">      - uses:</span> actions/download-artifact@v2
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          name:</span> docs
-<span class="hljs-attr">      - run:</span> git config --global user.email <span class="hljs-string">&quot;secrets.EMAIL&quot;</span>
-<span class="hljs-attr">      - run:</span> git config --global user.name <span class="hljs-string">&quot;secrets.NAME&quot;</span>
-<span class="hljs-attr">      - run:</span> git add .
-<span class="hljs-attr">      - run:</span> git commit -m <span class="hljs-string">&apos;UP&apos;</span>
-<span class="hljs-attr">      - run:</span> git push
-</code></pre>
-<pre><code>$ vim book.json
-{
-    &quot;title&quot;: &quot;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&quot;,
-    &quot;description&quot;: &quot;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&quot;,
-    &quot;author&quot;: &quot;Jett&quot;,
-    &quot;language&quot;: &quot;zh-hans&quot;,
-    &quot;root&quot;: &quot;.&quot;,
-
-    &quot;plugins&quot;: [
-        &quot;github-buttons@2.1.0&quot;,
-        &quot;edit-link&quot;,
-    &quot;toggle-chapters&quot;
-    ],
-
-    &quot;pluginsConfig&quot;: {
-        &quot;github-buttons&quot;: {
-            &quot;repo&quot;: &quot;huxiaoning/memory&quot;,
-            &quot;types&quot;: [
-                &quot;star&quot;
-            ],
-            &quot;size&quot;: &quot;small&quot;
-        },
-        &quot;edit-link&quot;: {
-            &quot;base&quot;: &quot;https://github.com/huxiaoning/memory/edit/master&quot;,
-            &quot;label&quot;: &quot;Edit This Page&quot;
-        }
-    }
-}
-</code></pre><p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/20210117233749.png" alt="image-20210117233747803"></p>
+                                <h1 id="spring-framework">Spring Framework</h1>
+<p><code>4.3.20.RELEASE</code></p>
 
                                 
                                 </section>
@@ -2915,12 +2841,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 个人笔记">
+                <a href="../800Java/01Java新手/" class="navigation navigation-prev " aria-label="Previous page: Java新手">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="01Git.html" class="navigation navigation-next " aria-label="Next page: Git">
+                <a href="01依赖关系管理和命名约定.html" class="navigation navigation-next " aria-label="Next page: 依赖关系管理和命名约定">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -2931,7 +2857,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"笔记系统","level":"1.2","depth":1,"next":{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},"previous":{"title":"个人笔记","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/README.md","mtime":"2021-09-07T06:47:40.308Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T06:48:35.739Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Spring Framework","level":"1.14","depth":1,"next":{"title":"依赖关系管理和命名约定","level":"1.14.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},"previous":{"title":"Java新手","level":"1.13.1","depth":2,"path":"800Java/01Java新手/README.md","ref":"800Java/01Java新手/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"900Spring Framework/README.md","mtime":"2021-09-07T06:47:40.312Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T06:48:35.739Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

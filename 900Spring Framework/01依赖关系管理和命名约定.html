@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>笔记系统 · 个人笔记</title>
+        <title>依赖关系管理和命名约定 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01Git.html" />
     
-    
-    <link rel="prev" href="../" />
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -126,9 +124,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
             
-                <a href="./">
+                <a href="../01笔记系统/">
             
                     
                     笔记系统
@@ -140,9 +138,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
             
-                <a href="01Git.html">
+                <a href="../01笔记系统/01Git.html">
             
                     
                     Git
@@ -153,9 +151,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
             
-                <a href="02Typora.html">
+                <a href="../01笔记系统/02Typora.html">
             
                     
                     Typora
@@ -166,9 +164,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
             
-                <a href="03Snipaste.html">
+                <a href="../01笔记系统/03Snipaste.html">
             
                     
                     Snipaste
@@ -179,9 +177,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
             
-                <a href="04PicGo.html">
+                <a href="../01笔记系统/04PicGo.html">
             
                     
                     PicGo
@@ -192,9 +190,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="05gitbook.html">
+        <li class="chapter " data-level="1.2.5" data-path="../01笔记系统/05gitbook.html">
             
-                <a href="05gitbook.html">
+                <a href="../01笔记系统/05gitbook.html">
             
                     
                     gitbook
@@ -2735,9 +2733,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../900Spring Framework/">
+        <li class="chapter " data-level="1.14" data-path="./">
             
-                <a href="../900Spring Framework/">
+                <a href="./">
             
                     
                     Spring Framework
@@ -2749,9 +2747,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.14.1" data-path="../900Spring Framework/01依赖关系管理和命名约定.html">
+        <li class="chapter active" data-level="1.14.1" data-path="01依赖关系管理和命名约定.html">
             
-                <a href="../900Spring Framework/01依赖关系管理和命名约定.html">
+                <a href="01依赖关系管理和命名约定.html">
             
                     
                     依赖关系管理和命名约定
@@ -2797,7 +2795,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >笔记系统</a>
+        <a href=".." >依赖关系管理和命名约定</a>
     </h1>
 </div>
 
@@ -2812,82 +2810,152 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x7B14;&#x8BB0;&#x7CFB;&#x7EDF;">&#x7B14;&#x8BB0;&#x7CFB;&#x7EDF;</h2>
-<pre><code class="lang-yaml">$ vim .github/workflows/generate-docs.yml
-<span class="hljs-attr">name:</span> generate-docs
-<span class="hljs-attr">on:</span>
-<span class="hljs-attr">  push:</span>
-<span class="hljs-attr">    branches:</span>
-<span class="hljs-bullet">      -</span> master
-<span class="hljs-attr">jobs:</span>
-<span class="hljs-attr">  generate-docs:</span>
-<span class="hljs-attr">    name:</span> generate-docs
-<span class="hljs-attr">    runs-on:</span> ubuntu-latest
-<span class="hljs-attr">    steps:</span>
-<span class="hljs-attr">      - uses:</span> actions/checkout@v2
-<span class="hljs-attr">      - uses:</span> actions/setup-java@v1
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          java-version:</span> <span class="hljs-string">&apos;9.0.4&apos;</span> <span class="hljs-comment"># The JDK version to make available on the path.</span>
-<span class="hljs-attr">          java-package:</span> jdk <span class="hljs-comment"># (jre, jdk, or jdk+fx) - defaults to jdk</span>
-<span class="hljs-attr">          architecture:</span> x64 <span class="hljs-comment"># (x64 or x86) - defaults to x64</span>
-<span class="hljs-attr">      - uses:</span> actions/setup-node@v1
-<span class="hljs-attr">      - run:</span> npm install -g gitbook-cli
-<span class="hljs-attr">      - run:</span> gitbook install
-<span class="hljs-attr">      - run:</span> wget https://github.com/huxiaoning/gitbook-helper/releases/download/<span class="hljs-number">1.0</span>/gitbook-helper<span class="hljs-bullet">-1.0</span>-SNAPSHOT.jar
-<span class="hljs-attr">      - run:</span> java -jar -Dwork.dir=$(pwd) gitbook-helper<span class="hljs-bullet">-1.0</span>-SNAPSHOT.jar
-<span class="hljs-attr">      - run:</span> gitbook build
-<span class="hljs-attr">      - uses:</span> actions/upload-artifact@v1
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          name:</span> docs
-<span class="hljs-attr">          path:</span> _book
-<span class="hljs-attr">  upload-docs:</span>
-<span class="hljs-attr">    name:</span> upload-docs
-<span class="hljs-attr">    needs:</span> generate-docs
-<span class="hljs-attr">    runs-on:</span> ubuntu-latest
-<span class="hljs-attr">    steps:</span>
-<span class="hljs-attr">      - uses:</span> actions/checkout@v2
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          ref:</span> <span class="hljs-string">&apos;docs&apos;</span>
-<span class="hljs-attr">      - name:</span> &#x5220;&#x9664;&#x9664;.git&#x76EE;&#x5F55;&#x5916;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;(&#x5939;)
-<span class="hljs-attr">        run:</span> ls -a | grep -v <span class="hljs-string">&apos;^.git$&apos;</span> | grep -v <span class="hljs-string">&apos;^.$&apos;</span> | grep -v <span class="hljs-string">&apos;^..$&apos;</span> | xargs -t -I % rm -rf %
-<span class="hljs-attr">      - uses:</span> actions/download-artifact@v2
-<span class="hljs-attr">        with:</span>
-<span class="hljs-attr">          name:</span> docs
-<span class="hljs-attr">      - run:</span> git config --global user.email <span class="hljs-string">&quot;secrets.EMAIL&quot;</span>
-<span class="hljs-attr">      - run:</span> git config --global user.name <span class="hljs-string">&quot;secrets.NAME&quot;</span>
-<span class="hljs-attr">      - run:</span> git add .
-<span class="hljs-attr">      - run:</span> git commit -m <span class="hljs-string">&apos;UP&apos;</span>
-<span class="hljs-attr">      - run:</span> git push
+                                <h1 id="&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7BA1;&#x7406;&#x548C;&#x547D;&#x540D;&#x7EA6;&#x5B9A;">&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7BA1;&#x7406;&#x548C;&#x547D;&#x540D;&#x7EA6;&#x5B9A;</h1>
+<table>
+<thead>
+<tr>
+<th><code>GroupId</code></th>
+<th><code>ArtifactId</code></th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-aop</code></td>
+<td>&#x57FA;&#x4E8E;&#x4EE3;&#x7406;&#x7684;<code>AOP</code>&#x652F;&#x6301;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-aspects</code></td>
+<td>&#x57FA;&#x4E8E;<code>AspectJ</code>&#x7684;&#x5207;&#x9762;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-beans</code></td>
+<td><code>bean</code>&#x652F;&#x6301;&#xFF0C;&#x5305;&#x542B;<code>Groovy</code></td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-context</code></td>
+<td>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x5305;&#x62EC;&#x8C03;&#x5EA6;&#x548C;&#x8FDC;&#x7A0B;&#x5904;&#x7406;&#x62BD;&#x8C61;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-context-support</code></td>
+<td>&#x7528;&#x4E8E;&#x5C06;&#x516C;&#x5171;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x96C6;&#x6210;&#x5230;Spring&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x7684;&#x652F;&#x6301;&#x7C7B;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-core</code></td>
+<td>&#x8BB8;&#x591A;&#x5176;&#x4ED6;Spring&#x6A21;&#x5757;&#x4F7F;&#x7528;&#x7684;&#x6838;&#x5FC3;&#x5B9E;&#x7528;&#x7A0B;&#x5E8F;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-expression</code></td>
+<td>Spring&#x8868;&#x8FBE;&#x5F0F;&#x8BED;&#x8A00;&#xFF08;<code>SpEL</code>&#xFF09;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-instrument</code></td>
+<td>&#x7528;&#x4E8E;<code>JVM</code>&#x5F15;&#x5BFC;&#x7684;&#x68C0;&#x6D4B;&#x4EE3;&#x7406;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-instrument-tomcat</code></td>
+<td>&#x7528;&#x4E8E;<code>Tomcat</code>&#x7684;&#x5F15;&#x5BFC;&#x68C0;&#x6D4B;&#x4EE3;&#x7406;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-jdbc</code></td>
+<td><code>JDBC</code>&#x652F;&#x6301;&#x5305;&#xFF0C;&#x5305;&#x62EC;&#x6570;&#x636E;&#x6E90;&#x8BBE;&#x7F6E;&#x548C;<code>JDBC</code>&#x8BBF;&#x95EE;&#x652F;&#x6301;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-jms</code></td>
+<td><code>JMS</code>&#x652F;&#x6301;&#x5305;&#xFF0C;&#x5305;&#x62EC;&#x7528;&#x4E8E;&#x53D1;&#x9001;/&#x63A5;&#x6536;<code>JMS</code>&#x6D88;&#x606F;&#x7684;&#x5E2E;&#x52A9;&#x5668;&#x7C7B;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-messaging</code></td>
+<td>&#x652F;&#x6301;&#x6D88;&#x606F;&#x4F20;&#x9012;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x548C;&#x534F;&#x8BAE;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-orm</code></td>
+<td>&#x5BF9;&#x8C61;/&#x5173;&#x7CFB;&#x6620;&#x5C04;&#xFF0C;&#x5305;&#x62EC;<code>JPA</code>&#x548C;<code>Hibernate</code>&#x652F;&#x6301;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-oxm</code></td>
+<td>&#x5BF9;&#x8C61;/XML&#x6620;&#x5C04;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-test</code></td>
+<td>&#x652F;&#x6301;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;<code>Spring</code>&#x7EC4;&#x4EF6;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-tx</code></td>
+<td>&#x4E8B;&#x52A1;&#x57FA;&#x7840;&#x67B6;&#x6784;&#xFF0C;&#x5305;&#x62EC;<code>DAO</code>&#x652F;&#x6301;&#x548C;<code>JCA</code>&#x96C6;&#x6210;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-web</code></td>
+<td>&#x57FA;&#x7840;web&#x652F;&#x6301;&#xFF0C;&#x5305;&#x62EC;web&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x57FA;&#x4E8E;web&#x7684;&#x8FDC;&#x7A0B;&#x5904;&#x7406;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-webmvc</code></td>
+<td><code>HTTP-based Model-ViewController and REST endpoints for Servlet stacks</code></td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-webmvc-portlet</code></td>
+<td>&#x5728;<code>Portlet</code>&#x73AF;&#x5883;&#x4E2D;&#x4F7F;&#x7528;&#x7684;<code>MVC</code>&#x5B9E;&#x73B0;</td>
+</tr>
+<tr>
+<td><code>org.springframework</code></td>
+<td><code>spring-websocket</code></td>
+<td><code>WebSocket</code>&#x548C;<code>SockJS</code>&#x57FA;&#x7840;&#x67B6;&#x6784;&#xFF0C;&#x5305;&#x62EC;<code>STOMP</code>&#x6D88;&#x606F;&#x4F20;&#x9012;&#x652F;&#x6301;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maven-&#x4F9D;&#x8D56;&#x7BA1;&#x7406;">Maven &#x4F9D;&#x8D56;&#x7BA1;&#x7406;</h3>
+<p>&#x5982;&#x679C;&#x4F7F;&#x7528;Maven&#x505A;&#x4F9D;&#x8D56;&#x7BA1;&#x7406;&#xFF0C;&#x4F60;&#x751A;&#x81F3;&#x4E0D;&#x9700;&#x8981;&#x663E;&#x5F0F;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x4F9D;&#x8D56;&#x3002;</p>
+<pre><code class="lang-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-context<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.3.20.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
-<pre><code>$ vim book.json
-{
-    &quot;title&quot;: &quot;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&quot;,
-    &quot;description&quot;: &quot;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&quot;,
-    &quot;author&quot;: &quot;Jett&quot;,
-    &quot;language&quot;: &quot;zh-hans&quot;,
-    &quot;root&quot;: &quot;.&quot;,
-
-    &quot;plugins&quot;: [
-        &quot;github-buttons@2.1.0&quot;,
-        &quot;edit-link&quot;,
-    &quot;toggle-chapters&quot;
-    ],
-
-    &quot;pluginsConfig&quot;: {
-        &quot;github-buttons&quot;: {
-            &quot;repo&quot;: &quot;huxiaoning/memory&quot;,
-            &quot;types&quot;: [
-                &quot;star&quot;
-            ],
-            &quot;size&quot;: &quot;small&quot;
-        },
-        &quot;edit-link&quot;: {
-            &quot;base&quot;: &quot;https://github.com/huxiaoning/memory/edit/master&quot;,
-            &quot;label&quot;: &quot;Edit This Page&quot;
-        }
-    }
-}
-</code></pre><p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/20210117233749.png" alt="image-20210117233747803"></p>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;spring&#x7684;&#x5B58;&#x50A8;&#x5E93;(&#x6211;&#x4E00;&#x822C;&#x7528;&#x4E0D;&#x5230;)</p>
+<pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">repositories</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>io.spring.repo.maven.release<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://repo.spring.io/release/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">snapshots</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">snapshots</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>io.spring.repo.maven.milestone<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://repo.spring.io/milestone/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">snapshots</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">snapshots</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>io.spring.repo.maven.snapshot<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://repo.spring.io/snapshot/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">snapshots</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">snapshots</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">repositories</span>&gt;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -2915,14 +2983,10 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 个人笔记">
+                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Spring Framework">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="01Git.html" class="navigation navigation-next " aria-label="Next page: Git">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -2931,7 +2995,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"笔记系统","level":"1.2","depth":1,"next":{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},"previous":{"title":"个人笔记","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/README.md","mtime":"2021-09-07T06:47:40.308Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T06:48:35.739Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"依赖关系管理和命名约定","level":"1.14.1","depth":2,"previous":{"title":"Spring Framework","level":"1.14","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.14.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"900Spring Framework/01依赖关系管理和命名约定.md","mtime":"2021-09-07T06:47:40.312Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-07T06:48:35.739Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
