@@ -109,3 +109,13 @@ public class PowerMockitoTest {
 
 <br>
 
+`PowerMock`集成`Spring`
+
+```java
+@RunWith(PowerMockRunner.class)
+@PrepareForTest()
+@PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:ctx.xml"})
+@PowerMockIgnore({"javax.net.ssl.*", "javax.management.*", "javax.security.*", "javax.crypto.*"})
+```
+
