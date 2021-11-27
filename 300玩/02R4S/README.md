@@ -4,6 +4,8 @@
 
 [固件地址](https://github.com/DHDAXCW/NanoPi-R4S-2021)
 
+该固件默认的管理后台地址是`192.168.2.1`用户名`root`密码`password`
+
 
 
 参考`R2S`刷机[教程](https://www.youtube.com/watch?v=ZCmbbnIBD78)

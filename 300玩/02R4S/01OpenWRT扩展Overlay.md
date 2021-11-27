@@ -8,19 +8,22 @@
 
 ```bash
 $ lsblk
-NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-mmcblk0     179:0    0 14.9G  0 disk 
-├─mmcblk0p1 179:1    0   64M  0 part /mnt/mmcblk0p1
-└─mmcblk0p2 179:2    0  1.2G  0 part /opt/docker
-                                     /
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0 946.7M  0 loop /overlay
+mmcblk0     179:0    0  14.9G  0 disk 
+├─mmcblk0p1 179:1    0    64M  0 part /mnt/mmcblk0p1
+└─mmcblk0p2 179:2    0   1.2G  0 part /rom
+
 $ df -h
 Filesystem                Size      Used Available Use% Mounted on
-/dev/root                 1.2G    829.6M    335.6M  71% /
-tmpfs                     1.9G     18.6M      1.9G   1% /tmp
+/dev/root               254.0M    254.0M         0 100% /rom
+tmpfs                     1.9G     18.2M      1.9G   1% /tmp
+/dev/loop0              944.7M    155.3M    789.4M  16% /overlay
+overlayfs:/overlay      944.7M    155.3M    789.4M  16% /
 tmpfs                   512.0K         0    512.0K   0% /dev
 cgroup                    1.9G         0      1.9G   0% /sys/fs/cgroup
-/dev/mmcblk0p1           63.0M     12.4M     49.3M  20% /mnt/mmcblk0p1
-/dev/root                 1.2G    829.6M    335.6M  71% /opt/docker
+/dev/mmcblk0p1           63.0M     12.5M     49.2M  20% /mnt/mmcblk0p1
+overlayfs:/overlay      944.7M    155.3M    789.4M  16% /opt/docker
  
 ```
 
@@ -31,13 +34,13 @@ cgroup                    1.9G         0      1.9G   0% /sys/fs/cgroup
 $ cfdisk /dev/mmcblk0
 ###  做了一些图形界面操作,增了一个G的Overlay
 
-$ lsblk
-NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-mmcblk0     179:0    0 14.9G  0 disk 
-├─mmcblk0p1 179:1    0   64M  0 part /mnt/mmcblk0p1
-├─mmcblk0p2 179:2    0  1.2G  0 part /opt/docker
-│                                    /
-└─mmcblk0p3 179:3    0    1G  0 part
+$ lsblk 
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0 946.7M  0 loop /overlay
+mmcblk0     179:0    0  14.9G  0 disk 
+├─mmcblk0p1 179:1    0    64M  0 part /mnt/mmcblk0p1
+├─mmcblk0p2 179:2    0   1.2G  0 part /rom
+└─mmcblk0p3 179:3    0     1G  0 part /mnt/mmcblk0p3
 
 # 格式化新增的分区
 $ mkfs.ext4 /dev/mmcblk0p3
@@ -53,4 +56,27 @@ $ ls /mnt/mmcblk0p3
 lost+found
 ```
 
-未完12:20
+
+
+迁移Overlay中的配置文件
+
+```
+$ cp -r /overlay/* /mnt/mmcblk0p3/
+$ ls /mnt/mmcblk0p3              
+lost+found  upper       work
+```
+
+
+
+在`OpenWRT WEB`管理后台中启用新的`overlay`挂载点
+
+![image-20211127202519672](https://raw.githubusercontent.com/huxiaoning/img/master/20211127202519.png)
+
+
+
+
+
+![image-20211127202645177](https://raw.githubusercontent.com/huxiaoning/img/master/20211127202645.png)
+
+这一步别忘了保存应用。然后重启路由器。
+
