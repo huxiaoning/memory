@@ -42,7 +42,7 @@ mmcblk0     179:0    0  14.9G  0 disk
 ├─mmcblk0p2 179:2    0   1.2G  0 part /rom
 └─mmcblk0p3 179:3    0     1G  0 part /mnt/mmcblk0p3
 
-# 格式化新增的分区
+# 格式化新增的分区 (这里注意如果已经挂载了，要先卸载再格式化)
 $ mkfs.ext4 /dev/mmcblk0p3
 # 挂载分区
 $ mount /dev/mmcblk0p3 /mnt/mmcblk0p3
@@ -80,3 +80,6 @@ lost+found  upper       work
 
 这一步别忘了保存应用。然后重启路由器。
 
+
+
+照葫芦画瓢，再弄一个5G大小的分区给Docker用。
