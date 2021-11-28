@@ -1,12 +1,15 @@
 # OpenWRT扩展Overlay
 
-[视频教程](https://www.youtube.com/watch?v=YwbwzuXKNlg)
+[overlay视频教程](https://www.youtube.com/watch?v=YwbwzuXKNlg)
+
+
 
 
 
 先看下分区情况
 
 ```bash
+# 分区情况
 $ lsblk
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
 loop0         7:0    0 946.7M  0 loop /overlay
@@ -14,6 +17,7 @@ mmcblk0     179:0    0  14.9G  0 disk
 ├─mmcblk0p1 179:1    0    64M  0 part /mnt/mmcblk0p1
 └─mmcblk0p2 179:2    0   1.2G  0 part /rom
 
+# 分区挂载情况
 $ df -h
 Filesystem                Size      Used Available Use% Mounted on
 /dev/root               254.0M    254.0M         0 100% /rom
@@ -82,5 +86,5 @@ lost+found  upper       work
 
 
 
-照葫芦画瓢，再弄一个8G大小的分区给Docker用。
+照葫芦画瓢，再弄一个8G大小的分区给Docker用。[docker教程](https://www.youtube.com/watch?v=isr6cPKy8eg&t=593s)
 
