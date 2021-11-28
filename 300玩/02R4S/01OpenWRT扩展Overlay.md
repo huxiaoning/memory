@@ -4,6 +4,8 @@
 
 
 
+需要弄2G软件包 overlay 和 8G Docker Overlay
+
 
 
 先看下分区情况
