@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Git · 个人笔记</title>
+        <title>Maven · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="02Typora.html" />
+    <link rel="next" href="01Maven构建速度慢.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="../100 Docker/01 CentOS 7.html" />
     
 
     <style>
@@ -126,9 +126,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../01笔记系统/">
             
-                <a href="./">
+                <a href="../01笔记系统/">
             
                     
                     笔记系统
@@ -140,9 +140,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="01Git.html">
+        <li class="chapter " data-level="1.2.1" data-path="../01笔记系统/01Git.html">
             
-                <a href="01Git.html">
+                <a href="../01笔记系统/01Git.html">
             
                     
                     Git
@@ -153,9 +153,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="02Typora.html">
+        <li class="chapter " data-level="1.2.2" data-path="../01笔记系统/02Typora.html">
             
-                <a href="02Typora.html">
+                <a href="../01笔记系统/02Typora.html">
             
                     
                     Typora
@@ -166,9 +166,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="03Snipaste.html">
+        <li class="chapter " data-level="1.2.3" data-path="../01笔记系统/03Snipaste.html">
             
-                <a href="03Snipaste.html">
+                <a href="../01笔记系统/03Snipaste.html">
             
                     
                     Snipaste
@@ -179,9 +179,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="04PicGo.html">
+        <li class="chapter " data-level="1.2.4" data-path="../01笔记系统/04PicGo.html">
             
-                <a href="04PicGo.html">
+                <a href="../01笔记系统/04PicGo.html">
             
                     
                     PicGo
@@ -192,9 +192,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="05gitbook.html">
+        <li class="chapter " data-level="1.2.5" data-path="../01笔记系统/05gitbook.html">
             
-                <a href="05gitbook.html">
+                <a href="../01笔记系统/05gitbook.html">
             
                     
                     gitbook
@@ -900,9 +900,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="../1000Maven/">
+        <li class="chapter active" data-level="1.7" data-path="./">
             
-                <a href="../1000Maven/">
+                <a href="./">
             
                     
                     Maven
@@ -914,9 +914,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../1000Maven/01Maven构建速度慢.html">
+        <li class="chapter " data-level="1.7.1" data-path="01Maven构建速度慢.html">
             
-                <a href="../1000Maven/01Maven构建速度慢.html">
+                <a href="01Maven构建速度慢.html">
             
                     
                     Maven构建速度慢
@@ -2983,7 +2983,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Git</a>
+        <a href=".." >Maven</a>
     </h1>
 </div>
 
@@ -2998,57 +2998,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="git"><code>Git</code></h2>
-<h5 id="&#x751F;&#x6210;&#x5BC6;&#x94A5;&#x5BF9;">&#x751F;&#x6210;&#x5BC6;&#x94A5;&#x5BF9;</h5>
-<pre><code class="lang-bash">$ sudo apt update
-$ sudo apt install -y git
-$ git --version
-$ git config --global user.name <span class="hljs-string">&quot;huxiaoningsworld&quot;</span>
-$ git config --global user.email <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span>
-$ ssh-keygen -t rsa -C <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span>
-$ cat ~/.ssh/id_rsa.pub
-</code></pre>
-<h5 id="github&#x7AEF;&#x53E3;&#x914D;&#x7F6E;&#x548C;&#x4EE3;&#x7406;&#x914D;&#x7F6E;">GitHub&#x7AEF;&#x53E3;&#x914D;&#x7F6E;&#x548C;&#x4EE3;&#x7406;&#x914D;&#x7F6E;</h5>
-<pre><code class="lang-bash">$ cat ~/.ssh/config
-Host xxxx.com
-        port xxx
-        IdentityFile C:\Users\aidan\.ssh\id_rsa
-Host ssh.github.com
-        User    git
-        Hostname        ssh.github.com
-        Port    443
-        ProxyCommand    connect -S 127.0.0.1:60002 <span class="hljs-_">-a</span> none %h %p
-        IdentityFile C:\Users\aidan\.ssh\id_rsa
- Host github.com
-        User    git
-        Hostname        github.com
-        Port    22
-        ProxyCommand    connect -S 127.0.0.1:60002 <span class="hljs-_">-a</span> none %h %p
-        IdentityFile C:\Users\aidan\.ssh\id_rsa
-</code></pre>
-<h5 id="&#x5E38;&#x7528;&#x522B;&#x540D;">&#x5E38;&#x7528;&#x522B;&#x540D;</h5>
-<pre><code class="lang-bash">$ <span class="hljs-built_in">alias</span> add=<span class="hljs-string">&apos;git add .&apos;</span>
-<span class="hljs-comment"># alias commit=&apos;vim ~/info.txt &amp;&amp; git commit -m &quot;$(cat ~/info.txt)&quot;&apos;</span>
-$ <span class="hljs-built_in">alias</span> commit=<span class="hljs-string">&apos;git commit -m &quot;UP&quot;&apos;</span>
-$ <span class="hljs-built_in">alias</span> pull=<span class="hljs-string">&apos;git pull&apos;</span>
-$ <span class="hljs-built_in">alias</span> push=<span class="hljs-string">&apos;git push&apos;</span>
-$ <span class="hljs-built_in">alias</span> status=<span class="hljs-string">&apos;git status&apos;</span>
-
-$ vim /etc/bash.bashrc
-<span class="hljs-built_in">alias</span> add=<span class="hljs-string">&apos;git add .&apos;</span>
-<span class="hljs-built_in">alias</span> commit=<span class="hljs-string">&apos;git commit -m &quot;UP&quot;&apos;</span>
-<span class="hljs-built_in">alias</span> pull=<span class="hljs-string">&apos;git pull&apos;</span>
-<span class="hljs-built_in">alias</span> push=<span class="hljs-string">&apos;git push&apos;</span>
-<span class="hljs-built_in">alias</span> status=<span class="hljs-string">&apos;git status&apos;</span>
-</code></pre>
-<h5 id="git&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;"><code>Git</code>&#x7248;&#x672C;&#x63A7;&#x5236;&#x5DE5;&#x5177;</h5>
-<pre><code class="lang-shell">echo &quot;# memory&quot; &gt;&gt; README.md
-git init
-git add README.md
-git commit -m &quot;first commit&quot;
-git remote add origin git@github.com:huxiaoning/memory.git
-git push -u origin master
-</code></pre>
+                                <h1 id="maven">Maven</h1>
 
                                 
                                 </section>
@@ -3076,12 +3026,12 @@ git push -u origin master
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 笔记系统">
+                <a href="../100 Docker/01 CentOS 7.html" class="navigation navigation-prev " aria-label="Previous page: CentOS 7">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="02Typora.html" class="navigation navigation-next " aria-label="Next page: Typora">
+                <a href="01Maven构建速度慢.html" class="navigation navigation-next " aria-label="Next page: Maven构建速度慢">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3092,7 +3042,7 @@ git push -u origin master
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Git","level":"1.2.1","depth":2,"next":{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},"previous":{"title":"笔记系统","level":"1.2","depth":1,"path":"01笔记系统/README.md","ref":"01笔记系统/README.md","articles":[{"title":"Git","level":"1.2.1","depth":2,"path":"01笔记系统/01Git.md","ref":"01笔记系统/01Git.md","articles":[]},{"title":"Typora","level":"1.2.2","depth":2,"path":"01笔记系统/02Typora.md","ref":"01笔记系统/02Typora.md","articles":[]},{"title":"Snipaste","level":"1.2.3","depth":2,"path":"01笔记系统/03Snipaste.md","ref":"01笔记系统/03Snipaste.md","articles":[]},{"title":"PicGo","level":"1.2.4","depth":2,"path":"01笔记系统/04PicGo.md","ref":"01笔记系统/04PicGo.md","articles":[]},{"title":"gitbook","level":"1.2.5","depth":2,"path":"01笔记系统/05gitbook.md","ref":"01笔记系统/05gitbook.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"01笔记系统/01Git.md","mtime":"2021-12-13T13:52:06.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-13T13:52:51.462Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Maven","level":"1.7","depth":1,"next":{"title":"Maven构建速度慢","level":"1.7.1","depth":2,"path":"1000Maven/01Maven构建速度慢.md","ref":"1000Maven/01Maven构建速度慢.md","articles":[]},"previous":{"title":"CentOS 7","level":"1.6.1","depth":2,"path":"100 Docker/01 CentOS 7.md","ref":"100 Docker/01 CentOS 7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"1000Maven/README.md","mtime":"2021-12-13T13:52:06.004Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-13T13:52:51.462Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
