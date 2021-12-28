@@ -4,5 +4,5 @@
 
 
 ```bash
--DarchetypeCatalog=local
+-DarchetypeCatalog=internal
 ```
