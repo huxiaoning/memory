@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>CentOS 7 · 个人笔记</title>
+        <title>PPT常用快捷键 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../1000Maven/" />
+    <link rel="next" href="999常用功能菜单导航.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="04设计.html" />
     
 
     <style>
@@ -126,9 +126,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../010 PPT/">
+        <li class="chapter " data-level="1.2" data-path="./">
             
-                <a href="../010 PPT/">
+                <a href="./">
             
                     
                     PPT
@@ -140,9 +140,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="../010 PPT/01文本框操作.html">
+        <li class="chapter " data-level="1.2.1" data-path="01文本框操作.html">
             
-                <a href="../010 PPT/01文本框操作.html">
+                <a href="01文本框操作.html">
             
                     
                     文本框操作
@@ -153,9 +153,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="../010 PPT/02形状操作.html">
+        <li class="chapter " data-level="1.2.2" data-path="02形状操作.html">
             
-                <a href="../010 PPT/02形状操作.html">
+                <a href="02形状操作.html">
             
                     
                     形状操作
@@ -166,9 +166,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="../010 PPT/03图片操作.html">
+        <li class="chapter " data-level="1.2.3" data-path="03图片操作.html">
             
-                <a href="../010 PPT/03图片操作.html">
+                <a href="03图片操作.html">
             
                     
                     图片操作
@@ -179,9 +179,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="../010 PPT/04设计.html">
+        <li class="chapter " data-level="1.2.4" data-path="04设计.html">
             
-                <a href="../010 PPT/04设计.html">
+                <a href="04设计.html">
             
                     
                     设计
@@ -192,9 +192,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="../010 PPT/05PPT常用快捷键.html">
+        <li class="chapter active" data-level="1.2.5" data-path="05PPT常用快捷键.html">
             
-                <a href="../010 PPT/05PPT常用快捷键.html">
+                <a href="05PPT常用快捷键.html">
             
                     
                     PPT常用快捷键
@@ -205,9 +205,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="../010 PPT/999常用功能菜单导航.html">
+        <li class="chapter " data-level="1.2.6" data-path="999常用功能菜单导航.html">
             
-                <a href="../010 PPT/999常用功能菜单导航.html">
+                <a href="999常用功能菜单导航.html">
             
                     
                     常用功能菜单导航
@@ -965,9 +965,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="./">
+        <li class="chapter " data-level="1.7" data-path="../100 Docker/">
             
-                <a href="./">
+                <a href="../100 Docker/">
             
                     
                     Docker
@@ -979,9 +979,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.7.1" data-path="01 CentOS 7.html">
+        <li class="chapter " data-level="1.7.1" data-path="../100 Docker/01 CentOS 7.html">
             
-                <a href="01 CentOS 7.html">
+                <a href="../100 Docker/01 CentOS 7.html">
             
                     
                     CentOS 7
@@ -3080,7 +3080,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >CentOS 7</a>
+        <a href=".." >PPT常用快捷键</a>
     </h1>
 </div>
 
@@ -3095,79 +3095,53 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h4 id="centos-7"><code>CentOS 7</code></h4>
-<h5 id="&#x57FA;&#x7840;&#x955C;&#x50CF;">&#x57FA;&#x7840;&#x955C;&#x50CF;</h5>
-<pre><code class="lang-powershell">$ docker pull centos:<span class="hljs-number">7</span>
-</code></pre>
-<h5 id="dockerfile"><code>Dockerfile</code></h5>
-<pre><code class="lang-dockerfile"><span class="hljs-keyword">FROM</span> centos:<span class="hljs-number">7</span>
-COPY id_rsa_2048.pub /root/.ssh/authorized_keys 
-<span class="hljs-keyword">RUN</span> <span class="bash">yum install -y openssh-server \
-    &amp;&amp; ssh-keygen -q -t rsa -b 2048 <span class="hljs-_">-f</span> /etc/ssh/ssh_host_rsa_key -N <span class="hljs-string">&apos;&apos;</span> \
-    &amp;&amp; ssh-keygen -q -t ecdsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ecdsa_key -N <span class="hljs-string">&apos;&apos;</span> \
-    &amp;&amp; ssh-keygen -t dsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ed25519_key -N <span class="hljs-string">&apos;&apos;</span> 
-</span><span class="hljs-keyword">CMD</span> <span class="bash">[<span class="hljs-string">&quot;/usr/sbin/sshd&quot;</span>,<span class="hljs-string">&quot;-D&quot;</span>]
-</span></code></pre>
-<h5 id="&#x6784;&#x5EFA;&#x8FD0;&#x884C;">&#x6784;&#x5EFA;&#x8FD0;&#x884C;</h5>
-<pre><code class="lang-powershell">$ docker build -t mycentos7:<span class="hljs-number">1.0</span> .
-</code></pre>
-<h5 id="&#x8C03;&#x8BD5;&#x547D;&#x4EE4;">&#x8C03;&#x8BD5;&#x547D;&#x4EE4;</h5>
-<pre><code class="lang-powershell">$ docker run -it --rm centos:<span class="hljs-number">7</span> bash
-$ docker exec -it mycentos bash
-</code></pre>
-<h5 id="&#x6B63;&#x5F0F;&#x547D;&#x4EE4;">&#x6B63;&#x5F0F;&#x547D;&#x4EE4;</h5>
-<pre><code class="lang-powershell">$ docker run --rm -it -p <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2222</span>:<span class="hljs-number">22</span> --name mycentos -d mycentos7:<span class="hljs-number">1.0</span>
-</code></pre>
-<h5 id="&#x8BF4;&#x660E;">&#x8BF4;&#x660E;</h5>
-<ol>
-<li><p><code>id_rsa_2048.pub</code>&#x662F;&#x7528;<code>XSehll</code>&#x751F;&#x6210;&#x7684;<code>SSH</code>&#x5BC6;&#x94A5;&#x5BF9;&#x4E2D;&#x7684;&#x516C;&#x94A5;</p>
-</li>
-<li><p>&#x4F7F;&#x7528;<code>XSehll</code>&#x8FDE;&#x63A5;<code>mycentos7:1.0</code>&#x5BB9;&#x5668;</p>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/image-20210528104325084.png" alt="image-20210528104325084"></p>
-<p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/image-20210528104349463.png" alt="image-20210528104349463"></p>
-<h5 id="&#x5B8C;&#x6574;">&#x5B8C;&#x6574;</h5>
-<pre><code class="lang-dockerfile"><span class="hljs-keyword">FROM</span> centos:<span class="hljs-number">7</span>
-COPY study.pub /root/.ssh/authorized_keys
-<span class="hljs-keyword">COPY</span> <span class="bash">id_rsa /root/.ssh/id_rsa
-</span><span class="hljs-keyword">COPY</span> <span class="bash">id_rsa.pub /root/.ssh/id_rsa.pub
-</span><span class="hljs-keyword">COPY</span> <span class="bash">known_hosts /root/.ssh/known_hosts
-</span><span class="hljs-keyword">COPY</span> <span class="bash">libfaketime-master.zip /root/libfaketime-master.zip
-</span><span class="hljs-keyword">ADD</span> <span class="bash">jdk-8u251-linux-x64.tar.gz /opt/Java/
-</span><span class="hljs-keyword">ADD</span> <span class="bash">apache-maven-3.6.3-bin.tar.gz /opt/Maven/
-</span><span class="hljs-comment"># ARG JAVA_HOME=/opt/Java/jdk1.8.0_251</span>
-<span class="hljs-comment"># ARG M2_HOME=/opt/Maven/apache-maven-3.6.3</span>
-<span class="hljs-comment"># ENV JAVA_HOME=$JAVA_HOME PATH=$PATH:$JAVA_HOME/bin</span>
-<span class="hljs-comment"># ENV CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span>
-<span class="hljs-comment"># ENV M2_HOME=$M2_HOME PATH=$PATH:$M2_HOME/bin</span>
-ARG TZ=Asia/Shanghai
-<span class="hljs-keyword">RUN</span> <span class="bash">yum install -y vim wget curl gcc gcc-c++ openssl openssh-server net-tools telnet-server telnet git unzip make \
-    &amp;&amp; mkdir -p /var/run/sshd \
-    &amp;&amp; ssh-keygen -q -t rsa -b 2048 <span class="hljs-_">-f</span> /etc/ssh/ssh_host_rsa_key -N <span class="hljs-string">&apos;&apos;</span> \
-    &amp;&amp; ssh-keygen -q -t ecdsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ecdsa_key -N <span class="hljs-string">&apos;&apos;</span> \
-    &amp;&amp; ssh-keygen -t dsa <span class="hljs-_">-f</span> /etc/ssh/ssh_host_ed25519_key -N <span class="hljs-string">&apos;&apos;</span> \
-    &amp;&amp; git config --global user.name <span class="hljs-string">&quot;huxiaoningsworld&quot;</span> \
-    &amp;&amp; git config --global user.email <span class="hljs-string">&quot;huxiaoningsworld@sina.com&quot;</span> \
-    &amp;&amp; chmod 0600 ~/.ssh/id_rsa \
-    &amp;&amp; yum install -y kde<span class="hljs-_">-l</span>10n-Chinese glibc-common \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export LC_ALL=&quot;zh_CN.UTF-8&quot;&apos;</span> &amp;&gt;&gt; /etc/profile \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;LANG=&quot;zh_CN.UTF-8&quot;&apos;</span> &amp;&gt; /etc/locale.conf \
-    &amp;&amp; localedef -c <span class="hljs-_">-f</span> UTF-8 -i zh_CN zh_CN.utf8 \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;:set encoding=UTF-8&quot;</span> &amp;&gt;&gt; /root/.vimrc \
-    &amp;&amp; ln -snf /usr/share/zoneinfo/<span class="hljs-variable">$TZ</span> /etc/localtime &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-variable">$TZ</span> &gt; /etc/timezone \
-    <span class="hljs-comment"># &amp;&amp; cd /root &amp;&amp; unzip libfaketime-master.zip \</span>
-    <span class="hljs-comment"># &amp;&amp; cd libfaketime-master \</span>
-    <span class="hljs-comment"># &amp;&amp; make &amp;&amp; make install \</span>
-    <span class="hljs-comment"># &amp;&amp; echo &apos;export LD_PRELOAD=/usr/local/lib/faketime/libfaketime.so.1&apos; &amp;&gt;&gt; /etc/profile.d/faketime.sh \</span>
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export JAVA_HOME=/opt/Java/jdk1.8.0_251&apos;</span> &amp;&gt;&gt; /etc/profile.d/java.sh \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export PATH=$JAVA_HOME/bin:$PATH&apos;</span> &amp;&gt;&gt; /etc/profile.d/java.sh \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar&apos;</span> &amp;&gt;&gt; /etc/profile.d/java.sh \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export M2_HOME=/opt/Maven/apache-maven-3.6.3&apos;</span> &amp;&gt;&gt; /etc/profile.d/maven.sh \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export PATH=$M2_HOME/bin:$PATH&apos;</span> &amp;&gt;&gt; /etc/profile.d/maven.sh \
-    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;export MAVEN_OPTS=&quot;-Xms128m -Xmx1024m&quot;&apos;</span> &amp;&gt;&gt; /etc/profile.d/maven.sh
-</span><span class="hljs-keyword">CMD</span> <span class="bash">[<span class="hljs-string">&quot;/usr/sbin/sshd&quot;</span>,<span class="hljs-string">&quot;-D&quot;</span>]
-</span></code></pre>
+                                <h1 id="ppt&#x5E38;&#x7528;&#x5FEB;&#x6377;&#x952E;">PPT&#x5E38;&#x7528;&#x5FEB;&#x6377;&#x952E;</h1>
+<h3 id="&#x5E38;&#x89C4;&#x5904;&#x7406;">&#x5E38;&#x89C4;&#x5904;&#x7406;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x5FEB;&#x6377;&#x952E;</th>
+<th>&#x529F;&#x80FD;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ctrl + n</td>
+<td>&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;PPT</td>
+</tr>
+<tr>
+<td>ctrl + o</td>
+<td>&#x6253;&#x5F00;&#x4E00;&#x4E2A;PPT</td>
+</tr>
+<tr>
+<td>ctrl + s</td>
+<td>&#x4FDD;&#x5B58;</td>
+</tr>
+<tr>
+<td>ctrl + shift + s</td>
+<td>&#x53E6;&#x5B58;&#x4E3A;</td>
+</tr>
+<tr>
+<td>ctrl + c</td>
+<td>&#x590D;&#x5236;</td>
+</tr>
+<tr>
+<td>ctrl + v</td>
+<td>&#x7C98;&#x8D34;</td>
+</tr>
+<tr>
+<td>ctrl + z</td>
+<td>&#x64A4;&#x56DE;</td>
+</tr>
+<tr>
+<td>ctrl + y</td>
+<td>&#x6062;&#x590D;&#x64A4;&#x56DE;&#x524D;&#x7684;&#x64CD;&#x4F5C;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x5B57;&#x4F53;&#x5904;&#x7406;">&#x5B57;&#x4F53;&#x5904;&#x7406;</h3>
+<h3 id="&#x901A;&#x7528;&#x5904;&#x7406;">&#x901A;&#x7528;&#x5904;&#x7406;</h3>
+<h3 id="&#x753B;&#x5E03;&#x5904;&#x7406;">&#x753B;&#x5E03;&#x5904;&#x7406;</h3>
 
                                 
                                 </section>
@@ -3195,12 +3169,12 @@ ARG TZ=Asia/Shanghai
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Docker">
+                <a href="04设计.html" class="navigation navigation-prev " aria-label="Previous page: 设计">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../1000Maven/" class="navigation navigation-next " aria-label="Next page: Maven">
+                <a href="999常用功能菜单导航.html" class="navigation navigation-next " aria-label="Next page: 常用功能菜单导航">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3211,7 +3185,7 @@ ARG TZ=Asia/Shanghai
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CentOS 7","level":"1.7.1","depth":2,"next":{"title":"Maven","level":"1.8","depth":1,"path":"1000Maven/README.md","ref":"1000Maven/README.md","articles":[{"title":"Maven构建速度慢","level":"1.8.1","depth":2,"path":"1000Maven/01Maven构建速度慢.md","ref":"1000Maven/01Maven构建速度慢.md","articles":[]}]},"previous":{"title":"Docker","level":"1.7","depth":1,"path":"100 Docker/README.md","ref":"100 Docker/README.md","articles":[{"title":"CentOS 7","level":"1.7.1","depth":2,"path":"100 Docker/01 CentOS 7.md","ref":"100 Docker/01 CentOS 7.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"100 Docker/01 CentOS 7.md","mtime":"2022-01-15T01:32:59.244Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-15T01:33:50.050Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"PPT常用快捷键","level":"1.2.5","depth":2,"next":{"title":"常用功能菜单导航","level":"1.2.6","depth":2,"path":"010 PPT/999常用功能菜单导航.md","ref":"010 PPT/999常用功能菜单导航.md","articles":[]},"previous":{"title":"设计","level":"1.2.4","depth":2,"path":"010 PPT/04设计.md","ref":"010 PPT/04设计.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"010 PPT/05PPT常用快捷键.md","mtime":"2022-01-15T01:32:59.244Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-15T01:33:50.050Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
