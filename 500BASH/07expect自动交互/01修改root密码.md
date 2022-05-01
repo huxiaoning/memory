@@ -18,3 +18,5 @@ $ chmod 755 change_root_password.sh
 $ ./change_root_password.sh 123456
 ```
 
+
+
