@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Stack · 个人笔记</title>
+        <title>线程状态 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../../900Spring Framework/" />
+    <link rel="next" href="../02容器/" />
     
     
-    <link rel="prev" href="04Queue.html" />
+    <link rel="prev" href="01Java程序运行原理分析.html" />
     
 
     <style>
@@ -3123,9 +3123,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.1" data-path="../01Java基础/">
+        <li class="chapter " data-level="1.17.1" data-path="./">
             
-                <a href="../01Java基础/">
+                <a href="./">
             
                     
                     Java基础
@@ -3137,9 +3137,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.1.1" data-path="../01Java基础/01Java程序运行原理分析.html">
+        <li class="chapter " data-level="1.17.1.1" data-path="01Java程序运行原理分析.html">
             
-                <a href="../01Java基础/01Java程序运行原理分析.html">
+                <a href="01Java程序运行原理分析.html">
             
                     
                     Java程序运行原理分析
@@ -3150,9 +3150,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.1.2" data-path="../01Java基础/02线程状态.html">
+        <li class="chapter active" data-level="1.17.1.2" data-path="02线程状态.html">
             
-                <a href="../01Java基础/02线程状态.html">
+                <a href="02线程状态.html">
             
                     
                     线程状态
@@ -3168,9 +3168,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2" data-path="./">
+        <li class="chapter " data-level="1.17.2" data-path="../02容器/">
             
-                <a href="./">
+                <a href="../02容器/">
             
                     
                     容器
@@ -3182,9 +3182,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.2.1" data-path="01Map.html">
+        <li class="chapter " data-level="1.17.2.1" data-path="../02容器/01Map.html">
             
-                <a href="01Map.html">
+                <a href="../02容器/01Map.html">
             
                     
                     Map
@@ -3195,9 +3195,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.2" data-path="02List.html">
+        <li class="chapter " data-level="1.17.2.2" data-path="../02容器/02List.html">
             
-                <a href="02List.html">
+                <a href="../02容器/02List.html">
             
                     
                     List
@@ -3208,9 +3208,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.3" data-path="03Set.html">
+        <li class="chapter " data-level="1.17.2.3" data-path="../02容器/03Set.html">
             
-                <a href="03Set.html">
+                <a href="../02容器/03Set.html">
             
                     
                     Set
@@ -3221,9 +3221,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.4" data-path="04Queue.html">
+        <li class="chapter " data-level="1.17.2.4" data-path="../02容器/04Queue.html">
             
-                <a href="04Queue.html">
+                <a href="../02容器/04Queue.html">
             
                     
                     Queue
@@ -3234,9 +3234,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17.2.5" data-path="05Stack.html">
+        <li class="chapter " data-level="1.17.2.5" data-path="../02容器/05Stack.html">
             
-                <a href="05Stack.html">
+                <a href="../02容器/05Stack.html">
             
                     
                     Stack
@@ -3364,7 +3364,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Stack</a>
+        <a href="../.." >线程状态</a>
     </h1>
 </div>
 
@@ -3379,8 +3379,137 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="stack">Stack</h1>
-<p>&#x6808;&#xFF1A;&#x5148;&#x5165;&#x540E;&#x51FA;&#x3002;</p>
+                                <h1 id="&#x7EBF;&#x7A0B;&#x72B6;&#x6001;">&#x7EBF;&#x7A0B;&#x72B6;&#x6001;</h1>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * A thread state.  A thread can be in one of the following states:
+ * &lt;ul&gt;
+ * &lt;li&gt;{<span class="hljs-doctag">@link</span> #NEW}&lt;br&gt;
+ *     A thread that has not yet started is in this state.
+ *     &lt;/li&gt;
+ * &lt;li&gt;{<span class="hljs-doctag">@link</span> #RUNNABLE}&lt;br&gt;
+ *     A thread executing in the Java virtual machine is in this state.
+ *     &lt;/li&gt;
+ * &lt;li&gt;{<span class="hljs-doctag">@link</span> #BLOCKED}&lt;br&gt;
+ *     A thread that is blocked waiting for a monitor lock
+ *     is in this state.
+ *     &lt;/li&gt;
+ * &lt;li&gt;{<span class="hljs-doctag">@link</span> #WAITING}&lt;br&gt;
+ *     A thread that is waiting indefinitely for another thread to
+ *     perform a particular action is in this state.
+ *     &lt;/li&gt;
+ * &lt;li&gt;{<span class="hljs-doctag">@link</span> #TIMED_WAITING}&lt;br&gt;
+ *     A thread that is waiting for another thread to perform an action
+ *     for up to a specified waiting time is in this state.
+ *     &lt;/li&gt;
+ * &lt;li&gt;{<span class="hljs-doctag">@link</span> #TERMINATED}&lt;br&gt;
+ *     A thread that has exited is in this state.
+ *     &lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * &lt;p&gt;
+ * A thread can be in only one state at a given point in time.
+ * These states are virtual machine states which do not reflect
+ * any operating system thread states.
+ *
+ * <span class="hljs-doctag">@since</span>   1.5
+ * <span class="hljs-doctag">@see</span> #getState
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> State {
+    <span class="hljs-comment">/**
+     * Thread state for a thread which has not yet started.
+     */</span>
+    NEW,
+
+    <span class="hljs-comment">/**
+     * Thread state for a runnable thread.  A thread in the runnable
+     * state is executing in the Java virtual machine but it may
+     * be waiting for other resources from the operating system
+     * such as processor.
+     */</span>
+    RUNNABLE,
+
+    <span class="hljs-comment">/**
+     * Thread state for a thread blocked waiting for a monitor lock.
+     * A thread in the blocked state is waiting for a monitor lock
+     * to enter a synchronized block/method or
+     * reenter a synchronized block/method after calling
+     * {<span class="hljs-doctag">@link</span> Object#wait() Object.wait}.
+     */</span>
+    BLOCKED,
+
+    <span class="hljs-comment">/**
+     * Thread state for a waiting thread.
+     * A thread is in the waiting state due to calling one of the
+     * following methods:
+     * &lt;ul&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> Object#wait() Object.wait} with no timeout&lt;/li&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> #join() Thread.join} with no timeout&lt;/li&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> LockSupport#park() LockSupport.park}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * &lt;p&gt;A thread in the waiting state is waiting for another thread to
+     * perform a particular action.
+     *
+     * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;
+     * on an object is waiting for another thread to call
+     * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on
+     * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;
+     * is waiting for a specified thread to terminate.
+     */</span>
+    WAITING,
+
+    <span class="hljs-comment">/**
+     * Thread state for a waiting thread with a specified waiting time.
+     * A thread is in the timed waiting state due to calling one of
+     * the following methods with a specified positive waiting time:
+     * &lt;ul&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> #sleep Thread.sleep}&lt;/li&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> Object#wait(long) Object.wait} with timeout&lt;/li&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> #join(long) Thread.join} with timeout&lt;/li&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> LockSupport#parkNanos LockSupport.parkNanos}&lt;/li&gt;
+     *   &lt;li&gt;{<span class="hljs-doctag">@link</span> LockSupport#parkUntil LockSupport.parkUntil}&lt;/li&gt;
+     * &lt;/ul&gt;
+     */</span>
+    TIMED_WAITING,
+
+    <span class="hljs-comment">/**
+     * Thread state for a terminated thread.
+     * The thread has completed execution.
+     */</span>
+    TERMINATED;
+}
+</code></pre>
+<p>&#x7EBF;&#x7A0B;&#x6709;6&#x79CD;&#x72B6;&#x6001;&#xFF1A;</p>
+<ul>
+<li>NEW<ul>
+<li>&#x5C1A;&#x672A;&#x542F;&#x52A8;&#x7684;&#x7EBF;&#x7A0B;&#x7684;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x3002;</li>
+</ul>
+</li>
+<li>RUNNABLE<ul>
+<li>&#x53EF;&#x8FD0;&#x884C;&#x7EBF;&#x7A0B;&#x7684;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#xFF0C;&#x7B49;&#x5F85;CPU&#x8C03;&#x5EA6;&#x3002;</li>
+</ul>
+</li>
+<li>BLOCKED<ul>
+<li>&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x76D1;&#x89C6;&#x5668;&#x9501;&#x5B9A;&#x7684;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x3002;</li>
+<li>&#x5904;&#x4E8E;synchronized&#x540C;&#x6B65;&#x4EE3;&#x7801;&#x5757;&#x6216;&#x65B9;&#x6CD5;&#x4E2D;&#x88AB;&#x963B;&#x585E;&#x3002;</li>
+</ul>
+</li>
+<li>WAITING<ul>
+<li>&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x7684;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x3002;&#x4E0B;&#x5217;&#x4E0D;&#x5E26;&#x8D85;&#x65F6;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;</li>
+<li>Object.wait&#x3001;Thread.join&#x3001;LockSupport.park </li>
+</ul>
+</li>
+<li>TIMED_WAITING<ul>
+<li>&#x5177;&#x6709;&#x6307;&#x5B9A;&#x7B49;&#x5F85;&#x65F6;&#x95F4;&#x7684;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x7684;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x3002;&#x4E0B;&#x5217;&#x5E26;&#x8D85;&#x65F6;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;</li>
+<li>Thread.sleep&#x3001;Object.wait&#x3001;Thread.join&#x3001;LockSupport.parkNanos&#x3001;LockSupport.parkUntil </li>
+</ul>
+</li>
+<li>TERMINATED<ul>
+<li>&#x7EC8;&#x6B62;&#x7EBF;&#x7A0B;&#x7684;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x3002;&#x7EBF;&#x7A0B;&#x6B63;&#x5E38;&#x5B8C;&#x6210;&#x6267;&#x884C;&#x6216;&#x8005;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<p>&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x95F4;&#x7684;&#x5207;&#x6362;<a href="https://blog.csdn.net/xyzyhs/article/details/121417200" target="_blank">&#x56FE;&#x793A;</a></p>
 
                                 
                                 </section>
@@ -3408,12 +3537,12 @@
 
             
                 
-                <a href="04Queue.html" class="navigation navigation-prev " aria-label="Previous page: Queue">
+                <a href="01Java程序运行原理分析.html" class="navigation navigation-prev " aria-label="Previous page: Java程序运行原理分析">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../../900Spring Framework/" class="navigation navigation-next " aria-label="Next page: Spring Framework">
+                <a href="../02容器/" class="navigation navigation-next " aria-label="Next page: 容器">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3424,7 +3553,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Stack","level":"1.17.2.5","depth":3,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/02容器/05Stack.md","mtime":"2022-05-01T14:04:28.223Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-01T14:05:12.576Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"线程状态","level":"1.17.1.2","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/02容器/README.md","ref":"800Java/02容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/02容器/01Map.md","ref":"800Java/02容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/02容器/02List.md","ref":"800Java/02容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/02容器/03Set.md","ref":"800Java/02容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/02容器/05Stack.md","ref":"800Java/02容器/05Stack.md","articles":[]}]},"previous":{"title":"Java程序运行原理分析","level":"1.17.1.1","depth":3,"path":"800Java/01Java基础/01Java程序运行原理分析.md","ref":"800Java/01Java基础/01Java程序运行原理分析.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/02线程状态.md","mtime":"2022-05-01T14:04:28.223Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-01T14:05:12.576Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
