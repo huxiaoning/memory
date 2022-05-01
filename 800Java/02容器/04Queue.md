@@ -83,3 +83,10 @@ peek取到的元素永远为null。
 
 如果队列泛型指定为String或Integer这样的实现了Comparable接口的类，队列的顺序由compareTo方法决定。
 
+```java
+        Comparator<Student> comparator = Comparator
+                .comparing(Student::getAge, Comparator.reverseOrder())
+                .thenComparing(Student::getName);
+        PriorityBlockingQueue<Student> queue = new PriorityBlockingQueue<>(3, comparator);
+```
+
