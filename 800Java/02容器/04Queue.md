@@ -73,3 +73,13 @@ peek取到的元素永远为null。
 
 同步队列(线程安全)。
 
+
+
+### PriorityBlockingQueue
+
+存储结构为数组。默认容量是11。会扩容，无界队列。
+
+还可以指定一个比较器，使其成为一个有序(由Comparator指定)的队列。
+
+如果队列泛型指定为String或Integer这样的实现了Comparable接口的类，队列的顺序由compareTo方法决定。
+
