@@ -65,5 +65,11 @@ take时会阻塞，直到有其他线程put/offer一个元素到队列。
 
 put时也会阻塞，直到有其他线程take/poll走一个元素。
 
+若没有线程执行take阻塞，offer新增元素会失败，返回false。
+
+若没有线程执行put阻塞，pool会取到一个null。
+
+peek取到的元素永远为null。
+
 同步队列(线程安全)。
 
