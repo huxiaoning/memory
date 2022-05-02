@@ -3393,6 +3393,57 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x7EBF;&#x7A0B;&#x4E2D;&#x6B62;">&#x7EBF;&#x7A0B;&#x4E2D;&#x6B62;</h1>
+<h3 id="&#x4E0D;&#x6B63;&#x786E;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x6B62;">&#x4E0D;&#x6B63;&#x786E;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x6B62;</h3>
+<ul>
+<li>stop<ul>
+<li>&#x4E2D;&#x6B62;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x4E14;&#x6E05;&#x9664;&#x76D1;&#x63A7;&#x5668;&#x9501;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF0C; JDK&#x4E0D;&#x5EFA;&#x8BAE;&#x7528;&#x3002;</li>
+</ul>
+</li>
+<li>destroy<ul>
+<li>JDK&#x672A;&#x5B9E;&#x73B0;&#x8BE5;&#x65B9;&#x6CD5;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h3 id="interrupt">interrupt</h3>
+<ul>
+<li>&#x5982;&#x679C;&#x76EE;&#x6807;&#x7EBF;&#x7A0B;&#x5728;&#x8C03;&#x7528;Object class&#x7684;wait&#xFF08;&#xFF09;&#x3001;wait&#xFF08;long&#xFF09;&#x6216;wait&#xFF08;long&#xFF0C;int&#xFF09;&#x65B9;&#x6CD5;&#x3001;join&#xFF08;&#xFF09;&#x3001; join&#xFF08;long&#xFF0C; int&#xFF09; &#x6216;sleep&#xFF08;long&#xFF0C;int&#xFF09;&#x65B9;&#x6CD5;&#x65F6;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x90A3;&#x4E48;Interrupt&#x4F1A;&#x751F;&#x6548;&#xFF0C;&#x8BE5;&#x7EBF;&#x7A0B;&#x7684;&#x4E2D;&#x65AD;&#x72B6;&#x6001;&#x5C06; &#x88AB;&#x6E05;&#x9664;&#xFF0C;&#x629B;&#x51FA;InterruptedException&#x5F02;&#x5E38;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x76EE;&#x6807;&#x7EBF;&#x7A0B;&#x662F;&#x88AB;I&#xFF0F;O&#x6216;&#x8005;NIO&#x4E2D;&#x7684;Channel&#x6240;&#x963B;&#x585E;&#xFF0C;&#x540C;&#x6837;&#xFF0C;1&#xFF0F;O&#x64CD;&#x4F5C;&#x4F1A;&#x88AB;&#x4E2D;&#x65AD;&#x6216;&#x8005;&#x8FD4;&#x56DE;&#x7279;&#x6B8A;&#x5F02;&#x5E38;&#x503C;&#x3002;&#x8FBE;&#x5230;&#x7EC8;&#x6B62;&#x7EBF;&#x7A0B;&#x7684;&#x76EE;&#x7684;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4EE5;&#x4E0A;&#x6761;&#x4EF6;&#x90FD;&#x4E0D;&#x6EE1;&#x8DB3;&#xFF0C;&#x5219;&#x4F1A;&#x8BBE;&#x7F6E;&#x6B64;&#x7EBF;&#x7A0B;&#x7684;&#x4E2D;&#x65AD;&#x72B6;&#x6001;&#x3002;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyTask</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-comment">//        while (!Thread.currentThread().isInterrupted()) { // &#x4E0D;&#x4F1A;&#x6E05;&#x7406;&#x4E2D;&#x65AD;&#x72B6;&#x6001;&#x6807;&#x8BC6;</span>
+        <span class="hljs-keyword">while</span> (!Thread.interrupted()) { <span class="hljs-comment">// &#x4F1A;&#x6E05;&#x7406;&#x4E2D;&#x65AD;&#x72B6;&#x6001;&#x6807;&#x8BC6;</span>
+            System.out.println();
+            <span class="hljs-keyword">try</span> {
+                Thread.sleep(<span class="hljs-number">1000</span>);
+            } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                e.printStackTrace(); <span class="hljs-comment">// &#x4F1A;&#x6E05;&#x7406;&#x4E2D;&#x65AD;&#x72B6;&#x6001;&#x6807;&#x8BC6;</span>
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+        System.out.println(<span class="hljs-string">&quot;xxx&quot;</span> + Thread.currentThread().isInterrupted());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        MyTask myTask = <span class="hljs-keyword">new</span> MyTask();
+        Thread thread = <span class="hljs-keyword">new</span> Thread(myTask);
+        thread.start();
+
+        Thread.sleep(<span class="hljs-number">1500</span>);
+
+        thread.interrupt();
+
+        <span class="hljs-keyword">while</span> (thread.isAlive()) {
+            System.out.println(thread.getState()); <span class="hljs-comment">// TIMED_WAITING or RUNNABLE</span>
+        }
+
+        System.out.println(thread.getState()); <span class="hljs-comment">// TERMINATED</span>
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -3436,7 +3487,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"线程中止","level":"1.17.1.3","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/02容器/README.md","ref":"800Java/02容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/02容器/01Map.md","ref":"800Java/02容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/02容器/02List.md","ref":"800Java/02容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/02容器/03Set.md","ref":"800Java/02容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/02容器/05Stack.md","ref":"800Java/02容器/05Stack.md","articles":[]}]},"previous":{"title":"线程状态","level":"1.17.1.2","depth":3,"path":"800Java/01Java基础/02线程状态.md","ref":"800Java/01Java基础/02线程状态.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/03线程中止.md","mtime":"2022-05-01T14:12:38.370Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-01T14:13:32.287Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"线程中止","level":"1.17.1.3","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/02容器/README.md","ref":"800Java/02容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/02容器/01Map.md","ref":"800Java/02容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/02容器/02List.md","ref":"800Java/02容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/02容器/03Set.md","ref":"800Java/02容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/02容器/05Stack.md","ref":"800Java/02容器/05Stack.md","articles":[]}]},"previous":{"title":"线程状态","level":"1.17.1.2","depth":3,"path":"800Java/01Java基础/02线程状态.md","ref":"800Java/01Java基础/02线程状态.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/03线程中止.md","mtime":"2022-05-02T03:25:18.250Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-02T03:26:11.219Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
