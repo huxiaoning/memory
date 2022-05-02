@@ -3543,6 +3543,49 @@
         }
     }
 </code></pre>
+<h3 id="parkunpark">park/unpark</h3>
+<p>&#x7EBF;&#x7A0B;&#x8C03;&#x7528;park&#x5219;&#x7B49;&#x5F85;&#x201C;&#x8BB8;&#x53EF;&#x201D;&#xFF0C;unpark&#x65B9;&#x6CD5;&#x4E3A;&#x6307;&#x5B9A;&#x7EBF;&#x7A0B;&#x63D0;&#x4F9B;&#x201C;&#x8BB8;&#x53EF;&#xFF08;permit&#xFF09;&#x201D;&#x3002;</p>
+<p>&#x4E0D;&#x8981;&#x6C42;park&#x548C;unpark&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x987A;&#x5E8F;&#x3002;</p>
+<p>&#x591A;&#x6B21;&#x8C03;&#x7528;unpark&#x4E4B;&#x540E;&#xFF0C;&#x518D;&#x8C03;&#x7528;park&#xFF0C;&#x7EBF;&#x7A0B;&#x4F1A;&#x76F4;&#x63A5;&#x8FD0;&#x884C;&#x3002;</p>
+<p>&#x4F46;&#x4E0D;&#x4F1A;&#x53E0;&#x52A0;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x8FDE;&#x7EED;&#x591A;&#x6B21;&#x8C03;&#x7528;park&#x65B9;&#x6CD5;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x4F1A;&#x62FF;&#x5230;&#x201C;&#x8BB8;&#x53EF;&#x201D;&#x76F4;&#x63A5;&#x8FD0;&#x884C;&#xFF0C;&#x540E;&#x7EED;&#x8C03;&#x7528;&#x4F1A;&#x8FDB;&#x5165;&#x7B49;&#x5F85;&#x3002;</p>
+<h5 id="parkunpark&#x6B63;&#x786E;&#x793A;&#x4F8B;">park/unpark&#x6B63;&#x786E;&#x793A;&#x4F8B;</h5>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        Runnable task = <span class="hljs-keyword">new</span> Runnable() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                System.out.println(<span class="hljs-string">&quot;&#x7EBF;&#x7A0B;&#x6302;&#x8D77;&quot;</span>);
+                LockSupport.park();
+                System.out.println(<span class="hljs-string">&quot;&#x7EBF;&#x7A0B;&#x88AB;&#x5524;&#x9192;&quot;</span>);
+            }
+        };
+        Thread thread = <span class="hljs-keyword">new</span> Thread(task);
+        thread.start();
+
+        Thread.sleep(<span class="hljs-number">1000</span>); <span class="hljs-comment">// &#x4E0D;&#x8981;&#x8FD9;&#x884C;&#x4E5F;&#x53EF;&#x4EE5;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x8981;&#x6C42;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x3002;</span>
+        LockSupport.unpark(thread);
+    }
+</code></pre>
+<h5 id="parkunpark&#x6B7B;&#x7410;&#x793A;&#x4F8B;">park/unpark&#x6B7B;&#x7410;&#x793A;&#x4F8B;</h5>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        Runnable task = <span class="hljs-keyword">new</span> Runnable() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                System.out.println(<span class="hljs-string">&quot;&#x7EBF;&#x7A0B;&#x6302;&#x8D77;&quot;</span>);
+                <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) {
+                    LockSupport.park(); <span class="hljs-comment">// &#x4E0D;&#x4F1A;&#x91CA;&#x653E;&#x7410;&#x3002;</span>
+                }
+                System.out.println(<span class="hljs-string">&quot;&#x7EBF;&#x7A0B;&#x88AB;&#x5524;&#x9192;&quot;</span>);
+            }
+        };
+        Thread thread = <span class="hljs-keyword">new</span> Thread(task);
+        thread.start();
+
+        Thread.sleep(<span class="hljs-number">1000</span>);
+        <span class="hljs-keyword">synchronized</span> (task) { <span class="hljs-comment">// &#x65E0;&#x6CD5;&#x83B7;&#x53D6;&#x7410;&#xFF0C;&#x9677;&#x5165;&#x6B7B;&#x7410;&#x3002;</span>
+            LockSupport.unpark(thread);
+        }
+    }
+</code></pre>
 <p>&#x7EBF;&#x7A0B;&#x901A;&#x8BAF;API&#x7279;&#x6027;</p>
 <table>
 <thead>
@@ -3551,7 +3594,7 @@
 <th>&#x8C03;&#x7528;&#x8005;</th>
 <th>&#x9700;&#x8981;&#x5728;&#x7410;&#x5757;&#x5185;&#x8C03;&#x7528;</th>
 <th>&#x5728;&#x7410;&#x5757;&#x5185;&#x6302;&#x8D77;&#x7EBF;&#x7A0B;&#xFF0C;&#x662F;&#x5426;&#x91CA;&#x653E;&#x7410;</th>
-<th>&#x9700;&#x4FDD;&#x6301;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x624D;&#x6709;&#x6548;</th>
+<th>&#x8981;&#x6C42;&#x6301;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x624D;&#x6709;&#x6548;</th>
 <th>&#x5F03;&#x7528;</th>
 </tr>
 </thead>
@@ -3559,8 +3602,8 @@
 <tr>
 <td>suspend/resume</td>
 <td>&#x9700;&#x8981;&#x88AB;&#x6302;&#x8D77;/&#x5524;&#x9192;&#x7684;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;</td>
-<td>&#x4E0D;&#x4E00;&#x5B9A;</td>
-<td><strong>&#x4E0D;&#x91CA;&#x653E;</strong></td>
+<td>&#x4E0D;&#x9700;&#x8981;</td>
+<td><strong>&#x4E0D;&#x91CA;&#x653E;</strong>synchronized</td>
 <td><strong>&#x5148;suspend,&#x540E;resume</strong></td>
 <td>&#x662F;</td>
 </tr>
@@ -3568,16 +3611,16 @@
 <td>wait/notify</td>
 <td>&#x7410;&#x5BF9;&#x8C61;</td>
 <td>synchronized&#x4EE3;&#x7801;&#x5757;&#x5185;</td>
-<td>&#x91CA;&#x653E;</td>
+<td>&#x91CA;&#x653E;synchronized</td>
 <td><strong>&#x5148;wait,&#x540E;notify</strong></td>
 <td>&#x5426;</td>
 </tr>
 <tr>
 <td>park/unpark</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>LockSupport.park();<br>LockSupport.unpark(thread);</td>
+<td>&#x4E0D;&#x9700;&#x8981;</td>
+<td><strong>&#x4E0D;&#x91CA;&#x653E;</strong>synchronized</td>
+<td>&#x4E0D;&#x8981;&#x6C42;</td>
 <td>&#x5426;</td>
 </tr>
 </tbody>
@@ -3625,7 +3668,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"线程通信","level":"1.17.1.5","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/02容器/README.md","ref":"800Java/02容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/02容器/01Map.md","ref":"800Java/02容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/02容器/02List.md","ref":"800Java/02容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/02容器/03Set.md","ref":"800Java/02容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/02容器/05Stack.md","ref":"800Java/02容器/05Stack.md","articles":[]}]},"previous":{"title":"CPU缓存和内在屏障","level":"1.17.1.4","depth":3,"path":"800Java/01Java基础/04CPU缓存和内在屏障.md","ref":"800Java/01Java基础/04CPU缓存和内在屏障.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/05线程通信.md","mtime":"2022-05-02T11:46:28.051Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-02T11:47:11.998Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"线程通信","level":"1.17.1.5","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/02容器/README.md","ref":"800Java/02容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/02容器/01Map.md","ref":"800Java/02容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/02容器/02List.md","ref":"800Java/02容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/02容器/03Set.md","ref":"800Java/02容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/02容器/05Stack.md","ref":"800Java/02容器/05Stack.md","articles":[]}]},"previous":{"title":"CPU缓存和内在屏障","level":"1.17.1.4","depth":3,"path":"800Java/01Java基础/04CPU缓存和内在屏障.md","ref":"800Java/01Java基础/04CPU缓存和内在屏障.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/05线程通信.md","mtime":"2022-05-02T13:26:00.032Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-02T13:26:44.729Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
