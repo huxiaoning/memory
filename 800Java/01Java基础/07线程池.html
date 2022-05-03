@@ -70,7 +70,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../02容器/" />
+    <link rel="next" href="../10容器/" />
     
     
     <link rel="prev" href="06线程封闭.html" />
@@ -3233,9 +3233,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2" data-path="../02容器/">
+        <li class="chapter " data-level="1.17.2" data-path="../10容器/">
             
-                <a href="../02容器/">
+                <a href="../10容器/">
             
                     
                     容器
@@ -3247,9 +3247,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.2.1" data-path="../02容器/01Map.html">
+        <li class="chapter " data-level="1.17.2.1" data-path="../10容器/01Map.html">
             
-                <a href="../02容器/01Map.html">
+                <a href="../10容器/01Map.html">
             
                     
                     Map
@@ -3260,9 +3260,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.2" data-path="../02容器/02List.html">
+        <li class="chapter " data-level="1.17.2.2" data-path="../10容器/02List.html">
             
-                <a href="../02容器/02List.html">
+                <a href="../10容器/02List.html">
             
                     
                     List
@@ -3273,9 +3273,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.3" data-path="../02容器/03Set.html">
+        <li class="chapter " data-level="1.17.2.3" data-path="../10容器/03Set.html">
             
-                <a href="../02容器/03Set.html">
+                <a href="../10容器/03Set.html">
             
                     
                     Set
@@ -3286,9 +3286,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.4" data-path="../02容器/04Queue.html">
+        <li class="chapter " data-level="1.17.2.4" data-path="../10容器/04Queue.html">
             
-                <a href="../02容器/04Queue.html">
+                <a href="../10容器/04Queue.html">
             
                     
                     Queue
@@ -3299,9 +3299,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2.5" data-path="../02容器/05Stack.html">
+        <li class="chapter " data-level="1.17.2.5" data-path="../10容器/05Stack.html">
             
-                <a href="../02容器/05Stack.html">
+                <a href="../10容器/05Stack.html">
             
                     
                     Stack
@@ -3531,7 +3531,9 @@ submit(Runnable task,T result)
 schedule(Callable&lt;V&gt; callable, <span class="hljs-keyword">long</span> delay, TimeUnit unit)
 schedule(Runnable command, <span class="hljs-keyword">long</span> delay, TimeUnit unit)
 <span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E9B;&#x5468;&#x671F;&#x6027;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;,&#x8FC7;&#x4E86;&#x7ED9;&#x5B9A;&#x7684;&#x521D;&#x59CB;&#x5EF6;&#x8FDF;&#x65F6;&#x95F4;&#xFF0C;&#x4F1A;&#x7B2C;&#x4E00;&#x6B21;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x53D1;&#x751F;&#x4E86;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x4EFB;&#x52A1;&#x5C31;&#x505C;&#x6B62;&#x3002;</span>
+<span class="hljs-comment">// &#x4E24;&#x6B21;&#x4EFB;&#x52A1;&#x7684;&#x5F00;&#x59CB;&#x65F6;&#x95F4;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x56FA;&#x5B9A;&#xFF0C;&#x82E5;&#x4EFB;&#x52A1;&#x65F6;&#x957F;&#x8D85;&#x8FC7;&#x95F4;&#x9694;&#x65F6;&#x95F4;&#xFF0C;&#x5219;&#x7B2C;&#x4E8C;&#x6B21;&#x4EFB;&#x52A1;&#x5C06;&#x7ACB;&#x5373;&#x6267;&#x884C;&#x3002;</span>
 scheduleAtFixedRate(Runnable command,<span class="hljs-keyword">long</span> initialDelay,<span class="hljs-keyword">long</span> period,TimeUnit unit)
+<span class="hljs-comment">// &#x4EFB;&#x52A1;&#x524D;&#x4E00;&#x6B21;&#x7684;&#x7ED3;&#x675F;&#x4E0E;&#x4E0B;&#x4E00;&#x6B21;&#x7684;&#x5F00;&#x59CB;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x56FA;&#x5B9A;&#x3002;</span>
 scheduleWithFixedDelay(Runnable command,<span class="hljs-keyword">long</span> initialDelay,<span class="hljs-keyword">long</span> delay,TimeUnit unit)
 </code></pre>
 <h3 id="&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6C60;">&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6C60;</h3>
@@ -3586,6 +3588,13 @@ scheduleWithFixedDelay(Runnable command,<span class="hljs-keyword">long</span> i
 </ul>
 </li>
 </ul>
+<p>&#x6216;&#x8005;&#x8BF4;&#xFF1A;</p>
+<ul>
+<li>&#x6709;&#x7A7A;&#x95F2;&#x7684;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#xFF0C;&#x8BA9;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x76F4;&#x63A5;&#x6267;&#x884C;&#x3002;&#x7ED3;&#x675F;&#x3002;&#x6CA1;&#x6709;&#x7A7A;&#x95F2;&#x7684;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x7EE7;&#x7EED;&#x4E0B;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#x3002;</li>
+<li>&#x5DE5;&#x4F5C;&#x961F;&#x5217;&#x6CA1;&#x6EE1;&#xFF0C;&#x4E22;&#x5230;&#x961F;&#x5217;&#x7B49;&#x5F85;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x3002;&#x7ED3;&#x675F;&#x3002;&#x5DE5;&#x4F5C;&#x961F;&#x5217;&#x6EE1;&#x4E86;&#x7EE7;&#x7EED;&#x4E0B;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#x3002;</li>
+<li>&#x6709;&#x7A7A;&#x95F2;&#x7684;&#x6269;&#x5C55;&#x7EBF;&#x7A0B; &#x6216; &#x6CA1;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#xFF0C;&#x8BA9;&#x7A7A;&#x95F2;&#x7684;&#x6269;&#x5C55;&#x7EBF;&#x7A0B;&#x6216;&#x5EFA;&#x65B0;&#x7684;&#x6269;&#x5C55;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x3002;&#x7ED3;&#x675F;&#x3002;&#x5426;&#x5219;&#x7EE7;&#x7EED;&#x4E0B;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#x3002;</li>
+<li>&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;&#x7ED3;&#x675F;&#x3002;</li>
+</ul>
 <h3 id="&#x62D2;&#x7EDD;&#x7B56;&#x7565;rejectedexecutionhandler">&#x62D2;&#x7EDD;&#x7B56;&#x7565;<code>RejectedExecutionHandler</code></h3>
 <p><code>void rejectedExecution(Runnable r, ThreadPoolExecutor executor);</code></p>
 <table>
@@ -3624,6 +3633,17 @@ scheduleWithFixedDelay(Runnable command,<span class="hljs-keyword">long</span> i
 </tr>
 </tbody>
 </table>
+<h3 id="&#x5EF6;&#x65F6;&#x961F;&#x5217;">&#x5EF6;&#x65F6;&#x961F;&#x5217;</h3>
+<p>&#x4EFB;&#x52A1;&#x8C03;&#x5EA6;&#x7EBF;&#x7A0B;&#x6C60;<code>ScheduledThreadPoolExecutor</code>&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x79CD;&#x961F;&#x5217;&#xFF0C;&#x5EF6;&#x65F6;&#x961F;&#x5217;<code>DelayedWorkQueue</code>&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x7684;&#x529F;&#x80FD;&#x662F;&#x5143;&#x7D20;&#x653E;&#x8FDB;&#x53BB;&#x4E4B;&#x540E;&#xFF0C;<strong>&#x65F6;&#x95F4;&#x6CA1;&#x5230;&#xFF0C;&#x662F;&#x53D6;&#x4E0D;&#x51FA;&#x6765;&#x7684;</strong>&#x3002;</p>
+<h3 id="&#x7EBF;&#x7A0B;&#x6570;&#x91CF;">&#x7EBF;&#x7A0B;&#x6570;&#x91CF;</h3>
+<h5 id="&#x5982;&#x4F55;&#x786E;&#x5B9A;&#x5408;&#x9002;&#x6570;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#xFF1F;">&#x5982;&#x4F55;&#x786E;&#x5B9A;&#x5408;&#x9002;&#x6570;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#xFF1F;</h5>
+<ul>
+<li>&#x8BA1;&#x7B97;&#x578B;&#x4EFB;&#x52A1;&#xFF1A;cpu&#x6570;&#x91CF;&#x7684;1-2&#x500D;</li>
+<li>IO&#x578B;&#x4EFB;&#x52A1;&#xFF1A;&#x76F8;&#x5BF9;&#x6BD4;&#x8BA1;&#x7B97;&#x578B;&#x4EFB;&#x52A1;&#xFF0C;&#x9700;&#x591A;&#x4E00;&#x4E9B;&#x7EBF;&#x7A0B;&#xFF0C;&#x8981;&#x6839;&#x636E;&#x5177;&#x4F53;&#x7684;IO&#x963B;&#x585E;&#x65F6;&#x957F;&#x8FDB;&#x884C;&#x8003;&#x91CF;&#x51B3;&#x5B9A;&#x3002;&#x5982;tomcat&#x4E2D;&#x9ED8;&#x8BA4;&#x7684;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A;&#xFF1A;200&#x3002;</li>
+<li>&#x4E5F;&#x53EF;&#x8003;&#x8651;&#x6839;&#x636E;&#x9700;&#x8981;&#x5728;&#x4E00;&#x4E2A;&#x6700;&#x5C0F;&#x6570;&#x91CF;&#x548C;&#x6700;&#x5927;&#x6570;&#x91CF;&#x95F4;&#x81EA;&#x52A8;&#x589E;&#x51CF;&#x7EBF;&#x7A0B;&#x6570;&#x3002;</li>
+<li>&#x63A7;&#x5236;CPU&#x5229;&#x7528;&#x7387;&#x5728;80%&#x5DE6;&#x53F3;&#x3002;</li>
+</ul>
 
                                 
                                 </section>
@@ -3656,7 +3676,7 @@ scheduleWithFixedDelay(Runnable command,<span class="hljs-keyword">long</span> i
                 </a>
                 
                 
-                <a href="../02容器/" class="navigation navigation-next " aria-label="Next page: 容器">
+                <a href="../10容器/" class="navigation navigation-next " aria-label="Next page: 容器">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3667,7 +3687,7 @@ scheduleWithFixedDelay(Runnable command,<span class="hljs-keyword">long</span> i
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"线程池","level":"1.17.1.7","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/02容器/README.md","ref":"800Java/02容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/02容器/01Map.md","ref":"800Java/02容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/02容器/02List.md","ref":"800Java/02容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/02容器/03Set.md","ref":"800Java/02容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/02容器/04Queue.md","ref":"800Java/02容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/02容器/05Stack.md","ref":"800Java/02容器/05Stack.md","articles":[]}]},"previous":{"title":"线程封闭","level":"1.17.1.6","depth":3,"path":"800Java/01Java基础/06线程封闭.md","ref":"800Java/01Java基础/06线程封闭.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/07线程池.md","mtime":"2022-05-03T02:26:39.660Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-03T02:27:26.525Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"线程池","level":"1.17.1.7","depth":3,"next":{"title":"容器","level":"1.17.2","depth":2,"path":"800Java/10容器/README.md","ref":"800Java/10容器/README.md","articles":[{"title":"Map","level":"1.17.2.1","depth":3,"path":"800Java/10容器/01Map.md","ref":"800Java/10容器/01Map.md","articles":[]},{"title":"List","level":"1.17.2.2","depth":3,"path":"800Java/10容器/02List.md","ref":"800Java/10容器/02List.md","articles":[]},{"title":"Set","level":"1.17.2.3","depth":3,"path":"800Java/10容器/03Set.md","ref":"800Java/10容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.2.4","depth":3,"path":"800Java/10容器/04Queue.md","ref":"800Java/10容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.2.5","depth":3,"path":"800Java/10容器/05Stack.md","ref":"800Java/10容器/05Stack.md","articles":[]}]},"previous":{"title":"线程封闭","level":"1.17.1.6","depth":3,"path":"800Java/01Java基础/06线程封闭.md","ref":"800Java/01Java基础/06线程封闭.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/01Java基础/07线程池.md","mtime":"2022-05-03T03:19:57.759Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-03T03:20:42.826Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
