@@ -3510,6 +3510,83 @@
 <p>&#x5047;&#x5B9A;&#x6CA1;&#x6709;&#x51B2;&#x7A81;&#xFF0C;&#x5728;&#x4FEE;&#x6539;&#x6570;&#x636E;&#x65F6;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x6570;&#x636E;&#x548C;&#x4E4B;&#x524D;&#x83B7;&#x53D6;&#x7684;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x5219;&#x8BFB;&#x6700;&#x65B0;&#x6570;&#x636E;&#xFF0C;&#x4FEE;&#x6539;&#x540E;&#x91CD;&#x8BD5;&#x4FEE;&#x6539;</p>
 <h5 id="&#x60B2;&#x89C2;&#x9501;">&#x60B2;&#x89C2;&#x9501;</h5>
 <p>&#x5047;&#x5B9A;&#x4F1A;&#x53D1;&#x751F;&#x5E76;&#x53D1;&#x51B2;&#x7A81;&#xFF0C;&#x540C;&#x6B65;&#x6240;&#x6709;&#x5BF9;&#x6570;&#x636E;&#x7684;&#x76F8;&#x5173;&#x64CD;&#x4F5C;&#xFF0C;&#x4ECE;&#x8BFB;&#x6570;&#x636E;&#x5C31;&#x5F00;&#x59CB;&#x4E0A;&#x9501;&#x3002;</p>
+<h5 id="&#x72EC;&#x4EAB;&#x9501;&#xFF08;&#x5199;&#xFF09;">&#x72EC;&#x4EAB;&#x9501;&#xFF08;&#x5199;&#xFF09;</h5>
+<p>&#x7ED9;&#x8D44;&#x6E90;&#x52A0;&#x4E0A;&#x5199;&#x9501;&#xFF0C;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x8D44;&#x6E90;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E0D;&#x80FD;&#x518D;&#x52A0;&#x9501;&#xFF1B;&#xFF08;&#x5355;&#x5199;&#xFF09;</p>
+<h5 id="&#x5171;&#x4EAB;&#x9501;&#xFF08;&#x8BFB;&#xFF09;">&#x5171;&#x4EAB;&#x9501;&#xFF08;&#x8BFB;&#xFF09;</h5>
+<p>&#x7ED9;&#x8D44;&#x6E90;&#x52A0;&#x4E0A;&#x8BFB;&#x9501;&#x540E;&#x53EA;&#x80FD;&#x8BFB;&#x4E0D;&#x80FD;&#x6539;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E5F;&#x53EA;&#x80FD;&#x52A0;&#x8BFB;&#x9501;&#xFF0C;&#x4E0D;&#x80FD;&#x52A0;&#x5199;&#x9501;&#xFF1B;&#xFF08;&#x591A;&#x8BFB;&#xFF09;</p>
+<h5 id="&#x53EF;&#x91CD;&#x5165;&#x9501;&#x3001;&#x4E0D;&#x53EF;&#x91CD;&#x5165;&#x9501;">&#x53EF;&#x91CD;&#x5165;&#x9501;&#x3001;&#x4E0D;&#x53EF;&#x91CD;&#x5165;&#x9501;</h5>
+<p>&#x7EBF;&#x7A0B;&#x62FF;&#x5230;&#x4E00;&#x628A;&#x9501;&#x4E4B;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x7531;&#x8FDB;&#x5165;&#x540C;&#x4E00;&#x628A;&#x9501;&#x6240;&#x540C;&#x6B65;&#x7684;&#x5176;&#x4ED6;&#x4EE3;&#x7801;&#x3002;</p>
+<h5 id="&#x516C;&#x5E73;&#x9501;&#x3001;&#x975E;&#x516C;&#x5E73;&#x9501;&#xFF1A;">&#x516C;&#x5E73;&#x9501;&#x3001;&#x975E;&#x516C;&#x5E73;&#x9501;&#xFF1A;</h5>
+<p>&#x4E89;&#x62A2;&#x9501;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x6309;&#x5148;&#x6765;&#x540E;&#x5230;&#xFF0C;&#x5219;&#x4E3A;&#x516C;&#x5E73;&#x3002;</p>
+<h5 id="&#x51E0;&#x79CD;&#x91CD;&#x8981;&#x7684;&#x9501;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;">&#x51E0;&#x79CD;&#x91CD;&#x8981;&#x7684;&#x9501;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;</h5>
+<ul>
+<li><code>synchronized</code></li>
+<li><code>ReentrantLock</code></li>
+<li><code>ReentrantReadWriteLock</code></li>
+</ul>
+<h3 id="synchronized"><code>synchronized</code></h3>
+<ul>
+<li><p>&#x7279;&#x6027;</p>
+<ul>
+<li>&#x53EF;&#x91CD;&#x5165;</li>
+<li>&#x72EC;&#x4EAB;</li>
+<li>&#x60B2;&#x89C2;</li>
+</ul>
+</li>
+<li><p>&#x9501;&#x4F18;&#x5316;</p>
+</li>
+<li><p>&#x9500;&#x6D88;&#x9664;&#xFF08;&#x5F00;&#x542F;&#x9501;&#x6D88;&#x9664;&#x7684;&#x53C2;&#x6570;&#xFF1A;<code>-XX:+DoEscapeAnalysis -XX:+EliminateLocks</code>&#xFF09; </p>
+</li>
+</ul>
+<p>&#x5728;&#x5355;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#x6216;<code>StringBuffer</code>&#x8FD9;&#x6837;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x7C7B;&#x65F6;&#xFF0C;&#x6D88;&#x9664;&#x52A0;&#x7410;&#x89E3;&#x7410;&#x7684;&#x5F00;&#x9500;</p>
+<pre><code class="lang-java">        StringBuffer stringBuffer = <span class="hljs-keyword">new</span> StringBuffer();
+        stringBuffer.append(<span class="hljs-string">&quot;a&quot;</span>);
+        stringBuffer.append(<span class="hljs-string">&quot;b&quot;</span>);
+        stringBuffer.append(<span class="hljs-string">&quot;c&quot;</span>);
+        stringBuffer.append(<span class="hljs-string">&quot;d&quot;</span>);
+        stringBuffer.append(<span class="hljs-string">&quot;e&quot;</span>);
+</code></pre>
+<pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> StringBuffer <span class="hljs-title">append</span><span class="hljs-params">(String str)</span> </span>{
+        toStringCache = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">super</span>.append(str);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+</code></pre>
+<p>&#x5F00;&#x542F;&#x9500;&#x6D88;&#x9664;&#x540E;&#xFF0C;<code>StringBuffer</code>&#x7C7B;&#x7684;<code>append</code>&#x65B9;&#x6CD5;&#x88AB;&#x9891;&#x7E41;&#x8C03;&#x7528;&#xFF0C;<code>JIT</code>&#x5373;&#x65F6;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x8BA4;&#x4E3A;append&#x65B9;&#x6CD5;&#x7684;<code>synchronized</code>&#x662F;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x3002;</p>
+<ol>
+<li>&#x9501;&#x7C97;&#x5316;</li>
+</ol>
+<p><code>JDK</code>&#x505A;&#x4E86;&#x9501;&#x7C97;&#x5316;&#x7684;&#x4F18;&#x5316;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x81EA;&#x5DF2;&#x53EF;&#x4ECE;&#x4EE3;&#x7801;&#x5C42;&#x9762;&#x4F18;&#x5316;</p>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) {
+            i++;
+        }
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) {
+            i--;
+        }
+        System.out.println(<span class="hljs-string">&quot;123&quot;</span>);
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) {
+            System.out.println(<span class="hljs-string">&quot;abc&quot;</span>);
+        }
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) {
+            i++;
+        }
+
+        <span class="hljs-comment">// &#x9501;&#x7C97;&#x5316;</span>
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) {
+            i++;
+            i--;
+            System.out.println(<span class="hljs-string">&quot;123&quot;</span>);
+            System.out.println(<span class="hljs-string">&quot;abc&quot;</span>);
+            i++;
+        }
+    }
+</code></pre>
+<p>Note&#xFF1A;<code>synchronized</code>&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x4E0D;&#x4EC5;&#x5B9E;&#x73B0;&#x540C;&#x6B65;&#xFF0C;
+<code>JMM</code>&#x4E2D;&#x89C4;&#x5B9A;&#xFF0C;<code>synchronized</code>&#x8981;&#x4FDD;&#x8BC1;&#x53EF;&#x89C1;&#x6027;&#xFF08;&#x4E0D;&#x80FD;&#x591F;&#x88AB;&#x7F13;&#x5B58;&#xFF09;&#x3002;</p>
+<p>40:57</p>
 
                                 
                                 </section>
@@ -3553,7 +3630,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java琐相关","level":"1.17.2.3","depth":3,"next":{"title":"容器","level":"1.17.3","depth":2,"path":"800Java/10容器/README.md","ref":"800Java/10容器/README.md","articles":[{"title":"Map","level":"1.17.3.1","depth":3,"path":"800Java/10容器/01Map.md","ref":"800Java/10容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2","depth":3,"path":"800Java/10容器/02List.md","ref":"800Java/10容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.3","depth":3,"path":"800Java/10容器/03Set.md","ref":"800Java/10容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.4","depth":3,"path":"800Java/10容器/04Queue.md","ref":"800Java/10容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.5","depth":3,"path":"800Java/10容器/05Stack.md","ref":"800Java/10容器/05Stack.md","articles":[]}]},"previous":{"title":"线程安全之原子操作","level":"1.17.2.2","depth":3,"path":"800Java/02线程安全问题/02线程安全之原子操作.md","ref":"800Java/02线程安全问题/02线程安全之原子操作.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/02线程安全问题/03Java琐相关.md","mtime":"2022-05-05T13:41:10.165Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-05T13:41:51.454Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java琐相关","level":"1.17.2.3","depth":3,"next":{"title":"容器","level":"1.17.3","depth":2,"path":"800Java/10容器/README.md","ref":"800Java/10容器/README.md","articles":[{"title":"Map","level":"1.17.3.1","depth":3,"path":"800Java/10容器/01Map.md","ref":"800Java/10容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2","depth":3,"path":"800Java/10容器/02List.md","ref":"800Java/10容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.3","depth":3,"path":"800Java/10容器/03Set.md","ref":"800Java/10容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.4","depth":3,"path":"800Java/10容器/04Queue.md","ref":"800Java/10容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.5","depth":3,"path":"800Java/10容器/05Stack.md","ref":"800Java/10容器/05Stack.md","articles":[]}]},"previous":{"title":"线程安全之原子操作","level":"1.17.2.2","depth":3,"path":"800Java/02线程安全问题/02线程安全之原子操作.md","ref":"800Java/02线程安全问题/02线程安全之原子操作.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/02线程安全问题/03Java琐相关.md","mtime":"2022-05-05T14:21:51.806Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-05T14:22:35.359Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
