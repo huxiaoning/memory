@@ -123,4 +123,120 @@ Note：`synchronized`关键字，不仅实现同步，
 
 
 
-40:57
+### `synchronized`是如何记录加锁的状态标识的？
+
+状态会被记录到锁对象中吗？
+
+若锁被其他线程占用，当前线程需要挂起。释放锁时唤醒其他挂起的线程，这些是如何做到的？
+
+##### 堆内存中的Java对象包含对象头信息：
+
+- `Mark Word` 
+- `Class Meta address` 指向方法区中的类信息，说明当前的Java对象是哪个类的对象。
+- `Array Length` 如果当前对象是数组，对象头中会记录数组的长度。
+
+##### Mark Word
+
+| Bitfields               |      |      | Tag  | State               | 说明               |
+| ----------------------- | ---- | ---- | ---- | ------------------- | ------------------ |
+| Hashcode                | Age  | 0    | 01   | Unlocked            | 未锁定             |
+| Thread ID               | Age  | 1    | 01   | Biased/biasable     | 偏向锁             |
+| Lock record address     |      |      | 00   | Light-weight locked | 轻量级锁           |
+| Monitor address         |      |      | 10   | Heavy-weight locked | 重量级锁(监视器锁) |
+| Forwarding address,etc. |      |      | 11   | Marked for GC       | GC标记             |
+
+找到一篇有意思的[文章](https://blog.csdn.net/qq_36434742/article/details/106854061)。
+
+```xml
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.16</version>
+        </dependency>
+```
+
+
+
+```java
+import org.openjdk.jol.info.ClassLayout;
+import org.openjdk.jol.vm.VM;
+public class MarkWordDemo {
+    private boolean flag;
+    public static void main(String[] args) {
+        MarkWordDemo markWordDemo = new MarkWordDemo();
+        System.out.println(VM.current().details());
+        markWordDemo.print();
+        markWordDemo.printWithLock();
+        for (int i = 0; i < 2; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int j = 0; j < 2; j++) {
+                        markWordDemo.printWithLock();
+                    }
+                }
+            }).start();
+        }
+    }
+    public void print() {
+        System.out.println(ClassLayout.parseInstance(this).toPrintable());
+    }
+    public synchronized void printWithLock() {
+        System.out.println(ClassLayout.parseInstance(this).toPrintable());
+    }
+}
+```
+
+输出如下:
+
+```shell
+# Running 64-bit HotSpot VM.
+# Using compressed oop with 3-bit shift.
+# Using compressed klass with 3-bit shift.
+# Objects are 8 bytes aligned.
+# Field sizes by type: 4, 1, 1, 2, 2, 4, 4, 8, 8 [bytes]
+# Array element sizes: 4, 1, 1, 2, 2, 4, 4, 8, 8 [bytes]
+
+org.example.header.MarkWordDemo object internals:
+OFF  SZ      TYPE DESCRIPTION               VALUE
+  0   8           (object header: mark)     0x0000000000000001 (non-biasable; age: 0)
+  8   4           (object header: class)    0xf800c105
+ 12   1   boolean MarkWordDemo.flag         false
+ 13   3           (object alignment gap)    
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 3 bytes external = 3 bytes total
+
+org.example.header.MarkWordDemo object internals:
+OFF  SZ      TYPE DESCRIPTION               VALUE
+  0   8           (object header: mark)     0x000000343afff2f8 (thin lock: 0x000000343afff2f8)
+  8   4           (object header: class)    0xf800c105
+ 12   1   boolean MarkWordDemo.flag         false
+ 13   3           (object alignment gap)    
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 3 bytes external = 3 bytes total
+
+org.example.header.MarkWordDemo object internals:
+OFF  SZ      TYPE DESCRIPTION               VALUE
+  0   8           (object header: mark)     0x00000230132e501a (fat lock: 0x00000230132e501a)
+  8   4           (object header: class)    0xf800c105
+ 12   1   boolean MarkWordDemo.flag         false
+ 13   3           (object alignment gap)    
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 3 bytes external = 3 bytes total
+```
+
+##### 加锁原理
+
+cas修改markword。cas(Hashcode行,Lock record address行)，
+
+Lock record address指向抢锁成功的线程。
+
+抢锁失败的线程，会继续自旋，但有一定的次数限制，超过次数就升级锁。
+
+
+
+
+
+
+
+69：12 还没讲怎么挂起、唤醒。
