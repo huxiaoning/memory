@@ -281,3 +281,7 @@ public class ObjectMonitor {
 
 `synchronized`锁，只能升级，不能降级。
 
+
+
+`synchronized`中的监视器锁，不是公平锁。
+
