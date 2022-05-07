@@ -231,12 +231,53 @@ cas修改markword。cas(Hashcode行,Lock record address行)，
 
 Lock record address指向抢锁成功的线程。
 
-抢锁失败的线程，会继续自旋，但有一定的次数限制，超过次数就升级锁。
+抢锁失败的线程，会继续自旋，但有一定的次数限制，超过次数就升级锁。此时的markword被置为`Monitor address`。
+
+cas自旋，加的是一个轻量级锁。自旋超过一定次数，就升级为重量级锁。
+
+重量级锁，即监视器锁，其[原理](https://blog.csdn.net/weixin_43364551/article/details/117163224)。
+
+```java
+/**
+ * 对象监视器示意(其实应该是C++对象结构体)
+ * https://blog.csdn.net/weixin_43364551/article/details/117163224
+ */
+public class ObjectMonitor {
+    /**
+     * 由于synchronized是可重入锁，count用于记录当前对象锁拥有者线程获取锁的次数
+     */
+    private int count;
+    /**
+     * 处于等待锁block状态的线程，会被加入到EntryList
+     */
+    private List<Thread> entryList;
+
+    /**
+     * 调用了wait方法，处于WAIT/TIME_WAIT的线程，会被加入到WaitSet
+     */
+    private Set<Thread> waitSet;
+
+    /**
+     * 获得锁的线程对象
+     * waiteSet中的线程，被其他线程notify唤醒后，将会成为锁对象的拥有者
+     */
+    private Thread owner;
+}
+```
 
 
 
+##### 偏向锁
 
+在JDK6以后，默认已经开启了偏向锁这个优化，通过JVM参数`-XX:-UseBiasedLocking`来禁用偏向锁若偏向锁开启，只有一个线程抢锁，可获取到偏向锁。
 
+| Bitfields |      |      | Tag  | State           | 说明                                     |
+| --------- | ---- | ---- | ---- | --------------- | ---------------------------------------- |
+| Hashcode  | Age  | 0    | 01   | Unlocked        | 未锁定,关闭偏向锁`-XX:-UseBiasedLocking` |
+|           | Age  | 1    | 01   | Biased/biasable | 未锁定,开启偏向锁                        |
+| Thread ID | Age  | 1    | 01   | Biased/biasable | 锁定，偏向锁                             |
 
+减少cas消耗。
 
-69：12 还没讲怎么挂起、唤醒。
+`synchronized`锁，只能升级，不能降级。
+
