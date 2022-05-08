@@ -59,4 +59,30 @@ public class ReadWriteLockApi {
 }
 ```
 
-99:00
+
+
+##### 读写锁实现原理
+
+```java
+public class MyReentrantReadWriteLock {
+
+    /**
+     * 获取读锁的线程数量
+     */
+    private AtomicInteger readCount = new AtomicInteger();
+    /**
+     * 写锁重入次数
+     */
+    private AtomicInteger writeCount = new AtomicInteger();
+
+    /**
+     * 写锁线程
+     */
+    private volatile Thread owner;
+    /**
+     * 等待队列
+     */
+    private final ConcurrentLinkedQueue<Thread> waiters = new ConcurrentLinkedQueue<>();
+}
+```
+
