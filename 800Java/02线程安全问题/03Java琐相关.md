@@ -52,6 +52,8 @@
 
 ### `synchronized`
 
+`synchronized`是由`JVM`提供的一把互斥锁。
+
 - 特性
 
   - 可重入
