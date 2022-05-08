@@ -38,6 +38,80 @@ Condition是需要与Lock配合使用的，提供多个等待集合，更精确�
 | park/unpark    | 死锁          | 不死锁                    |                             |
 | condition      | 不死锁        | 死锁                      | 只用于创建此Condition的Lock |
 
+synchronized只有一个等待队列，也就是监视器锁对象的waitSet,只要调用锁对象的wait方法，当前线程就会进入waitSet,然后由其他线程调用锁对象的notify方法唤醒。
 
+但是Lock却可以有多个等待队列，因为我们可以创建多个condition。
 
-37:48
+```java
+        Lock lock = new ReentrantLock();
+        Condition putCondition = lock.newCondition();
+        Condition takeCondition = lock.newCondition();
+```
+
+可以使用两个condtion实现阻塞队列:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class MyBlockQueue<E> {
+
+    private final List<E> elementList = new ArrayList<>();
+
+    private final int length;
+
+    private final Lock lock = new ReentrantLock();
+
+    private final Condition putCondition = lock.newCondition();
+
+    private final Condition takeCondition = lock.newCondition();
+
+    public MyBlockQueue(int length) {
+        this.length = length;
+    }
+
+    public MyBlockQueue() {
+        this(16);
+    }
+
+    public void put(E e) {
+        lock.lock();
+        try {
+            while (elementList.size() >= length) {
+                try {
+                    putCondition.await();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            elementList.add(e);
+            takeCondition.signal();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public E take() {
+        lock.lock();
+        try {
+            while (elementList.size() <= 0) {
+                try {
+                    takeCondition.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            E element = elementList.remove(0);
+            putCondition.signal();
+            return element;
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+```
+
+55:54
