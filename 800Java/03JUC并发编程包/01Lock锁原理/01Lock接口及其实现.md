@@ -114,4 +114,146 @@ public class MyBlockQueue<E> {
 }
 ```
 
-55:54
+`ReentrantLock`是一把可重入锁:
+
+```java
+    public static void main(String[] args) throws InterruptedException {
+        Lock lock = new ReentrantLock(); // owner = null、count = 0
+        lock.lock(); // owner = mainThread、count = 1
+        lock.lock();// owner = mainThread、count = 2
+        lock.unlock();// owner = mainThread、count = 1
+        lock.unlock();// owner = null、count = 0
+    }
+```
+
+`ReentrantLock`实现思路：
+
+```java
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
+
+public class MyReentrantLock implements Lock {
+
+    /**
+     * 锁的重入次数
+     */
+    private final AtomicInteger count = new AtomicInteger();
+    /**
+     * 当前持有锁的线程
+     */
+    private volatile Thread owner;
+
+    /**
+     * 相当于 synchronized 监视器锁中的 waitSet
+     */
+    private final ConcurrentLinkedQueue<Thread> waiters = new ConcurrentLinkedQueue<>();
+
+    @Override
+    public void lock() {
+        waiters.offer(Thread.currentThread());
+        for (; ; ) {
+            Thread thread = waiters.peek();
+            if (thread != Thread.currentThread()) {
+                LockSupport.park();
+                continue;
+            }
+            boolean succ = tryLock();
+            if (!succ) {
+                LockSupport.park();
+                continue;
+            }
+            waiters.poll();
+            return;
+        }
+    }
+
+    @Override
+    public void lockInterruptibly() throws InterruptedException {
+
+    }
+
+    @Override
+    public boolean tryLock() {
+        int ct = count.get();
+        if (ct == 0) {
+            // 锁没被占用,抢锁
+            boolean success = count.compareAndSet(ct, ct + 1);
+            if (success) {
+                // 抢到了
+                owner = Thread.currentThread();
+            }
+            return success;
+        } else {
+            // 锁被占用
+            if (owner == Thread.currentThread()) {
+                // 锁被当前线程占用，重入次数++
+                count.set(ct + 1);
+                return true;
+            } else {
+                // 锁被其他线程占用
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+        return false;
+    }
+
+    @Override
+    public void unlock() {
+        if (!tryUnlock()) {
+            return;
+        }
+        Thread thread = waiters.peek();
+        if (thread == null) {
+            return;
+        }
+        LockSupport.unpark(thread);
+    }
+
+    /**
+     * @return 重入次数彻底归零，释放掉锁
+     */
+    private boolean tryUnlock() {
+        if (owner != Thread.currentThread()) {
+            throw new IllegalMonitorStateException();
+        }
+        int ct = count.get();
+        int newCt = ct - 1;
+        count.set(newCt);
+        if (newCt == 0) {
+            owner = null;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Condition newCondition() {
+        return null;
+    }
+}
+```
+
+##### synchronized vs Lock
+
+- synchronized
+  - 优点
+    - 使用简单，语义清晰，哪里需要点哪里。
+    - 由JVM提供，提供了多种优化方案（锁粗化、锁消除、偏向锁、轻量级锁）
+    - 锁的释放由虚拟机来完成，不用人工干预，也降低了死锁的可能性
+  - 缺点
+    - 无法实现一些锁的高级功能如：公平锁、中断锁、超时锁、读写锁、共享锁等
+- Lock
+  - 优点
+    - 所有synchronized的缺点
+    - 可以实现更多的功能，让synchronized缺点更多
+  - 缺点
+    - 需手动释放锁unlock，新手使用不当可能造成死锁
+- synchronized是卡片机，Lock是单反 
