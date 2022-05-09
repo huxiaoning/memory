@@ -21,6 +21,10 @@
 
 读锁可以由多个读线程同时持有，写锁是排他的。同一时间，两把锁不能被不同线程持有。
 
+##### ReadWriteLock适用场景
+
+适合读取操作多于写入操作的场景，改进互斥锁的性能，比如：集合的并发线程安全性改造、缓存组件。
+
 ##### 读写锁只能锁降级，不能锁升级
 
 - 可以锁降级
@@ -86,3 +90,63 @@ public class MyReentrantReadWriteLock {
 }
 ```
 
+
+
+### 用读写锁将HashMap改造成并发安全的容器
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class MyHashMap<K, V> {
+
+    private final Map<K, V> m = new HashMap<>();
+
+    private final ReadWriteLock rwl = new ReentrantReadWriteLock();
+    private final Lock r = rwl.readLock();
+    private final Lock w = rwl.writeLock();
+
+
+    public V get(K k) {
+        r.lock();
+        try {
+            return m.get(k);
+        } finally {
+            r.unlock();
+        }
+    }
+
+    public K[] allKeys() {
+        r.lock();
+        try {
+            return (K[]) m.keySet().toArray();
+        } finally {
+            r.unlock();
+        }
+    }
+
+    public V put(K k, V v) {
+        w.lock();
+        try {
+            return m.put(k, v);
+        } finally {
+            w.unlock();
+        }
+    }
+
+    public void clear() {
+        w.lock();
+        try {
+            m.clear();
+        } finally {
+            w.unlock();
+        }
+    }
+
+}
+```
+
+11:03
