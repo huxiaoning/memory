@@ -3711,7 +3711,67 @@
 
 }
 </code></pre>
-<p>11:03</p>
+<h3 id="&#x8BFB;&#x5199;&#x9501;&#x89E3;&#x51B3;&#x7F13;&#x5B58;&#x96EA;&#x5D29;&#x7684;&#x95EE;&#x9898;">&#x8BFB;&#x5199;&#x9501;&#x89E3;&#x51B3;&#x7F13;&#x5B58;&#x96EA;&#x5D29;&#x7684;&#x95EE;&#x9898;</h3>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TeacherInfoCache</span> </span>{
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> cacheValid;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ReadWriteLock rwl = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> Object <span class="hljs-title">get</span><span class="hljs-params">(String dataKey)</span> </span>{
+        Object data = <span class="hljs-keyword">null</span>;
+        rwl.readLock().lock();
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">if</span> (cacheValid) {
+                data = Redis.data.get(dataKey);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// &#x53EF;&#x80FD;&#x4F1A;&#x53D1;&#x751F;&#x7F13;&#x5B58;&#x96EA;&#x5D29;&#x7684;&#x95EE;&#x9898;(&#x521A;&#x5F00;&#x59CB;&#x7F13;&#x5B58;&#x4E0D;&#x53EF;&#x7528;&#xFF0C;&#x5F88;&#x591A;&#x7EBF;&#x7A0B;&#x67E5;&#x5E93;)</span>
+                data = DataBase.queryUserInfo();
+                Redis.data.put(dataKey, data);
+                cacheValid = <span class="hljs-keyword">true</span>;
+            }
+            <span class="hljs-keyword">return</span> data;
+        } <span class="hljs-keyword">finally</span> {
+            rwl.readLock().unlock();
+        }
+    }
+
+    <span class="hljs-comment">// &#x67E5;&#x5E93;&#x65F6;&#x52A0;&#x4E2A;&#x5199;&#x9501;,&#x5E76;&#x4E14;&#x53CC;&#x91CD;&#x68C0;&#x67E5;</span>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> Object <span class="hljs-title">get2</span><span class="hljs-params">(String dataKey)</span> </span>{
+        <span class="hljs-keyword">if</span> (!cacheValid) {
+            rwl.writeLock().lock();
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-keyword">if</span> (!cacheValid) {
+                    Object data = DataBase.queryUserInfo();
+                    Redis.data.put(dataKey, data);
+                    cacheValid = <span class="hljs-keyword">true</span>;
+                    <span class="hljs-keyword">return</span> data;
+                }
+            } <span class="hljs-keyword">finally</span> {
+                rwl.writeLock().unlock();
+            }
+        }
+        rwl.readLock().lock();
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">return</span> Redis.data.get(dataKey);
+        } <span class="hljs-keyword">finally</span> {
+            rwl.readLock().unlock();
+        }
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DataBase</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> String <span class="hljs-title">queryUserInfo</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">&quot;&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x3002;&#x3002;&#x3002;&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;name:Kody,age:40,gender:true&quot;</span>;
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Redis</span> </span>{
+    <span class="hljs-keyword">static</span> Map&lt;String, Object&gt; data = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+}
+</code></pre>
+<h3 id="&#x9501;&#x964D;&#x7EA7;">&#x9501;&#x964D;&#x7EA7;</h3>
+<p>&#x6307;&#x7684;&#x662F;&#x5199;&#x9501;&#x964D;&#x7EA7;&#x6210;&#x4E3A;&#x8BFB;&#x9501;&#x3002;&#x6301;&#x6709;&#x5199;&#x9501;&#x7684;&#x540C;&#x65F6;&#xFF0C;&#x518D;&#x83B7;&#x53D6;&#x8BFB;&#x9501;&#xFF0C;&#x968F;&#x540E;&#x91CA;&#x653E;&#x5199;&#x9501;&#x7684;&#x8FC7;&#x7A0B;&#x3002;&#x5199;&#x9501;&#x662F;&#x7EBF;&#x7A0B;&#x72EC;&#x5360;&#xFF0C;&#x8BFB;&#x9501;&#x662F;&#x5171;&#x4EAB;&#xFF0C;&#x6240;&#x4EE5;&#x5199;&#x2014;&#x2192;&#x8BFB;&#x662F;&#x964D;&#x7EA7;&#x3002;&#xFF08;&#x8BFB;&#xFF1E;&#x5199;&#xFF0C;&#x662F;&#x4E0D;&#x80FD;&#x5B9E;&#x73B0;&#x7684;&#xFF09;</p>
+<p>68:36</p>
 
                                 
                                 </section>
@@ -3755,7 +3815,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ReadWriteLock接口及其实现","level":"1.17.3.1.2","depth":4,"next":{"title":"并发容器","level":"1.17.3.2","depth":3,"path":"800Java/03JUC并发编程包/02并发容器/README.md","ref":"800Java/03JUC并发编程包/02并发容器/README.md","articles":[{"title":"Map","level":"1.17.3.2.1","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/01Map.md","ref":"800Java/03JUC并发编程包/02并发容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2.2","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/02List.md","ref":"800Java/03JUC并发编程包/02并发容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.2.3","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","ref":"800Java/03JUC并发编程包/02并发容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.2.4","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","ref":"800Java/03JUC并发编程包/02并发容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.2.5","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/05Stack.md","ref":"800Java/03JUC并发编程包/02并发容器/05Stack.md","articles":[]}]},"previous":{"title":"Lock接口及其实现","level":"1.17.3.1.1","depth":4,"path":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","ref":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","mtime":"2022-05-09T14:38:05.734Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-09T14:38:56.009Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ReadWriteLock接口及其实现","level":"1.17.3.1.2","depth":4,"next":{"title":"并发容器","level":"1.17.3.2","depth":3,"path":"800Java/03JUC并发编程包/02并发容器/README.md","ref":"800Java/03JUC并发编程包/02并发容器/README.md","articles":[{"title":"Map","level":"1.17.3.2.1","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/01Map.md","ref":"800Java/03JUC并发编程包/02并发容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2.2","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/02List.md","ref":"800Java/03JUC并发编程包/02并发容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.2.3","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","ref":"800Java/03JUC并发编程包/02并发容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.2.4","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","ref":"800Java/03JUC并发编程包/02并发容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.2.5","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/05Stack.md","ref":"800Java/03JUC并发编程包/02并发容器/05Stack.md","articles":[]}]},"previous":{"title":"Lock接口及其实现","level":"1.17.3.1.1","depth":4,"path":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","ref":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","mtime":"2022-05-13T07:19:45.514Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-13T07:20:27.124Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
