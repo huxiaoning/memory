@@ -149,4 +149,75 @@ public class MyHashMap<K, V> {
 }
 ```
 
-11:03
+
+
+### 读写锁解决缓存雪崩的问题
+
+```java
+class TeacherInfoCache {
+    static volatile boolean cacheValid;
+    static final ReadWriteLock rwl = new ReentrantReadWriteLock();
+
+    static Object get(String dataKey) {
+        Object data = null;
+        rwl.readLock().lock();
+        try {
+            if (cacheValid) {
+                data = Redis.data.get(dataKey);
+            } else {
+                // 可能会发生缓存雪崩的问题(刚开始缓存不可用，很多线程查库)
+                data = DataBase.queryUserInfo();
+                Redis.data.put(dataKey, data);
+                cacheValid = true;
+            }
+            return data;
+        } finally {
+            rwl.readLock().unlock();
+        }
+    }
+
+    // 查库时加个写锁,并且双重检查
+    static Object get2(String dataKey) {
+        if (!cacheValid) {
+            rwl.writeLock().lock();
+            try {
+                if (!cacheValid) {
+                    Object data = DataBase.queryUserInfo();
+                    Redis.data.put(dataKey, data);
+                    cacheValid = true;
+                    return data;
+                }
+            } finally {
+                rwl.writeLock().unlock();
+            }
+        }
+        rwl.readLock().lock();
+        try {
+            return Redis.data.get(dataKey);
+        } finally {
+            rwl.readLock().unlock();
+        }
+    }
+}
+
+class DataBase {
+    static String queryUserInfo() {
+        System.out.println("查询数据库。。。");
+        return "name:Kody,age:40,gender:true";
+    }
+}
+
+class Redis {
+    static Map<String, Object> data = new HashMap<>();
+}
+```
+
+
+
+### 锁降级
+
+指的是写锁降级成为读锁。持有写锁的同时，再获取读锁，随后释放写锁的过程。写锁是线程独占，读锁是共享，所以写—→读是降级。（读＞写，是不能实现的）
+
+
+
+68:36
