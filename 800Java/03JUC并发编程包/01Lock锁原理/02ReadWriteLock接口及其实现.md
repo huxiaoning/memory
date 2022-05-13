@@ -220,4 +220,179 @@ class Redis {
 
 
 
-68:36
+
+
+手写读写锁
+
+```java
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.locks.LockSupport;
+public class MyReentrantReadWriteLock {
+
+    /**
+     * 获取读锁的线程数量
+     */
+    private final AtomicStampedReference<LockCount> lockCount = new AtomicStampedReference<>(new LockCount(0, 0), 0);
+
+    /**
+     * 写锁线程
+     */
+    private volatile Thread owner;
+    /**
+     * 等待队列(读写线程都在这里等)
+     */
+    private final ConcurrentLinkedQueue<WaitNode> waiters = new ConcurrentLinkedQueue<>();
+
+
+    public void lock() {
+        WaitNode waitNode = new WaitNode(false, Thread.currentThread());
+        waiters.offer(waitNode);
+        for (; ; ) {
+            WaitNode head = waiters.peek();
+            if (head == null) {
+                // 这里不可能为null,若为null,说明有别的线程处理了当前线程
+                throw new IllegalMonitorStateException();
+            }
+            if (head.getThread() != Thread.currentThread()) {
+                LockSupport.park();
+            }
+            boolean success = tryLock(1);
+            if (!success) {
+                LockSupport.park();
+            }
+            waiters.poll();
+            return;
+        }
+
+    }
+
+    public boolean unlock() {
+        int arg = 1;
+        boolean success = tryUnlock(arg);
+        if (!success) {
+            return false;
+        }
+        WaitNode next = waiters.peek();
+        if (next != null) {
+            LockSupport.unpark(next.getThread());
+        }
+        return true;
+    }
+
+    public boolean tryLock(int acquires) {
+        LockCount oldLockCount = lockCount.getReference();
+        int oldStamp = lockCount.getStamp();
+        if (oldLockCount.getReadCount() != 0) {
+            // 有读锁占用
+            return false;
+        }
+        int writeCount = oldLockCount.getWriteCount();
+        if (writeCount == 0) {
+            boolean success = lockCount.compareAndSet(oldLockCount, new LockCount(0, acquires), oldStamp, oldStamp + 1);
+            if (success) {
+                owner = Thread.currentThread();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (owner == Thread.currentThread()) {
+                lockCount.set(new LockCount(0, writeCount + acquires), oldStamp + 1);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public boolean tryUnlock(int releases) {
+        if (owner != Thread.currentThread()) {
+            throw new IllegalMonitorStateException();
+        }
+        LockCount oldLockCount = lockCount.getReference();
+        int oldStamp = lockCount.getStamp();
+        int nextWriteCount = oldLockCount.getWriteCount() - releases;
+        if (nextWriteCount < 0) {
+            throw new IllegalMonitorStateException();
+        }
+        lockCount.set(new LockCount(0, nextWriteCount), oldStamp + 1);
+        if (nextWriteCount == 0) {
+            owner = null;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void lockShared() {
+        int arg = 1;
+        WaitNode waitNode = new WaitNode(true, Thread.currentThread());
+        waiters.offer(waitNode);
+        for (; ; ) {
+            WaitNode head = waiters.peek();
+            if (head == null) {
+                // 这里不可能为null,若为null,说明有别的线程处理了当前线程
+                throw new IllegalMonitorStateException();
+            }
+            if (head.getThread() != Thread.currentThread()) {
+                LockSupport.park();
+            }
+            boolean success = tryLockShared(arg);
+            if (!success) {
+                LockSupport.park();
+            }
+            waiters.poll();
+            WaitNode next = waiters.peek();
+            if (next != null && next.isRead()) {
+                LockSupport.unpark(next.getThread());
+            }
+            return;
+        }
+    }
+
+    public boolean unlockShared() {
+        int arg = 1;
+        boolean success = tryUnlockShared(arg);
+        if (!success) {
+            return false;
+        }
+        WaitNode next = waiters.peek();
+        if (next != null) {
+            LockSupport.unpark(next.getThread());
+        }
+        return true;
+    }
+
+    public boolean tryLockShared(int acquires) {
+        for (; ; ) {
+            LockCount oldLockCount = lockCount.getReference();
+            int oldStamp = lockCount.getStamp();
+            int writeCount = oldLockCount.getWriteCount();
+            if (writeCount > 0 && owner != Thread.currentThread()) {
+                return false;
+            }
+            int readCount = oldLockCount.getReadCount();
+            boolean success = lockCount.compareAndSet(oldLockCount, new LockCount(readCount + acquires, writeCount), oldStamp, oldStamp + 1);
+            if (success) {
+                return true;
+            }
+        }
+    }
+
+    public boolean tryUnlockShared(int releases) {
+        for (; ; ) {
+            LockCount oldLockCount = lockCount.getReference();
+            int oldStamp = lockCount.getStamp();
+            int nextReadCount = oldLockCount.getReadCount() - releases;
+            if (nextReadCount < 0) {
+                throw new IllegalMonitorStateException();
+            }
+            if (lockCount.compareAndSet(oldLockCount, new LockCount(nextReadCount, oldLockCount.getWriteCount()), oldStamp, oldStamp + 1)) {
+                return nextReadCount == 0;
+            }
+        }
+    }
+}
+```
+
