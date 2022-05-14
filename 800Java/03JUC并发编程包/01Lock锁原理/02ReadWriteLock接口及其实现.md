@@ -398,4 +398,110 @@ public class MyReentrantReadWriteLock {
 
 
 
-70:47
+### 从手写的读写锁推导出抽象队列同步器
+
+```java
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.locks.LockSupport;
+
+public abstract class MyAqs {
+
+    /**
+     * 获取读锁的线程数量
+     */
+    private final AtomicStampedReference<LockCount> lockCount = new AtomicStampedReference<>(new LockCount(0, 0), 0);
+
+    /**
+     * 写锁线程
+     */
+    private volatile Thread owner;
+    /**
+     * 等待队列(读写线程都在这里等)
+     */
+    private final ConcurrentLinkedQueue<WaitNode> waiters = new ConcurrentLinkedQueue<>();
+
+
+    public void lock() {
+        WaitNode waitNode = new WaitNode(false, Thread.currentThread());
+        waiters.offer(waitNode);
+        for (; ; ) {
+            WaitNode head = waiters.peek();
+            if (head == null) {
+                // 这里不可能为null,若为null,说明有别的线程处理了当前线程
+                throw new IllegalMonitorStateException();
+            }
+            if (head.getThread() != Thread.currentThread()) {
+                LockSupport.park();
+            }
+            boolean success = tryLock(1);
+            if (!success) {
+                LockSupport.park();
+            }
+            waiters.poll();
+            return;
+        }
+
+    }
+
+    public boolean unlock() {
+        int arg = 1;
+        boolean success = tryUnlock(arg);
+        if (!success) {
+            return false;
+        }
+        WaitNode next = waiters.peek();
+        if (next != null) {
+            LockSupport.unpark(next.getThread());
+        }
+        return true;
+    }
+
+    public void lockShared() {
+        int arg = 1;
+        WaitNode waitNode = new WaitNode(true, Thread.currentThread());
+        waiters.offer(waitNode);
+        for (; ; ) {
+            WaitNode head = waiters.peek();
+            if (head == null) {
+                // 这里不可能为null,若为null,说明有别的线程处理了当前线程
+                throw new IllegalMonitorStateException();
+            }
+            if (head.getThread() != Thread.currentThread()) {
+                LockSupport.park();
+            }
+            boolean success = tryLockShared(arg);
+            if (!success) {
+                LockSupport.park();
+            }
+            waiters.poll();
+            WaitNode next = waiters.peek();
+            if (next != null && next.isRead()) {
+                LockSupport.unpark(next.getThread());
+            }
+            return;
+        }
+    }
+
+    public boolean unlockShared() {
+        int arg = 1;
+        boolean success = tryUnlockShared(arg);
+        if (!success) {
+            return false;
+        }
+        WaitNode next = waiters.peek();
+        if (next != null) {
+            LockSupport.unpark(next.getThread());
+        }
+        return true;
+    }
+
+    public abstract boolean tryLock(int acquires);
+
+    public abstract boolean tryUnlock(int releases);
+
+    public abstract boolean tryLockShared(int acquires);
+
+    public abstract boolean tryUnlockShared(int releases);
+```
+
