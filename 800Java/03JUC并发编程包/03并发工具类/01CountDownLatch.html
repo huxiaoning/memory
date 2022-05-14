@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Set · 个人笔记</title>
+        <title>CountDownLatch · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="04Queue.html" />
+    <link rel="next" href="../../../900Spring Framework/" />
     
     
-    <link rel="prev" href="02List.html" />
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -3350,9 +3350,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2" data-path="./">
+        <li class="chapter " data-level="1.17.3.2" data-path="../02并发容器/">
             
-                <a href="./">
+                <a href="../02并发容器/">
             
                     
                     并发容器
@@ -3364,9 +3364,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.2.1" data-path="01Map.html">
+        <li class="chapter " data-level="1.17.3.2.1" data-path="../02并发容器/01Map.html">
             
-                <a href="01Map.html">
+                <a href="../02并发容器/01Map.html">
             
                     
                     Map
@@ -3377,9 +3377,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.2" data-path="02List.html">
+        <li class="chapter " data-level="1.17.3.2.2" data-path="../02并发容器/02List.html">
             
-                <a href="02List.html">
+                <a href="../02并发容器/02List.html">
             
                     
                     List
@@ -3390,9 +3390,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17.3.2.3" data-path="03Set.html">
+        <li class="chapter " data-level="1.17.3.2.3" data-path="../02并发容器/03Set.html">
             
-                <a href="03Set.html">
+                <a href="../02并发容器/03Set.html">
             
                     
                     Set
@@ -3403,9 +3403,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.4" data-path="04Queue.html">
+        <li class="chapter " data-level="1.17.3.2.4" data-path="../02并发容器/04Queue.html">
             
-                <a href="04Queue.html">
+                <a href="../02并发容器/04Queue.html">
             
                     
                     Queue
@@ -3416,9 +3416,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.5" data-path="05Stack.html">
+        <li class="chapter " data-level="1.17.3.2.5" data-path="../02并发容器/05Stack.html">
             
-                <a href="05Stack.html">
+                <a href="../02并发容器/05Stack.html">
             
                     
                     Stack
@@ -3434,9 +3434,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.3" data-path="../03并发工具类/">
+        <li class="chapter " data-level="1.17.3.3" data-path="./">
             
-                <a href="../03并发工具类/">
+                <a href="./">
             
                     
                     并发工具类
@@ -3448,9 +3448,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.3.1" data-path="../03并发工具类/01CountDownLatch.html">
+        <li class="chapter active" data-level="1.17.3.3.1" data-path="01CountDownLatch.html">
             
-                <a href="../03并发工具类/01CountDownLatch.html">
+                <a href="01CountDownLatch.html">
             
                     
                     CountDownLatch
@@ -3583,7 +3583,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >Set</a>
+        <a href="../../.." >CountDownLatch</a>
     </h1>
 </div>
 
@@ -3598,15 +3598,53 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="set">Set</h1>
-<p>Set&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x4E0D;&#x91CD;&#x590D;&#x3002;</p>
-<h3 id="hashset">HashSet</h3>
-<p>&#x57FA;&#x4E8E;HashMap&#x5B9E;&#x73B0;&#x3002;</p>
-<h3 id="treeset">TreeSet</h3>
-<h3 id="copyonwritearrayset">CopyOnWriteArraySet</h3>
-<p>&#x57FA;&#x4E8E;CopyOnWriteArrayList&#x5B9E;&#x73B0;&#x3002;</p>
-<h3 id="concurrentskiplistset">ConcurrentSkipListSet</h3>
-<p>&#x57FA;&#x4E8E;ConcurrentSkipListMap&#x5B9E;&#x73B0;&#x3002;</p>
+                                <h1 id="countdownlatch-&#x5012;&#x8BA1;&#x6570;&#x95E9;&#x9501;"><code>CountDownLatch</code> &#x5012;&#x8BA1;&#x6570;&#x95E9;&#x9501;</h1>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        AtomicLong num = <span class="hljs-keyword">new</span> AtomicLong();
+        CountDownLatch countDownLatch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">10</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10000000</span>; j++) {
+                        num.getAndIncrement();
+                    }
+                    countDownLatch.countDown(); <span class="hljs-comment">// &#x8BA1;&#x6570;--</span>
+                }
+            }).start();
+        }
+
+        countDownLatch.await(); <span class="hljs-comment">// &#x963B;&#x585E;&#x7B49;&#x5F85;10&#x6B21; countDown()</span>
+        System.out.println(num.get());
+    }
+</code></pre>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        CountDownLatch countDownLatch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">3</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
+            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                    System.out.println(<span class="hljs-string">&quot;before ...&quot;</span>);
+                    countDownLatch.countDown();
+                    <span class="hljs-keyword">try</span> {
+                        countDownLatch.await();
+                        System.out.println(<span class="hljs-string">&quot;after ...&quot;</span>);
+                    } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
+
+before ...
+before ...
+before ...
+after ...
+after ...
+after ...
+</code></pre>
+<p>07:51</p>
 
                                 
                                 </section>
@@ -3634,12 +3672,12 @@
 
             
                 
-                <a href="02List.html" class="navigation navigation-prev " aria-label="Previous page: List">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 并发工具类">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="04Queue.html" class="navigation navigation-next " aria-label="Next page: Queue">
+                <a href="../../../900Spring Framework/" class="navigation navigation-next " aria-label="Next page: Spring Framework">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3650,7 +3688,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Set","level":"1.17.3.2.3","depth":4,"next":{"title":"Queue","level":"1.17.3.2.4","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","ref":"800Java/03JUC并发编程包/02并发容器/04Queue.md","articles":[]},"previous":{"title":"List","level":"1.17.3.2.2","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/02List.md","ref":"800Java/03JUC并发编程包/02并发容器/02List.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","mtime":"2022-05-14T02:05:50.208Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-14T02:06:35.595Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CountDownLatch","level":"1.17.3.3.1","depth":4,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"并发工具类","level":"1.17.3.3","depth":3,"path":"800Java/03JUC并发编程包/03并发工具类/README.md","ref":"800Java/03JUC并发编程包/03并发工具类/README.md","articles":[{"title":"CountDownLatch","level":"1.17.3.3.1","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","ref":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","mtime":"2022-05-14T02:05:50.208Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-14T02:06:35.595Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
