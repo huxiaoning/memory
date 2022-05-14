@@ -3942,7 +3942,110 @@
     }
 }
 </code></pre>
-<p>70:47</p>
+<h3 id="&#x4ECE;&#x624B;&#x5199;&#x7684;&#x8BFB;&#x5199;&#x9501;&#x63A8;&#x5BFC;&#x51FA;&#x62BD;&#x8C61;&#x961F;&#x5217;&#x540C;&#x6B65;&#x5668;">&#x4ECE;&#x624B;&#x5199;&#x7684;&#x8BFB;&#x5199;&#x9501;&#x63A8;&#x5BFC;&#x51FA;&#x62BD;&#x8C61;&#x961F;&#x5217;&#x540C;&#x6B65;&#x5668;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.concurrent.ConcurrentLinkedQueue;
+<span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicStampedReference;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.LockSupport;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAqs</span> </span>{
+
+    <span class="hljs-comment">/**
+     * &#x83B7;&#x53D6;&#x8BFB;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;
+     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicStampedReference&lt;LockCount&gt; lockCount = <span class="hljs-keyword">new</span> AtomicStampedReference&lt;&gt;(<span class="hljs-keyword">new</span> LockCount(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">/**
+     * &#x5199;&#x9501;&#x7EBF;&#x7A0B;
+     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> Thread owner;
+    <span class="hljs-comment">/**
+     * &#x7B49;&#x5F85;&#x961F;&#x5217;(&#x8BFB;&#x5199;&#x7EBF;&#x7A0B;&#x90FD;&#x5728;&#x8FD9;&#x91CC;&#x7B49;)
+     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentLinkedQueue&lt;WaitNode&gt; waiters = <span class="hljs-keyword">new</span> ConcurrentLinkedQueue&lt;&gt;();
+
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>{
+        WaitNode waitNode = <span class="hljs-keyword">new</span> WaitNode(<span class="hljs-keyword">false</span>, Thread.currentThread());
+        waiters.offer(waitNode);
+        <span class="hljs-keyword">for</span> (; ; ) {
+            WaitNode head = waiters.peek();
+            <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span>) {
+                <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4E0D;&#x53EF;&#x80FD;&#x4E3A;null,&#x82E5;&#x4E3A;null,&#x8BF4;&#x660E;&#x6709;&#x522B;&#x7684;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x4E86;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</span>
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+            }
+            <span class="hljs-keyword">if</span> (head.getThread() != Thread.currentThread()) {
+                LockSupport.park();
+            }
+            <span class="hljs-keyword">boolean</span> success = tryLock(<span class="hljs-number">1</span>);
+            <span class="hljs-keyword">if</span> (!success) {
+                LockSupport.park();
+            }
+            waiters.poll();
+            <span class="hljs-keyword">return</span>;
+        }
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> arg = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">boolean</span> success = tryUnlock(arg);
+        <span class="hljs-keyword">if</span> (!success) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        }
+        WaitNode next = waiters.peek();
+        <span class="hljs-keyword">if</span> (next != <span class="hljs-keyword">null</span>) {
+            LockSupport.unpark(next.getThread());
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lockShared</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> arg = <span class="hljs-number">1</span>;
+        WaitNode waitNode = <span class="hljs-keyword">new</span> WaitNode(<span class="hljs-keyword">true</span>, Thread.currentThread());
+        waiters.offer(waitNode);
+        <span class="hljs-keyword">for</span> (; ; ) {
+            WaitNode head = waiters.peek();
+            <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span>) {
+                <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4E0D;&#x53EF;&#x80FD;&#x4E3A;null,&#x82E5;&#x4E3A;null,&#x8BF4;&#x660E;&#x6709;&#x522B;&#x7684;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x4E86;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</span>
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+            }
+            <span class="hljs-keyword">if</span> (head.getThread() != Thread.currentThread()) {
+                LockSupport.park();
+            }
+            <span class="hljs-keyword">boolean</span> success = tryLockShared(arg);
+            <span class="hljs-keyword">if</span> (!success) {
+                LockSupport.park();
+            }
+            waiters.poll();
+            WaitNode next = waiters.peek();
+            <span class="hljs-keyword">if</span> (next != <span class="hljs-keyword">null</span> &amp;&amp; next.isRead()) {
+                LockSupport.unpark(next.getThread());
+            }
+            <span class="hljs-keyword">return</span>;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">unlockShared</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> arg = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">boolean</span> success = tryUnlockShared(arg);
+        <span class="hljs-keyword">if</span> (!success) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        }
+        WaitNode next = waiters.peek();
+        <span class="hljs-keyword">if</span> (next != <span class="hljs-keyword">null</span>) {
+            LockSupport.unpark(next.getThread());
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">(<span class="hljs-keyword">int</span> acquires)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryUnlock</span><span class="hljs-params">(<span class="hljs-keyword">int</span> releases)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLockShared</span><span class="hljs-params">(<span class="hljs-keyword">int</span> acquires)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryUnlockShared</span><span class="hljs-params">(<span class="hljs-keyword">int</span> releases)</span></span>;
+</code></pre>
 
                                 
                                 </section>
@@ -3986,7 +4089,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ReadWriteLock接口及其实现","level":"1.17.3.1.2","depth":4,"next":{"title":"并发容器","level":"1.17.3.2","depth":3,"path":"800Java/03JUC并发编程包/02并发容器/README.md","ref":"800Java/03JUC并发编程包/02并发容器/README.md","articles":[{"title":"Map","level":"1.17.3.2.1","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/01Map.md","ref":"800Java/03JUC并发编程包/02并发容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2.2","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/02List.md","ref":"800Java/03JUC并发编程包/02并发容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.2.3","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","ref":"800Java/03JUC并发编程包/02并发容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.2.4","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","ref":"800Java/03JUC并发编程包/02并发容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.2.5","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/05Stack.md","ref":"800Java/03JUC并发编程包/02并发容器/05Stack.md","articles":[]}]},"previous":{"title":"Lock接口及其实现","level":"1.17.3.1.1","depth":4,"path":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","ref":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","mtime":"2022-05-13T15:13:24.142Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-13T15:14:09.561Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ReadWriteLock接口及其实现","level":"1.17.3.1.2","depth":4,"next":{"title":"并发容器","level":"1.17.3.2","depth":3,"path":"800Java/03JUC并发编程包/02并发容器/README.md","ref":"800Java/03JUC并发编程包/02并发容器/README.md","articles":[{"title":"Map","level":"1.17.3.2.1","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/01Map.md","ref":"800Java/03JUC并发编程包/02并发容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2.2","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/02List.md","ref":"800Java/03JUC并发编程包/02并发容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.2.3","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","ref":"800Java/03JUC并发编程包/02并发容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.2.4","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","ref":"800Java/03JUC并发编程包/02并发容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.2.5","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/05Stack.md","ref":"800Java/03JUC并发编程包/02并发容器/05Stack.md","articles":[]}]},"previous":{"title":"Lock接口及其实现","level":"1.17.3.1.1","depth":4,"path":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","ref":"800Java/03JUC并发编程包/01Lock锁原理/01Lock接口及其实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","mtime":"2022-05-14T01:46:56.907Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-14T01:47:43.516Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
