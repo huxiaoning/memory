@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>并发容器 · 个人笔记</title>
+        <title>Semaphore · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01Map.html" />
+    <link rel="next" href="03CyclicBarrier.html" />
     
     
-    <link rel="prev" href="../01Lock锁原理/02ReadWriteLock接口及其实现.html" />
+    <link rel="prev" href="01CountDownLatch.html" />
     
 
     <style>
@@ -3350,9 +3350,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17.3.2" data-path="./">
+        <li class="chapter " data-level="1.17.3.2" data-path="../02并发容器/">
             
-                <a href="./">
+                <a href="../02并发容器/">
             
                     
                     并发容器
@@ -3364,9 +3364,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.2.1" data-path="01Map.html">
+        <li class="chapter " data-level="1.17.3.2.1" data-path="../02并发容器/01Map.html">
             
-                <a href="01Map.html">
+                <a href="../02并发容器/01Map.html">
             
                     
                     Map
@@ -3377,9 +3377,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.2" data-path="02List.html">
+        <li class="chapter " data-level="1.17.3.2.2" data-path="../02并发容器/02List.html">
             
-                <a href="02List.html">
+                <a href="../02并发容器/02List.html">
             
                     
                     List
@@ -3390,9 +3390,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.3" data-path="03Set.html">
+        <li class="chapter " data-level="1.17.3.2.3" data-path="../02并发容器/03Set.html">
             
-                <a href="03Set.html">
+                <a href="../02并发容器/03Set.html">
             
                     
                     Set
@@ -3403,9 +3403,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.4" data-path="04Queue.html">
+        <li class="chapter " data-level="1.17.3.2.4" data-path="../02并发容器/04Queue.html">
             
-                <a href="04Queue.html">
+                <a href="../02并发容器/04Queue.html">
             
                     
                     Queue
@@ -3416,9 +3416,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.5" data-path="05Stack.html">
+        <li class="chapter " data-level="1.17.3.2.5" data-path="../02并发容器/05Stack.html">
             
-                <a href="05Stack.html">
+                <a href="../02并发容器/05Stack.html">
             
                     
                     Stack
@@ -3434,9 +3434,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.3" data-path="../03并发工具类/">
+        <li class="chapter " data-level="1.17.3.3" data-path="./">
             
-                <a href="../03并发工具类/">
+                <a href="./">
             
                     
                     并发工具类
@@ -3448,9 +3448,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.3.1" data-path="../03并发工具类/01CountDownLatch.html">
+        <li class="chapter " data-level="1.17.3.3.1" data-path="01CountDownLatch.html">
             
-                <a href="../03并发工具类/01CountDownLatch.html">
+                <a href="01CountDownLatch.html">
             
                     
                     CountDownLatch
@@ -3461,9 +3461,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.3.2" data-path="../03并发工具类/02Semaphore.html">
+        <li class="chapter active" data-level="1.17.3.3.2" data-path="02Semaphore.html">
             
-                <a href="../03并发工具类/02Semaphore.html">
+                <a href="02Semaphore.html">
             
                     
                     Semaphore
@@ -3474,9 +3474,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.3.3" data-path="../03并发工具类/03CyclicBarrier.html">
+        <li class="chapter " data-level="1.17.3.3.3" data-path="03CyclicBarrier.html">
             
-                <a href="../03并发工具类/03CyclicBarrier.html">
+                <a href="03CyclicBarrier.html">
             
                     
                     CyclicBarrier
@@ -3609,7 +3609,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >并发容器</a>
+        <a href="../../.." >Semaphore</a>
     </h1>
 </div>
 
@@ -3624,14 +3624,120 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5BB9;&#x5668;">&#x5BB9;&#x5668;</h1>
-<p>&#x5B58;&#x50A8;&#x7ED3;&#x6784;</p>
+                                <h1 id="semaphore&#x4FE1;&#x53F7;&#x91CF;">Semaphore&#x4FE1;&#x53F7;&#x91CF;</h1>
 <ul>
-<li>&#x6570;&#x7EC4;</li>
-<li>&#x94FE;&#x8868;</li>
-<li>&#x6811;</li>
-<li>&#x56FE;</li>
+<li>Semaphore&#x662F;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x9650;&#x5236;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x67D0;&#x4E9B;&#x8D44;&#x6E90;&#xFF08;&#x7269;&#x7406;&#x6216;&#x903B;&#x8F91;&#x7684;&#xFF09;&#x7EBF;&#x7A0B;&#x6570;&#x76EE;&#x3002;</li>
+<li>&#x7B80;&#x5355;&#x8BF4;&#xFF0C;&#x662F;&#x4E00;&#x79CD;&#x7528;&#x6765;&#x63A7;&#x5236;&#x5E76;&#x53D1;&#x91CF;&#x7684;&#x5171;&#x4EAB;&#x9501;&#x3002;</li>
+<li>&#x9650;&#x6D41;&#x3002;</li>
 </ul>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        <span class="hljs-comment">// &#x516C;&#x5171;&#x7537;&#x5395;&#x6709;6&#x4E2A;&#x5751;&#x4F4D;</span>
+        <span class="hljs-keyword">final</span> Semaphore semaphore = <span class="hljs-keyword">new</span> Semaphore(<span class="hljs-number">6</span>);
+        <span class="hljs-comment">// &#x4E00;&#x5343;&#x4E2A;&#x7537;&#x4EBA;&#x6765;&#x8E72;&#x5751;</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
+            <span class="hljs-keyword">int</span> finalI = i;
+            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                    <span class="hljs-keyword">try</span> {
+                        semaphore.acquire();
+                    } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    squat(finalI);
+                    semaphore.release();
+                }
+            }).start();
+        }
+    }
+
+    <span class="hljs-comment">/**
+     * &#x8E72;&#x5751;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">squat</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+        Random random = <span class="hljs-keyword">new</span> Random();
+        <span class="hljs-keyword">int</span> x = random.nextInt(<span class="hljs-number">3</span>) + <span class="hljs-number">1</span>; <span class="hljs-comment">// [1,3]</span>
+        System.out.println(i + <span class="hljs-string">&quot;&#x53F7;&#x7EBF;&#x7A0B;&#x8E72;&#x5751;&#x7528;&#x65F6;&quot;</span> + x + <span class="hljs-string">&quot;&#x79D2;&#x3002;&quot;</span>);
+        LockSupport.parkNanos(x * <span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">1000L</span>);
+    }
+</code></pre>
+<h3 id="&#x7528;aqs&#x624B;&#x5199;semaphore">&#x7528;<code>AQS</code>&#x624B;&#x5199;Semaphore</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.Random;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.AbstractQueuedSynchronizer;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.LockSupport;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySemaphore</span> </span>{
+
+    <span class="hljs-keyword">private</span> Sync sync;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MySemaphore</span><span class="hljs-params">(<span class="hljs-keyword">int</span> permits)</span> </span>{
+        <span class="hljs-keyword">this</span>.sync = <span class="hljs-keyword">new</span> Sync(permits);
+    }
+
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">acquire</span><span class="hljs-params">()</span> </span>{
+        sync.acquireShared(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">release</span><span class="hljs-params">()</span> </span>{
+        sync.releaseShared(<span class="hljs-number">1</span>);
+    }
+
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractQueuedSynchronizer</span> </span>{
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> permits;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Sync</span><span class="hljs-params">(<span class="hljs-keyword">int</span> permits)</span> </span>{
+            <span class="hljs-keyword">this</span>.permits = permits;
+        }
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> <span class="hljs-title">tryAcquireShared</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arg)</span> </span>{
+            <span class="hljs-keyword">int</span> state = getState();
+            <span class="hljs-keyword">int</span> nextState = state + arg;
+            <span class="hljs-keyword">if</span> (nextState &lt;= permits) {
+                <span class="hljs-keyword">if</span> (compareAndSetState(state, nextState)) {
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+                }
+            }
+            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        }
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryReleaseShared</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arg)</span> </span>{
+            <span class="hljs-keyword">int</span> state = getState();
+            <span class="hljs-keyword">return</span> compareAndSetState(state, state - arg);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        <span class="hljs-comment">// &#x516C;&#x5171;&#x7537;&#x5395;&#x6709;6&#x4E2A;&#x5751;&#x4F4D;</span>
+        <span class="hljs-keyword">final</span> MySemaphore semaphore = <span class="hljs-keyword">new</span> MySemaphore(<span class="hljs-number">6</span>);
+        <span class="hljs-comment">// &#x4E00;&#x5343;&#x4E2A;&#x7537;&#x4EBA;&#x6765;&#x8E72;&#x5751;</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
+            <span class="hljs-keyword">int</span> finalI = i;
+            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                    semaphore.acquire();
+                    squat(finalI);
+                    semaphore.release();
+                }
+            }).start();
+        }
+    }
+
+    <span class="hljs-comment">/**
+     * &#x8E72;&#x5751;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">squat</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+        Random random = <span class="hljs-keyword">new</span> Random();
+        <span class="hljs-keyword">int</span> x = random.nextInt(<span class="hljs-number">3</span>) + <span class="hljs-number">1</span>; <span class="hljs-comment">// [1,3]</span>
+        System.out.println(i + <span class="hljs-string">&quot;&#x53F7;&#x7EBF;&#x7A0B;&#x8E72;&#x5751;&#x7528;&#x65F6;&quot;</span> + x + <span class="hljs-string">&quot;&#x79D2;&#x3002;&quot;</span>);
+        LockSupport.parkNanos(x * <span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">1000L</span>);
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -3659,12 +3765,12 @@
 
             
                 
-                <a href="../01Lock锁原理/02ReadWriteLock接口及其实现.html" class="navigation navigation-prev " aria-label="Previous page: ReadWriteLock接口及其实现">
+                <a href="01CountDownLatch.html" class="navigation navigation-prev " aria-label="Previous page: CountDownLatch">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="01Map.html" class="navigation navigation-next " aria-label="Next page: Map">
+                <a href="03CyclicBarrier.html" class="navigation navigation-next " aria-label="Next page: CyclicBarrier">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3675,7 +3781,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"并发容器","level":"1.17.3.2","depth":3,"next":{"title":"Map","level":"1.17.3.2.1","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/01Map.md","ref":"800Java/03JUC并发编程包/02并发容器/01Map.md","articles":[]},"previous":{"title":"ReadWriteLock接口及其实现","level":"1.17.3.1.2","depth":4,"path":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","ref":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/02并发容器/README.md","mtime":"2022-05-15T13:38:10.745Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-15T13:38:59.372Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Semaphore","level":"1.17.3.3.2","depth":4,"next":{"title":"CyclicBarrier","level":"1.17.3.3.3","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/03CyclicBarrier.md","ref":"800Java/03JUC并发编程包/03并发工具类/03CyclicBarrier.md","articles":[]},"previous":{"title":"CountDownLatch","level":"1.17.3.3.1","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","ref":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/03并发工具类/02Semaphore.md","mtime":"2022-05-15T13:38:10.745Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-15T13:38:59.372Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
