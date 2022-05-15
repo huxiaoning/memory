@@ -122,5 +122,4 @@ public class MyCountDownLatch {
 }
 ```
 
-25:51
 
