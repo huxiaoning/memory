@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Semaphore · 个人笔记</title>
+        <title>ForkJoin框架 · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="03CyclicBarrier.html" />
+    <link rel="next" href="../../../900Spring Framework/" />
     
     
-    <link rel="prev" href="01CountDownLatch.html" />
+    <link rel="prev" href="03CyclicBarrier.html" />
     
 
     <style>
@@ -3461,7 +3461,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17.3.3.2" data-path="02Semaphore.html">
+        <li class="chapter " data-level="1.17.3.3.2" data-path="02Semaphore.html">
             
                 <a href="02Semaphore.html">
             
@@ -3487,7 +3487,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.3.4" data-path="04ForkJoin框架.html">
+        <li class="chapter active" data-level="1.17.3.3.4" data-path="04ForkJoin框架.html">
             
                 <a href="04ForkJoin框架.html">
             
@@ -3622,7 +3622,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >Semaphore</a>
+        <a href="../../.." >ForkJoin框架</a>
     </h1>
 </div>
 
@@ -3637,120 +3637,205 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="semaphore&#x4FE1;&#x53F7;&#x91CF;">Semaphore&#x4FE1;&#x53F7;&#x91CF;</h1>
-<ul>
-<li>Semaphore&#x662F;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x9650;&#x5236;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x67D0;&#x4E9B;&#x8D44;&#x6E90;&#xFF08;&#x7269;&#x7406;&#x6216;&#x903B;&#x8F91;&#x7684;&#xFF09;&#x7EBF;&#x7A0B;&#x6570;&#x76EE;&#x3002;</li>
-<li>&#x7B80;&#x5355;&#x8BF4;&#xFF0C;&#x662F;&#x4E00;&#x79CD;&#x7528;&#x6765;&#x63A7;&#x5236;&#x5E76;&#x53D1;&#x91CF;&#x7684;&#x5171;&#x4EAB;&#x9501;&#x3002;</li>
-<li>&#x9650;&#x6D41;&#x3002;</li>
-</ul>
-<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-        <span class="hljs-comment">// &#x516C;&#x5171;&#x7537;&#x5395;&#x6709;6&#x4E2A;&#x5751;&#x4F4D;</span>
-        <span class="hljs-keyword">final</span> Semaphore semaphore = <span class="hljs-keyword">new</span> Semaphore(<span class="hljs-number">6</span>);
-        <span class="hljs-comment">// &#x4E00;&#x5343;&#x4E2A;&#x7537;&#x4EBA;&#x6765;&#x8E72;&#x5751;</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
-            <span class="hljs-keyword">int</span> finalI = i;
-            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
-                <span class="hljs-meta">@Override</span>
-                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
-                    <span class="hljs-keyword">try</span> {
-                        semaphore.acquire();
-                    } <span class="hljs-keyword">catch</span> (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    squat(finalI);
-                    semaphore.release();
-                }
-            }).start();
-        }
-    }
-
-    <span class="hljs-comment">/**
-     * &#x8E72;&#x5751;
-     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">squat</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
-        Random random = <span class="hljs-keyword">new</span> Random();
-        <span class="hljs-keyword">int</span> x = random.nextInt(<span class="hljs-number">3</span>) + <span class="hljs-number">1</span>; <span class="hljs-comment">// [1,3]</span>
-        System.out.println(i + <span class="hljs-string">&quot;&#x53F7;&#x7EBF;&#x7A0B;&#x8E72;&#x5751;&#x7528;&#x65F6;&quot;</span> + x + <span class="hljs-string">&quot;&#x79D2;&#x3002;&quot;</span>);
-        LockSupport.parkNanos(x * <span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">1000L</span>);
-    }
-</code></pre>
-<h3 id="&#x7528;aqs&#x624B;&#x5199;semaphore">&#x7528;<code>AQS</code>&#x624B;&#x5199;Semaphore</h3>
-<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.Random;
-<span class="hljs-keyword">import</span> java.util.concurrent.locks.AbstractQueuedSynchronizer;
-<span class="hljs-keyword">import</span> java.util.concurrent.locks.LockSupport;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySemaphore</span> </span>{
-
-    <span class="hljs-keyword">private</span> Sync sync;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MySemaphore</span><span class="hljs-params">(<span class="hljs-keyword">int</span> permits)</span> </span>{
-        <span class="hljs-keyword">this</span>.sync = <span class="hljs-keyword">new</span> Sync(permits);
-    }
-
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">acquire</span><span class="hljs-params">()</span> </span>{
-        sync.acquireShared(<span class="hljs-number">1</span>);
-    }
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">release</span><span class="hljs-params">()</span> </span>{
-        sync.releaseShared(<span class="hljs-number">1</span>);
-    }
-
-
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractQueuedSynchronizer</span> </span>{
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> permits;
-
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Sync</span><span class="hljs-params">(<span class="hljs-keyword">int</span> permits)</span> </span>{
-            <span class="hljs-keyword">this</span>.permits = permits;
-        }
-
-        <span class="hljs-meta">@Override</span>
-        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> <span class="hljs-title">tryAcquireShared</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arg)</span> </span>{
-            <span class="hljs-keyword">int</span> state = getState();
-            <span class="hljs-keyword">int</span> nextState = state + arg;
-            <span class="hljs-keyword">if</span> (nextState &lt;= permits) {
-                <span class="hljs-keyword">if</span> (compareAndSetState(state, nextState)) {
-                    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-                }
-            }
-            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
-        }
-
-        <span class="hljs-meta">@Override</span>
-        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryReleaseShared</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arg)</span> </span>{
-            <span class="hljs-keyword">int</span> state = getState();
-            <span class="hljs-keyword">return</span> compareAndSetState(state, state - arg);
-        }
-    }
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-        <span class="hljs-comment">// &#x516C;&#x5171;&#x7537;&#x5395;&#x6709;6&#x4E2A;&#x5751;&#x4F4D;</span>
-        <span class="hljs-keyword">final</span> MySemaphore semaphore = <span class="hljs-keyword">new</span> MySemaphore(<span class="hljs-number">6</span>);
-        <span class="hljs-comment">// &#x4E00;&#x5343;&#x4E2A;&#x7537;&#x4EBA;&#x6765;&#x8E72;&#x5751;</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
-            <span class="hljs-keyword">int</span> finalI = i;
-            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
-                <span class="hljs-meta">@Override</span>
-                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
-                    semaphore.acquire();
-                    squat(finalI);
-                    semaphore.release();
-                }
-            }).start();
-        }
-    }
-
-    <span class="hljs-comment">/**
-     * &#x8E72;&#x5751;
-     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">squat</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
-        Random random = <span class="hljs-keyword">new</span> Random();
-        <span class="hljs-keyword">int</span> x = random.nextInt(<span class="hljs-number">3</span>) + <span class="hljs-number">1</span>; <span class="hljs-comment">// [1,3]</span>
-        System.out.println(i + <span class="hljs-string">&quot;&#x53F7;&#x7EBF;&#x7A0B;&#x8E72;&#x5751;&#x7528;&#x65F6;&quot;</span> + x + <span class="hljs-string">&quot;&#x79D2;&#x3002;&quot;</span>);
-        LockSupport.parkNanos(x * <span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">1000L</span>);
-    }
+                                <h1 id="forkjoin&#x6846;&#x67B6;">ForkJoin&#x6846;&#x67B6;</h1>
+<h3 id="&#x76F8;&#x5173;&#x63A5;&#x53E3;&#x7C7B;">&#x76F8;&#x5173;&#x63A5;&#x53E3;&#x7C7B;</h3>
+<h5 id="runnable">Runnable</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Runnable</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;
 }
 </code></pre>
+<h5 id="callable">Callable</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
+    <span class="hljs-function">V <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>;
+}
+</code></pre>
+<h5 id="future">Future</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> mayInterruptIfRunning)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isCancelled</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isDone</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException</span>;
+    <span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span>
+        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException</span>;
+}
+</code></pre>
+<h5 id="runnablefuture">RunnableFuture</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">RunnableFuture</span>&lt;<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Runnable</span>, <span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;
+}
+</code></pre>
+<h5 id="futuretask">FutureTask</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTask</span>&lt;<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">RunnableFuture</span>&lt;<span class="hljs-title">V</span>&gt;</span>{
+    <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<h3 id="futuretask&#x4F7F;&#x7528;&#x793A;&#x4F8B;">FutureTask&#x4F7F;&#x7528;&#x793A;&#x4F8B;</h3>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        FutureTask&lt;String&gt; futureTask = <span class="hljs-keyword">new</span> FutureTask&lt;&gt;(<span class="hljs-keyword">new</span> Callable&lt;String&gt;() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{
+                LockSupport.parkNanos(<span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">5L</span>);
+                System.out.println(<span class="hljs-string">&quot;done ...&quot;</span>); <span class="hljs-comment">// &#x4E24;&#x6B21;&#x542F;&#x52A8;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#xFF0C;&#x4F46;&#x8FD9;&#x884C;&#x53EA;&#x8F93;&#x51FA;&#x4E00;&#x6B21;</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Finish&quot;</span>;
+            }
+        });
+
+        <span class="hljs-comment">// &#x7B2C;1&#x6B21;&#x6267;&#x884C;</span>
+        <span class="hljs-keyword">new</span> Thread(futureTask).start();
+        <span class="hljs-keyword">try</span> {
+            String s = futureTask.get();
+            System.out.println(s);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        } <span class="hljs-keyword">catch</span> (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        <span class="hljs-comment">// &#x7B2C;2&#x6B21;&#x6267;&#x884C;</span>
+        <span class="hljs-keyword">new</span> Thread(futureTask).start();
+        <span class="hljs-keyword">try</span> {
+            String s = futureTask.get();
+            System.out.println(s);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        } <span class="hljs-keyword">catch</span> (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+done ...
+Finish
+Finish
+</code></pre>
+<p>&#x540C;&#x4E00;&#x4E2A;FutureTask&#x5BF9;&#x8C61;&#xFF0C;&#x4EA4;&#x7ED9;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#xFF0C;&#x53EA;&#x4F1A;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x3002;</p>
+<h3 id="&#x624B;&#x5199;futuretask">&#x624B;&#x5199;FutureTask</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.concurrent.*;
+<span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicReference;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.LockSupport;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFutureTask</span>&lt;<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span>, <span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
+
+    <span class="hljs-comment">// FutureTask &#x53EA;&#x80FD;&#x6267;&#x884C;&#x4E00;&#x6B21;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">int</span> state = NEW;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> NEW = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> RUNNING = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> FINISH = <span class="hljs-number">2</span>;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicReference&lt;Thread&gt; runner = <span class="hljs-keyword">new</span> AtomicReference&lt;&gt;(<span class="hljs-keyword">null</span>);
+
+    <span class="hljs-comment">/**
+     * &#x6267;&#x884C;&#x7ED3;&#x679C;
+     */</span>
+    <span class="hljs-keyword">private</span> V result;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Callable&lt;V&gt; callable;
+
+    <span class="hljs-comment">// &#x7B49;&#x5F85;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x7684;&#x7B49;&#x5F85;&#x961F;&#x5217;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> LinkedBlockingQueue&lt;Thread&gt; waiters = <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;&gt;(<span class="hljs-number">100</span>);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyFutureTask</span><span class="hljs-params">(Callable&lt;V&gt; callable)</span> </span>{
+        <span class="hljs-keyword">this</span>.callable = callable;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (state != NEW) {
+            <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">if</span> (!runner.compareAndSet(<span class="hljs-keyword">null</span>, Thread.currentThread())) {
+            <span class="hljs-keyword">return</span>;
+        }
+        state = RUNNING;
+        <span class="hljs-keyword">try</span> {
+            result = callable.call();
+        } <span class="hljs-keyword">catch</span> (Exception e) {
+            e.printStackTrace();
+        } <span class="hljs-keyword">finally</span> {
+            state = FINISH;
+        }
+        <span class="hljs-keyword">for</span> (; ; ) {
+            Thread waiter = waiters.poll();
+            <span class="hljs-keyword">if</span> (waiter == <span class="hljs-keyword">null</span>) {
+                <span class="hljs-keyword">break</span>;
+            }
+            LockSupport.unpark(waiter);
+        }
+
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>{
+        <span class="hljs-keyword">if</span> (state != FINISH) {
+            waiters.offer(Thread.currentThread());
+        }
+        <span class="hljs-keyword">while</span> (state != FINISH) {
+            LockSupport.park();
+        }
+        <span class="hljs-keyword">return</span> result;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> mayInterruptIfRunning)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isCancelled</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isDone</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        MyFutureTask&lt;String&gt; futureTask = <span class="hljs-keyword">new</span> MyFutureTask&lt;&gt;(<span class="hljs-keyword">new</span> Callable&lt;String&gt;() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{
+                LockSupport.parkNanos(<span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">5L</span>);
+                System.out.println(<span class="hljs-string">&quot;done ...&quot;</span>); <span class="hljs-comment">// &#x4E24;&#x6B21;&#x542F;&#x52A8;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#xFF0C;&#x4F46;&#x8FD9;&#x884C;&#x53EA;&#x8F93;&#x51FA;&#x4E00;&#x6B21;</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Finish&quot;</span>;
+            }
+        });
+
+        <span class="hljs-comment">// &#x7B2C;1&#x6B21;&#x6267;&#x884C;</span>
+        <span class="hljs-keyword">new</span> Thread(futureTask).start();
+        <span class="hljs-keyword">try</span> {
+            String s = futureTask.get();
+            System.out.println(s);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        } <span class="hljs-keyword">catch</span> (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        <span class="hljs-comment">// &#x7B2C;2&#x6B21;&#x6267;&#x884C;</span>
+        <span class="hljs-keyword">new</span> Thread(futureTask).start();
+        <span class="hljs-keyword">try</span> {
+            String s = futureTask.get();
+            System.out.println(s);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        } <span class="hljs-keyword">catch</span> (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+done ...
+Finish
+Finish
+</code></pre>
+<p>98:50</p>
 
                                 
                                 </section>
@@ -3778,12 +3863,12 @@
 
             
                 
-                <a href="01CountDownLatch.html" class="navigation navigation-prev " aria-label="Previous page: CountDownLatch">
+                <a href="03CyclicBarrier.html" class="navigation navigation-prev " aria-label="Previous page: CyclicBarrier">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="03CyclicBarrier.html" class="navigation navigation-next " aria-label="Next page: CyclicBarrier">
+                <a href="../../../900Spring Framework/" class="navigation navigation-next " aria-label="Next page: Spring Framework">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3794,7 +3879,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Semaphore","level":"1.17.3.3.2","depth":4,"next":{"title":"CyclicBarrier","level":"1.17.3.3.3","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/03CyclicBarrier.md","ref":"800Java/03JUC并发编程包/03并发工具类/03CyclicBarrier.md","articles":[]},"previous":{"title":"CountDownLatch","level":"1.17.3.3.1","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","ref":"800Java/03JUC并发编程包/03并发工具类/01CountDownLatch.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/03并发工具类/02Semaphore.md","mtime":"2022-05-16T06:16:41.342Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-16T06:17:33.123Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ForkJoin框架","level":"1.17.3.3.4","depth":4,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"CyclicBarrier","level":"1.17.3.3.3","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/03CyclicBarrier.md","ref":"800Java/03JUC并发编程包/03并发工具类/03CyclicBarrier.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/03并发工具类/04ForkJoin框架.md","mtime":"2022-05-16T06:16:41.342Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-16T06:17:33.123Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
