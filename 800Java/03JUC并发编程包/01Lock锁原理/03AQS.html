@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Queue · 个人笔记</title>
+        <title>AQS · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="05Stack.html" />
+    <link rel="next" href="../02并发容器/" />
     
     
-    <link rel="prev" href="03Set.html" />
+    <link rel="prev" href="02ReadWriteLock接口及其实现.html" />
     
 
     <style>
@@ -3305,9 +3305,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.1" data-path="../01Lock锁原理/">
+        <li class="chapter " data-level="1.17.3.1" data-path="./">
             
-                <a href="../01Lock锁原理/">
+                <a href="./">
             
                     
                     Lock锁原理
@@ -3319,9 +3319,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.1.1" data-path="../01Lock锁原理/01Lock接口及其实现.html">
+        <li class="chapter " data-level="1.17.3.1.1" data-path="01Lock接口及其实现.html">
             
-                <a href="../01Lock锁原理/01Lock接口及其实现.html">
+                <a href="01Lock接口及其实现.html">
             
                     
                     Lock接口及其实现
@@ -3332,9 +3332,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.1.2" data-path="../01Lock锁原理/02ReadWriteLock接口及其实现.html">
+        <li class="chapter " data-level="1.17.3.1.2" data-path="02ReadWriteLock接口及其实现.html">
             
-                <a href="../01Lock锁原理/02ReadWriteLock接口及其实现.html">
+                <a href="02ReadWriteLock接口及其实现.html">
             
                     
                     ReadWriteLock接口及其实现
@@ -3345,9 +3345,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.1.3" data-path="../01Lock锁原理/03AQS.html">
+        <li class="chapter active" data-level="1.17.3.1.3" data-path="03AQS.html">
             
-                <a href="../01Lock锁原理/03AQS.html">
+                <a href="03AQS.html">
             
                     
                     AQS
@@ -3363,9 +3363,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2" data-path="./">
+        <li class="chapter " data-level="1.17.3.2" data-path="../02并发容器/">
             
-                <a href="./">
+                <a href="../02并发容器/">
             
                     
                     并发容器
@@ -3377,9 +3377,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.3.2.1" data-path="01Map.html">
+        <li class="chapter " data-level="1.17.3.2.1" data-path="../02并发容器/01Map.html">
             
-                <a href="01Map.html">
+                <a href="../02并发容器/01Map.html">
             
                     
                     Map
@@ -3390,9 +3390,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.2" data-path="02List.html">
+        <li class="chapter " data-level="1.17.3.2.2" data-path="../02并发容器/02List.html">
             
-                <a href="02List.html">
+                <a href="../02并发容器/02List.html">
             
                     
                     List
@@ -3403,9 +3403,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.3" data-path="03Set.html">
+        <li class="chapter " data-level="1.17.3.2.3" data-path="../02并发容器/03Set.html">
             
-                <a href="03Set.html">
+                <a href="../02并发容器/03Set.html">
             
                     
                     Set
@@ -3416,9 +3416,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17.3.2.4" data-path="04Queue.html">
+        <li class="chapter " data-level="1.17.3.2.4" data-path="../02并发容器/04Queue.html">
             
-                <a href="04Queue.html">
+                <a href="../02并发容器/04Queue.html">
             
                     
                     Queue
@@ -3429,9 +3429,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.3.2.5" data-path="05Stack.html">
+        <li class="chapter " data-level="1.17.3.2.5" data-path="../02并发容器/05Stack.html">
             
-                <a href="05Stack.html">
+                <a href="../02并发容器/05Stack.html">
             
                     
                     Stack
@@ -3648,7 +3648,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >Queue</a>
+        <a href="../../.." >AQS</a>
     </h1>
 </div>
 
@@ -3663,101 +3663,151 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="queue">Queue</h1>
-<p>&#x961F;&#x5217;:&#x5148;&#x8FDB;&#x5148;&#x51FA;&#x3002;</p>
-<h3 id="queue-api">Queue API</h3>
-<table>
-<thead>
-<tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x4F5C;&#x7528;</th>
-<th>&#x63CF;&#x8FF0;</th>
-<th>&#x963B;&#x585E;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>add</td>
-<td>&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x4E00;&#x4E2A;IllegalSlabEepeplian&#x5F02;&#x5E38;</td>
-<td>&#x5F02;&#x5E38;</td>
-</tr>
-<tr>
-<td>remove</td>
-<td>&#x79FB;&#x9664;&#x5E76;&#x8FD4;&#x56DE;&#x961F;&#x5217;&#x5934;&#x90E8;&#x7684;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x4E00;&#x4E2A;NoSuchElementException&#x5F02;&#x5E38;</td>
-<td>&#x5F02;&#x5E38;</td>
-</tr>
-<tr>
-<td>element</td>
-<td>&#x8FD4;&#x56DE;&#x961F;&#x5217;&#x5934;&#x90E8;&#x7684;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x4E00;&#x4E2A;NoSuchElementException&#x5F02;&#x5E38;</td>
-<td>&#x5F02;&#x5E38;</td>
-</tr>
-<tr>
-<td>offer</td>
-<td>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5E76;&#x8FD4;&#x56DE;true</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;false</td>
-<td></td>
-</tr>
-<tr>
-<td>poll</td>
-<td>&#x79FB;&#x9664;&#x5E76;&#x8FD4;&#x95EE;&#x961F;&#x5217;&#x5934;&#x90E8;&#x7684;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null</td>
-<td></td>
-</tr>
-<tr>
-<td>peek</td>
-<td>&#x8FD4;&#x56DE;&#x961F;&#x5217;&#x5934;&#x90E8;&#x7684;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null</td>
-<td></td>
-</tr>
-<tr>
-<td>put</td>
-<td>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x6EE1;&#xFF0C;&#x5219;&#x963B;&#x585E;</td>
-<td>&#x963B;&#x585E;</td>
-</tr>
-<tr>
-<td>take</td>
-<td>&#x79FB;&#x9664;&#x5E76;&#x8FD4;&#x56DE;&#x961F;&#x5217;&#x5934;&#x90E8;&#x5143;&#x7D20;</td>
-<td>&#x5982;&#x679C;&#x961F;&#x5217;&#x7A7A;&#xFF0C;&#x5219;&#x963B;&#x585E;</td>
-<td>&#x963B;&#x585E;</td>
-</tr>
-</tbody>
-</table>
-<h3 id="arrayblockingqueue">ArrayBlockingQueue</h3>
-<p>&#x5B58;&#x50A8;&#x7ED3;&#x6784;&#x4E3A;&#x6570;&#x7EC4;&#x3002;</p>
-<p>&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x3002;</p>
-<p>&#x6784;&#x9020;&#x51FD;&#x6570;&#x8981;&#x6C42;&#x6307;&#x5B9A;&#x5BB9;&#x91CF;&#xFF0C;&#x4E14;&#x4E0D;&#x80FD;&#x6269;&#x5BB9;&#xFF08;&#x5982;&#x679C;&#x80FD;&#x6269;&#x5BB9;&#x8FD8;&#x963B;&#x585E;&#x4E2A;&#x4EC0;&#x4E48;&#x52B2;&#xFF09;&#x3002;</p>
-<p>&#x6709;&#x754C;&#x3002;</p>
-<h3 id="linkedblockingdeque">LinkedBlockingDeque</h3>
-<p>&#x5B58;&#x50A8;&#x7ED3;&#x6784;&#x4E3A;&#x94FE;&#x8868;&#x3002;</p>
-<p>&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x3002;</p>
-<p>&#x6784;&#x9020;&#x65F6;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x5BB9;&#x91CF;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x6307;&#x5B9A;&#x3002;&#x4E0D;&#x6307;&#x5B9A;&#x65F6;&#x8868;&#x793A;&#x5BB9;&#x91CF;&#x65E0;&#x9650;&#x5927;&#xFF0C;Integer.MAX_VALUE&#x3002;</p>
-<p>&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E3A;&#x6709;&#x754C;&#x6216;&#x65E0;&#x754C;&#x961F;&#x5217;&#x3002;</p>
-<p>&#x5E76;&#x53D1;&#x5EA6;&#x9AD8;&#x4E8E;ArrayBlockingQueue&#x3002;</p>
-<h3 id="concurrentlinkedqueue">ConcurrentLinkedQueue</h3>
-<p>&#x5B58;&#x50A8;&#x7ED3;&#x6784;&#x4E3A;&#x94FE;&#x8868;&#x3002;</p>
-<p>&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x3002;</p>
-<p>&#x975E;&#x963B;&#x585E;&#xFF0C;&#x65E0;&#x754C;&#x3002;</p>
-<p>&#x5E76;&#x53D1;&#x6027;&#x80FD;&#x66F4;&#x9AD8;&#x3002;</p>
-<h3 id="synchronousqueue">SynchronousQueue</h3>
-<p>&#x963B;&#x585E;&#x961F;&#x5217;&#xFF0C;&#x6CA1;&#x6709;&#x5BB9;&#x91CF;&#x3002;</p>
-<p>take&#x65F6;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;put/offer&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5230;&#x961F;&#x5217;&#x3002;</p>
-<p>put&#x65F6;&#x4E5F;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;take/poll&#x8D70;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x3002;</p>
-<p>&#x82E5;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x6267;&#x884C;take&#x963B;&#x585E;&#xFF0C;offer&#x65B0;&#x589E;&#x5143;&#x7D20;&#x4F1A;&#x5931;&#x8D25;&#xFF0C;&#x8FD4;&#x56DE;false&#x3002;</p>
-<p>&#x82E5;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x6267;&#x884C;put&#x963B;&#x585E;&#xFF0C;pool&#x4F1A;&#x53D6;&#x5230;&#x4E00;&#x4E2A;null&#x3002;</p>
-<p>peek&#x53D6;&#x5230;&#x7684;&#x5143;&#x7D20;&#x6C38;&#x8FDC;&#x4E3A;null&#x3002;</p>
-<p>&#x540C;&#x6B65;&#x961F;&#x5217;(&#x7EBF;&#x7A0B;&#x5B89;&#x5168;)&#x3002;</p>
-<h3 id="priorityblockingqueue">PriorityBlockingQueue</h3>
-<p>&#x5B58;&#x50A8;&#x7ED3;&#x6784;&#x4E3A;&#x6570;&#x7EC4;&#x3002;&#x9ED8;&#x8BA4;&#x5BB9;&#x91CF;&#x662F;11&#x3002;&#x4F1A;&#x6269;&#x5BB9;&#xFF0C;&#x65E0;&#x754C;&#x961F;&#x5217;&#x3002;</p>
-<p>&#x8FD8;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x5668;&#xFF0C;&#x4F7F;&#x5176;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x6709;&#x5E8F;(&#x7531;Comparator&#x6307;&#x5B9A;)&#x7684;&#x961F;&#x5217;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x961F;&#x5217;&#x6CDB;&#x578B;&#x6307;&#x5B9A;&#x4E3A;String&#x6216;Integer&#x8FD9;&#x6837;&#x7684;&#x5B9E;&#x73B0;&#x4E86;Comparable&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#xFF0C;&#x961F;&#x5217;&#x7684;&#x987A;&#x5E8F;&#x7531;compareTo&#x65B9;&#x6CD5;&#x51B3;&#x5B9A;&#x3002;</p>
-<pre><code class="lang-java">        Comparator&lt;Student&gt; comparator = Comparator
-                .comparing(Student::getAge, Comparator.reverseOrder())
-                .thenComparing(Student::getName);
-        PriorityBlockingQueue&lt;Student&gt; queue = <span class="hljs-keyword">new</span> PriorityBlockingQueue&lt;&gt;(<span class="hljs-number">3</span>, comparator);
+                                <h3 id="aqs---abstractqueuedsynchronizer">AQS - AbstractQueuedSynchronizer</h3>
+<h3 id="&#x540C;&#x6B65;&#x57FA;&#x7840;&#x65B9;&#x6CD5;">&#x540C;&#x6B65;&#x57FA;&#x7840;&#x65B9;&#x6CD5;</h3>
+<h5 id="getstate"><code>getState()</code></h5>
+<p>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x540C;&#x6B65;&#x72B6;&#x6001;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6574;&#x5F62;&#x6570;&#x503C;</p>
+<h5 id="setstate"><code>setState()</code></h5>
+<p>&#x8BBE;&#x7F6E;&#x72B6;&#x6001;&#xFF0C;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x6574;&#x5F62;&#x6570;&#x503C;</p>
+<h5 id="compareandsetstate"><code>compareAndSetState()</code></h5>
+<p>&#x5229;&#x7528;<code>CAS</code>&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x8BBE;&#x7F6E;&#x72B6;&#x6001;</p>
+<h5 id="setexclusiveownerthreadthread-thread"><code>setExclusiveOwnerThread(Thread thread)</code></h5>
+<p>&#x8BBE;&#x7F6E;&#x72EC;&#x5360;&#x6709;&#x7EBF;&#x7A0B;</p>
+<h5 id="thread-getexclusiveownerthread"><code>Thread getExclusiveOwnerThread()</code></h5>
+<p>&#x83B7;&#x53D6;&#x72EC;&#x5360;&#x7EBF;&#x7A0B;</p>
+<h3 id="&#x540C;&#x6B65;&#x5668;&#x4E2D;&#x53EF;&#x91CD;&#x5199;&#x7684;&#x65B9;&#x6CD5;">&#x540C;&#x6B65;&#x5668;&#x4E2D;&#x53EF;&#x91CD;&#x5199;&#x7684;&#x65B9;&#x6CD5;</h3>
+<ul>
+<li><code>tryAccquire()</code></li>
+<li><code>tryRelease()</code></li>
+<li><code>tryAccquireShared()</code></li>
+<li><code>tryReleaseShared()</code></li>
+<li><code>isHeldExclusively()</code></li>
+</ul>
+<h3 id="&#x540C;&#x6B65;&#x5668;&#x4E2D;&#x7684;&#x6A21;&#x7248;&#x65B9;&#x6CD5;">&#x540C;&#x6B65;&#x5668;&#x4E2D;&#x7684;&#x6A21;&#x7248;&#x65B9;&#x6CD5;</h3>
+<ul>
+<li><code>accquire()</code></li>
+<li><code>accquirelnterruptibly()</code></li>
+<li><code>tryAccquireNanos()</code></li>
+<li><code>acquireShared()</code></li>
+<li><code>accquireSharedlnterruptibly()</code></li>
+<li><code>tryAccquireSharedNanos()</code></li>
+<li><code>release()</code></li>
+<li><code>releaseShared()</code></li>
+<li><code>getQueuedThreads()</code></li>
+</ul>
+<h3 id="&#x7528;aqs&#x5B9E;&#x73B0;&#x81EA;&#x5DF2;reentrantlock">&#x7528;<code>AQS</code>&#x5B9E;&#x73B0;&#x81EA;&#x5DF2;<code>ReentrantLock</code></h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.concurrent.TimeUnit;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.AbstractQueuedSynchronizer;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.Condition;
+<span class="hljs-keyword">import</span> java.util.concurrent.locks.Lock;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyReentrantLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Lock</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Sync sync = <span class="hljs-keyword">new</span> Sync();
+
+    <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractQueuedSynchronizer</span> </span>{
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryAcquire</span><span class="hljs-params">(<span class="hljs-keyword">int</span> acquires)</span> </span>{
+            <span class="hljs-keyword">int</span> c = getState();
+            <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">boolean</span> success = compareAndSetState(<span class="hljs-number">0</span>, acquires);
+                <span class="hljs-keyword">if</span> (success) {
+                    setExclusiveOwnerThread(Thread.currentThread());
+                }
+                <span class="hljs-keyword">return</span> success;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">if</span> (Thread.currentThread() == getExclusiveOwnerThread()) {
+                    <span class="hljs-keyword">int</span> netxc = c + acquires;
+                    <span class="hljs-keyword">if</span> (netxc &lt; <span class="hljs-number">0</span>) {
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">&quot;&quot;</span>);
+                    }
+                    setState(netxc);
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+                }
+            }
+        }
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryRelease</span><span class="hljs-params">(<span class="hljs-keyword">int</span> releases)</span> </span>{
+            <span class="hljs-keyword">if</span> (Thread.currentThread() != getExclusiveOwnerThread()) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+            }
+            <span class="hljs-keyword">int</span> c = getState() - releases;
+            <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) {
+                setExclusiveOwnerThread(<span class="hljs-keyword">null</span>);
+                setState(c);
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            } <span class="hljs-keyword">else</span> {
+                setState(c);
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            }
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> Condition <span class="hljs-title">newCondition</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ConditionObject();
+        }
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isHeldExclusively</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> getExclusiveOwnerThread() == Thread.currentThread();
+        }
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>{
+        sync.acquire(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> sync.tryAcquire(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span> </span>{
+        sync.release(<span class="hljs-number">1</span>);
+    }
+
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lockInterruptibly</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        sync.acquireInterruptibly(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">(<span class="hljs-keyword">long</span> time, TimeUnit unit)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        <span class="hljs-keyword">return</span> sync.tryAcquireNanos(<span class="hljs-number">1</span>, unit.toNanos(time));
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Condition <span class="hljs-title">newCondition</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> sync.newCondition();
+    }
+
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] sum = {<span class="hljs-number">0</span>};
+        <span class="hljs-keyword">final</span> MyReentrantLock myReentrantLock = <span class="hljs-keyword">new</span> MyReentrantLock();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; i++) {
+            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                    myReentrantLock.lock();
+                    <span class="hljs-keyword">try</span> {
+                        sum[<span class="hljs-number">0</span>]++;
+                    } <span class="hljs-keyword">finally</span> {
+                        myReentrantLock.unlock();
+                    }
+                }
+            }).start();
+        }
+        Thread.sleep(<span class="hljs-number">20000L</span>);
+        System.out.println(sum[<span class="hljs-number">0</span>]);
+    }
+}
 </code></pre>
 
                                 
@@ -3786,12 +3836,12 @@
 
             
                 
-                <a href="03Set.html" class="navigation navigation-prev " aria-label="Previous page: Set">
+                <a href="02ReadWriteLock接口及其实现.html" class="navigation navigation-prev " aria-label="Previous page: ReadWriteLock接口及其实现">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="05Stack.html" class="navigation navigation-next " aria-label="Next page: Stack">
+                <a href="../02并发容器/" class="navigation navigation-next " aria-label="Next page: 并发容器">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3802,7 +3852,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Queue","level":"1.17.3.2.4","depth":4,"next":{"title":"Stack","level":"1.17.3.2.5","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/05Stack.md","ref":"800Java/03JUC并发编程包/02并发容器/05Stack.md","articles":[]},"previous":{"title":"Set","level":"1.17.3.2.3","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","ref":"800Java/03JUC并发编程包/02并发容器/03Set.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","mtime":"2022-05-18T03:01:47.102Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-18T03:02:35.175Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AQS","level":"1.17.3.1.3","depth":4,"next":{"title":"并发容器","level":"1.17.3.2","depth":3,"path":"800Java/03JUC并发编程包/02并发容器/README.md","ref":"800Java/03JUC并发编程包/02并发容器/README.md","articles":[{"title":"Map","level":"1.17.3.2.1","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/01Map.md","ref":"800Java/03JUC并发编程包/02并发容器/01Map.md","articles":[]},{"title":"List","level":"1.17.3.2.2","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/02List.md","ref":"800Java/03JUC并发编程包/02并发容器/02List.md","articles":[]},{"title":"Set","level":"1.17.3.2.3","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/03Set.md","ref":"800Java/03JUC并发编程包/02并发容器/03Set.md","articles":[]},{"title":"Queue","level":"1.17.3.2.4","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/04Queue.md","ref":"800Java/03JUC并发编程包/02并发容器/04Queue.md","articles":[]},{"title":"Stack","level":"1.17.3.2.5","depth":4,"path":"800Java/03JUC并发编程包/02并发容器/05Stack.md","ref":"800Java/03JUC并发编程包/02并发容器/05Stack.md","articles":[]}]},"previous":{"title":"ReadWriteLock接口及其实现","level":"1.17.3.1.2","depth":4,"path":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","ref":"800Java/03JUC并发编程包/01Lock锁原理/02ReadWriteLock接口及其实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/03JUC并发编程包/01Lock锁原理/03AQS.md","mtime":"2022-05-18T03:01:47.102Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-18T03:02:35.175Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
