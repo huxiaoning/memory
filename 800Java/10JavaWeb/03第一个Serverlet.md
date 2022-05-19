@@ -37,18 +37,20 @@ maven-archetype-webapp
 package org.example.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
+@WebServlet("/a") // 可以不用配置web.xml web 3.0.1 开始支持
 public class MyServlet extends HttpServlet {
 
     private static final AtomicLong num = new AtomicLong(0);
 
     public MyServlet() {
-        num.incrementAndGet(); // 只会执行一次
+        num.incrementAndGet();
     }
 
     @Override
@@ -58,6 +60,7 @@ public class MyServlet extends HttpServlet {
         System.out.println(num.get()); // 无论请求几次，这里都只会打印1，因为servlet是单例的。
     }
 }
+
 ```
 
 ### 在web.xml中配置myServlet
@@ -101,7 +104,10 @@ $ cp target/web-demo.war $CATALINA_HOME/webapps/
 
 ![image-20220519145909957](https://raw.githubusercontent.com/huxiaoning/img/master/20220519145910.png)
 
-访问地址`http://localhost:8080/web-demo/myServlet`
+访问地址
+
+- `http://localhost:8080/web-demo/myServlet`
+- `http://localhost:8080/web-demo/a`  (这种不需要配置web.xml)
 
 ### Servlet是单例的吗？
 
