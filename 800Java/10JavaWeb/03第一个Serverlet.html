@@ -70,7 +70,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../../900Spring Framework/" />
+    <link rel="next" href="04Servlet生命周期.html" />
     
     
     <link rel="prev" href="02Tomcat.html" />
@@ -3589,6 +3589,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.17.4.4" data-path="04Servlet生命周期.html">
+            
+                <a href="04Servlet生命周期.html">
+            
+                    
+                    Servlet生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -3804,17 +3817,6 @@
 <h3 id="servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x5417;&#xFF1F;">Servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x5417;&#xFF1F;</h3>
 <p>&#x662F;&#x3002;(&#x53EA;&#x9700;&#x8981;&#x628A;MyServlet&#x7684;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5199;&#x51FA;&#x6765;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x6DFB;&#x52A0;&#x4E00;&#x53E5;&#x6253;&#x5370;&#x8BED;&#x53E5;&#xFF0C;&#x5373;&#x53EF;&#x9A8C;&#x8BC1;)</p>
 <p>Servlet&#x88AB;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x673A;&#x88AB;&#x4E00;&#x6B21;&#x88AB;&#x8BBF;&#x95EE;&#x65F6;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x3002;&#x76F8;&#x5F53;&#x4E8E;&#x61D2;&#x6C49;&#x6A21;&#x5F0F;&#x3002;</p>
-<h3 id="servlet&#x63A5;&#x53E3;">Servlet&#x63A5;&#x53E3;</h3>
-<pre><code class="lang-java"><span class="hljs-keyword">package</span> javax.servlet;
-<span class="hljs-keyword">import</span> java.io.IOException;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Servlet</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ServletConfig config)</span> <span class="hljs-keyword">throws</span> ServletException</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> ServletConfig <span class="hljs-title">getServletConfig</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(ServletRequest req, ServletResponse res)</span> <span class="hljs-keyword">throws</span> ServletException, IOException</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getServletInfo</span><span class="hljs-params">()</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span></span>;
-}
-</code></pre>
 
                                 
                                 </section>
@@ -3847,7 +3849,7 @@
                 </a>
                 
                 
-                <a href="../../900Spring Framework/" class="navigation navigation-next " aria-label="Next page: Spring Framework">
+                <a href="04Servlet生命周期.html" class="navigation navigation-next " aria-label="Next page: Servlet生命周期">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -3858,7 +3860,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"Tomcat","level":"1.17.4.2","depth":3,"path":"800Java/10JavaWeb/02Tomcat.md","ref":"800Java/10JavaWeb/02Tomcat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/10JavaWeb/03第一个Serverlet.md","mtime":"2022-05-19T07:59:29.119Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-19T08:00:12.041Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"next":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"path":"800Java/10JavaWeb/04Servlet生命周期.md","ref":"800Java/10JavaWeb/04Servlet生命周期.md","articles":[]},"previous":{"title":"Tomcat","level":"1.17.4.2","depth":3,"path":"800Java/10JavaWeb/02Tomcat.md","ref":"800Java/10JavaWeb/02Tomcat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/10JavaWeb/03第一个Serverlet.md","mtime":"2022-05-19T08:57:47.692Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-19T08:58:46.215Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
