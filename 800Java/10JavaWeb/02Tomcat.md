@@ -33,7 +33,7 @@
 
 ### Idea配置Tomcat
 
-![image-20220519141823444](C:\Users\Jett\AppData\Roaming\Typora\typora-user-images\image-20220519141823444.png)
+![image-20220519141823444](https://raw.githubusercontent.com/huxiaoning/img/master/20220519143124.png)
 
 #### 启动web项目
 
