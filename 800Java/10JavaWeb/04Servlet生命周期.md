@@ -15,7 +15,7 @@
     <servlet>
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>org.example.servlet.MyServlet</servlet-class>
-        <load-on-startup>1</load-on-startup> <!-- Tomcat服务器启动时创建Servlet对象实例 -->
+        <load-on-startup>1</load-on-startup> <!-- Tomcat服务器启动时创建Servlet对象实例,数字表示加载顺序 -->
     </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
@@ -32,10 +32,6 @@ public class MyServlet extends HttpServlet {
     
 }
 ```
-
-
-
-
 
 
 
@@ -95,4 +91,126 @@ public class ServletLife extends HttpServlet {
     }
 }
 ```
+
+
+
+### `doGet`和`doPost`
+
+正常情况下不需要重写`service`方法,`HttpServlet`类的`service`方法已经做了方法分发：
+
+```java
+    protected void service(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException
+    {
+        String method = req.getMethod();
+
+        if (method.equals(METHOD_GET)) {
+            long lastModified = getLastModified(req);
+            if (lastModified == -1) {
+                // servlet doesn't support if-modified-since, no reason
+                // to go through further expensive logic
+                doGet(req, resp);
+            } else {
+                long ifModifiedSince = req.getDateHeader(HEADER_IFMODSINCE);
+                if (ifModifiedSince < lastModified) {
+                    // If the servlet mod time is later, call doGet()
+                    // Round down to the nearest second for a proper compare
+                    // A ifModifiedSince of -1 will always be less
+                    maybeSetLastModified(resp, lastModified);
+                    doGet(req, resp);
+                } else {
+                    resp.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+                }
+            }
+
+        } else if (method.equals(METHOD_HEAD)) {
+            long lastModified = getLastModified(req);
+            maybeSetLastModified(resp, lastModified);
+            doHead(req, resp);
+
+        } else if (method.equals(METHOD_POST)) {
+            doPost(req, resp);
+            
+        } else if (method.equals(METHOD_PUT)) {
+            doPut(req, resp);
+            
+        } else if (method.equals(METHOD_DELETE)) {
+            doDelete(req, resp);
+            
+        } else if (method.equals(METHOD_OPTIONS)) {
+            doOptions(req,resp);
+            
+        } else if (method.equals(METHOD_TRACE)) {
+            doTrace(req,resp);
+            
+        } else {
+            //
+            // Note that this means NO servlet supports whatever
+            // method was requested, anywhere on this server.
+            //
+
+            String errMsg = lStrings.getString("http.method_not_implemented");
+            Object[] errArgs = new Object[1];
+            errArgs[0] = method;
+            errMsg = MessageFormat.format(errMsg, errArgs);
+            
+            resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
+        }
+    }    
+```
+
+一般`servlet`开发需要复写`doGet`或`doPost`方法。
+
+
+
+### 示例
+
+```java
+@WebServlet("/method")
+public class ServletMethod extends HttpServlet {
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("service");
+        super.service(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doGet");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doPost");
+    }
+}
+```
+
+`method.jsp`
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<form action="method" method="post">
+    用户名:<input type="text" name="uname" value=""><br>
+    密码: <input type="password" name="pwd" value=""><br>
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>
+```
+
+##### 访问说明
+
+- http://localhost:8080/web-demo/method.jsp 访问的是`method.jsp`页面
+- http://localhost:8080/web-demo/method 访问的是`ServletMethod`的`doGet`|`doPost`方法
+
+
+
+
 

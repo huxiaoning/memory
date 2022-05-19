@@ -71,6 +71,9 @@ public class MyServlet extends HttpServlet {
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+    <welcome-file-list> <!-- 可以不配置这个 -->
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>org.example.servlet.MyServlet</servlet-class>
@@ -107,6 +110,7 @@ $ cp target/web-demo.war $CATALINA_HOME/webapps/
 访问地址
 
 - `http://localhost:8080/web-demo/myServlet`
+  - 相当于 `http://localhost:8080/web-demo/myServlet/index.jsp`
 - `http://localhost:8080/web-demo/a`  (这种不需要配置web.xml)
 
 ### Servlet是单例的吗？
