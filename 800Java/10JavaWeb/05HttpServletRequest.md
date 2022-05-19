@@ -1,12 +1,13 @@
 # HttpServletRequest
 
-### 获取所有请求头信息
+### 获取所有请求行信息
 
 ```java
 @WebServlet("/requestServlet")
 public class RequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 获取所有请求行信息
         Enumeration<String> headerNames = req.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headKey = headerNames.nextElement();
@@ -16,6 +17,10 @@ public class RequestServlet extends HttpServlet {
                 System.out.println(headKey + " --> " + value);
             }
         }
+
+        // 获取指定的请求行信息
+        String header = req.getHeader("user-agent");
+        System.out.println(header);
     }
 }
 
@@ -39,7 +44,7 @@ cookie --> JSESSIONID=B724BEF33A2A1375E7A3B009B6B2607B; _ga=GA1.1.835850808.1623
 
 
 
-### 获取一些常用信息
+### 获取一些常用请求头信息
 
 ```java
 @WebServlet("/requestServlet")
@@ -62,5 +67,23 @@ public class RequestServlet extends HttpServlet {
         System.out.println(protocol); // HTTP/1.1
     }
 }
+```
+
+
+
+### 获取用户信息,即参数
+
+##### 取单个参数
+
+```java
+String username = req.getParameter("username");
+String[] hobbies = req.getParameterValues("hobby");
+```
+
+##### 取所有参数
+
+```java
+Map<String, String[]> parameterMap = req.getParameterMap();
+Enumeration<String> parameterNames = req.getParameterNames();
 ```
 
