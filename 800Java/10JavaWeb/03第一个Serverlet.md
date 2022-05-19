@@ -117,17 +117,3 @@ Servlet被创建的时机被一次被访问时。也就是延迟加载。相当�
 
 
 
-### Servlet接口
-
-```java
-package javax.servlet;
-import java.io.IOException;
-public interface Servlet {
-    public void init(ServletConfig config) throws ServletException;
-    public ServletConfig getServletConfig();
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException;
-    public String getServletInfo()
-    public void destroy();
-}
-```
-
