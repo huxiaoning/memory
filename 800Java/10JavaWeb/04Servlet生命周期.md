@@ -208,9 +208,7 @@ public class ServletMethod extends HttpServlet {
 ##### 访问说明
 
 - http://localhost:8080/web-demo/method.jsp 访问的是`method.jsp`页面
-- http://localhost:8080/web-demo/method 访问的是`ServletMethod`的`doGet`|`doPost`方法
-
-
+- http://localhost:8080/web-demo/method 访问的是`ServletMethod`的`doGet`|`doPost`即`service`方法
 
 
 
