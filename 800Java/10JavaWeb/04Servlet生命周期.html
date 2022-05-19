@@ -3749,7 +3749,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.example.servlet.MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span> <span class="hljs-comment">&lt;!-- Tomcat&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;&#x65F6;&#x521B;&#x5EFA;Servlet&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span> <span class="hljs-comment">&lt;!-- Tomcat&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;&#x65F6;&#x521B;&#x5EFA;Servlet&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x6570;&#x5B57;&#x8868;&#x793A;&#x52A0;&#x8F7D;&#x987A;&#x5E8F; --&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
@@ -3812,6 +3812,109 @@
     }
 }
 </code></pre>
+<h3 id="doget&#x548C;dopost"><code>doGet</code>&#x548C;<code>doPost</code></h3>
+<p>&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x5199;<code>service</code>&#x65B9;&#x6CD5;,<code>HttpServlet</code>&#x7C7B;&#x7684;<code>service</code>&#x65B9;&#x6CD5;&#x5DF2;&#x7ECF;&#x505A;&#x4E86;&#x65B9;&#x6CD5;&#x5206;&#x53D1;&#xFF1A;</p>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span>
+        <span class="hljs-keyword">throws</span> ServletException, IOException
+    </span>{
+        String method = req.getMethod();
+
+        <span class="hljs-keyword">if</span> (method.equals(METHOD_GET)) {
+            <span class="hljs-keyword">long</span> lastModified = getLastModified(req);
+            <span class="hljs-keyword">if</span> (lastModified == -<span class="hljs-number">1</span>) {
+                <span class="hljs-comment">// servlet doesn&apos;t support if-modified-since, no reason</span>
+                <span class="hljs-comment">// to go through further expensive logic</span>
+                doGet(req, resp);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">long</span> ifModifiedSince = req.getDateHeader(HEADER_IFMODSINCE);
+                <span class="hljs-keyword">if</span> (ifModifiedSince &lt; lastModified) {
+                    <span class="hljs-comment">// If the servlet mod time is later, call doGet()</span>
+                    <span class="hljs-comment">// Round down to the nearest second for a proper compare</span>
+                    <span class="hljs-comment">// A ifModifiedSince of -1 will always be less</span>
+                    maybeSetLastModified(resp, lastModified);
+                    doGet(req, resp);
+                } <span class="hljs-keyword">else</span> {
+                    resp.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+                }
+            }
+
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_HEAD)) {
+            <span class="hljs-keyword">long</span> lastModified = getLastModified(req);
+            maybeSetLastModified(resp, lastModified);
+            doHead(req, resp);
+
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_POST)) {
+            doPost(req, resp);
+
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_PUT)) {
+            doPut(req, resp);
+
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_DELETE)) {
+            doDelete(req, resp);
+
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_OPTIONS)) {
+            doOptions(req,resp);
+
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_TRACE)) {
+            doTrace(req,resp);
+
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">//</span>
+            <span class="hljs-comment">// Note that this means NO servlet supports whatever</span>
+            <span class="hljs-comment">// method was requested, anywhere on this server.</span>
+            <span class="hljs-comment">//</span>
+
+            String errMsg = lStrings.getString(<span class="hljs-string">&quot;http.method_not_implemented&quot;</span>);
+            Object[] errArgs = <span class="hljs-keyword">new</span> Object[<span class="hljs-number">1</span>];
+            errArgs[<span class="hljs-number">0</span>] = method;
+            errMsg = MessageFormat.format(errMsg, errArgs);
+
+            resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
+        }
+    }
+</code></pre>
+<p>&#x4E00;&#x822C;<code>servlet</code>&#x5F00;&#x53D1;&#x9700;&#x8981;&#x590D;&#x5199;<code>doGet</code>&#x6216;<code>doPost</code>&#x65B9;&#x6CD5;&#x3002;</p>
+<h3 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">&quot;/method&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServletMethod</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
+        System.out.println(<span class="hljs-string">&quot;service&quot;</span>);
+        <span class="hljs-keyword">super</span>.service(req, resp);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
+        System.out.println(<span class="hljs-string">&quot;doGet&quot;</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
+        System.out.println(<span class="hljs-string">&quot;doPost&quot;</span>);
+    }
+}
+</code></pre>
+<p><code>method.jsp</code></p>
+<pre><code class="lang-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; pageEncoding=&quot;utf-8&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;method&quot; method=&quot;post&quot;&gt;
+    &#x7528;&#x6237;&#x540D;:&lt;input type=&quot;text&quot; name=&quot;uname&quot; value=&quot;&quot;&gt;&lt;br&gt;
+    &#x5BC6;&#x7801;: &lt;input type=&quot;password&quot; name=&quot;pwd&quot; value=&quot;&quot;&gt;&lt;br&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;&#x767B;&#x5F55;&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h5 id="&#x8BBF;&#x95EE;&#x8BF4;&#x660E;">&#x8BBF;&#x95EE;&#x8BF4;&#x660E;</h5>
+<ul>
+<li><a href="http://localhost:8080/web-demo/method.jsp" target="_blank">http://localhost:8080/web-demo/method.jsp</a> &#x8BBF;&#x95EE;&#x7684;&#x662F;<code>method.jsp</code>&#x9875;&#x9762;</li>
+<li><a href="http://localhost:8080/web-demo/method" target="_blank">http://localhost:8080/web-demo/method</a> &#x8BBF;&#x95EE;&#x7684;&#x662F;<code>ServletMethod</code>&#x7684;<code>doGet</code>|<code>doPost</code>&#x65B9;&#x6CD5;</li>
+</ul>
 
                                 
                                 </section>
@@ -3855,7 +3958,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"path":"800Java/10JavaWeb/03第一个Serverlet.md","ref":"800Java/10JavaWeb/03第一个Serverlet.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/10JavaWeb/04Servlet生命周期.md","mtime":"2022-05-19T08:57:47.692Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-19T08:58:46.215Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"path":"800Java/10JavaWeb/03第一个Serverlet.md","ref":"800Java/10JavaWeb/03第一个Serverlet.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/10JavaWeb/04Servlet生命周期.md","mtime":"2022-05-19T12:56:27.137Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-19T12:57:24.560Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
