@@ -113,7 +113,7 @@
 %>
 <html>
 <head>
-    <base href="<%=basePath%>"> <!-- 这个href会自动拼接到下面的a标签的href中 -->
+    <base href="<%=basePath%>"> <!-- 这个href会自动拼接到下面的a标签的href中 --><!-- 如果没有这句，推荐使用绝对路径的方式，从"/虚拟项目名"写起 -->
     <title>学习JSP动态引入</title>
 </head>
 <body>
