@@ -86,3 +86,39 @@
 
 这些就是jsp的内置对象。
 
+
+
+### 四个作用域对象
+
+| 对象        | 作用域                 | 说明                                                         |
+| ----------- | ---------------------- | ------------------------------------------------------------ |
+| pageContext | 当前页面               | 仅当前页面(多次转发是不同的pageContext页面),用来获取其它内置对象。 |
+| request     | 一次请求               | 可以在一次请求的多次转发间流转数据                           |
+| session     | 一次会话               |                                                              |
+| application | 项目内，应用启动到关闭 | 全局唯一 ServletContext                                      |
+
+
+
+
+
+### JSP路径问题
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    // /web-demo
+    String path = request.getContextPath();
+    // http://localhost:8080/web-demo/
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<html>
+<head>
+    <base href="<%=basePath%>"> <!-- 这个href会自动拼接到下面的a标签的href中 -->
+    <title>学习JSP动态引入</title>
+</head>
+<body>
+<a href="a.jsp">a.jsp</a>
+</body>
+</html>
+```
+
