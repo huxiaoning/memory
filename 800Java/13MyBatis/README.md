@@ -171,8 +171,12 @@ public class App {
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        List<User> userList = sqlSession.selectList("org.example.mapper.UserMapper.findAll");
-        System.out.println(userList);
+        try {
+            List<User> userList = sqlSession.selectList("org.example.mapper.UserMapper.findAll");
+            System.out.println(userList);
+        } finally {
+            sqlSession.close();
+        }
     }
 }
 ```
