@@ -3784,6 +3784,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.17.4.19" data-path="19过滤器.html">
+            
+                <a href="19过滤器.html">
+            
+                    
+                    过滤器
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -4005,6 +4018,75 @@
 <h3 id="servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x5417;&#xFF1F;">Servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x5417;&#xFF1F;</h3>
 <p>&#x662F;&#x3002;(&#x53EA;&#x9700;&#x8981;&#x628A;MyServlet&#x7684;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5199;&#x51FA;&#x6765;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x6DFB;&#x52A0;&#x4E00;&#x53E5;&#x6253;&#x5370;&#x8BED;&#x53E5;&#xFF0C;&#x5373;&#x53EF;&#x9A8C;&#x8BC1;)</p>
 <p>Servlet&#x88AB;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x673A;&#x88AB;&#x4E00;&#x6B21;&#x88AB;&#x8BBF;&#x95EE;&#x65F6;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x3002;&#x76F8;&#x5F53;&#x4E8E;&#x61D2;&#x6C49;&#x6A21;&#x5F0F;&#x3002;</p>
+<h3 id="webservlet&#x6CE8;&#x89E3;&#x6E90;&#x7801;&#x770B;&#x4E0B;&#x90FD;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x4EC0;&#x4E48;&#xFF0C;xml&#x7C7B;&#x4F3C;">WebServlet&#x6CE8;&#x89E3;&#x6E90;&#x7801;(&#x770B;&#x4E0B;&#x90FD;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x4EC0;&#x4E48;)&#xFF0C;xml&#x7C7B;&#x4F3C;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> javax.servlet.annotation;
+
+<span class="hljs-keyword">import</span> java.lang.annotation.ElementType;
+<span class="hljs-keyword">import</span> java.lang.annotation.Target;
+<span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;
+<span class="hljs-keyword">import</span> java.lang.annotation.Retention;
+<span class="hljs-keyword">import</span> java.lang.annotation.Documented;
+
+<span class="hljs-meta">@Target</span>({ElementType.TYPE})
+<span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> WebServlet {
+
+    <span class="hljs-comment">/**
+     * The name of the servlet
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">name</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;
+
+    <span class="hljs-comment">/**
+     * The URL patterns of the servlet
+     */</span>
+    String[] value() <span class="hljs-keyword">default</span> {};
+
+    <span class="hljs-comment">/**
+     * The URL patterns of the servlet
+     */</span>
+    String[] urlPatterns() <span class="hljs-keyword">default</span> {};
+
+    <span class="hljs-comment">/**
+     * The load-on-startup order of the servlet 
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">loadOnStartup</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> -1</span>;
+
+    <span class="hljs-comment">/**
+     * The init parameters of the servlet
+     */</span>
+    WebInitParam [] initParams() <span class="hljs-keyword">default</span> {};
+
+    <span class="hljs-comment">/**
+     * Declares whether the servlet supports asynchronous operation mode.
+     *
+     * <span class="hljs-doctag">@see</span> javax.servlet.ServletRequest#startAsync
+     * <span class="hljs-doctag">@see</span> javax.servlet.ServletRequest#startAsync(ServletRequest,
+     * ServletResponse)
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">asyncSupported</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">false</span></span>;
+
+    <span class="hljs-comment">/**
+     * The small-icon of the servlet
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">smallIcon</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;
+
+     <span class="hljs-comment">/**
+      * The large-icon of the servlet
+      */</span>
+    <span class="hljs-function">String <span class="hljs-title">largeIcon</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;
+
+    <span class="hljs-comment">/**
+     * The description of the servlet
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">description</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;
+
+    <span class="hljs-comment">/**
+     * The display name of the servlet
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">displayName</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;
+}
+</code></pre>
 
                                 
                                 </section>
@@ -4048,7 +4130,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"next":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"path":"800Java/12JavaWeb/04Servlet生命周期.md","ref":"800Java/12JavaWeb/04Servlet生命周期.md","articles":[]},"previous":{"title":"Tomcat","level":"1.17.4.2","depth":3,"path":"800Java/12JavaWeb/02Tomcat.md","ref":"800Java/12JavaWeb/02Tomcat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/12JavaWeb/03第一个Serverlet.md","mtime":"2022-05-22T02:53:42.236Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-22T02:54:41.693Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"next":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"path":"800Java/12JavaWeb/04Servlet生命周期.md","ref":"800Java/12JavaWeb/04Servlet生命周期.md","articles":[]},"previous":{"title":"Tomcat","level":"1.17.4.2","depth":3,"path":"800Java/12JavaWeb/02Tomcat.md","ref":"800Java/12JavaWeb/02Tomcat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/12JavaWeb/03第一个Serverlet.md","mtime":"2022-05-22T03:36:59.851Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-22T03:37:59.153Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
