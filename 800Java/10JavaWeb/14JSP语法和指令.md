@@ -3,7 +3,7 @@
 # JSP语法和指令
 
 - Jsp的page指令
-- Jsp的taglib指令 
+- Jsp的taglib指令(见JSTL)
 - Jsp的局部代码块 
 - Jsp的全局代码块 
 - Jsp的注释
