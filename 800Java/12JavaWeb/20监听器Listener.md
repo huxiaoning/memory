@@ -66,7 +66,7 @@
 ### 请求监听器示例
 
 ```xml
-    <listener>
+    <listener><!-- web.xml -->
         <listener-class>org.example.servlet.listener.MyRequestListener</listener-class>
     </listener>
 ```
@@ -128,7 +128,7 @@ public class MyRequestListener implements
 ### 绘话监听器示例
 
 ```xml
-    <listener>
+    <listener><!-- web.xml -->
         <listener-class>org.example.servlet.listener.MySessionListener</listener-class>
     </listener>
 ```
@@ -177,7 +177,7 @@ public class MySessionListener implements
 ### 应用监听器示例
 
 ```xml
-    <listener>
+    <listener><!-- web.xml -->
         <listener-class>org.example.servlet.listener.MyApplicationListener</listener-class>
     </listener>
 ```
@@ -232,7 +232,7 @@ public class MyApplicationListener implements ServletContextListener, ServletCon
         </listener>
     ```
 
-- 注解
+- 注解(Servlet3.0及以上支持注解)
 
   - `@WebListener`
 
