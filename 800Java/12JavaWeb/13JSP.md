@@ -54,6 +54,18 @@ Tomcat中conf目录下的web.xml文件中有关于jsp的Servlet配置:
 
 
 
+### Idea中查看jsp转译的Servlet文件
+
+idea启动时控制台一行输出如下：
+
+```
+Using CATALINA_BASE:   "C:\Users\%USERNAME%\AppData\Local\JetBrains\IntelliJIdea2021.2\tomcat\064f584c-f937-4fe0-8b45-d21e5ba13057"
+```
+
+有这个目录下的如下位置
+
+`\work\Catalina\localhost\web-demo\org\apache\jsp\`
+
 ### 示例`a.jsp`
 
 ```jsp
@@ -91,3 +103,4 @@ Tomcat中conf目录下的web.xml文件中有关于jsp的Servlet配置:
 - Jsp注释
   - 不会被转译
     - `<%--  --%>`
+

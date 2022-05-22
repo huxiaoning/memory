@@ -101,6 +101,16 @@ $ cp target/web-demo.war $CATALINA_HOME/webapps/
 
 
 
+### 源码目录结构
+
+![image-20220522151318303](https://raw.githubusercontent.com/huxiaoning/img/master/20220522151318.png)
+
+maven中的webapp目录等同于，eclipse中的web-content目录和myeclipse中的web-root目录
+
+这个目录下的所以内容会部署到Tomcat中的webapps目录下的web-demo(虚拟项目名称)目录下。
+
+当然这里面没有class等编译后的文件，部署后会有class文件放在WEB-INF目录下。
+
 ### 最终web项目目录结构
 
 ![image-20220519145823911](https://raw.githubusercontent.com/huxiaoning/img/master/20220519145823.png)
