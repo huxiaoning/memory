@@ -20,9 +20,9 @@ JSTL是apache对EL表达式的扩展（也就是说JSTL依赖 EL），JSTL 是�
 
 - JSTL的核心标签库(重点)
 - JSTL的格式化标签库
-- JSTL的SQL标签库
-- JSTL的函数标签库
-- JSTL的XML标签库
+- JSTL的SQL标签库(了解)
+- JSTL的函数标签库(了解)
+- JSTL的XML标签库(了解)
 
 
 
@@ -86,5 +86,4 @@ JSTL是apache对EL表达式的扩展（也就是说JSTL依赖 EL），JSTL 是�
 | [<fmt:setTimeZone>](https://www.runoob.com/jsp/jstl-format-settimezone-tag.html) | 指定时区                                 |
 | [<fmt:message>](https://www.runoob.com/jsp/jstl-format-message-tag.html) | 显示资源配置文件信息                     |
 | [<fmt:requestEncoding>](https://www.runoob.com/jsp/jstl-format-requestencoding-tag.html) | 设置request的字符编码                    |
-
 
