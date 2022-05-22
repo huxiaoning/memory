@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Servlet生命周期 · 个人笔记</title>
+        <title>第一个Serverlet · 个人笔记</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -70,10 +70,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="05HttpServletRequest.html" />
+    <link rel="next" href="04Servlet生命周期.html" />
     
     
-    <link rel="prev" href="03第一个Serverlet.html" />
+    <link rel="prev" href="02Tomcat.html" />
     
 
     <style>
@@ -3576,7 +3576,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.4.3" data-path="03第一个Serverlet.html">
+        <li class="chapter active" data-level="1.17.4.3" data-path="03第一个Serverlet.html">
             
                 <a href="03第一个Serverlet.html">
             
@@ -3589,7 +3589,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17.4.4" data-path="04Servlet生命周期.html">
+        <li class="chapter " data-level="1.17.4.4" data-path="04Servlet生命周期.html">
             
                 <a href="04Servlet生命周期.html">
             
@@ -3901,7 +3901,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Servlet生命周期</a>
+        <a href="../.." >第一个Serverlet</a>
     </h1>
 </div>
 
@@ -3916,47 +3916,28 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="servlet&#x751F;&#x547D;&#x5468;&#x671F;"><code>Servlet</code>&#x751F;&#x547D;&#x5468;&#x671F;</h1>
-<ul>
-<li><p>&#x4ECE;&#x7B2C;&#x4E00;&#x6B21;&#x8C03;&#x7528;&#xFF0C;&#x5230;&#x670D;&#x52A1;&#x5668;&#x5173;&#x95ED;&#x3002;</p>
-</li>
-<li><p>&#x5982;&#x679C;&#x5728;<code>web.xml</code>&#x4E2D;&#x914D;&#x7F6E;&#x4E86;<code>load-on-startup</code>(<code>&gt;=0</code>&#x5373;&#x53EF;)&#x5219;&#x662F;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x5F00;&#x542F;&#x5230;&#x670D;&#x52A1;&#x5668;&#x5173;&#x95ED;&#x3002;</p>
-</li>
-</ul>
-<pre><code class="lang-xml"><span class="hljs-meta">&lt;!DOCTYPE web-app PUBLIC
-        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
-        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.example.servlet.MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span> <span class="hljs-comment">&lt;!-- Tomcat&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;&#x65F6;&#x521B;&#x5EFA;Servlet&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x6570;&#x5B57;&#x8868;&#x793A;&#x52A0;&#x8F7D;&#x987A;&#x5E8F; --&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/myServlet<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span>
+                                <h1 id="&#x7B2C;&#x4E00;&#x4E2A;serverlet">&#x7B2C;&#x4E00;&#x4E2A;Serverlet</h1>
+<h3 id="&#x7528;idea&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;maven-web&#x9879;&#x76EE;">&#x7528;Idea&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;maven web&#x9879;&#x76EE;</h3>
+<p>maven-archetype-webapp</p>
+<pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.example<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>web-demo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>war<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
 </code></pre>
-<p>&#x6216;&#x8005;</p>
-<pre><code class="lang-java"><span class="hljs-meta">@WebServlet</span>(name = <span class="hljs-string">&quot;/a&quot;</span>, loadOnStartup = <span class="hljs-number">1</span>)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{
-
-}
+<h3 id="maven&#x4F9D;&#x8D56;">maven&#x4F9D;&#x8D56;</h3>
+<pre><code class="lang-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>javax.servlet-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>provided<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jstl<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
-<h3 id="servlet&#x63A5;&#x53E3;"><code>Servlet</code>&#x63A5;&#x53E3;</h3>
-<pre><code class="lang-java"><span class="hljs-keyword">package</span> javax.servlet;
-<span class="hljs-keyword">import</span> java.io.IOException;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Servlet</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ServletConfig config)</span> <span class="hljs-keyword">throws</span> ServletException</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> ServletConfig <span class="hljs-title">getServletConfig</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(ServletRequest req, ServletResponse res)</span> <span class="hljs-keyword">throws</span> ServletException, IOException</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getServletInfo</span><span class="hljs-params">()</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span></span>;
-}
-</code></pre>
-<h3 id="&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#x8BF4;&#x660E;">&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#x8BF4;&#x660E;</h3>
+<h3 id="&#x7F16;&#x5199;myservlet">&#x7F16;&#x5199;MyServlet</h3>
 <pre><code class="lang-java"><span class="hljs-keyword">package</span> org.example.servlet;
 
 <span class="hljs-keyword">import</span> javax.servlet.ServletException;
@@ -3965,138 +3946,65 @@
 <span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;
 <span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;
 <span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicLong;
 
-<span class="hljs-comment">// @WebServlet(name = &quot;/servletLife1&quot;, urlPatterns = {&quot;/servletLife1&quot;}, loadOnStartup = 1)</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServletLife</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{
+<span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">&quot;/a&quot;</span>) <span class="hljs-comment">// &#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x914D;&#x7F6E;web.xml web 3.0.1 &#x5F00;&#x59CB;&#x652F;&#x6301;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ServletLife</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x88AB;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;Servlet&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x7136;&#x540E;&#x6267;&#x884C;init&#x65B9;&#x6CD5;&#xFF1B;</span>
-        <span class="hljs-comment">// &#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x6267;&#x884C;Servlet&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x673A;&#xFF1B; loadOnStartup | &lt;load-on-startup&gt;1&lt;/load-on-startup&gt; &#x6307;&#x5B9A;Tomcat&#x542F;&#x52A8;&#x65F6;&#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;</span>
-        System.out.println(<span class="hljs-string">&quot;servlet&#x6784;&#x9020;&#x5B8C;&#x6210;&#x3002;&quot;</span>);
-    }
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> AtomicLong num = <span class="hljs-keyword">new</span> AtomicLong(<span class="hljs-number">0</span>);
 
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> ServletException </span>{
-        System.out.println(<span class="hljs-string">&quot;servlet&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6210;&#x3002;&quot;</span>);
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyServlet</span><span class="hljs-params">()</span> </span>{
+        num.incrementAndGet();
     }
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
-        <span class="hljs-comment">// &#x6267;&#x884C;service&#x65B9;&#x6CD5;&#xFF0C;&#x6267;&#x884C;&#x591A;&#x6B21;,&#x5237;&#x65B0;&#x4E00;&#x6B21;&#x6D4F;&#x89C8;&#x5668;&#x9875;&#x9762;&#x5C31;&#x4F1A;&#x6267;&#x884C;&#x4E00;&#x6B21;</span>
-        resp.getWriter().write(<span class="hljs-string">&quot;servlet life&#x3002;&quot;</span>);
-        System.out.println(<span class="hljs-string">&quot;servlet life&#x3002;&quot;</span>);
-    }
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">// &#x5F53;Servlet&#x670D;&#x52A1;&#x5668;&#x6B63;&#x5E38;&#x5173;&#x95ED;&#x65F6;&#xFF0C;&#x6267;&#x884C;destroy&#x65B9;&#x6CD5;&#xFF0C;&#x53EA;&#x6267;&#x884C;&#x4E00;&#x6B21;</span>
-        System.out.println(<span class="hljs-string">&quot;servlet&#x9500;&#x6BC1;&#x3002;&quot;</span>);
+        resp.getWriter().write(<span class="hljs-string">&quot;this is my first servlet.&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;this is my first servlet.&quot;</span>);
+        System.out.println(num.get()); <span class="hljs-comment">// &#x65E0;&#x8BBA;&#x8BF7;&#x6C42;&#x51E0;&#x6B21;&#xFF0C;&#x8FD9;&#x91CC;&#x90FD;&#x53EA;&#x4F1A;&#x6253;&#x5370;1&#xFF0C;&#x56E0;&#x4E3A;servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x3002;</span>
     }
 }
 </code></pre>
-<h3 id="doget&#x548C;dopost"><code>doGet</code>&#x548C;<code>doPost</code></h3>
-<p>&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x5199;<code>service</code>&#x65B9;&#x6CD5;,<code>HttpServlet</code>&#x7C7B;&#x7684;<code>service</code>&#x65B9;&#x6CD5;&#x5DF2;&#x7ECF;&#x505A;&#x4E86;&#x65B9;&#x6CD5;&#x5206;&#x53D1;&#xFF1A;</p>
-<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span>
-        <span class="hljs-keyword">throws</span> ServletException, IOException
-    </span>{
-        String method = req.getMethod();
+<h3 id="&#x5728;webxml&#x4E2D;&#x914D;&#x7F6E;myservlet">&#x5728;web.xml&#x4E2D;&#x914D;&#x7F6E;myServlet</h3>
+<pre><code class="lang-xml"><span class="hljs-meta">&lt;!DOCTYPE web-app PUBLIC
+        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span>
 
-        <span class="hljs-keyword">if</span> (method.equals(METHOD_GET)) {
-            <span class="hljs-keyword">long</span> lastModified = getLastModified(req);
-            <span class="hljs-keyword">if</span> (lastModified == -<span class="hljs-number">1</span>) {
-                <span class="hljs-comment">// servlet doesn&apos;t support if-modified-since, no reason</span>
-                <span class="hljs-comment">// to go through further expensive logic</span>
-                doGet(req, resp);
-            } <span class="hljs-keyword">else</span> {
-                <span class="hljs-keyword">long</span> ifModifiedSince = req.getDateHeader(HEADER_IFMODSINCE);
-                <span class="hljs-keyword">if</span> (ifModifiedSince &lt; lastModified) {
-                    <span class="hljs-comment">// If the servlet mod time is later, call doGet()</span>
-                    <span class="hljs-comment">// Round down to the nearest second for a proper compare</span>
-                    <span class="hljs-comment">// A ifModifiedSince of -1 will always be less</span>
-                    maybeSetLastModified(resp, lastModified);
-                    doGet(req, resp);
-                } <span class="hljs-keyword">else</span> {
-                    resp.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-                }
-            }
-
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_HEAD)) {
-            <span class="hljs-keyword">long</span> lastModified = getLastModified(req);
-            maybeSetLastModified(resp, lastModified);
-            doHead(req, resp);
-
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_POST)) {
-            doPost(req, resp);
-
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_PUT)) {
-            doPut(req, resp);
-
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_DELETE)) {
-            doDelete(req, resp);
-
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_OPTIONS)) {
-            doOptions(req,resp);
-
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(METHOD_TRACE)) {
-            doTrace(req,resp);
-
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-comment">//</span>
-            <span class="hljs-comment">// Note that this means NO servlet supports whatever</span>
-            <span class="hljs-comment">// method was requested, anywhere on this server.</span>
-            <span class="hljs-comment">//</span>
-
-            String errMsg = lStrings.getString(<span class="hljs-string">&quot;http.method_not_implemented&quot;</span>);
-            Object[] errArgs = <span class="hljs-keyword">new</span> Object[<span class="hljs-number">1</span>];
-            errArgs[<span class="hljs-number">0</span>] = method;
-            errMsg = MessageFormat.format(errMsg, errArgs);
-
-            resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
-        }
-    }
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">welcome-file-list</span>&gt;</span> <span class="hljs-comment">&lt;!-- &#x53EF;&#x4EE5;&#x4E0D;&#x914D;&#x7F6E;&#x8FD9;&#x4E2A; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">welcome-file</span>&gt;</span>index.jsp<span class="hljs-tag">&lt;/<span class="hljs-name">welcome-file</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">welcome-file-list</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.example.servlet.MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/myServlet<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span>
 </code></pre>
-<p>&#x4E00;&#x822C;<code>servlet</code>&#x5F00;&#x53D1;&#x9700;&#x8981;&#x590D;&#x5199;<code>doGet</code>&#x6216;<code>doPost</code>&#x65B9;&#x6CD5;&#x3002;</p>
-<h3 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h3>
-<pre><code class="lang-java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">&quot;/method&quot;</span>)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServletMethod</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
-        System.out.println(<span class="hljs-string">&quot;service&quot;</span>);
-        <span class="hljs-keyword">super</span>.service(req, resp);
-    }
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
-        System.out.println(<span class="hljs-string">&quot;doGet&quot;</span>);
-    }
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>{
-        System.out.println(<span class="hljs-string">&quot;doPost&quot;</span>);
-    }
-}
+<h3 id="&#x90E8;&#x7F72;myservlet&#x5230;tomcat">&#x90E8;&#x7F72;myServlet&#x5230;Tomcat</h3>
+<h5 id="&#x624B;&#x52A8;&#x90E8;&#x7F72;&#x65B9;&#x5F0F;1">&#x624B;&#x52A8;&#x90E8;&#x7F72;&#x65B9;&#x5F0F;1</h5>
+<pre><code class="lang-bash">$ cp -r target/web-demo <span class="hljs-variable">$CATALINA_HOME</span>/webapps/
 </code></pre>
-<p><code>method.jsp</code></p>
-<pre><code class="lang-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; pageEncoding=&quot;utf-8&quot; %&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;form action=&quot;method&quot; method=&quot;post&quot;&gt;
-    &#x7528;&#x6237;&#x540D;:&lt;input type=&quot;text&quot; name=&quot;uname&quot; value=&quot;&quot;&gt;&lt;br&gt;
-    &#x5BC6;&#x7801;: &lt;input type=&quot;password&quot; name=&quot;pwd&quot; value=&quot;&quot;&gt;&lt;br&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;&#x767B;&#x5F55;&quot;&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h5 id="&#x624B;&#x52A8;&#x90E8;&#x7F72;&#x65B9;&#x5F0F;2">&#x624B;&#x52A8;&#x90E8;&#x7F72;&#x65B9;&#x5F0F;2</h5>
+<pre><code class="lang-bash">$ cp target/web-demo.war <span class="hljs-variable">$CATALINA_HOME</span>/webapps/
 </code></pre>
-<h5 id="&#x8BBF;&#x95EE;&#x8BF4;&#x660E;">&#x8BBF;&#x95EE;&#x8BF4;&#x660E;</h5>
+<h3 id="&#x6700;&#x7EC8;web&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x7ED3;&#x6784;">&#x6700;&#x7EC8;web&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x7ED3;&#x6784;</h3>
+<p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/20220519145823.png" alt="image-20220519145823911"></p>
+<p><img src="https://raw.githubusercontent.com/huxiaoning/img/master/20220519145910.png" alt="image-20220519145909957"></p>
+<p>&#x8BBF;&#x95EE;&#x5730;&#x5740;</p>
 <ul>
-<li><a href="http://localhost:8080/web-demo/method.jsp" target="_blank">http://localhost:8080/web-demo/method.jsp</a> &#x8BBF;&#x95EE;&#x7684;&#x662F;<code>method.jsp</code>&#x9875;&#x9762;</li>
-<li><a href="http://localhost:8080/web-demo/method" target="_blank">http://localhost:8080/web-demo/method</a> &#x8BBF;&#x95EE;&#x7684;&#x662F;<code>ServletMethod</code>&#x7684;<code>doGet</code>|<code>doPost</code>&#x5373;<code>service</code>&#x65B9;&#x6CD5;</li>
+<li><code>http://localhost:8080/web-demo/myServlet</code><ul>
+<li>&#x76F8;&#x5F53;&#x4E8E; <code>http://localhost:8080/web-demo/myServlet/index.jsp</code></li>
 </ul>
+</li>
+<li><code>http://localhost:8080/web-demo/a</code>  (&#x8FD9;&#x79CD;&#x4E0D;&#x9700;&#x8981;&#x914D;&#x7F6E;web.xml)</li>
+</ul>
+<h3 id="servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x5417;&#xFF1F;">Servlet&#x662F;&#x5355;&#x4F8B;&#x7684;&#x5417;&#xFF1F;</h3>
+<p>&#x662F;&#x3002;(&#x53EA;&#x9700;&#x8981;&#x628A;MyServlet&#x7684;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5199;&#x51FA;&#x6765;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x6DFB;&#x52A0;&#x4E00;&#x53E5;&#x6253;&#x5370;&#x8BED;&#x53E5;&#xFF0C;&#x5373;&#x53EF;&#x9A8C;&#x8BC1;)</p>
+<p>Servlet&#x88AB;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x673A;&#x88AB;&#x4E00;&#x6B21;&#x88AB;&#x8BBF;&#x95EE;&#x65F6;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x3002;&#x76F8;&#x5F53;&#x4E8E;&#x61D2;&#x6C49;&#x6A21;&#x5F0F;&#x3002;</p>
 
                                 
                                 </section>
@@ -4124,12 +4032,12 @@
 
             
                 
-                <a href="03第一个Serverlet.html" class="navigation navigation-prev " aria-label="Previous page: 第一个Serverlet">
+                <a href="02Tomcat.html" class="navigation navigation-prev " aria-label="Previous page: Tomcat">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="05HttpServletRequest.html" class="navigation navigation-next " aria-label="Next page: HttpServletRequest">
+                <a href="04Servlet生命周期.html" class="navigation navigation-next " aria-label="Next page: Servlet生命周期">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -4140,7 +4048,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"next":{"title":"HttpServletRequest","level":"1.17.4.5","depth":3,"path":"800Java/10JavaWeb/05HttpServletRequest.md","ref":"800Java/10JavaWeb/05HttpServletRequest.md","articles":[]},"previous":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"path":"800Java/10JavaWeb/03第一个Serverlet.md","ref":"800Java/10JavaWeb/03第一个Serverlet.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/10JavaWeb/04Servlet生命周期.md","mtime":"2022-05-22T02:29:39.068Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-22T02:30:41.215Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第一个Serverlet","level":"1.17.4.3","depth":3,"next":{"title":"Servlet生命周期","level":"1.17.4.4","depth":3,"path":"800Java/12JavaWeb/04Servlet生命周期.md","ref":"800Java/12JavaWeb/04Servlet生命周期.md","articles":[]},"previous":{"title":"Tomcat","level":"1.17.4.2","depth":3,"path":"800Java/12JavaWeb/02Tomcat.md","ref":"800Java/12JavaWeb/02Tomcat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/12JavaWeb/03第一个Serverlet.md","mtime":"2022-05-22T02:53:42.236Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-22T02:54:41.693Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
