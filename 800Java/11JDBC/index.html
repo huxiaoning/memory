@@ -3969,6 +3969,279 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="jdbc">JDBC</h1>
+<h3 id="&#x51C6;&#x5907;&#x4E00;&#x4E2A;mysql&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;">&#x51C6;&#x5907;&#x4E00;&#x4E2A;mysql&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;</h3>
+<pre><code class="lang-shell">$ docker run -it --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=jdbc -d --restart=always daocloud.io/mysql:5.7
+</code></pre>
+<p>&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>URL<ul>
+<li><code>jdbc:mysql://127.0.0.1:3306/jdbc</code></li>
+</ul>
+</li>
+<li>USER<ul>
+<li><code>root</code></li>
+</ul>
+</li>
+<li>PASSWORD<ul>
+<li>123456</li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x5F04;&#x4E00;&#x4E9B;&#x81EA;&#x6D4B;&#x6570;&#x636E;">&#x5F04;&#x4E00;&#x4E9B;&#x81EA;&#x6D4B;&#x6570;&#x636E;</h3>
+<pre><code class="lang-sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> t_user;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`t_user`</span> (
+  <span class="hljs-string">`id`</span> <span class="hljs-built_in">INT</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;ID&apos;</span>,
+  <span class="hljs-string">`user_name`</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x7528;&#x6237;&#x540D;&apos;</span>,
+  <span class="hljs-string">`age`</span> <span class="hljs-built_in">INT</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x5E74;&#x9F84;&apos;</span>,
+  <span class="hljs-string">`sex`</span> <span class="hljs-built_in">INT</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x6027;&#x522B;(0&#x5973;1&#x7537;)&apos;</span>,
+  <span class="hljs-string">`birth`</span> <span class="hljs-built_in">DATE</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x51FA;&#x751F;&#x65E5;&#x671F;&apos;</span>,
+  <span class="hljs-string">`mobile`</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x624B;&#x673A;&#x53F7;&#x7801;&apos;</span>,
+  <span class="hljs-string">`create_user_id`</span> <span class="hljs-built_in">INT</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x7684;ID&apos;</span>,
+  <span class="hljs-string">`create_time`</span> DATETIME <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x521B;&#x5EFA;&#x65F6;&#x95F4;&apos;</span>,
+  <span class="hljs-string">`update_user_id`</span> <span class="hljs-built_in">INT</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x66F4;&#x65B0;&#x7528;&#x6237;&#x7684;ID&apos;</span>,
+  <span class="hljs-string">`update_time`</span> DATETIME <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&apos;&#x66F4;&#x65B0;&#x65F6;&#x95F4;&apos;</span>,
+  PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>)
+) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">INNODB</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8;
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_user;
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_user <span class="hljs-keyword">VALUES</span>
+(<span class="hljs-keyword">DEFAULT</span>,<span class="hljs-string">&apos;&#x5F20;&#x4E09;&apos;</span>,<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&apos;2020-10-15&apos;</span>,<span class="hljs-string">&apos;13111111111&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>),
+(<span class="hljs-keyword">DEFAULT</span>,<span class="hljs-string">&apos;&#x674E;&#x56DB;&apos;</span>,<span class="hljs-number">13</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-14&apos;</span>,<span class="hljs-string">&apos;13111111113&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>),
+(<span class="hljs-keyword">DEFAULT</span>,<span class="hljs-string">&apos;&#x738B;&#x4E94;&apos;</span>,<span class="hljs-number">14</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&apos;2020-10-13&apos;</span>,<span class="hljs-string">&apos;13111111112&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>),
+(<span class="hljs-keyword">DEFAULT</span>,<span class="hljs-string">&apos;&#x8D75;&#x516D;&apos;</span>,<span class="hljs-number">15</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&apos;2020-10-12&apos;</span>,<span class="hljs-string">&apos;13111111116&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&apos;2020-10-15 00:00:00&apos;</span>);
+</code></pre>
+<h3 id="idea&#x521B;&#x5EFA;maven-quick-start&#x5DE5;&#x7A0B;">Idea&#x521B;&#x5EFA;<code>Maven</code> <code>quick-start</code>&#x5DE5;&#x7A0B;</h3>
+<p><code>maven-archetype-quickstart</code></p>
+<h3 id="&#x5F15;&#x5165;mysql&#x9A71;&#x52A8;&#x4F9D;&#x8D56;jar&#x5305;">&#x5F15;&#x5165;mysql&#x9A71;&#x52A8;&#x4F9D;&#x8D56;jar&#x5305;</h3>
+<pre><code class="lang-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.1.49<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h3 id="&#x7528;jdbc&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;">&#x7528;JDBC&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.sql.Connection;
+<span class="hljs-keyword">import</span> java.sql.DriverManager;
+<span class="hljs-keyword">import</span> java.sql.SQLException;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DbUtil</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String URL = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/jdbc?characterEncoding=utf-8&quot;</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String USER = <span class="hljs-string">&quot;root&quot;</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String PASSWORD = <span class="hljs-string">&quot;123456&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Connection conn = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">static</span> {
+        <span class="hljs-keyword">try</span> {
+            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        } <span class="hljs-keyword">catch</span> (ClassNotFoundException e) {
+            e.printStackTrace();
+        } <span class="hljs-keyword">catch</span> (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Connection <span class="hljs-title">getConnection</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> conn;
+    }
+}
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.Date;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+    <span class="hljs-keyword">private</span> Integer id;
+    <span class="hljs-keyword">private</span> String userName;
+    <span class="hljs-keyword">private</span> Integer age;
+    <span class="hljs-keyword">private</span> Integer sex;
+    <span class="hljs-keyword">private</span> Date birth;
+    <span class="hljs-keyword">private</span> String mobile;
+    <span class="hljs-keyword">private</span> Integer createUserId;
+    <span class="hljs-keyword">private</span> Date createTime;
+    <span class="hljs-keyword">private</span> Integer updateUserId;
+    <span class="hljs-keyword">private</span> Date updateTime;
+
+    <span class="hljs-comment">// &#x7701;&#x7565;get and set</span>
+}
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> org.example.entity.User;
+<span class="hljs-keyword">import</span> org.example.util.DbUtil;
+<span class="hljs-keyword">import</span> java.sql.Connection;
+<span class="hljs-keyword">import</span> java.sql.PreparedStatement;
+<span class="hljs-keyword">import</span> java.sql.ResultSet;
+<span class="hljs-keyword">import</span> java.sql.SQLException;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDao</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">save</span><span class="hljs-params">(User user)</span> </span>{
+        String sql = <span class="hljs-string">&quot;INSERT INTO t_user VALUES (DEFAULT,?,?,?,?,?,?,?,DEFAULT,DEFAULT)&quot;</span>;
+        Connection conn = DbUtil.getConnection();
+        <span class="hljs-keyword">try</span> {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(<span class="hljs-number">1</span>, user.getUserName());
+            ps.setInt(<span class="hljs-number">2</span>, user.getAge());
+            ps.setInt(<span class="hljs-number">3</span>, user.getSex());
+            ps.setDate(<span class="hljs-number">4</span>, <span class="hljs-keyword">new</span> java.sql.Date(user.getBirth().getTime()));
+            ps.setString(<span class="hljs-number">5</span>, user.getMobile());
+            ps.setInt(<span class="hljs-number">6</span>, user.getCreateUserId());
+            ps.setDate(<span class="hljs-number">7</span>, <span class="hljs-keyword">new</span> java.sql.Date(user.getCreateTime().getTime()));
+            ps.execute();
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(User user)</span> </span>{
+        String sql = <span class="hljs-string">&quot;UPDATE t_user SET user_name = ?,age = ?,sex = ?,birth = ?,mobile = ?,update_user_id = ?,update_time = ? WHERE id = ?&quot;</span>;
+        Connection conn = DbUtil.getConnection();
+        <span class="hljs-keyword">try</span> {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(<span class="hljs-number">1</span>, user.getUserName());
+            ps.setInt(<span class="hljs-number">2</span>, user.getAge());
+            ps.setInt(<span class="hljs-number">3</span>, user.getSex());
+            ps.setDate(<span class="hljs-number">4</span>, <span class="hljs-keyword">new</span> java.sql.Date(user.getBirth().getTime()));
+            ps.setString(<span class="hljs-number">5</span>, user.getMobile());
+            ps.setInt(<span class="hljs-number">6</span>, user.getUpdateUserId());
+            ps.setDate(<span class="hljs-number">7</span>, <span class="hljs-keyword">new</span> java.sql.Date(user.getUpdateTime().getTime()));
+            ps.setInt(<span class="hljs-number">8</span>, user.getId());
+            ps.execute();
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">del</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id)</span> </span>{
+        String sql = <span class="hljs-string">&quot;DELETE FROM t_user WHERE id = ?&quot;</span>;
+        Connection conn = DbUtil.getConnection();
+        PreparedStatement ps = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(<span class="hljs-number">1</span>, id);
+            ps.execute();
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">queryAll</span><span class="hljs-params">()</span> </span>{
+        String sql = <span class="hljs-string">&quot;SELECT id,user_name,age,sex,birth,mobile,create_user_id,create_time,update_user_id,update_time FROM t_user&quot;</span>;
+        Connection conn = DbUtil.getConnection();
+        <span class="hljs-keyword">try</span> {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List&lt;User&gt; userList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+            <span class="hljs-keyword">while</span> (rs.next()) {
+                User user = <span class="hljs-keyword">new</span> User();
+                <span class="hljs-comment">// &#x4F7F;&#x7528;&#x4E0B;&#x6807;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;&#x4E0B;&#x6807;&#x4ECE;1&#x5F00;&#x59CB;</span>
+                <span class="hljs-comment">// user.setId(rs.getInt(1));</span>
+                user.setId(rs.getInt(<span class="hljs-string">&quot;id&quot;</span>));
+                user.setUserName(rs.getString(<span class="hljs-string">&quot;user_name&quot;</span>));
+                user.setAge(rs.getInt(<span class="hljs-string">&quot;age&quot;</span>));
+                user.setSex(rs.getInt(<span class="hljs-string">&quot;sex&quot;</span>));
+                user.setBirth(rs.getDate(<span class="hljs-string">&quot;birth&quot;</span>));
+                user.setMobile(rs.getString(<span class="hljs-string">&quot;mobile&quot;</span>));
+                user.setCreateUserId(rs.getInt(<span class="hljs-string">&quot;create_user_id&quot;</span>));
+                user.setCreateTime(rs.getDate(<span class="hljs-string">&quot;create_time&quot;</span>));
+                user.setUpdateUserId(rs.getInt(<span class="hljs-string">&quot;update_user_id&quot;</span>));
+                user.setUpdateTime(rs.getDate(<span class="hljs-string">&quot;update_time&quot;</span>));
+                userList.add(user);
+            }
+            <span class="hljs-keyword">return</span> userList;
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            e.printStackTrace();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id)</span> </span>{
+        String sql = <span class="hljs-string">&quot;SELECT id,user_name,age,sex,birth,mobile,create_user_id,create_time,update_user_id,update_time FROM t_user WHERE id = ?&quot;</span>;
+        Connection conn = DbUtil.getConnection();
+        PreparedStatement ps = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(<span class="hljs-number">1</span>, id);
+            ResultSet rs = ps.executeQuery();
+            <span class="hljs-keyword">if</span> (rs.next()) {
+                User user = <span class="hljs-keyword">new</span> User();
+                <span class="hljs-comment">// &#x4F7F;&#x7528;&#x4E0B;&#x6807;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;&#x4E0B;&#x6807;&#x4ECE;1&#x5F00;&#x59CB;</span>
+                <span class="hljs-comment">// user.setId(rs.getInt(1));</span>
+                user.setId(rs.getInt(<span class="hljs-string">&quot;id&quot;</span>));
+                user.setUserName(rs.getString(<span class="hljs-string">&quot;user_name&quot;</span>));
+                user.setAge(rs.getInt(<span class="hljs-string">&quot;age&quot;</span>));
+                user.setSex(rs.getInt(<span class="hljs-string">&quot;sex&quot;</span>));
+                user.setBirth(rs.getDate(<span class="hljs-string">&quot;birth&quot;</span>));
+                user.setMobile(rs.getString(<span class="hljs-string">&quot;mobile&quot;</span>));
+                user.setCreateUserId(rs.getInt(<span class="hljs-string">&quot;create_user_id&quot;</span>));
+                user.setCreateTime(rs.getDate(<span class="hljs-string">&quot;create_time&quot;</span>));
+                user.setUpdateUserId(rs.getInt(<span class="hljs-string">&quot;update_user_id&quot;</span>));
+                user.setUpdateTime(rs.getDate(<span class="hljs-string">&quot;update_time&quot;</span>));
+                <span class="hljs-keyword">return</span> user;
+            }
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            e.printStackTrace();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+}
+</code></pre>
+<h5 id="&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x7C7B;">&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x7C7B;</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> org.example.entity.User;
+<span class="hljs-keyword">import</span> org.junit.Test;
+
+<span class="hljs-keyword">import</span> java.util.Date;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDaoTest</span> </span>{
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">saveTest</span><span class="hljs-params">()</span> </span>{
+        UserDao userDao = <span class="hljs-keyword">new</span> UserDao();
+        User user = <span class="hljs-keyword">new</span> User();
+        user.setUserName(<span class="hljs-string">&quot;&#x738B;&#x5927;&#x70AE;&quot;</span>);
+        user.setAge(<span class="hljs-number">20</span>);
+        user.setSex(<span class="hljs-number">1</span>);
+        user.setBirth(<span class="hljs-keyword">new</span> Date());
+        user.setMobile(<span class="hljs-string">&quot;18022222222&quot;</span>);
+        user.setCreateUserId(<span class="hljs-number">1</span>);
+        user.setCreateTime(<span class="hljs-keyword">new</span> Date());
+        userDao.save(user);
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateTest</span><span class="hljs-params">()</span> </span>{
+        UserDao userDao = <span class="hljs-keyword">new</span> UserDao();
+        User user = <span class="hljs-keyword">new</span> User();
+        user.setId(<span class="hljs-number">10</span>);
+        user.setUserName(<span class="hljs-string">&quot;&#x5218;&#x5927;&#x70AE;&quot;</span>);
+        user.setAge(<span class="hljs-number">22</span>);
+        user.setSex(<span class="hljs-number">1</span>);
+        user.setBirth(<span class="hljs-keyword">new</span> Date());
+        user.setMobile(<span class="hljs-string">&quot;18022222222&quot;</span>);
+        user.setUpdateUserId(<span class="hljs-number">1</span>);
+        user.setUpdateTime(<span class="hljs-keyword">new</span> Date());
+        userDao.update(user);
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">delTest</span><span class="hljs-params">()</span> </span>{
+        UserDao userDao = <span class="hljs-keyword">new</span> UserDao();
+        userDao.del(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">queryAllTest</span><span class="hljs-params">()</span> </span>{
+        UserDao userDao = <span class="hljs-keyword">new</span> UserDao();
+        List&lt;User&gt; users = userDao.queryAll();
+        System.out.println(users);
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getTest</span><span class="hljs-params">()</span> </span>{
+        UserDao userDao = <span class="hljs-keyword">new</span> UserDao();
+        User user = userDao.get(<span class="hljs-number">3</span>);
+        System.out.println(user);
+    }
+}
+</code></pre>
+<h3 id="&#x6CE8;&#x610F;">&#x6CE8;&#x610F;</h3>
+<ul>
+<li>sql&#x53C2;&#x6570;&#x8D4B;&#x503C;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0D;&#x80FD;&#x6307;&#x5B9A;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x7D22;&#x5F15;&#x4ECE;1&#x5F00;&#x59CB;&#x3002;</li>
+<li>&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x96C6;<code>ResultSet</code>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E24;&#x79CD;&#x53D6;&#x503C;&#x65B9;&#x5F0F;<ul>
+<li>&#x7D22;&#x5F15; - &#x7D22;&#x5F15;&#x4ECE;1&#x5F00;&#x59CB; <code>user.setId(rs.getInt(1));</code></li>
+<li>&#x5B57;&#x6BB5;&#x540D; - <code>user.setId(rs.getInt(&quot;id&quot;));</code></li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -4012,7 +4285,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JDBC","level":"1.17.4","depth":2,"next":{"title":"JavaWeb","level":"1.17.5","depth":2,"path":"800Java/12JavaWeb/README.md","ref":"800Java/12JavaWeb/README.md","articles":[{"title":"Http状态码","level":"1.17.5.1","depth":3,"path":"800Java/12JavaWeb/01Http状态码.md","ref":"800Java/12JavaWeb/01Http状态码.md","articles":[]},{"title":"Tomcat","level":"1.17.5.2","depth":3,"path":"800Java/12JavaWeb/02Tomcat.md","ref":"800Java/12JavaWeb/02Tomcat.md","articles":[]},{"title":"第一个Serverlet","level":"1.17.5.3","depth":3,"path":"800Java/12JavaWeb/03第一个Serverlet.md","ref":"800Java/12JavaWeb/03第一个Serverlet.md","articles":[]},{"title":"Servlet生命周期","level":"1.17.5.4","depth":3,"path":"800Java/12JavaWeb/04Servlet生命周期.md","ref":"800Java/12JavaWeb/04Servlet生命周期.md","articles":[]},{"title":"HttpServletRequest","level":"1.17.5.5","depth":3,"path":"800Java/12JavaWeb/05HttpServletRequest.md","ref":"800Java/12JavaWeb/05HttpServletRequest.md","articles":[]},{"title":"HttpServletResponse","level":"1.17.5.6","depth":3,"path":"800Java/12JavaWeb/06HttpServletResponse.md","ref":"800Java/12JavaWeb/06HttpServletResponse.md","articles":[]},{"title":"请求转发和重定向","level":"1.17.5.7","depth":3,"path":"800Java/12JavaWeb/07请求转发和重定向.md","ref":"800Java/12JavaWeb/07请求转发和重定向.md","articles":[]},{"title":"Cookie","level":"1.17.5.8","depth":3,"path":"800Java/12JavaWeb/08Cookie.md","ref":"800Java/12JavaWeb/08Cookie.md","articles":[]},{"title":"Session","level":"1.17.5.9","depth":3,"path":"800Java/12JavaWeb/09Session.md","ref":"800Java/12JavaWeb/09Session.md","articles":[]},{"title":"ServletContext","level":"1.17.5.10","depth":3,"path":"800Java/12JavaWeb/10ServletContext.md","ref":"800Java/12JavaWeb/10ServletContext.md","articles":[]},{"title":"ServletConfig","level":"1.17.5.11","depth":3,"path":"800Java/12JavaWeb/11ServletConfig.md","ref":"800Java/12JavaWeb/11ServletConfig.md","articles":[]},{"title":"web.xml总结","level":"1.17.5.12","depth":3,"path":"800Java/12JavaWeb/12web.xml总结.md","ref":"800Java/12JavaWeb/12web.xml总结.md","articles":[]},{"title":"JSP","level":"1.17.5.13","depth":3,"path":"800Java/12JavaWeb/13JSP.md","ref":"800Java/12JavaWeb/13JSP.md","articles":[]},{"title":"JSP语法和指令","level":"1.17.5.14","depth":3,"path":"800Java/12JavaWeb/14JSP语法和指令.md","ref":"800Java/12JavaWeb/14JSP语法和指令.md","articles":[]},{"title":"JSP的内置对象","level":"1.17.5.15","depth":3,"path":"800Java/12JavaWeb/15JSP的内置对象.md","ref":"800Java/12JavaWeb/15JSP的内置对象.md","articles":[]},{"title":"Ajax","level":"1.17.5.16","depth":3,"path":"800Java/12JavaWeb/16Ajax.md","ref":"800Java/12JavaWeb/16Ajax.md","articles":[]},{"title":"EL表达式","level":"1.17.5.17","depth":3,"path":"800Java/12JavaWeb/17EL表达式.md","ref":"800Java/12JavaWeb/17EL表达式.md","articles":[]},{"title":"JSTL标签库","level":"1.17.5.18","depth":3,"path":"800Java/12JavaWeb/18JSTL标签库.md","ref":"800Java/12JavaWeb/18JSTL标签库.md","articles":[]},{"title":"过滤器Filter","level":"1.17.5.19","depth":3,"path":"800Java/12JavaWeb/19过滤器Filter.md","ref":"800Java/12JavaWeb/19过滤器Filter.md","articles":[]},{"title":"监听器Listener","level":"1.17.5.20","depth":3,"path":"800Java/12JavaWeb/20监听器Listener.md","ref":"800Java/12JavaWeb/20监听器Listener.md","articles":[]},{"title":"用Main方法启动Tomcat","level":"1.17.5.21","depth":3,"path":"800Java/12JavaWeb/21用Main方法启动Tomcat.md","ref":"800Java/12JavaWeb/21用Main方法启动Tomcat.md","articles":[]}]},"previous":{"title":"ForkJoin框架","level":"1.17.3.3.5","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/05ForkJoin框架.md","ref":"800Java/03JUC并发编程包/03并发工具类/05ForkJoin框架.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/11JDBC/README.md","mtime":"2022-05-22T07:17:45.568Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-22T07:18:29.563Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JDBC","level":"1.17.4","depth":2,"next":{"title":"JavaWeb","level":"1.17.5","depth":2,"path":"800Java/12JavaWeb/README.md","ref":"800Java/12JavaWeb/README.md","articles":[{"title":"Http状态码","level":"1.17.5.1","depth":3,"path":"800Java/12JavaWeb/01Http状态码.md","ref":"800Java/12JavaWeb/01Http状态码.md","articles":[]},{"title":"Tomcat","level":"1.17.5.2","depth":3,"path":"800Java/12JavaWeb/02Tomcat.md","ref":"800Java/12JavaWeb/02Tomcat.md","articles":[]},{"title":"第一个Serverlet","level":"1.17.5.3","depth":3,"path":"800Java/12JavaWeb/03第一个Serverlet.md","ref":"800Java/12JavaWeb/03第一个Serverlet.md","articles":[]},{"title":"Servlet生命周期","level":"1.17.5.4","depth":3,"path":"800Java/12JavaWeb/04Servlet生命周期.md","ref":"800Java/12JavaWeb/04Servlet生命周期.md","articles":[]},{"title":"HttpServletRequest","level":"1.17.5.5","depth":3,"path":"800Java/12JavaWeb/05HttpServletRequest.md","ref":"800Java/12JavaWeb/05HttpServletRequest.md","articles":[]},{"title":"HttpServletResponse","level":"1.17.5.6","depth":3,"path":"800Java/12JavaWeb/06HttpServletResponse.md","ref":"800Java/12JavaWeb/06HttpServletResponse.md","articles":[]},{"title":"请求转发和重定向","level":"1.17.5.7","depth":3,"path":"800Java/12JavaWeb/07请求转发和重定向.md","ref":"800Java/12JavaWeb/07请求转发和重定向.md","articles":[]},{"title":"Cookie","level":"1.17.5.8","depth":3,"path":"800Java/12JavaWeb/08Cookie.md","ref":"800Java/12JavaWeb/08Cookie.md","articles":[]},{"title":"Session","level":"1.17.5.9","depth":3,"path":"800Java/12JavaWeb/09Session.md","ref":"800Java/12JavaWeb/09Session.md","articles":[]},{"title":"ServletContext","level":"1.17.5.10","depth":3,"path":"800Java/12JavaWeb/10ServletContext.md","ref":"800Java/12JavaWeb/10ServletContext.md","articles":[]},{"title":"ServletConfig","level":"1.17.5.11","depth":3,"path":"800Java/12JavaWeb/11ServletConfig.md","ref":"800Java/12JavaWeb/11ServletConfig.md","articles":[]},{"title":"web.xml总结","level":"1.17.5.12","depth":3,"path":"800Java/12JavaWeb/12web.xml总结.md","ref":"800Java/12JavaWeb/12web.xml总结.md","articles":[]},{"title":"JSP","level":"1.17.5.13","depth":3,"path":"800Java/12JavaWeb/13JSP.md","ref":"800Java/12JavaWeb/13JSP.md","articles":[]},{"title":"JSP语法和指令","level":"1.17.5.14","depth":3,"path":"800Java/12JavaWeb/14JSP语法和指令.md","ref":"800Java/12JavaWeb/14JSP语法和指令.md","articles":[]},{"title":"JSP的内置对象","level":"1.17.5.15","depth":3,"path":"800Java/12JavaWeb/15JSP的内置对象.md","ref":"800Java/12JavaWeb/15JSP的内置对象.md","articles":[]},{"title":"Ajax","level":"1.17.5.16","depth":3,"path":"800Java/12JavaWeb/16Ajax.md","ref":"800Java/12JavaWeb/16Ajax.md","articles":[]},{"title":"EL表达式","level":"1.17.5.17","depth":3,"path":"800Java/12JavaWeb/17EL表达式.md","ref":"800Java/12JavaWeb/17EL表达式.md","articles":[]},{"title":"JSTL标签库","level":"1.17.5.18","depth":3,"path":"800Java/12JavaWeb/18JSTL标签库.md","ref":"800Java/12JavaWeb/18JSTL标签库.md","articles":[]},{"title":"过滤器Filter","level":"1.17.5.19","depth":3,"path":"800Java/12JavaWeb/19过滤器Filter.md","ref":"800Java/12JavaWeb/19过滤器Filter.md","articles":[]},{"title":"监听器Listener","level":"1.17.5.20","depth":3,"path":"800Java/12JavaWeb/20监听器Listener.md","ref":"800Java/12JavaWeb/20监听器Listener.md","articles":[]},{"title":"用Main方法启动Tomcat","level":"1.17.5.21","depth":3,"path":"800Java/12JavaWeb/21用Main方法启动Tomcat.md","ref":"800Java/12JavaWeb/21用Main方法启动Tomcat.md","articles":[]}]},"previous":{"title":"ForkJoin框架","level":"1.17.3.3.5","depth":4,"path":"800Java/03JUC并发编程包/03并发工具类/05ForkJoin框架.md","ref":"800Java/03JUC并发编程包/03并发工具类/05ForkJoin框架.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/11JDBC/README.md","mtime":"2022-05-22T09:18:56.141Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-22T09:19:39.193Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
