@@ -155,6 +155,39 @@ public class User {
                update_time    AS updateTime
         FROM t_user
     </select>
+
+    <select id="get" resultType="org.example.entity.User">
+        SELECT id,
+               user_name      AS userName,
+               age,
+               sex,
+               birth,
+               mobile,
+               create_user_id AS createUserId,
+               create_time    AS createTime,
+               update_user_id AS updateUserId,
+               update_time    AS updateTime
+        FROM t_user
+        where id = 1
+    </select>
+
+    <select id="collect" resultType="org.example.entity.User">
+        SELECT id,
+               user_name      AS userName,
+               age,
+               sex,
+               birth,
+               mobile,
+               create_user_id AS createUserId,
+               create_time    AS createTime,
+               update_user_id AS updateUserId,
+               update_time    AS updateTime
+        FROM t_user
+    </select>
+    <select id="count" resultType="int">
+        select count(*)
+        from t_user
+    </select>
 </mapper>
 ```
 
@@ -170,6 +203,8 @@ import org.example.entity.User;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
+
 public class App {
     public static void main(String[] args) {
         String resource = "mybatis-config.xml";
@@ -184,6 +219,17 @@ public class App {
         try {
             List<User> userList = sqlSession.selectList("org.example.mapper.UserMapper.findAll");
             System.out.println(userList);
+
+            User user = sqlSession.selectOne("org.example.mapper.UserMapper.get");
+            System.out.println(user);
+
+            // 把数据库中哪个列的值，当作Map的key
+            Map<Integer, User> map = sqlSession.selectMap("org.example.mapper.UserMapper.collect", "id");
+            System.out.println(map);
+
+            int count = sqlSession.selectOne("org.example.mapper.UserMapper.count");
+            System.out.println(count);
+
         } finally {
             sqlSession.close();
         }
