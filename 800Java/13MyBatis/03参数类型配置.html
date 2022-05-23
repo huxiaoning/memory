@@ -3933,6 +3933,32 @@
             
         </li>
     
+        <li class="chapter " data-level="1.17.6.6" data-path="06接口绑定方案.html">
+            
+                <a href="06接口绑定方案.html">
+            
+                    
+                    接口绑定方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.6.7" data-path="07动态SQL.html">
+            
+                <a href="07动态SQL.html">
+            
+                    
+                    动态SQL
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -4066,6 +4092,49 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x914D;&#x7F6E;">&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x914D;&#x7F6E;</h1>
+<h3 id="&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x8BF4;&#x660E;">&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x8BF4;&#x660E;</h3>
+<ul>
+<li><p>&#x53C2;&#x6570;&#x53EF;&#x80FD;&#x6709;&#x5982;&#x4E0B;&#x60C5;&#x51B5;</p>
+<ul>
+<li><p>Pojo&#x5BF9;&#x8C61;</p>
+</li>
+<li><p>Map<string,v>&#x6620;&#x5C04; (&#x5176;&#x4E2D;V&#x53EF;&#x4EE5;&#x662F;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x3001;Pojo&#x5BF9;&#x8C61;&#x7C7B;&#x578B;&#x3001;List&#x96C6;&#x5408;&#x7C7B;&#x578B;)</string,v></p>
+<ul>
+<li><pre><code class="lang-java">            <span class="hljs-keyword">int</span> pageNum = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">int</span> pageSize = <span class="hljs-number">2</span>;
+            Map&lt;String, Object&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+            map.put(<span class="hljs-string">&quot;idList&quot;</span>, Arrays.asList(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>));
+            map.put(<span class="hljs-string">&quot;pageStart&quot;</span>, pageSize * (pageNum - <span class="hljs-number">1</span>));
+            map.put(<span class="hljs-string">&quot;pageSize&quot;</span>, pageSize);
+</code></pre>
+</li>
+<li><pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;page&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;map&quot;</span>&gt;</span>
+        SELECT id,
+        user_name AS userName,
+        age,
+        sex,
+        birth,
+        mobile,
+        create_user_id AS createUserId,
+        create_time AS createTime,
+        update_user_id AS updateUserId,
+        update_time AS updateTime
+        FROM t_user
+        WHERE id IN
+        <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;idList&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">open</span>=<span class="hljs-string">&quot; (&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span> <span class="hljs-attr">close</span>=<span class="hljs-string">&quot;) &quot;</span>&gt;</span>
+            #{id}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span>
+        LIMIT
+        #{pageStart}
+        , #{pageSize}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -4109,7 +4178,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"参数类型配置","level":"1.17.6.3","depth":3,"next":{"title":"分页查询","level":"1.17.6.4","depth":3,"path":"800Java/13MyBatis/04分页查询.md","ref":"800Java/13MyBatis/04分页查询.md","articles":[]},"previous":{"title":"返回值类型配置","level":"1.17.6.2","depth":3,"path":"800Java/13MyBatis/02返回值类型配置.md","ref":"800Java/13MyBatis/02返回值类型配置.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/13MyBatis/03参数类型配置.md","mtime":"2022-05-23T06:33:14.585Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-23T06:33:57.296Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"参数类型配置","level":"1.17.6.3","depth":3,"next":{"title":"分页查询","level":"1.17.6.4","depth":3,"path":"800Java/13MyBatis/04分页查询.md","ref":"800Java/13MyBatis/04分页查询.md","articles":[]},"previous":{"title":"返回值类型配置","level":"1.17.6.2","depth":3,"path":"800Java/13MyBatis/02返回值类型配置.md","ref":"800Java/13MyBatis/02返回值类型配置.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/13MyBatis/03参数类型配置.md","mtime":"2022-05-23T13:24:32.047Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-23T13:25:18.827Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
