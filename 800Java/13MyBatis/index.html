@@ -4125,6 +4125,39 @@ $ mvn dependency:resolve -Dclassifier=javadoc
                update_time    AS updateTime
         FROM t_user
     <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;get&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;org.example.entity.User&quot;</span>&gt;</span>
+        SELECT id,
+               user_name      AS userName,
+               age,
+               sex,
+               birth,
+               mobile,
+               create_user_id AS createUserId,
+               create_time    AS createTime,
+               update_user_id AS updateUserId,
+               update_time    AS updateTime
+        FROM t_user
+        where id = 1
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;collect&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;org.example.entity.User&quot;</span>&gt;</span>
+        SELECT id,
+               user_name      AS userName,
+               age,
+               sex,
+               birth,
+               mobile,
+               create_user_id AS createUserId,
+               create_time    AS createTime,
+               update_user_id AS updateUserId,
+               update_time    AS updateTime
+        FROM t_user
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;count&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;int&quot;</span>&gt;</span>
+        select count(*)
+        from t_user
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span>
 </code></pre>
 <h5 id="4-&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;">4 &#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;</h5>
@@ -4137,6 +4170,8 @@ $ mvn dependency:resolve -Dclassifier=javadoc
 <span class="hljs-keyword">import</span> java.io.IOException;
 <span class="hljs-keyword">import</span> java.io.InputStream;
 <span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
+
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>{
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
         String resource = <span class="hljs-string">&quot;mybatis-config.xml&quot;</span>;
@@ -4151,6 +4186,17 @@ $ mvn dependency:resolve -Dclassifier=javadoc
         <span class="hljs-keyword">try</span> {
             List&lt;User&gt; userList = sqlSession.selectList(<span class="hljs-string">&quot;org.example.mapper.UserMapper.findAll&quot;</span>);
             System.out.println(userList);
+
+            User user = sqlSession.selectOne(<span class="hljs-string">&quot;org.example.mapper.UserMapper.get&quot;</span>);
+            System.out.println(user);
+
+            <span class="hljs-comment">// &#x628A;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x54EA;&#x4E2A;&#x5217;&#x7684;&#x503C;&#xFF0C;&#x5F53;&#x4F5C;Map&#x7684;key</span>
+            Map&lt;Integer, User&gt; map = sqlSession.selectMap(<span class="hljs-string">&quot;org.example.mapper.UserMapper.collect&quot;</span>, <span class="hljs-string">&quot;id&quot;</span>);
+            System.out.println(map);
+
+            <span class="hljs-keyword">int</span> count = sqlSession.selectOne(<span class="hljs-string">&quot;org.example.mapper.UserMapper.count&quot;</span>);
+            System.out.println(count);
+
         } <span class="hljs-keyword">finally</span> {
             sqlSession.close();
         }
@@ -4200,7 +4246,7 @@ $ mvn dependency:resolve -Dclassifier=javadoc
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"MyBatis","level":"1.17.6","depth":2,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"Tomcat数据库连接池","level":"1.17.5.22","depth":3,"path":"800Java/12JavaWeb/22Tomcat数据库连接池.md","ref":"800Java/12JavaWeb/22Tomcat数据库连接池.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/13MyBatis/README.md","mtime":"2022-05-23T00:03:50.811Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-23T00:04:36.299Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"MyBatis","level":"1.17.6","depth":2,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"Tomcat数据库连接池","level":"1.17.5.22","depth":3,"path":"800Java/12JavaWeb/22Tomcat数据库连接池.md","ref":"800Java/12JavaWeb/22Tomcat数据库连接池.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/13MyBatis/README.md","mtime":"2022-05-23T02:16:25.057Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-23T02:17:09.591Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
