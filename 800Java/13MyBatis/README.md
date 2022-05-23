@@ -143,7 +143,17 @@ public class User {
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.UserMapper">
     <select id="findAll" resultType="org.example.entity.User">
-        select * from t_user
+        SELECT id,
+               user_name      AS userName,
+               age,
+               sex,
+               birth,
+               mobile,
+               create_user_id AS createUserId,
+               create_time    AS createTime,
+               update_user_id AS updateUserId,
+               update_time    AS updateTime
+        FROM t_user
     </select>
 </mapper>
 ```
