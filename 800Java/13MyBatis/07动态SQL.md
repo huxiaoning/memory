@@ -70,3 +70,52 @@
 
 定义临时变量的。
 
+
+
+##### foreach
+
+- IN查询(主要)
+
+- 批量intert
+
+  - ```java
+    SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
+    ```
+
+  - 底层使用JDBC的`PreparedStatement.addBatch()`
+
+
+
+
+
+### 定义SQL片段
+
+```xml
+    <sql id="columns"> <!-- 定义SQL片段 -->
+        id,
+        user_name AS userName,
+        age,
+        sex,
+        birth,
+        mobile,
+        create_user_id AS createUserId,
+        create_time AS createTime,
+        update_user_id AS updateUserId,
+        update_time AS updateTime
+    </sql>
+
+    <select id="page" resultType="user" parameterType="map">
+        SELECT
+        <include refid="columns"></include> <!-- 复用SQL片段 -->
+        FROM t_user
+        WHERE id IN
+        <foreach collection="idList" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        LIMIT
+        #{pageStart}
+        , #{pageSize}
+    </select>
+```
+
+多表联合查询的时候用的比较多。
