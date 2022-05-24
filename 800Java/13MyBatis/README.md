@@ -1,5 +1,21 @@
 # MyBatis
 
+### `MyBatis`简介
+
+- 项目地址
+  - 项目代码仓库放在[GitHub](https://github.com/mybatis/mybatis-3)。
+- `MyBatis`是数据访问框架，底层是对JDBC的封装。
+- 英文官方[文档](https://mybatis.org/mybatis-3/)。
+- 中文官方[文档](https://mybatis.org/mybatis-3/zh/index.html)。
+
+### 什么是 MyBatis？
+
+MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。
+
+
+
+
+
 ### 准备一个mysql数据库服务
 
 ```shell
@@ -40,24 +56,6 @@ INSERT INTO t_user VALUES
 (DEFAULT,'王五',14,1,'2020-10-13','13111111112',0,'2020-10-15 00:00:00',0,'2020-10-15 00:00:00'),
 (DEFAULT,'赵六',15,1,'2020-10-12','13111111116',0,'2020-10-15 00:00:00',0,'2020-10-15 00:00:00');
 ```
-
-
-
-
-
-
-
-### `MyBatis`简介
-
-- 项目地址
-  - 项目代码仓库放在[GitHub](https://github.com/mybatis/mybatis-3)。
-- `MyBatis`是数据访问框架，底层是对JDBC的封装。
-- 英文官方[文档](https://mybatis.org/mybatis-3/)。
-- 中文官方[文档](https://mybatis.org/mybatis-3/zh/index.html)。
-
-### 什么是 MyBatis？
-
-MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。
 
 
 
