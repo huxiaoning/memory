@@ -4371,6 +4371,44 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="spring&#x52A0;&#x8F7D;&#x5C5E;&#x6027;&#x6587;&#x4EF6;">Spring&#x52A0;&#x8F7D;&#x5C5E;&#x6027;&#x6587;&#x4EF6;</h1>
+<ul>
+<li><p><code>db.properties</code></p>
+<ul>
+<li><pre><code class="lang-properties">jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false
+jdbc.username=root
+jdbc.password=123456
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><code>applicationContext.xml</code></p>
+<ul>
+<li><pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">context:property-placeholder</span> <span class="hljs-attr">location</span>=<span class="hljs-string">&quot;classpath:db.properties&quot;</span>/&gt;</span> <span class="hljs-comment">&lt;!-- &#x52A0;&#x8F7D;&#x591A;&#x4E2A;&#x7528;&#x9017;&#x53F7;&#x9694;&#x5F00; --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;driverManagerDataSource&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${jdbc.url}&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${jdbc.username}&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${jdbc.password}&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driverClassName&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${jdbc.driver}&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>&#x4E5F;&#x53EF;&#x4EE5;&#x5728;bean&#x7C7B;&#x578B;&#x4E2D;&#x53D6;&#x503C;</p>
+<ul>
+<li><pre><code class="lang-java"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">XxxComponent</span> </span>{
+    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${jdbc.driver}&quot;</span>) <span class="hljs-comment">//  @Value&#x6CE8;&#x89E3;&#x4E5F;&#x9700;&#x8981;&#x5F53;&#x524D;&#x7C7B;&#x88AB;&#x626B;&#x63CF; &lt;context:component-scan base-package=&quot;org.example&quot;/&gt;</span>
+    <span class="hljs-keyword">private</span> String driver;
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -4414,7 +4452,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Spring加载属性文件","level":"1.17.7.13","depth":3,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"自动注入","level":"1.17.7.12","depth":3,"path":"800Java/14Spring/12自动注入.md","ref":"800Java/14Spring/12自动注入.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/14Spring/13Spring加载属性文件.md","mtime":"2022-05-26T01:13:29.253Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-26T01:14:15.203Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Spring加载属性文件","level":"1.17.7.13","depth":3,"next":{"title":"Spring Framework","level":"1.18","depth":1,"path":"900Spring Framework/README.md","ref":"900Spring Framework/README.md","articles":[{"title":"依赖关系管理和命名约定","level":"1.18.1","depth":2,"path":"900Spring Framework/01依赖关系管理和命名约定.md","ref":"900Spring Framework/01依赖关系管理和命名约定.md","articles":[]},{"title":"日志","level":"1.18.2","depth":2,"path":"900Spring Framework/02日志.md","ref":"900Spring Framework/02日志.md","articles":[]},{"title":"测试","level":"1.18.3","depth":2,"path":"900Spring Framework/03测试/README.md","ref":"900Spring Framework/03测试/README.md","articles":[{"title":"单元测试","level":"1.18.3.1","depth":3,"path":"900Spring Framework/03测试/01单元测试.md","ref":"900Spring Framework/03测试/01单元测试.md","articles":[]}]}]},"previous":{"title":"自动注入","level":"1.17.7.12","depth":3,"path":"800Java/14Spring/12自动注入.md","ref":"800Java/14Spring/12自动注入.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/14Spring/13Spring加载属性文件.md","mtime":"2022-05-26T01:37:23.447Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-26T01:38:16.459Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
