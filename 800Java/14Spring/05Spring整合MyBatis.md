@@ -55,13 +55,14 @@
 
   - ```xml
         <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-            <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?characterEncoding=utf-8"/>
+            <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false"/>
             <property name="username" value="root"/>
             <property name="password" value="123456"/>
             <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         </bean>
         <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
             <property name="dataSource" ref="driverManagerDataSource"/>
+            <property name="typeAliasesPackage" value="org.example.entity"/>
         </bean>
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
             <property name="basePackage" value="org.example.mapper"/>
@@ -110,7 +111,7 @@
             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="org.example.mapper.UserMapper">
-        <select id="findAll" resultType="org.example.entity.User">
+        <select id="findAll" resultType="user">
             SELECT id,
                    user_name      AS userName,
                    age,
@@ -169,7 +170,7 @@
 
 - `mybatis-config.xml`不见了
 - 直接从Spring容器中获取Mapper接口的代理实例对象。
-- 缺少别名和声明式事务
+- 缺少声明式事务
 
 
 
