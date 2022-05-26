@@ -5,7 +5,7 @@
 - 启用注解扫描
 
   - ```xml
-        <context:component-scan base-package="org.example"/>
+        <context:component-scan base-package="org.example"/> <!-- 扫描多个包用逗号隔开 -->
         <!--
          proxy-target-class
             true:使用cglib动态代理
