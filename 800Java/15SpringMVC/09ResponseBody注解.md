@@ -32,7 +32,7 @@
 ```
 
 - 在方法上只有＠RequestMapping时，无论方法返回值是什么(void除外)认为需要跳转。
-- 添加@ResponseBody后
+- **添加@ResponseBody后**
   - 设置响应头Content-Type为`application/json`
     - 这里没给我加编码(据然也没有乱码)，使用`produces = {"application/json;charset=utf-8"}`重新设置一下响应头
   - 响应体转成json格式
@@ -41,4 +41,22 @@
 
 
 小结:ajax这种异步请求，对于后端来说，需要设置不跳转，并返回文本流即可。
+
+
+
+### `@RestController`
+
+提到`@ResponseBody`不能不提一下`@RestController`。
+
+`@RestController` 是 `@Controller` 和 `@ResponseBody` 两个注解的结合体。
+
+
+
+### `@RequestMapping`变体
+
+- `@GetMapping`
+- `@PostMapping`
+- `@PutMapping`
+- `@DeleteMapping`
+- `@PatchMapping`
 
