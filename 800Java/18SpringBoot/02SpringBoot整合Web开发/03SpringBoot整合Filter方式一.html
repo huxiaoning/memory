@@ -5031,6 +5031,59 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="springboot&#x6574;&#x5408;filter&#x65B9;&#x5F0F;&#x4E00;">SpringBoot&#x6574;&#x5408;Filter&#x65B9;&#x5F0F;&#x4E00;</h1>
+<p>&#x6CE8;&#x89E3;&#x626B;&#x63CF;&#x3002;</p>
+<ul>
+<li><p>&#x7F16;&#x5199;Filter</p>
+<ul>
+<li><pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example.bootdemo.filter;
+<span class="hljs-keyword">import</span> javax.servlet.*;
+<span class="hljs-keyword">import</span> javax.servlet.annotation.WebFilter;
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-meta">@WebFilter</span>(filterName = <span class="hljs-string">&quot;FirstFilter&quot;</span>, urlPatterns = {<span class="hljs-string">&quot;/*&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FirstFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Filter</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(FilterConfig filterConfig)</span> <span class="hljs-keyword">throws</span> ServletException </span>{
+        Filter.<span class="hljs-keyword">super</span>.init(filterConfig);
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFilter</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="hljs-keyword">throws</span> IOException, ServletException </span>{
+        System.out.println(<span class="hljs-string">&quot;&#x8FDB;&#x5165;Filter&quot;</span>);
+        filterChain.doFilter(servletRequest, servletResponse);
+        System.out.println(<span class="hljs-string">&quot;&#x79BB;&#x5F00;Filter&quot;</span>);
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>{
+        Filter.<span class="hljs-keyword">super</span>.destroy();
+    }
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>&#x542F;&#x52A8;&#x7C7B;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3;<code>@ServletComponentScan</code></p>
+<ul>
+<li><pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example.bootdemo;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.web.servlet.ServletComponentScan;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@ServletComponentScan</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BootDemoApplication</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        SpringApplication.run(BootDemoApplication.class, args);
+    }
+}
+</code></pre>
+</li>
+<li><p>&#x6CE8;&#x610F;&#xFF1A;&#x6CA1;&#x6709;@FilterComponentScan&#x3002;</p>
+</li>
+<li><p>@ServletComponentScan&#x4F1A;&#x626B;&#x63CF;@WebFilter&#xFF0C;&#x5E76;&#x5C06;&#x8BE5;&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x3002;</p>
+</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -5074,7 +5127,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"SpringBoot整合Filter方式一","level":"1.17.11.2.3","depth":4,"next":{"title":"SpringBoot整合Filter方式二","level":"1.17.11.2.4","depth":4,"path":"800Java/18SpringBoot/02SpringBoot整合Web开发/04SpringBoot整合Filter方式二.md","ref":"800Java/18SpringBoot/02SpringBoot整合Web开发/04SpringBoot整合Filter方式二.md","articles":[]},"previous":{"title":"SpringBoot整合Servlet方式二","level":"1.17.11.2.2","depth":4,"path":"800Java/18SpringBoot/02SpringBoot整合Web开发/02SpringBoot整合Servlet方式二.md","ref":"800Java/18SpringBoot/02SpringBoot整合Web开发/02SpringBoot整合Servlet方式二.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/18SpringBoot/02SpringBoot整合Web开发/03SpringBoot整合Filter方式一.md","mtime":"2022-05-31T16:02:30.164Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-31T16:03:30.526Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SpringBoot整合Filter方式一","level":"1.17.11.2.3","depth":4,"next":{"title":"SpringBoot整合Filter方式二","level":"1.17.11.2.4","depth":4,"path":"800Java/18SpringBoot/02SpringBoot整合Web开发/04SpringBoot整合Filter方式二.md","ref":"800Java/18SpringBoot/02SpringBoot整合Web开发/04SpringBoot整合Filter方式二.md","articles":[]},"previous":{"title":"SpringBoot整合Servlet方式二","level":"1.17.11.2.2","depth":4,"path":"800Java/18SpringBoot/02SpringBoot整合Web开发/02SpringBoot整合Servlet方式二.md","ref":"800Java/18SpringBoot/02SpringBoot整合Web开发/02SpringBoot整合Servlet方式二.md","articles":[]},"dir":"ltr"},"config":{"plugins":["donate","github-buttons@2.1.0","edit-link","toggle-chapters","code"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"donate":{"alipay":"https://raw.githubusercontent.com/huxiaoning/img/master/alipay.jpg","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://raw.githubusercontent.com/huxiaoning/img/master/wechatpay.jpg","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"repo":"huxiaoning/memory","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/huxiaoning/memory/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","author":"Jett","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"个人笔记","language":"zh-hans","gitbook":"*","description":"个人笔记"},"file":{"path":"800Java/18SpringBoot/02SpringBoot整合Web开发/03SpringBoot整合Filter方式一.md","mtime":"2022-05-31T23:42:18.720Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-31T23:43:14.539Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
