@@ -4,8 +4,6 @@
 
 Spring Boot一供提供了[44种启动器](https://blog.csdn.net/luqingshuai_eloong/article/details/106202718)。
 
-
-
 - spring-boot-starter
   - Spring Boot的核心启动器，包含了自动配置、日志和YAML。
 - spring-boot-starter-actuator
@@ -19,9 +17,10 @@ Spring Boot一供提供了[44种启动器](https://blog.csdn.net/luqingshuai_elo
 
 
 
+第三方启动器
 
-
-
+- mybatis-spring-boot-starter
+  - mybatis启动器
 
 
 

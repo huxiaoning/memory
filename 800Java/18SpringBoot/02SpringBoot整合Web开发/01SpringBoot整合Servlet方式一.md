@@ -50,5 +50,5 @@
     }
     ```
 
-  - 在SpringBoot启动时会扫描@WebServlet，并将该类实例化
+  - 在SpringBoot启动时会扫描@WebServlet，并将该类实例化。
 
