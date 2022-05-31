@@ -18,7 +18,7 @@
             <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
             <init-param><!-- 修改默认的springmvc位置 -->
                 <param-name>contextConfigLocation</param-name>
-                <param-value>classpath:springmvc.xml</param-value>
+                <param-value>classpath:springmvc.xml</param-value><!-- 支持*通配符:applicationContent-*.xml -->
             </init-param>
             <load-on-startup>1</load-on-startup> <!-- 启动时加载，而不是第一次访问时 -->
         </servlet>

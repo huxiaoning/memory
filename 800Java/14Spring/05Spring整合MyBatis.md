@@ -274,7 +274,7 @@
     <web-app>
         <context-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:applicationContext.xml</param-value>
+            <param-value>classpath:applicationContext.xml</param-value> <!-- 支持*通配符:applicationContent-*.xml -->
         </context-param>
         <listener>
             <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
