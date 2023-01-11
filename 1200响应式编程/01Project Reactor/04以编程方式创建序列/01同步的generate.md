@@ -4,7 +4,7 @@
 
 &emsp;&emsp;这是针对同步和逐一发射的，这意味着接收器是 SynchronousSink 并且其 next() 方法每次回调调用最多只能调用一次。然后您可以另外调用 error(Throwable) 或 complete()，但这是可选的。
 
-&emsp;&emsp;最有用的变体可能是让您保持状态的变体，您可以在您的接收器使用中参考该状态来决定接下来要发出什么。生成器函数然后变为 BiFunction<S, SynchronousSink<T>, S>，其中 <S> 是状态对象的类型。您必须为初始状态提供 Supplier<S> ，并且您的生成器函数现在在每一轮都返回一个新状态。
+&emsp;&emsp;最有用的变体可能是让您保持状态的变体，您可以在您的接收器使用中参考该状态来决定接下来要发出什么。生成器函数然后变为 `BiFunction<S, SynchronousSink<T>, S>`，其中 `<S>` 是状态对象的类型。您必须为初始状态提供 `Supplier<S>` ，并且您的生成器函数现在在每一轮都返回一个新状态。
 
 &emsp;&emsp;例如，您可以使用 int 作为状态：
 
