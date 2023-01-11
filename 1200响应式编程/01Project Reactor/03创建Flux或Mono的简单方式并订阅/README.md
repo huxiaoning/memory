@@ -18,6 +18,7 @@ Mono<String> noData = Mono.empty();
 Mono<String> data = Mono.just("foo");
 Flux<Integer> numbersFromFiveToSeven = Flux.range(5, 3); 
 ```
+---
 
 &emsp;&emsp;在订阅方面，Flux 和 Mono 使用 Java 8 lambda。您有多种 .subscribe() 变体可供选择，这些变体将 lambda 用于不同的回调组合，如以下方法签名所示：
 
