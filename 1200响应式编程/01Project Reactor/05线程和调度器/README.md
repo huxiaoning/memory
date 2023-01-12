@@ -48,8 +48,9 @@ hello thread Thread-0
 Flux.interval(Duration.ofMillis(300), Schedulers.newSingle("test"))
 ```
 
+&emsp;&emsp;Reactor 提供了两种在反应链中切换执行上下文（或调度程序）的方法：publishOn 和 subscribeOn。两者都采用调度程序并让您将执行上下文切换到该调度程序。但是 publishOn 在链中的位置很重要，而 subscribeOn 的位置则无关紧要。要了解这种差异，您首先必须记住，在您订阅之前什么都不会发生。
 
+&emsp;&emsp;在 Reactor 中，当您链接运算符时，您可以根据需要将尽可能多的 Flux 和 Mono 实现包装在彼此中。订阅后，将创建一个订阅者对象链，向后（沿着链向上）到第一个发布者。这实际上对您隐藏了。您所能看到的只是 Flux（或 Mono）和 Subscription 的外层，但这些中间操作符特定的订阅者才是真正工作发生的地方。
 
+&emsp;&emsp;有了这些知识，我们可以仔细看看 publishOn 和 subscribeOn 运算符：
 
-
-Reactor offers two means of switching the execution context (or `Scheduler`) in a reactive chain: `publishOn` and `subscribeOn`. Both take a `Scheduler` and let you switch the execution context to that scheduler. But the placement of `publishOn` in the chain matters, while the placement of `subscribeOn` does not. To understand that difference, you first have to remember that [nothing happens until you subscribe](https://projectreactor.io/docs/core/release/reference/#reactive.subscribe).
