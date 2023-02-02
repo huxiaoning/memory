@@ -7,3 +7,12 @@ $ mvn dependency:sources
 $ mvn dependency:resolve -Dclassifier=javadoc
 ```
 
+
+
+
+
+```java
+$ mvn clean package -Dmaven.test.skip=true
+$ mvn clean install -Dmaven.test.skip=true
+```
+
