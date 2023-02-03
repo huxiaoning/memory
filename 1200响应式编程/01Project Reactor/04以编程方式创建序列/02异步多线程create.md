@@ -181,3 +181,74 @@ public interface FluxSink<T> {
 - BUFFER（默认）在下游无法跟上时缓冲所有信号。 （这会无限缓冲并可能导致 OutOfMemoryError）。
 
 &emsp;&emsp;Mono也有一个create生成器。Mono 创建的 MonoSink 不允许多次发射。它会在第一个信号之后丢弃所有信号。
+
+
+
+
+
+
+
+
+
+### create示例 简洁版本
+
+```java
+package org.example;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.FluxSink;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
+public class App {
+    public static void main(String[] args) {
+
+        Flux<String> flux = Flux.create(new Consumer<FluxSink<String>>() {
+            @Override
+            public void accept(FluxSink<String> sink) {
+                MyEventListener<String> myEventListener = new MyEventListener<>(sink);
+                myEventListener.onDataChunk(Arrays.asList("11", "22"));
+                myEventListener.processComplete();
+            }
+        });
+        
+        flux.subscribe(s -> System.out.println("s = " + s), throwable -> System.out.println("throwable = " + throwable), new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("complete");
+            }
+        });
+    }
+}
+
+
+class MyEventListener<T> {
+
+    private final FluxSink<T> sink;
+
+    public MyEventListener(FluxSink<T> sink) {
+        this.sink = sink;
+    }
+
+    public void onDataChunk(List<T> chunk) {
+        for (T t : chunk) {
+            sink.next(t);
+        }
+    }
+
+    public void processComplete() {
+        sink.complete();
+    }
+}
+```
+
+输出如下：
+
+```
+s = 11
+s = 22
+complete
+```
+
