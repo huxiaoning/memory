@@ -28,3 +28,39 @@ psiFile.accept(new PsiRecursiveElementWalkingVisitor() {
 });
 ```
 
+请参阅[导航PSI](https://plugins.jetbrains.com/docs/intellij/navigating-psi.html)。
+
+### PSI文件来自哪里？
+
+&emsp;&emsp;由于PSI依赖于语言，因此需要使用[Language](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/platform/core-api/src/com/intellij/lang/Language.java)实例来创建Psl文件：
+
+```java
+LanguageParserDefinitions.INSTANCE
+    .forLanguage(MyLanguage.INSTANCE)
+    .createFile(fileViewProvider);
+```
+
+&emsp;&emsp;与文档类似，当访问特定文件的 PSI 时，PSI 文件会按需创建。
+
+### PSI文件会持续多久？
+
+&emsp;&emsp;像文档一样，PSI文件从相应的VirtualFile实例中弱引用，并且如果没有任何人引用它们，则可以进行垃圾回收。
+
+### 如何创建PSl文件？
+
+&emsp;&emsp;`PsiFileFactory.createFileFromText()` 方法创建一个带有指定内容的内存中的 PSl 文件。
+要将 Psl 文件保存到磁盘，请使用 `PsiDirectory.add()` 方法。
+
+### 当PSl文件发生更改时，我该如何收到通知？
+
+&emsp;&emsp;`PsiManager.addPsiTreeChangeListener()` 允许您接收有关项目PSI树的所有更改的通知。或者，可以在 `com.intellij.psi.treeChangeListener` 扩展点中注册 `PsiTreeChangeListener`。
+
+> 请查看 PsiTreeChangeEvent Javadoc，了解处理 PSI 事件时常见的问题。
+
+### 我如何扩展PSI?
+
+&emsp;&emsp;PSI可以通过自定义语言插件来支持其他语言。有关开发自定义语言插件的更多详细信息，请参阅《自定义语言支持参考指南》。
+
+### 与PSI合作的规则是什么？
+
+&emsp;&emsp;PSI文件内容的任何更改都会反映在文档中，因此所有与文档相关的工作规则（读/写操作、命令、只读状态处理）均有效。
