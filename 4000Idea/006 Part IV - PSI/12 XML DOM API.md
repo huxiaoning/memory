@@ -113,3 +113,11 @@ String getTagValue();
 void setTagValue(String s);
 ```
 
+正如您所看到的，我们的访问器使用字符串值。这是很自然的，因为XML代表一种文本格式，而标签内容总是文本。但有时您可能希望操作整数、布尔值、枚举甚至类名（它们当然会被表示为`PsiClass`）以及更通用的Java类型（`PsiType`）。在这种情况下，您只需要将方法中的类型更改为需要的类型，一切都将正常工作。
+
+###### 自定义值类型
+
+```text
+https://plugins.jetbrains.com/docs/intellij/xml-dom-api.html#custom-value-types
+```
+
