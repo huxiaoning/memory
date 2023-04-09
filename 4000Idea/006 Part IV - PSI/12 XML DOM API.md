@@ -113,13 +113,13 @@ String getTagValue();
 void setTagValue(String s);
 ```
 
-正如您所看到的，我们的访问器使用字符串值。这是很自然的，因为XML代表一种文本格式，而标签内容总是文本。但有时您可能希望操作整数、布尔值、枚举甚至类名（它们当然会被表示为`PsiClass`）以及更通用的Java类型（`PsiType`）。在这种情况下，您只需要将方法中的类型更改为需要的类型，一切都将正常工作。
+&emsp;&emsp;正如您所看到的，我们的访问器使用字符串值。这是很自然的，因为XML代表一种文本格式，而标签内容总是文本。但有时您可能希望操作整数、布尔值、枚举甚至类名（它们当然会被表示为`PsiClass`）以及更通用的Java类型（`PsiType`）。在这种情况下，您只需要将方法中的类型更改为需要的类型，一切都将正常工作。
 
 ###### 自定义值类型
 
-如果您使用更加奇特的类型，那么您应该告诉DOM如何处理它们。首先，在访问器方法上注释`@Convert`注解，并在注解中指定自己的类，该类应扩展`Converter<T>`类。这里T是您的奇特类型，而`Converter<T>`是一种知道如何在`String`和`T`之间转换值的东西。如果无法转换值（例如，“foo”不能转换为`Integer`），则转换器可能返回`null`。还请注意，您的实现应具有无参数构造函数。
+&emsp;&emsp;如果您使用更加奇特的类型，那么您应该告诉DOM如何处理它们。首先，在访问器方法上注释`@Convert`注解，并在注解中指定自己的类，该类应扩展`Converter<T>`类。这里T是您的奇特类型，而`Converter<T>`是一种知道如何在`String`和`T`之间转换值的东西。如果无法转换值（例如，“foo”不能转换为`Integer`），则转换器可能返回`null`。还请注意，您的实现应具有无参数构造函数。
 
-让我们考虑一个有趣的情况，当`T`表示枚举值时。通常，转换器只是在XML中搜索指定名称的枚举元素。但有时候，为了它们的名称，您可能需要或想要使用不是有效Java标识符的值。例如，在EJB中CMP版本可以是“1.x”或“2.x”，但您无法创建具有这些名称的Java枚举。对于这种情况，请让您的枚举实现`NamedEnum`接口，然后按照您希望命名您的枚举元素。现在，只需提供`getValue()`实现即可返回正确值以与XML内容匹配，并完成！在我们的示例中，代码将如下所示：
+&emsp;&emsp;让我们考虑一个有趣的情况，当`T`表示枚举值时。通常，转换器只是在XML中搜索指定名称的枚举元素。但有时候，为了它们的名称，您可能需要或想要使用不是有效Java标识符的值。例如，在EJB中CMP版本可以是“1.x”或“2.x”，但您无法创建具有这些名称的Java枚举。对于这种情况，请让您的枚举实现`NamedEnum`接口，然后按照您希望命名您的枚举元素。现在，只需提供`getValue()`实现即可返回正确值以与XML内容匹配，并完成！在我们的示例中，代码将如下所示：
 
 ```java
 enum CmpVersion implements NamedEnum {
@@ -135,7 +135,7 @@ enum CmpVersion implements NamedEnum {
 }
 ```
 
-正如我们已经提到的，一个XML标签除了它的值之外可能还有很多附属信息：可以有属性、子元素，但通常（例如根据DTD或Schema）它只应该具有值。当然，这样的标签也需要与DOM元素相关联。我们提供了这样一个元素：
+&emsp;&emsp;正如我们已经提到的，一个XML标签除了它的值之外可能还有很多附属信息：可以有属性、子元素，但通常（例如根据DTD或Schema）它只应该具有值。当然，这样的标签也需要与DOM元素相关联。我们提供了这样一个元素：
 
 ```java
 interface GenericDomValue<T> {
@@ -148,11 +148,11 @@ interface GenericDomValue<T> {
 }
 ```
 
-因此，当使用此接口时，您可以指定特定的`T` - 一切都将正常工作。提供处理字符串的方法有很多原因。例如，如果您的`T`是`PsiClass`，则在UI中突出显示无效值会非常有用。为了获取要突出显示的值（来自XML文件的字符串），我们有`getStringValue()`方法。错误消息将通过`getErrorMessage()`从转换器中获取。
+&emsp;&emsp;因此，当使用此接口时，您可以指定特定的`T` - 一切都将正常工作。提供处理字符串的方法有很多原因。例如，如果您的`T`是`PsiClass`，则在UI中突出显示无效值会非常有用。为了获取要突出显示的值（来自XML文件的字符串），我们有`getStringValue()`方法。错误消息将通过`getErrorMessage()`从转换器中获取。
 
 ##### 属性
 
-属性也相对简单易处理。您可以读取它们的值，设置它们，并使用不同类型进行操作。因此，自然而然地创建类似于`GenericDomValue<T>`这样的东西，然后像往常一样工作。“类似于”将成为一个继承者，如下所示：
+&emsp;&emsp;属性也相对简单易处理。您可以读取它们的值，设置它们，并使用不同类型进行操作。因此，自然而然地创建类似于`GenericDomValue<T>`这样的东西，然后像往常一样工作。“类似于”将成为一个继承者，如下所示：
 
 ```java
 interface GenericAttributeValue<T> extends GenericDomValue<T> {
@@ -160,27 +160,27 @@ interface GenericAttributeValue<T> extends GenericDomValue<T> {
 }
 ```
 
-考虑您想要使用名为“some-class”的属性，其值为`PsiClass`类型：
+&emsp;&emsp;考虑您想要使用名为“some-class”的属性，其值为`PsiClass`类型：
 
 ```java
 @Attribute("some-class")
 GenericAttributeValue<PsiClass> getMyAttributeValue();
 ```
 
-就是这样！现在你可以获取/设置值，解析此`PsiClass`，获取其字符串表示等。属性的名称将从方法名中取得（请参见下一段）。如果您以特殊方式命名方法，则甚至可以省略注释。例如：
+&emsp;&emsp;就是这样！现在你可以获取/设置值，解析此`PsiClass`，获取其字符串表示等。属性的名称将从方法名中取得（请参见下一段）。如果您以特殊方式命名方法，则甚至可以省略注释。例如：
 
 ```java
 GenericAttributeValue<PsiClass> getSomeClass();
 ```
 
-[`DomNameStrategy`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/DomNameStrategy.java)接口指定了如何将访问器名称转换为XML元素名称。更确切地说，不是完整的访问器名称，而是减去任何“get”、“set”或“is”前缀的名称。策略类在任何DOM元素接口中的`@NameStrategy`注释中指定。然后，该接口的任何后代和子级都将使用此策略。默认策略是[`HyphenNameStrategy`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/HyphenNameStrategy.java)，在其中单词由连字符分隔（请参见上面的示例）。另一个常见变体是[`JavaNameStrategy`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/JavaNameStrategy.java)，它大写每个单词的第一个字母，就像Java命名约定一样。在我们的示例中，属性名称将为“someClass”。
+&emsp;&emsp;[`DomNameStrategy`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/DomNameStrategy.java)接口指定了如何将访问器名称转换为XML元素名称。更确切地说，不是完整的访问器名称，而是减去任何“get”、“set”或“is”前缀的名称。策略类在任何DOM元素接口中的`@NameStrategy`注释中指定。然后，该接口的任何后代和子级都将使用此策略。默认策略是[`HyphenNameStrategy`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/HyphenNameStrategy.java)，在其中单词由连字符分隔（请参见上面的示例）。另一个常见变体是[`JavaNameStrategy`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/JavaNameStrategy.java)，它大写每个单词的第一个字母，就像Java命名约定一样。在我们的示例中，属性名称将为“someClass”。
 
-如果属性没有定义为`PsiClass`，而是其他需要转换器的自定义`T`类型，则只需在getter方法上指定`@Convert`注解即可。
+&emsp;&emsp;如果属性没有定义为`PsiClass`，而是其他需要转换器的自定义`T`类型，则只需在getter方法上指定`@Convert`注解即可。
 
-请注意，即使在XML中未指定属性，其getter方法也永远不会返回`null`。它的`getValue()`、`getStringValue()`和`getXmlAttribute()`方法将返回`null`，但DOM接口实例将存在且有效。如果元素具有基础属性，则可以轻松解决此问题（当然，仅在需要时才能这样做）：只需调用`undefine()`方法（定义在`DomElement`中），XML属性就会消失，而[`GenericAttributeValue`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/GenericAttributeValue.java)仍然有效。
+&emsp;&emsp;请注意，即使在XML中未指定属性，其getter方法也永远不会返回`null`。它的`getValue()`、`getStringValue()`和`getXmlAttribute()`方法将返回`null`，但DOM接口实例将存在且有效。如果元素具有基础属性，则可以轻松解决此问题（当然，仅在需要时才能这样做）：只需调用`undefine()`方法（定义在`DomElement`中），XML属性就会消失，而[`GenericAttributeValue`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/GenericAttributeValue.java)仍然有效。
 
 ##### 子标签：固定数量
-您可能经常处理具有最多一个给定名称的子标记（例如`<ejb-name>`，`<ejb-class>`或`<cmp-field>`）的标记，这些标记定义实体EJB。要使用此类子项，请为其提供getter。这些getter应该具有扩展`DomElement`的返回类型：
+&emsp;&emsp;您可能经常处理具有最多一个给定名称的子标记（例如`<ejb-name>`，`<ejb-class>`或`<cmp-field>`）的标记，这些标记定义实体EJB。要使用此类子项，请为其提供getter。这些getter应该具有扩展`DomElement`的返回类型：
 
 ```java
 GenericDomValue<String> getEjbName();
@@ -188,11 +188,11 @@ GenericDomValue<String> getEjbClass();
 CmpField getCmpField();
 ```
 
-还有一种注释可以明确指定这样的子元素：`@SubTag`。它的"value"属性包含一个标签名称。如果没有指定，将使用当前命名策略从方法名称中推断出名称。
+&emsp;&emsp;还有一种注释可以明确指定这样的子元素：`@SubTag`。它的"value"属性包含一个标签名称。如果没有指定，将使用当前命名策略从方法名称中推断出名称。
 
-有时候，子标签的存在意味着某些东西，而不是它的内容 - 例如，在 EJB 方法权限中的 `<unchecked>` 标记。如果存在，则权限未经检查，否则已经检查。对于这种情况，应该创建一个特殊的 `GenericDomValue<Boolean>` 子元素。通常情况下，如果标记值中有 "true" 则 `getValue()` 返回 `true` ，如果标记值中有 "false" 则返回 `false` ，否则返回 `null` 。在 `@SubTag` 注释中，可以指定属性如 `indicator=true` 。在这种情况下，`getValue()` 将在标签存在时返回 `true` ，否则返回 `false` 。
+&emsp;&emsp;有时候，子标签的存在意味着某些东西，而不是它的内容 - 例如，在 EJB 方法权限中的 `<unchecked>` 标记。如果存在，则权限未经检查，否则已经检查。对于这种情况，应该创建一个特殊的 `GenericDomValue<Boolean>` 子元素。通常情况下，如果标记值中有 "true" 则 `getValue()` 返回 `true` ，如果标记值中有 "false" 则返回 `false` ，否则返回 `null` 。在 `@SubTag` 注释中，可以指定属性如 `indicator=true` 。在这种情况下，`getValue()` 将在标签存在时返回 `true` ，否则返回 `false` 。
 
-让我们考虑另一个受EJB启发的有趣例子，其中存在具有两个角色的关系，每个角色指定一个关系端点：第一角色和第二角色。它们都由具有相同值的标签表示。因此，我们可以创建一个包含多个角色元素的集合，并且每次访问某些角色时，我们将检查该集合是否具有足够数量的元素。但是DOM的主要目的之一是消除不必要的检查。那么为什么不能拥有带有相同标记名称的固定（超过一个）数量子项呢？让我们来试试！
+&emsp;&emsp;让我们考虑另一个受EJB启发的有趣例子，其中存在具有两个角色的关系，每个角色指定一个关系端点：第一角色和第二角色。它们都由具有相同值的标签表示。因此，我们可以创建一个包含多个角色元素的集合，并且每次访问某些角色时，我们将检查该集合是否具有足够数量的元素。但是DOM的主要目的之一是消除不必要的检查。那么为什么不能拥有带有相同标记名称的固定（超过一个）数量子项呢？让我们来试试！
 
 ```java
 @SubTag(value = "ejb-relationship-role", index = 0)
@@ -202,39 +202,39 @@ EjbRelationshipRole getEjbRelationshipRole1();
 EjbRelationshipRole getEjbRelationshipRole2();
 ```
 
-第一种方法将返回第一个名为`<ejb-relationship-role>`的子标记的DOM元素，第二个方法将返回第二个。因此，对于这些子项，“固定数量”是一个术语。根据DTD或模式，应该有给定名称的子标记的固定数量。大多数情况下，这个固定数字是1；在我们与关系相关的情况下，则为2。就像属性一样，无论底层标签是否存在，都存在具有固定数量的子项。如果您需要删除标记，则可以使用相同的`undefine()`方法来完成。
+&emsp;&emsp;第一种方法将返回第一个名为`<ejb-relationship-role>`的子标记的DOM元素，第二个方法将返回第二个。因此，对于这些子项，“固定数量”是一个术语。根据DTD或模式，应该有给定名称的子标记的固定数量。大多数情况下，这个固定数字是1；在我们与关系相关的情况下，则为2。就像属性一样，无论底层标签是否存在，都存在具有固定数量的子项。如果您需要删除标记，则可以使用相同的`undefine()`方法来完成。
 
-对于 [`GenericDomValue`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/GenericDomValue.java) 类型的子元素，您也可以像属性一样指定转换器。
+&emsp;&emsp;对于 [`GenericDomValue`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/GenericDomValue.java) 类型的子元素，您也可以像属性一样指定转换器。
 
 ##### 子标签：收藏
 
-DTD和Schemas中的另一个常见情况是，当子元素具有相同的标记名称和非固定上限计数时。它们的访问器与固定数量子元素不同，如下所示：返回结果是扩展了`DomElement`特殊类型的`Collection`或`List`，并且如果您想使用名称策略，则方法名必须为复数形式。例如，在EJB中我们将有以下方法：
+&emsp;&emsp;DTD和Schemas中的另一个常见情况是，当子元素具有相同的标记名称和非固定上限计数时。它们的访问器与固定数量子元素不同，如下所示：返回结果是扩展了`DomElement`特殊类型的`Collection`或`List`，并且如果您想使用名称策略，则方法名必须为复数形式。例如，在EJB中我们将有以下方法：
 
 ```java
 List<Entity> getEntities();
 ```
 
-还有一个注释`@SubTagList`，您可以明确指定标签名称。
+&emsp;&emsp;还有一个注释`@SubTagList`，您可以明确指定标签名称。
 
-返回的集合不能直接修改。要从集合中删除一个元素，只需在该元素上调用`undefine()`即可。标签将被删除，元素将变为无效（`DomElement.isValid() == false`）。请注意，此行为与固定数量的子项和属性不同：它们始终有效，即使在`undefine()`之后也是如此。同样，与这些子类型不同，集合子始终具有有效的基础XML标记。
+&emsp;&emsp;返回的集合不能直接修改。要从集合中删除一个元素，只需在该元素上调用`undefine()`即可。标签将被删除，元素将变为无效（`DomElement.isValid() == false`）。请注意，此行为与固定数量的子项和属性不同：它们始终有效，即使在`undefine()`之后也是如此。同样，与这些子类型不同，集合子始终具有有效的基础XML标记。
 
-添加元素有点困难。由于所有的DOM元素都是在内部创建的，你不能仅仅将一些DOM元素传递给某个方法来添加到集合中。实际上，你必须要求父元素将子元素添加到集合中。在我们的例子中，它是这样完成的：
+&emsp;&emsp;添加元素有点困难。由于所有的DOM元素都是在内部创建的，你不能仅仅将一些DOM元素传递给某个方法来添加到集合中。实际上，你必须要求父元素将子元素添加到集合中。在我们的例子中，它是这样完成的：
 
 ```java
 Entity addEntity(int index);
 ```
 
-它可以在任何你想要的地方添加一个元素，或者
+&emsp;&emsp;它可以在任何你想要的地方添加一个元素，或者
 
 ```java
 Entity addEntity();
 ```
 
-这会向集合末尾添加一个新的DOM元素。请注意“`Entity`”一词的单数形式。因为在这里我们处理一个实体对象，而在集合getter中，我们可能处理多个实体。
+&emsp;&emsp;这会向集合末尾添加一个新的DOM元素。请注意“`Entity`”一词的单数形式。因为在这里我们处理一个实体对象，而在集合getter中，我们可能处理多个实体。
 
-现在，您可以对返回的值进行任何操作：修改、定义标签的值、子元素等。
+&emsp;&emsp;现在，您可以对返回的值进行任何操作：修改、定义标签的值、子元素等。
 
-最后一个常见情况也是一个集合，但它由任意混合的具有不同名称的标签组成。要处理它，您应该为混合集合中所有标签名称定义集合getter，然后定义一个额外的特殊注释getter：
+&emsp;&emsp;最后一个常见情况也是一个集合，但它由任意混合的具有不同名称的标签组成。要处理它，您应该为混合集合中所有标签名称定义集合getter，然后定义一个额外的特殊注释getter：
 
 ```java
 // <foo> elements
@@ -246,9 +246,9 @@ List<Bar> getBars();
 List<FooBar> getMergedListOfFoosAndBars();
 ```
 
-这里的注释是必需的 - 我们无法从一个方法名猜测出多个标签名称。
+&emsp;&emsp;这里的注释是必需的 - 我们无法从一个方法名猜测出多个标签名称。
 
-要向这样的混合集合中添加元素，您应该为每个可能的标签名称创建“add”方法：
+&emsp;&emsp;要向这样的混合集合中添加元素，您应该为每个可能的标签名称创建“add”方法：
 
 ```java
 @SubTagsList(value = { "foo", "bar" }, tagName = "foo")
@@ -257,14 +257,23 @@ FooBar addFoo();
 FooBar addBar(int index);
 ```
 
-在最后一个例子中，索引参数表示合并集合中的索引，而不是名为“bar”的标签集合中的索引。
+&emsp;&emsp;在最后一个例子中，索引参数表示合并集合中的索引，而不是名为“bar”的标签集合中的索引。
 
 ##### 动态定义
 
-您可以通过实现 `com.intellij.util.xml.reflect.DomExtender<T>` 在运行时扩展现有的 DOM 模型。在 `com.intellij.dom.extender` 扩展点的 "extenderClass" 属性中注册它，其中 "domClass" 指定要扩展的 DOM 类 `<T>`。[`DomExtensionsRegistrar`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/reflect/DomExtensionsRegistrar.java) 提供了各种方法来注册动态属性和子元素。
+&emsp;&emsp;您可以通过实现 `com.intellij.util.xml.reflect.DomExtender<T>` 在运行时扩展现有的 DOM 模型。在 `com.intellij.dom.extender` 扩展点的 "extenderClass" 属性中注册它，其中 "domClass" 指定要扩展的 DOM 类 `<T>`。[`DomExtensionsRegistrar`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/reflect/DomExtensionsRegistrar.java) 提供了各种方法来注册动态属性和子元素。
 
-如果贡献的元素依赖于除纯 XML 文件内容之外的任何东西（使用框架版本、类路径中的库等），请确保从 `DomExtender.supportsStubs()` 返回 `false`。
+&emsp;&emsp;如果贡献的元素依赖于除纯 XML 文件内容之外的任何东西（使用框架版本、类路径中的库等），请确保从 `DomExtender.supportsStubs()` 返回 `false`。
 
 ##### 命名空间支持
 
-使用`DomFileDescription.registerNamespacePolicy()`在DOM模型中注释命名空间，并注册命名空间键映射，从而通过`DomFileDescription.initializeFileDescription()`初始化文件描述。
+&emsp;&emsp;使用`DomFileDescription.registerNamespacePolicy()`在DOM模型中注释[`NameSpace`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/Namespace.java)，并注册命名空间键映射，从而通过`DomFileDescription.initializeFileDescription()`初始化文件描述。
+
+##### IDE 支持
+
+&emsp;&emsp;插件 DevKit 支持以下功能，用于处理与 DOM 相关的代码：
+
+- [`DomElement`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/DomElement.java) - 为继承类中定义的所有与 DOM 相关的方法提供隐式用法（以抑制“未使用方法”警告）。
+- [`DomElementVisitor`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/DomElementVisitor.java) - 为继承类中定义的所有与DOM相关的访问器方法提供隐式用法（以抑制“未使用方法”警告）
+
+### 使用DOM操作
