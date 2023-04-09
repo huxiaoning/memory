@@ -264,3 +264,7 @@ FooBar addBar(int index);
 您可以通过实现 `com.intellij.util.xml.reflect.DomExtender<T>` 在运行时扩展现有的 DOM 模型。在 `com.intellij.dom.extender` 扩展点的 "extenderClass" 属性中注册它，其中 "domClass" 指定要扩展的 DOM 类 `<T>`。[`DomExtensionsRegistrar`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/reflect/DomExtensionsRegistrar.java) 提供了各种方法来注册动态属性和子元素。
 
 如果贡献的元素依赖于除纯 XML 文件内容之外的任何东西（使用框架版本、类路径中的库等），请确保从 `DomExtender.supportsStubs()` 返回 `false`。
+
+##### 命名空间支持
+
+使用`DomFileDescription.registerNamespacePolicy()`在DOM模型中注释命名空间，并注册命名空间键映射，从而通过`DomFileDescription.initializeFileDescription()`初始化文件描述。
