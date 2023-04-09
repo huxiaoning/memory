@@ -277,3 +277,29 @@ FooBar addBar(int index);
 - [`DomElementVisitor`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/DomElementVisitor.java) - 为继承类中定义的所有与DOM相关的访问器方法提供隐式用法（以抑制“未使用方法”警告）
 
 ### 使用DOM操作
+
+##### Class选择器
+
+&emsp;&emsp;经常发生的情况是，一个集合包含同名标签，这些标签可能具有不同的结构或甚至在DTD或模式中表示为不同类型。例如，JSF托管Bean可以分为三种类型。如果`<managed-bean>`标记包含`<map-entries>`子标记，则托管Bean类型为`MapEntriesBean`。如果它包含`<list-entries>`子标记 - 你能猜到吗？没错 - `ListEntriesBean`！否则，它是`PropertyBean`（所有三个接口都扩展了`ManagedBean`）。当我们编写`List <ManagedBean> getManagedBeans()`时，我们期望得到的不仅是一个列表，在该列表中所有元素都是`ManagedBean`接口的实例，而且每个元素都属于某种类型，即`MapEntriesBean`、`ListEntriesBea` 或`PropertyBean`。
+
+&emsp;&emsp;在这种情况下，应该决定DOM元素实际上应该实现哪个接口（根据给定的标记）。这可以通过扩展[`TypeChooser`](https://github.com/JetBrains/intellij-community/blob/idea/231.8109.175/xml/dom-openapi/src/com/intellij/util/xml/TypeChooser.java)抽象类来实现：
+
+```java
+public abstract class TypeChooser {
+  public abstract Type chooseType(XmlTag tag);
+  public abstract void distinguishTag(XmlTag tag, Type aClass)
+      throws IncorrectOperationException;
+  public abstract Type[] getChooserTypes();
+}
+```
+
+&emsp;&emsp;这里，第一个方法（`chooseType()`）恰好做了它的名字所描述的事情（选择特定类型，通常是类）。第二个方法（`distinguishTag()`）则相反：它修改标签，以便下次从XML文件中读取元素时（例如，在用户关闭并重新打开项目后），新创建的DOM元素将实现相同的接口，并且不会丢失任何模型数据。最后，`getChooserTypes()`只返回可以由`chooseType()`返回的所有类型。
+
+&emsp;&emsp;要使您的`TypeChooser`工作，请在覆盖的`DomFileDescription.initializeFileDescription()`方法中通过调用`registerTypeChooser()`将其注册。
+
+##### DomElement和DomManager的有用方法
+
+```
+https://plugins.jetbrains.com/docs/intellij/xml-dom-api.html#useful-methods-of-domelement-and-dommanager
+```
+
