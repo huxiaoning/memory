@@ -299,7 +299,32 @@ public abstract class TypeChooser {
 
 ##### DomElement和DomManager的有用方法
 
-```
-https://plugins.jetbrains.com/docs/intellij/xml-dom-api.html#useful-methods-of-domelement-and-dommanager
-```
+###### PSI连接
 
+当然，DOM 与 XML PSI 密切相关，因此始终可以使用 `getXmlTag()` 方法获取 `XmlTag` 实例（对于固定数量的子元素和属性可能为 `null`）。我们记得在 `GenericAttributeValue` 中也有 `getXmlAttribute()` 方法。一般情况下有 `getXmlElement()` 方法。您还可以使用 `DomManager.getDomElement()` 方法通过其基础 XML PSI 元素获取 DOM 元素。
+
+如果一个DOM元素没有底层的XML元素，可以通过调用`ensureTagExists()`方法来创建它。要删除标记，请使用已知的`undefine()`方法。该方法将始终删除底层的XML元素（标记或属性）。如果该元素是集合的子项，则它及其整个子树都将不再有效。
+
+###### 树状结构
+
+在每棵正常的树中，总有一种可能性可以向上走。`DomElement`也不例外。方法`getParent()`只返回元素在树中的父级。
+
+方法 `<T extends DomElement> T getParentOfType(Class<T> requiredClass, boolean strict)` 返回给定类的树祖先。您可以看到标准strict参数，如果它为 `false` 并且当前 DOM 元素是 `requiredClass` 的实例，则可以返回 DOM 元素本身。
+
+最后，`getRoot()`将返回`DomFileElement`，它是每个DOM树的根。
+
+###### 有效性
+
+如果元素已被明确删除或由于外部PSI更改而无效，则该元素将变为无效。 固定数量的子级和属性旨在尽可能长时间保持有效，无论XML发生什么情况。 它们只有在具有已删除的集合树祖先时才会变得无效。
+
+新创建的DOM元素总是正确和有效的，因此它们的`isValid()`方法将返回`true`。
+
+元素的有效性非常重要，因为您无法在无效元素上调用任何方法（当然，除了`isValid()`本身）。
+
+###### 反射式文档对象模型
+
+DOM还有一种反射机制，称为“通用信息”。人们可以使用它直接按标记名称访问子元素，而不是调用getter方法。有关更多信息，请参见`DomGenericInfo`接口和`DomElement`以及`DomManager`中的`getGenericInfo()`方法。还有一个`DomElement.getXmlElementName()`方法，返回相应标记或属性的名称。
+
+###### 演示
+
+`DomElement.getPresentation()` 返回一个 `ElementPresentation` 实例，它是一个接口，知道可呈现的元素类型、名称，有时甚至包括其图标。实际上，演示文稿是从演示工厂对象中获取的，这些对象像 `ClassChoosers` 一样应尽早在 `ElementPresentationManager` 中注册。您可以为某个类的所有元素指定类型名称和图标，并为特定对象获取类型名称、图标和可呈现名称的方法。当未指定时，如果对象本身包含使用 `@NameValue` 注释注释的返回 `String` 或 `GenericValue` 的方法，则会从该对象本身获取可呈现名称。如果没有这样的方法，则返回 `null`。对于 `DomElement` 来说，还有另一种获得此可呈现名称的方式：`DomElement.getGenericInfo().getElementName()`。
