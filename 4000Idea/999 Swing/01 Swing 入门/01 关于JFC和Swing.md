@@ -38,4 +38,4 @@
 &emsp;&emsp;幸运的是，大多数程序仅使用API的一小部分。本教程为您整理了API，并提供常见代码示例，指导您需要使用哪些方法和类。本教程中的大部分代码仅使用了一个或两个Swing包：
 
 - `javax.swing`
-- `javax.swing.event` (not always required)
+- `javax.swing.event` (不总是必需的)
