@@ -1,6 +1,6 @@
 # Swing
 
-译自[官方文档](https://docs.oracle.com/javase/tutorial/uiswing/index.html)
+&emsp;&emsp;译自[官方文档](https://docs.oracle.com/javase/tutorial/uiswing/index.html)
 
 > Java教程是为JDK 8编写的。本页面中描述的示例和实践不利用后续版本引入的改进，并可能使用不再可用的技术。
 >
@@ -10,9 +10,9 @@
 
 ## 教程：使用Swing创建GUI
 
-也被称为“Swing教程”。
+&emsp;&emsp;也被称为“Swing教程”。
 
-这个教程向你介绍如何使用Swing组件为应用程序和小程序创建图形用户界面(GUI)。如果你想将JavaFX集成到你的Swing应用程序中，请参阅[将JavaFX集成到Swing应用程序中](https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/swing-fx-interoperability.htm)。
+&emsp;&emsp;这个教程向你介绍如何使用Swing组件为应用程序和小程序创建图形用户界面(GUI)。如果你想将JavaFX集成到你的Swing应用程序中，请参阅[将JavaFX集成到Swing应用程序中](https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/swing-fx-interoperability.htm)。
 
 - [Swing 入门](https://docs.oracle.com/javase/tutorial/uiswing/start/index.html)是一个快速入门课程。首先它会为您提供一些关于 Swing 的背景知识。然后告诉您如何编译和运行使用 Swing 组件的程序。
 - [使用NetBeans IDE学习Swing](https://docs.oracle.com/javase/tutorial/uiswing/learn/index.html)是开始使用Swing的最快、最简单的方法。本课程探讨了NetBeans IDE的GUI构建器，这是一个强大的功能，可以让您可视化地构建图形用户界面。
@@ -27,7 +27,7 @@
 
 ### 其他与用户界面相关的路径
 
-虽然这是了解GUI的主要路径，但它并不是唯一包含与UI相关信息的路径。
+&emsp;&emsp;虽然这是了解GUI的主要路径，但它并不是唯一包含与UI相关信息的路径。
 
 - [2D图形](https://docs.oracle.com/javase/tutorial/2d/index.html)，描述了JDK中可用的2D图形功能。
 - [声音](https://docs.oracle.com/javase/tutorial/sound/index.html)，其中讨论了JDK中可用的声音功能。
