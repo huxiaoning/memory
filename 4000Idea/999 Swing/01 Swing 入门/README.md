@@ -1,4 +1,4 @@
-# Swing 入门
+# 课程：Swing 入门
 
 &emsp;&emsp;[示例索引](https://docs.oracle.com/javase/tutorial/uiswing/examples/start/index.html)
 
@@ -15,3 +15,4 @@
 &emsp;&emsp;本节将为您提供详细的说明，告诉您如何获取最新的JDK，并创建、编译和运行使用Swing组件的程序。
 
 &emsp;&emsp;如果您有兴趣使用JavaFX包创建用户界面，请参阅[JavaFX文档](https://docs.oracle.com/javase/8/javase-clienttechnologies.htm)。要部署，请参阅[Java平台标准版部署指南](https://docs.oracle.com/javase/8/docs/technotes/guides/deploy/)。
+
