@@ -18,3 +18,9 @@
 
 [&emsp;&emsp;Launch](https://docs.oracle.com/javase/tutorialJWS/samples/uiswing/CelsiusConverterProject/CelsiusConverter.jnlp)
 
+&emsp;&emsp;从最终用户的角度来看，使用非常简单：在文本框中输入温度（摄氏度），点击“转换”按钮，然后观察屏幕上显示的转换后的温度（华氏度）。最小化、最大化和关闭按钮将按预期运行，并且应用程序还将具有出现在窗口顶部的标题。
+
+&emsp;&emsp;从程序员的角度来看，我们将分两个主要阶段编写应用程序。首先，我们将使用各种Swing组件填充GUI并按上面所示排列它们。然后，我们将添加应用逻辑，以便在用户按下“转换”按钮时实际执行转换操作。
+
+&emsp;&emsp;如果您有兴趣使用JavaFX创建GUI，请参阅[JavaFX文档](https://docs.oracle.com/javase/8/javase-clienttechnologies.htm)和[JavaFX-NetBeans Wiki](https://netbeans.apache.org/wiki/JavaFX.html)。
+
