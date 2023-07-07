@@ -67,3 +67,16 @@ git remote add origin git@github.com:huxiaoning/memory.git
 git push -u origin master
 ```
 
+
+
+##### git status 中文乱码
+
+```bash
+$ git config --global core.quotepath false
+＃ 在使用git log出现乱码上面一个设置不能解决问题需要再做以下设置(其实上面那条命令就足够用了)
+git config--global gui.encoding utf-8
+git config--global i18n.commit.encoding utf-8
+git config --global i18n.logoutputencoding utf-8
+export LESSCHARSET＝utf-8 ＃ 添加到环境变量
+```
+
