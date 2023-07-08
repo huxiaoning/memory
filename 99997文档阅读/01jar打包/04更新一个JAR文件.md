@@ -1,5 +1,13 @@
 # 更新一个JAR文件
 
+[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/update.html)
+
+
+
+---
+
+
+
 &emsp;&emsp;`Jar`工具提供了一个`u`选项，你可以通过修改其清单或添加文件来更新现有JAR文件的内容。
 
 &emsp;&emsp;添加文件的基本命令有这样的格式：
@@ -98,9 +106,3 @@ new.gif
 ```
 
 
-
----
-
-
-
-[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/update.html)

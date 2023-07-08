@@ -1,5 +1,13 @@
 # 运行JAR包的软件
 
+[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html)
+
+
+
+---
+
+
+
 &emsp;&emsp;现在你已经学会了如何创建`JAR`文件，那么你如何实际运行你打包的代码呢？考虑一下这些情况：
 
 - 你的JAR文件包含一个将在浏览器中运行的小程序。
@@ -80,10 +88,3 @@ $ java -jar app.jar
 
 &emsp;&emsp;要从另一个目录下的`JAR`文件中运行应用程序，你必须指定该目录的路径： `java -jar path/app.jar`
 
-
-
----
-
-
-
-[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html)

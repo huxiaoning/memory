@@ -1,5 +1,13 @@
 # 查看JAR文件的内容
 
+[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/view.html)
+
+
+
+---
+
+
+
 &emsp;&emsp;查看JAR文件内容的命令的基本格式是：
 
 ```bash
@@ -77,11 +85,4 @@ $ jar tvf TicTacToe.jar
    158 Mon Sep 24 21:57:48 PDT 2012 images/not.gif
 ```
 
-
-
----
-
-
-
-[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/view.html)
 

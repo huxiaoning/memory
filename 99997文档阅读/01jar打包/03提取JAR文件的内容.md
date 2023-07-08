@@ -1,5 +1,13 @@
 # 提取JAR文件的内容
 
+[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/unpack.html)
+
+
+
+---
+
+
+
 &emsp;&emsp;用来提取`JAR`文件内容的基本命令是：
 
 ```bash
@@ -64,9 +72,3 @@ $ jar xf TicTacToe.jar
 ```
 
 
-
----
-
-
-
-[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/unpack.html)

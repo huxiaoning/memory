@@ -1,5 +1,13 @@
 # 创建JAR文件
 
+[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/build.html)
+
+
+
+---
+
+
+
 &emsp;&emsp;创建JAR文件的命令的基本格式是：
 
 ```bash
@@ -147,10 +155,4 @@ audio/yahoo2.au
 ```
 
 
-
----
-
-
-
-[原文地址](https://docs.oracle.com/javase/tutorial/deployment/jar/build.html)
 
