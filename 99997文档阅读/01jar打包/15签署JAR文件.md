@@ -49,3 +49,36 @@ $ jarsigner jar-file alias
 
 ##### 例子
 
+&emsp;&emsp;让我们来看几个使用`Jarsigner`工具签署`JAR`文件的例子。在这些示例中，我们将假设如下： 
+
+- 您的别名是 "johndoe"。
+- 您要使用的密钥存储在当前工作目录下名为 "mykeys "的文件中。
+- 您希望用于签名时间戳的 TSA 位于 http://tsa.url.example.com。
+
+&emsp;&emsp;根据这些假设，您可以使用此命令签署名为 `app.jar` 的 `JAR` 文件：
+
+```bash
+$ jarsigner -keystore mykeys -tsa http://tsa.url.example.com app.jar johndoe
+```
+
+&emsp;&emsp;系统会提示你输入密钥存储和别名的密码。由于该命令没有使用 `-sigfile` 选项，它创建的 `.SF` 和 `.DSA` 文件将被命名为 `JOHNDOE.SF` 和 `JOHNDOE.DSA`。由于命令没有使用`-signedjar`选项，生成的签名文件将覆盖原始版本的`app.jar`。
+
+&emsp;&emsp;让我们看看如果您使用不同的选项组合会发生什么情况：
+
+```bash
+$ jarsigner -keystore mykeys -sigfile SIG -signedjar SignedApp.jar -tsacert testalias app.jar johndoe
+```
+
+&emsp;&emsp;签名和签名块文件将分别命名为`SIG.SF`和`SIG.DSA`，签名后的`JAR`文件`SignedApp.jar`将被放置在当前目录下。原始的未签名`JAR`文件将保持不变。此外，签名将使用`TSA`的公钥证书`testalias`加盖时间戳。
+
+
+
+---
+
+
+
+##### 其他信息
+
+&emsp;&emsp;在线提供`JAR`签名和验证工具的完整参考页面：[安全工具概要](https://docs.oracle.com/javase/8/docs/technotes/guides/security/SecurityToolsSummary.html)
+
+&emsp;&emsp;注意：当证书为自签名时，UNKNOWN 将显示为应用程序的发布者。欲了解更多信息，请参阅 "[运行 UNKNOWN 发布者的应用程序是否安全](https://www.java.com/en/download/help/self_signed.html)？
