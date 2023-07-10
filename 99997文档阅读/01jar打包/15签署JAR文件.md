@@ -31,13 +31,21 @@ $ jarsigner jar-file alias
 
 <center>Jarsigner命令选项</center>
 
-| 选项                           | 描述 |
-| ------------------------------ | ---- |
-| `-keystore url`                |      |
-| `-sigfile file`                |      |
-| `-signedjar file`              |      |
-| `-tsa url`                     |      |
-| `-tsacert` *alias*             |      |
-| `-altsigner class`             |      |
-| `-altsignerpath classpathlist` |      |
+| 选项                           | 描述                                                         |
+| ------------------------------ | ------------------------------------------------------------ |
+| `-keystore url`                | 如果不想使用 `.keystore` 默认数据库，则指定要使用的密钥存储。 |
+| `-sigfile file`                | 指定 `.SF` 和 `.DSA` 文件的基本名称，如果您不希望基本名称取自别名。文件必须仅由大写字母 (A-Z)、数字 (0-9)、连字符 (-) 和下划线 (_) 组成。 |
+| `-signedjar file`              | 如果不希望未签名的原始文件被签名文件覆盖，则指定要生成的签名 `JAR` 文件的名称。 |
+| `-tsa url`                     | 使用由`URL`确定的时间戳机构（`TSA`）为签名生成一个时间戳。   |
+| `-tsacert alias`               | 使用别名标识的`TSA`公钥证书为签名生成时间戳。                |
+| `-altsigner class`             | 表示使用另一种签名机制对签名加时间戳。全称类名标识所使用的类。 |
+| `-altsignerpath classpathlist` | 提供由`altsigner`选项确定的类的路径以及该类所依赖的任何`JAR`文件。 |
+
+
+
+---
+
+
+
+##### 例子
 
