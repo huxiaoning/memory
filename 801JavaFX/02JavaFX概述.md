@@ -24,3 +24,14 @@
 
 ### 主要功能
 
+&emsp;&emsp;JavaFX 8 及其后续版本包含以下功能。JavaFX 8 版本中引入的项目会相应标出：
+
+- Java API。JavaFX 是一个 Java 库，由用 Java 代码编写的类和接口组成。这些应用程序接口旨在成为 Java 虚拟机（Java VM）语言（如 JRuby 和 Scala）的友好替代品。
+
+- FXML 和场景生成器。FXML 是一种基于 XML 的声明式标记语言，用于构建 JavaFX 应用程序用户界面。设计人员可以用 FXML 编写代码，也可以使用 JavaFX 场景生成器交互式地设计图形用户界面（GUI）。Scene Builder 生成的 FXML 标记可移植到集成开发环境，开发人员可在其中添加业务逻辑。
+
+- WebView。它是一种网络组件，使用 WebKitHTML 技术可在 JavaFX 应用程序中嵌入网页。在 WebView 中运行的 JavaScript 可调用 Java API，而 Java API 可调用在 WebView 中运行的 JavaScript。JavaFX 8 中添加了对其他 HTML5 功能的支持，包括 Web Sockets、Web Workers 和 Web 字体以及打印功能。 请参见在 JavaFX 应用程序中添加 HTML 内容。
+- Swing 互操作性。现有的 Swing 应用程序可使用 JavaFX 功能进行更新，如丰富的图形媒体播放和嵌入式 Web 内容。SwingNode 类可让您将 Swing 内容嵌入 JavaFX 应用程序，该类已添加到 JavaFX 8 中。 有关详细信息，请参阅 SwingNode API javadoc 和在 JavaFX 应用程序中嵌入 Swing 内容。
+- 内置用户界面控件和 CSS。JavaFX 提供了开发全功能应用程序所需的所有主要用户界面控件。组件可以使用 CSS 等标准 Web 技术进行换肤。DatePicker 和 TreeTableView UI 控件现已随 JavaFX 8 版本发布。有关详细信息，请参阅使用 JavaFX UI 控件。此外，CSS Styleable* 类已成为公共 API，允许使用 CSS 对对象进行样式设置。
+- 摩德纳主题Modena 主题取代了 Caspian 主题，成为 JavaFX 8 应用程序的默认主题。通过在应用程序 start() 方法中添加 setUserAgentStylesheet(STYLESHEET_CASPIAN) 行，您仍可使用 Caspian 主题。如需了解更多信息，请访问 fxexperience.com 上的 Modena 博客。
+- 3D 图形功能。JavaFX 8 的三维图形库中新增了 Shape3D（Box、Cylinder、MeshView 和 Sphere 子类）、SubScene、Material、PickResult、LightBase（AmbientLight 和 PointLight 子类）和 SceneAntialiasing 的 API 类。 在此版本中还更新了 Camera API 类。更多信息，请参阅 JavaFX 三维图形入门文档以及 javafx.scene.shape.Shape3D、javafx.scene.SubScene、javafx.scene.paint.Material、javafx.scene.input.PickResult 和 javafx.scene.SceneAntialiasing 的相应 API javadoc。
